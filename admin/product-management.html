@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechX Admin | Product Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/admin-css/admin-product.css">
+</head>
+<body>
+<div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2 class="logo"><i class="bi bi-cpu me-2"></i>TechX Admin</h2>
+        <nav>
+            <ul>
+                <li><a href="admin-dashboard.html"><i class="bi bi-house"></i> Dashboard</a></li>
+                <li><a href="admin-products.html" class="active"><i class="bi bi-box"></i> Sản phẩm</a></li>
+                <li><a href="admin-orders.html"><i class="bi bi-cart"></i> Đơn hàng</a></li>
+                <li><a href="admin-payment.html"><i class="bi bi-credit-card"></i> Thanh toán</a></li>
+                <li><a href="admin-users.html"><i class="bi bi-people"></i> Người dùng</a></li>
+                <li><a href="admin-blog.html"><i class="bi bi-journal-text"></i> Blog</a></li>
+                <li><a href="#"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="main-content">
+        <header class="header d-flex justify-content-between align-items-center">
+            <h3>Quản lý sản phẩm</h3>
+            <div class="actions d-flex align-items-center gap-2">
+                <div class="search-bar d-flex">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Tìm sản phẩm...">
+                    <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+                </div>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                    <i class="bi bi-plus-lg me-1"></i> Thêm sản phẩm
+                </button>
+            </div>
+        </header>
+
+        <!-- Bộ lọc -->
+        <section class="filters mt-4">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <select class="form-select">
+                        <option value="">Tất cả danh mục</option>
+                        <option>Điện thoại</option>
+                        <option>Laptop</option>
+                        <option>Phụ kiện</option>
+                        <option>Camera</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-select">
+                        <option value="">Tất cả trạng thái</option>
+                        <option>Còn hàng</option>
+                        <option>Hết hàng</option>
+                        <option>Ẩn</option>
+                    </select>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-info"><i class="bi bi-funnel"></i> Lọc</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Danh sách sản phẩm -->
+        <section class="product-table mt-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3"><i class="bi bi-box-seam me-2"></i>Danh sách sản phẩm</h5>
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Ảnh</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Danh mục</th>
+                            <th>Giá</th>
+                            <th>Tồn kho</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                        </thead>
+                        <tbody id="productTable">
+                        <tr>
+                            <td>1</td>
+                            <td><img src="https://cdn.tgdd.vn/Products/Images/7264/293446/apple-macbook-pro-14-m3-pro-2023-thumb-600x600.jpg" class="product-img"></td>
+                            <td>MacBook Pro M3 2023</td>
+                            <td>Laptop</td>
+                            <td>₫48,990,000</td>
+                            <td>10</td>
+                            <td><span class="status in-stock">Còn hàng</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-info"><i class="bi bi-eye"></i></button>
+                                <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><img src="https://cdn.tgdd.vn/Products/Images/7077/307146/samsung-galaxy-s24-ultra-titanium-vang-thumb-600x600.jpg" class="product-img"></td>
+                            <td>Samsung Galaxy S24 Ultra</td>
+                            <td>Điện thoại</td>
+                            <td>₫32,990,000</td>
+                            <td>18</td>
+                            <td><span class="status in-stock">Còn hàng</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-info"><i class="bi bi-eye"></i></button>
+                                <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination -->
+                    <nav aria-label="Page navigation" class="mt-3">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item disabled"><a class="page-link">Trước</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Sau</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- Modal thêm sản phẩm -->
+<div class="modal fade" id="addProductModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>Thêm sản phẩm mới</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Tên sản phẩm</label>
+                        <input type="text" class="form-control" placeholder="Nhập tên sản phẩm">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Danh mục</label>
+                        <select class="form-select">
+                            <option>Điện thoại</option>
+                            <option>Laptop</option>
+                            <option>Phụ kiện</option>
+                            <option>Camera</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Giá (₫)</label>
+                        <input type="number" class="form-control" placeholder="Nhập giá">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Số lượng tồn kho</label>
+                        <input type="number" class="form-control" placeholder="Nhập số lượng">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Link ảnh sản phẩm</label>
+                        <input type="text" class="form-control" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Mô tả</label>
+                        <textarea class="form-control" rows="3" placeholder="Mô tả chi tiết sản phẩm..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $("#searchInput").on("keyup", function() {
+        let value = $(this).val().toLowerCase();
+        $("#productTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+    });
+</script>
+</body>
+</html>

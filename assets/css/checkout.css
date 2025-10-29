@@ -1,0 +1,99 @@
+/* ================= Checkout Page ================= */
+
+/* Wrapper */
+.checkout-wrapper {
+    max-width: 900px;
+}
+
+/* Header */
+.checkout-header h1 {
+    font-size: 2.5rem;
+}
+
+.checkout-header p {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+/* Card */
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Form Controls */
+.form-control-lg {
+    border-radius: 0.75rem;
+    padding: 0.65rem 1rem;
+    font-size: 1rem;
+}
+
+/* Buttons */
+.btn-lg {
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+}
+
+.btn-lg:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Payment Options */
+.payment-option {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.payment-option input {
+    margin-right: 10px;
+}
+
+.payment-option:hover {
+    background-color: #f8f9fa;
+    border-color: #007bff;
+}
+
+/* Order Summary */
+.list-group-item {
+    border: none;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.list-group-item.total {
+    background-color: #f1f5fb;
+    border-left: 4px solid #007bff;
+    font-size: 1.1rem;
+}
+
+/* Alert */
+.alert-info {
+    background-color: #e9f7fe;
+    border-radius: 0.5rem;
+}
+
+/* Sticky Right Column */
+@media (min-width: 992px) {
+    .sticky-top {
+        top: 100px;
+    }
+}
+
+/* Responsive */
+@media (max-width: 990px) {
+    .checkout-wrapper {
+        padding: 0 1rem;
+    }
+}
+#email {
+    border-radius: 0.75rem;
+    padding: 0.65rem 1rem;
+    font-size: 1rem;
+}

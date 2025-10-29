@@ -1,0 +1,88 @@
+/* ========== Layout chung ========== */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fb;
+    margin: 0;
+}
+
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ========== Sidebar ========== */
+.sidebar {
+    width: 250px;
+    background: #1f1f2e;
+    color: #fff;
+    padding: 20px;
+}
+
+.sidebar .logo {
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 12px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #ccc;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+/* ========== Main Content ========== */
+.main-content {
+    flex: 1;
+    padding: 30px;
+}
+
+.header h3 {
+    font-weight: 700;
+    color: #0d6efd;
+}
+
+.header .form-control {
+    border-radius: 8px 0 0 8px;
+}
+
+.header .btn {
+    border-radius: 0 8px 8px 0;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.btn-outline-warning:hover {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
