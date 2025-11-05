@@ -8,9 +8,6 @@
 
 body {
   background: #f6f8fa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
 }
 
@@ -20,6 +17,7 @@ main {
   flex-direction: column;
   gap: 20px;
   width: 600px;
+    margin: auto;
 }
 
 /* Hộp tiêu đề */

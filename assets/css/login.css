@@ -8,18 +8,18 @@
 
 body {
   background: #f6f8fa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
 }
 
 /* Bố cục tổng */
 main {
   display: flex;
-  flex-direction: column;
+    flex-direction: column;
+  align-content: center;
+    justify-content: center;
   gap: 20px;
   width: 600px;
+    margin: auto;
 }
 
 /* Hộp tiêu đề */
