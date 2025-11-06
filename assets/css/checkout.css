@@ -1,16 +1,26 @@
-
 .checkout-wrapper {
     max-width: 1100px;
+}
+
+.checkout-header h1 {
+    font-size: 2.5rem;
+}
+
+.checkout-header p {
+    font-size: 1rem;
+    color: #6c757d;
 }
 
 .checkout-wrapper .card {
     border-radius: 1rem;
     transition: all 0.3s ease;
 }
+
 .checkout-wrapper .card:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
+
 .checkout-wrapper form .form-control {
     border-radius: 10px;
     border: 1px solid #dee2e6;
@@ -77,12 +87,14 @@
     color: #084298;
     font-size: 0.95rem;
 }
+
+/* Header Sticky */
 .header-main {
     position: sticky;
     top: 0;
     z-index: 1050;
     background: #fff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 @media (max-width: 991px) {
