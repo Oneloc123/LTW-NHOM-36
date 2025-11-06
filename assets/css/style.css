@@ -92,3 +92,15 @@
         margin: 4px;
     }
 }
+/* Giữ phần tóm tắt đơn hàng không đè lên header */
+.checkout-wrapper .sticky-top {
+    top: 90px; /* đẩy xuống cách header */
+    z-index: 10; /* thấp hơn header */
+}
+
+/* Đảm bảo header luôn trên cùng */
+.header-main {
+    z-index: 1050 !important; /* cao hơn sticky-top */
+    position: sticky;
+    top: 0;
+}

@@ -7,12 +7,67 @@
     <title>Thanh toán - TechX</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
     <link rel="stylesheet" href="../assets/css/checkout.css">
 </head>
 
 <body class="bg-light">
+<header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
+            <i class="bi bi-camera fs-4 me-2"></i>
+            <span>TechX</span>
+        </a>
 
-    <!-- ================= Checkout Wrapper ================= -->
+        <!-- Toggle (mobile) -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list fs-2 text-primary"></i>
+        </button>
+
+        <!-- Nav links -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-lg-center gap-lg-3">
+                <li class="nav-item"><a class="nav-link active" href="/index.html">Trang chủ</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/shop.html">Cửa hàng</a></li>
+
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Sản phẩm
+                    </a>
+                    <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/pages/products.html">Tất cả sản phẩm</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/pages/products.html#mini-tech">Công nghệ mini</a></li>
+                        <li><a class="dropdown-item" href="/pages/products.html#ai-device">Thiết bị AI</a></li>
+                        <li><a class="dropdown-item" href="/pages/products.html#creative">Phụ kiện sáng tạo</a></li>
+                        <li><a class="dropdown-item" href="/pages/products.html#fun-tech">Đồ chơi công nghệ</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/order-history.html">Đơn hàng</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/profile.html">Tài khoản</a></li>
+            </ul>
+
+            <!-- Login & Cart -->
+            <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
+                <a href="/pages/login.html" class="btn btn-outline-primary btn-sm d-flex align-items-center">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
+                </a>
+                <a href="/pages/cart.html" class="btn btn-primary btn-sm d-flex align-items-center">
+                    <i class="bi bi-cart3 me-1"></i> Giỏ hàng
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
     <div class="checkout-wrapper container my-5">
 
         <!-- Header -->
@@ -31,22 +86,22 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Họ và tên</label>
                             <input type="text" class="form-control form-control-lg" id="name"
-                                placeholder="Nhập họ tên của bạn">
+                                   placeholder="Nhập họ tên của bạn">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control form-control-lg" id="email"
-                                placeholder="Nhập địa chỉ email">
+                                   placeholder="Nhập địa chỉ email">
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Số điện thoại</label>
                             <input type="tel" class="form-control form-control-lg" id="phone"
-                                placeholder="Nhập số điện thoại">
+                                   placeholder="Nhập số điện thoại">
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Địa chỉ giao hàng</label>
                             <textarea class="form-control form-control-lg" id="address" rows="3"
-                                placeholder="Nhập địa chỉ cụ thể"></textarea>
+                                      placeholder="Nhập địa chỉ cụ thể"></textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Phương thức thanh toán</label>
@@ -68,8 +123,9 @@
                                 </label>
                             </div>
                         </div>
+
                         <a href="/pages/order-success.html">
-                            <button type="button"  class="btn btn-primary w-100 btn-lg mt-3">
+                            <button type="button" class="btn btn-primary w-100 btn-lg mt-3">
                                 <i class="bi bi-credit-card me-2"></i>Xác nhận thanh toán
                             </button>
                         </a>
@@ -107,8 +163,57 @@
 
         </div>
     </div>
+</main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-md-4">
+                <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
+                    <i class="bi bi-camera fs-3 text-primary me-2"></i>
+                    <span class="fw-bold fs-5 text-primary">TechX</span>
+                </a>
+                <p class="text-muted">Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo. Chúng tôi mang
+                    đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.</p>
+            </div>
+            <div class="col-md-2">
+                <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
+                <ul class="list-unstyled">
+                    <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
+                    <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
+                    <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
+                    <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
+                <ul class="list-unstyled">
+                    <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
+                    <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
+                    <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
+                    <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
+                <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh</p>
+                <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
+                <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
+                <div class="mt-3">
+                    <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="mt-4 mb-3">
+        <div class="text-center small text-muted">
+            © 2025 <strong>TechX</strong>. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
