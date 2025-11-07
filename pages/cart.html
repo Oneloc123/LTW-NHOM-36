@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylgitesheet" href="../assets/css/footer.css">
     <link rel="stylesheet" href="../assets/css/header.css">
     <link rel="stylesheet" href="../assets/css/Cart.css">
 </head>
@@ -60,7 +60,7 @@
         </div>
     </div>
 </header>
-
+<section></section>
 <div class="container">
     <div class="cart-header">
         <h1><i class="bi bi-cart4 me-2"></i>Giỏ Hàng Của Bạn</h1>
@@ -102,6 +102,7 @@
                     </div>
                 </div>
 
+
                 <div class="d-flex align-items-center">
                     <div class="quantity-control input-group me-3">
                         <button class="btn btn-outline-secondary minus">-</button>
@@ -111,6 +112,51 @@
                     <button class="btn btn-outline-danger delete-btn"><i class="bi bi-trash"></i></button>
                 </div>
             </div>
+
+            <!-- Sản phẩm 3 -->
+            <div class="cart-item d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <img src="https://cdn.tgdd.vn/Products/Images/7077/303358/petoi-bittle-thumb-600x600.jpg"
+                         class="product-img me-3" alt="sp3">
+                    <div>
+                        <h6 class="product-name mb-1">Petoi Bittle – Chú chó robot STEM</h6>
+                        <p class="text-muted small mb-1">Robot mini học lập trình, điều khiển qua app</p>
+                        <span class="product-price" data-price="2990000">2.990.000₫</span>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <div class="quantity-control input-group me-3">
+                        <button class="btn btn-outline-secondary minus">-</button>
+                        <input type="number" class="form-control text-center quantity" value="1" min="1">
+                        <button class="btn btn-outline-secondary plus">+</button>
+                    </div>
+                    <button class="btn btn-outline-danger delete-btn"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 4 -->
+            <div class="cart-item d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <img src="https://cdn.tgdd.vn/Products/Images/7077/301144/mars-pro-speaker-thumb-600x600.jpg"
+                         class="product-img me-3" alt="sp4">
+                    <div>
+                        <h6 class="product-name mb-1">MARS Pro – Loa Bluetooth cực ngầu</h6>
+                        <p class="text-muted small mb-1">Âm thanh 360° | Đèn RGB động | Pin 15h</p>
+                        <span class="product-price" data-price="4590000">4.590.000₫</span>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <div class="quantity-control input-group me-3">
+                        <button class="btn btn-outline-secondary minus">-</button>
+                        <input type="number" class="form-control text-center quantity" value="1" min="1">
+                        <button class="btn btn-outline-secondary plus">+</button>
+                    </div>
+                    <button class="btn btn-outline-danger delete-btn"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+
         </div>
 
         <div class="col-lg-4">
@@ -118,7 +164,7 @@
                 <h5>Tổng kết đơn hàng</h5>
                 <div class="d-flex justify-content-between mb-2">
                     <span>Tạm tính:</span>
-                    <span id="subtotal" class="highlight">51.480.000₫</span>
+                    <span id="subtotal" class="highlight">59.060.000₫</span>
                 </div>
                 <div class="d-flex justify-content-between mb-2">
                     <span>Phí vận chuyển:</span>
@@ -126,20 +172,22 @@
                 </div>
                 <div class="d-flex justify-content-between border-top pt-2 mb-3">
                     <strong>Tổng cộng:</strong>
-                    <strong id="total" class="highlight">51.480.000₫</strong>
+                    <strong id="total" class="highlight">59.060.000₫</strong>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Mã giảm giá</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Nhập mã">
-                        <button class="btn btn-outline-primary">Áp dụng</button>
-                    </div>
+
+                <div class="input-group mt-3">
+                    <input type="text" class="form-control" placeholder="Nhập mã giảm giá">
+                    <button class="btn btn-outline-success">Áp dụng</button>
                 </div>
+                <p class="text-success small mt-2">Giảm 10% cho đơn trên 500.000đ!</p>
+
 
                 <div class="mb-3">
                     <label class="form-label">Ghi chú đơn hàng</label>
-                    <textarea class="form-control" rows="2" placeholder="VD: Giao trước 17h..."></textarea>
+                    <textarea class="form-control mt-3" rows="2"
+                              placeholder="Ghi chú cho đơn hàng (VD: Giao buổi sáng)..."></textarea>
+
                 </div>
 
                 <div class="mb-3">
@@ -166,8 +214,7 @@
         </div>
     </div>
 </div>
-
-<!-- Modal xác nhận xóa -->
+</section>
 <div class="modal fade" id="confirmDelete" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 rounded-4">
@@ -194,7 +241,6 @@
         </div>
     </div>
 </div>
-<!-- ================= Footer ================= -->
 <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
     <div class="container">
         <div class="row gy-4">
@@ -255,50 +301,50 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<!--<script>-->
-<!--  let toDelete = null;-->
-<!--  const modal = new bootstrap.Modal('#confirmDelete');-->
-<!--  const toast = new bootstrap.Toast('#toastMsg');-->
-
-<!--  const updateTotal = () => {-->
-<!--    let subtotal = 0;-->
-<!--    document.querySelectorAll('.cart-item').forEach(item => {-->
-<!--      const price = parseInt(item.querySelector('.product-price').dataset.price);-->
-<!--      const qty = parseInt(item.querySelector('.quantity').value);-->
-<!--      subtotal += price * qty;-->
-<!--    });-->
-<!--    const formatted = subtotal.toLocaleString('vi-VN') + '₫';-->
-<!--    document.getElementById('subtotal').textContent = formatted;-->
-<!--    document.getElementById('total').textContent = formatted;-->
-<!--  };-->
-
-<!--  document.querySelectorAll('.plus').forEach(btn => btn.onclick = e => {-->
-<!--    const input = e.target.closest('.quantity-control').querySelector('.quantity');-->
-<!--    input.value = parseInt(input.value) + 1;-->
-<!--    updateTotal();-->
-<!--  });-->
-
-<!--  document.querySelectorAll('.minus').forEach(btn => btn.onclick = e => {-->
-<!--    const input = e.target.closest('.quantity-control').querySelector('.quantity');-->
-<!--    if (parseInt(input.value) > 1) input.value = parseInt(input.value) - 1;-->
-<!--    updateTotal();-->
-<!--  });-->
-
-<!--  document.querySelectorAll('.delete-btn').forEach(btn => btn.onclick = e => {-->
-<!--    toDelete = e.target.closest('.cart-item');-->
-<!--    modal.show();-->
-<!--  });-->
-
-<!--  document.getElementById('confirmDeleteBtn').onclick = () => {-->
-<!--    if (toDelete) {-->
-<!--      toDelete.remove();-->
-<!--      updateTotal();-->
-<!--      toast.show();-->
-<!--      modal.hide();-->
-<!--    }-->
-<!--  };-->
-
-updateTotal();
+<script>
+    //   let toDelete = null;
+    //   const modal = new bootstrap.Modal('#confirmDelete');
+    //   const toast = new bootstrap.Toast('#toastMsg');
+    //
+    //   const updateTotal = () => {
+    //     let subtotal = 0;
+    //     document.querySelectorAll('.cart-item').forEach(item => {
+    //       const price = parseInt(item.querySelector('.product-price').dataset.price);
+    //       const qty = parseInt(item.querySelector('.quantity').value);
+    //       subtotal += price * qty;
+    //     });
+    //     const formatted = subtotal.toLocaleString('vi-VN') + '₫';
+    //     document.getElementById('subtotal').textContent = formatted;
+    //     document.getElementById('total').textContent = formatted;
+    //   };
+    //
+    //   document.querySelectorAll('.plus').forEach(btn => btn.onclick = e => {
+    //     const input = e.target.closest('.quantity-control').querySelector('.quantity');
+    //     input.value = parseInt(input.value) + 1;
+    //     updateTotal();
+    //   });
+    //
+    //   document.querySelectorAll('.minus').forEach(btn => btn.onclick = e => {
+    //     const input = e.target.closest('.quantity-control').querySelector('.quantity');
+    //     if (parseInt(input.value) > 1) input.value = parseInt(input.value) - 1;
+    //     updateTotal();
+    //   });
+    //
+    //   document.querySelectorAll('.delete-btn').forEach(btn => btn.onclick = e => {
+    //     toDelete = e.target.closest('.cart-item');
+    //     modal.show();
+    //   });
+    //
+    //   document.getElementById('confirmDeleteBtn').onclick = () => {
+    //     if (toDelete) {
+    //       toDelete.remove();
+    //       updateTotal();
+    //       toast.show();
+    //       modal.hide();
+    //     }
+    //   };
+    //
+    // updateTotal();
 </script>
 </body>
 </html>
