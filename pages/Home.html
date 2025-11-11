@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechX - Khám phá công nghệ độc lạ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+</head>
+<body>
+<!-- ================= Header ================= -->
+<header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
+            <i class="bi bi-camera fs-4 me-2"></i>
+            <span>TechX</span>
+        </a>
+
+        <!-- Toggle (mobile) -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list fs-2 text-primary"></i>
+        </button>
+
+        <!-- Nav links -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-lg-center gap-lg-3">
+                <li class="nav-item"><a class="nav-link active" href="../index.html">Trang chủ</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/shop.html">Cửa hàng</a></li>
+
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Sản phẩm
+                    </a>
+                    <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/pages/products.html">Tất cả sản phẩm</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/pages/products.html#mini-tech">Công nghệ mini</a></li>
+                        <li><a class="dropdown-item" href="/pages/products.html#ai-device">Thiết bị AI</a></li>
+                        <li><a class="dropdown-item" href="/pages/products.html#creative">Phụ kiện sáng tạo</a></li>
+                        <li><a class="dropdown-item" href="/pages/products.html#fun-tech">Đồ chơi công nghệ</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/order-history.html">Đơn hàng</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/profile.html">Tài khoản</a></li>
+            </ul>
+
+            <!-- Login & Cart -->
+            <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
+                <a href="../pages/login.html" class="btn btn-outline-primary btn-sm d-flex align-items-center">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
+                </a>
+                <a href="../pages/cart.html" class="btn btn-primary btn-sm d-flex align-items-center">
+                    <i class="bi bi-cart3 me-1"></i> Giỏ hàng
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!-- Hero Slider -->
+<section id="heroSlider" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=1600&q=80" class="d-block w-100" alt="TechX Banner 1">
+            <div class="carousel-caption d-none d-md-block">
+                <h1>Khám phá công nghệ tương lai</h1>
+                <p>Thiết bị độc lạ, sáng tạo và đậm chất TechX.</p>
+                <a href="/pages/shop.html" class="btn btn-light btn-lg fw-bold">Khám phá ngay</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://images.unsplash.com/photo-1581093588401-22d65a2fd1f9?auto=format&fit=crop&w=1600&q=80" class="d-block w-100" alt="TechX Banner 2">
+            <div class="carousel-caption d-none d-md-block">
+                <h1>Thiết bị AI & Phụ kiện sáng tạo</h1>
+                <p>Nâng tầm trải nghiệm công nghệ của bạn.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://images.unsplash.com/photo-1616469829581-1e4f3c1b86b5?auto=format&fit=crop&w=1600&q=80" class="d-block w-100" alt="TechX Banner 3">
+            <div class="carousel-caption d-none d-md-block">
+                <h1>Sáng tạo – Độc đáo – Hiện đại</h1>
+                <p>TechX – Nơi công nghệ trở nên nghệ thuật.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section sản phẩm -->
+<main class="py-5">
+    <div class="container">
+        <!-- Khu 1: Sản phẩm mới -->
+        <div class="section-title">
+            <h2><i class="bi bi-stars text-primary me-2"></i>Sản phẩm mới nhất</h2>
+        </div>
+        <div class="row g-4">
+            <!-- 6 sản phẩm -->
+            <script>
+                const products = [
+                    {img:'https://images.unsplash.com/photo-1519389950473-47ba0277781c',name:'AI Drone Mini',price:'3.500.000₫'},
+                    {img:'https://images.unsplash.com/photo-1606813902779-8ad6a6d1e793',name:'Loa Bluetooth HoloSound',price:'1.200.000₫'},
+                    {img:'https://images.unsplash.com/photo-1555617981-3b21f968df9f',name:'Đồng hồ thông minh GX Pro',price:'4.990.000₫'},
+                    {img:'https://images.unsplash.com/photo-1616627988418-eda4c8a3af2b',name:'Tai nghe TechBeam',price:'2.300.000₫'},
+                    {img:'https://images.unsplash.com/photo-1615041215072-4e5c22f0e312',name:'Robot mini AI Buddy',price:'6.000.000₫'},
+                    {img:'https://images.unsplash.com/photo-1505740106531-4243f3831c78',name:'Micro X-Pro Studio',price:'1.700.000₫'},
+                ];
+                products.forEach(p=>{
+                    document.write(`
+                            <div class="col-md-4 col-lg-2">
+                                <div class="card product-card h-100 text-center">
+                                    <img src="${p.img}?auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="${p.name}">
+                                    <div class="card-body">
+                                        <h6 class="card-title">${p.name}</h6>
+                                        <p class="text-primary fw-bold">${p.price}</p>
+                                        <a href="/pages/products.html" class="btn btn-sm btn-outline-primary">Xem chi tiết</a>
+                                    </div>
+                                </div>
+                            </div>
+                        `)
+                })
+            </script>
+        </div>
+
+        <!-- Khu 2: Giảm giá -->
+        <div class="section-title mt-5">
+            <h2><i class="bi bi-tag-fill text-danger me-2"></i>Sản phẩm giảm giá</h2>
+        </div>
+        <div class="row g-4">
+            <script>
+                const sale = [
+                    {img:'https://images.unsplash.com/photo-1585386959984-a41552231693',name:'Camera 360X Pro',price:'Giảm 20%'},
+                    {img:'https://images.unsplash.com/photo-1606813902779-8ad6a6d1e793',name:'Loa Bass Boost',price:'Giảm 15%'},
+                    {img:'https://images.unsplash.com/photo-1580894732444-8ecded79ef5e',name:'Smart Light RGB',price:'Giảm 30%'},
+                    {img:'https://images.unsplash.com/photo-1592991658449-0f7dd9dfef2f',name:'Máy chiếu mini XBeam',price:'Giảm 10%'},
+                    {img:'https://images.unsplash.com/photo-1616627988418-eda4c8a3af2b',name:'Tai nghe không dây M3',price:'Giảm 25%'},
+                    {img:'https://images.unsplash.com/photo-1624705002806-bf6a3c3cc1e1',name:'Smartwatch NeoX',price:'Giảm 20%'},
+                ];
+                sale.forEach(p=>{
+                    document.write(`
+                            <div class="col-md-4 col-lg-2">
+                                <div class="card product-card h-100 text-center border-danger">
+                                    <img src="${p.img}?auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="${p.name}">
+                                    <div class="card-body">
+                                        <h6 class="card-title">${p.name}</h6>
+                                        <p class="text-danger fw-bold">${p.price}</p>
+                                        <a href="/pages/products.html" class="btn btn-sm btn-danger">Mua ngay</a>
+                                    </div>
+                                </div>
+                            </div>
+                        `)
+                })
+            </script>
+        </div>
+
+        <!-- Khu 3: Khuyến mãi -->
+        <div class="section-title mt-5">
+            <h2><i class="bi bi-gift-fill text-success me-2"></i>Sản phẩm khuyến mãi</h2>
+        </div>
+        <div class="row g-4">
+            <script>
+                const promo = [
+                    {img:'https://images.unsplash.com/photo-1620714223084-8ce7d42b1a1d',name:'Combo Tech Starter',price:'Tặng kèm phụ kiện'},
+                    {img:'https://images.unsplash.com/photo-1594007654729-407eedc4be51',name:'Robot dọn nhà R2',price:'Giảm 1.000.000₫'},
+                    {img:'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d',name:'Bàn phím cơ TechPro',price:'Tặng keycap RGB'},
+                    {img:'https://images.unsplash.com/photo-1592995933354-44b7d3ef7a02',name:'Tai nghe gaming GX1',price:'Giảm 15%'},
+                    {img:'https://images.unsplash.com/photo-1612215369696-72db5b68b8ce',name:'Laptop UltraSlim X',price:'Tặng chuột không dây'},
+                    {img:'https://images.unsplash.com/photo-1580894732444-8ecded79ef5e',name:'Đèn thông minh Luma',price:'Giảm 20%'},
+                ];
+                promo.forEach(p=>{
+                    document.write(`
+                            <div class="col-md-4 col-lg-2">
+                                <div class="card product-card h-100 text-center border-success">
+                                    <img src="${p.img}?auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="${p.name}">
+                                    <div class="card-body">
+                                        <h6 class="card-title">${p.name}</h6>
+                                        <p class="text-success fw-bold">${p.price}</p>
+                                        <a href="/pages/products.html" class="btn btn-sm btn-success">Xem khuyến mãi</a>
+                                    </div>
+                                </div>
+                            </div>
+                        `)
+                })
+            </script>
+        </div>
+
+        <!-- Khu 4: Sắp ra mắt -->
+        <div class="section-title mt-5">
+            <h2><i class="bi bi-rocket-takeoff-fill text-warning me-2"></i>Sản phẩm sắp ra mắt</h2>
+        </div>
+        <div class="row g-4">
+            <script>
+                const upcoming = [
+                    {img:'https://images.unsplash.com/photo-1594007654729-407eedc4be51',name:'Drone AI Vision',price:'Sắp ra mắt 2025'},
+                    {img:'https://images.unsplash.com/photo-1620714223084-8ce7d42b1a1d',name:'Kính AR FutureView',price:'Coming soon'},
+                    {img:'https://images.unsplash.com/photo-1612215369696-72db5b68b8ce',name:'Robot giúp việc X5',price:'Sắp ra mắt'},
+                    {img:'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d',name:'Loa HoloSpace 3D',price:'Đặt trước'},
+                    {img:'https://images.unsplash.com/photo-1616469829581-1e4f3c1b86b5',name:'Smart Mirror Pro',price:'Coming soon'},
+                    {img:'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7',name:'AI Projector Ultra',price:'2025'},
+                ];
+                upcoming.forEach(p=>{
+                    document.write(`
+                            <div class="col-md-4 col-lg-2">
+                                <div class="card product-card h-100 text-center border-warning">
+                                    <img src="${p.img}?auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="${p.name}">
+                                    <div class="card-body">
+                                        <h6 class="card-title">${p.name}</h6>
+                                        <p class="text-warning fw-bold">${p.price}</p>
+                                        <a href="/pages/products.html" class="btn btn-sm btn-outline-warning">Xem chi tiết</a>
+                                    </div>
+                                </div>
+                            </div>
+                        `)
+                })
+            </script>
+        </div>
+    </div>
+</main>
+
+<!-- Footer (giữ nguyên) -->
+<!-- ================= Footer ================= -->
+<footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Logo + Giới thiệu -->
+            <div class="col-md-4">
+                <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
+                    <i class="bi bi-camera fs-3 text-primary me-2"></i>
+                    <span class="fw-bold fs-5 text-primary">TechX</span>
+                </a>
+                <p class="text-muted">
+                    Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
+                    Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
+                </p>
+            </div>
+
+            <!-- Danh mục -->
+            <div class="col-md-2">
+                <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
+                <ul class="list-unstyled">
+                    <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
+                    <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
+                    <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
+                    <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
+                </ul>
+            </div>
+
+            <!-- Hỗ trợ -->
+            <div class="col-md-2">
+                <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
+                <ul class="list-unstyled">
+                    <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
+                    <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
+                    <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
+                    <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
+                </ul>
+            </div>
+
+            <!-- Liên hệ -->
+            <div class="col-md-4">
+                <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
+                <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh</p>
+                <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
+                <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
+                <div class="mt-3">
+                    <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="mt-4 mb-3">
+        <div class="text-center small text-muted">
+            © 2025 <strong>TechX</strong>. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
