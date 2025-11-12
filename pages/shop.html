@@ -4,66 +4,47 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ưu đãi đặc biệt - TechX</title>
+    <title>Công nghệ độc lạ - TechX</title>
 
-    <!-- ✅ Bootstrap & Icons (giúp menu hoạt động ngang) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- ✅ CSS riêng -->
     <link rel="stylesheet" href="/assets/css/shop.css" />
 
-    <!-- ================= IMAGE SOURCES ================= -->
     <script>
-        const IMG = {
-            /* HERO + OFFER (tỉ lệ landscape ~1200x600) */
-            OFFER_GALAXY: "/assets/img/Banner/bn1.jpg",
-            OFFER_TV: "/assets/img/Banner/bn2.png",
-            OFFER_HOME: "/assets/img/Banner/bn3.png",
-
-            /* PRODUCT (thumbnail ~172x172) */
-            GALAXY_A56: "/assets/img/pr/maygiatai.jpg",
-            GALAXY_FIT3: "https://images.samsung.com/is/image/samsung/p6pim/vn/2401/gallery/vn-fit3-sm-r390nzkaxxv-thumb-538517145?$172_172_PNG$",
-            FRIDGE_AI: "https://images.samsung.com/is/image/samsung/p6pim/vn/2401/gallery/vn-rs62r5001b4-tc-thumb-538527502?$172_172_PNG$",
-            FRIDGE_RS64: "https://images.samsung.com/is/image/samsung/p6pim/vn/2401/gallery/vn-rs64r5331b4-tc-thumb-538527505?$172_172_PNG$",
-            Z_FLIP5: "https://images.samsung.com/is/image/samsung/p6pim/vn/2401/gallery/vn-galaxy-z-flip5-thumb-538510900?$172_172_PNG$",
-            // === CATEGORY PRODUCTS ===
-            GALAXY_S25: "/assets/img/pr/maygiatai.jpg",
-            GALAXY_S25_ULTRA: "/assets/img/pr/maygiatai.jpg",
-            TV_OLED: "/assets/img/products/maygiatai.jpg",
-            MAY_GIAT_AI: "/assets/img/pr/pr1.jpg",
-            GALAXY_BOOK4: "/assets/img/Banner/tivi.jpg",
-            WATCH8: "/assets/img/Banner/bn3.png",
-            SAC_DOI: ""
-        };
 
     </script>
-
 </head>
 
 <body>
-    <!-- ================= HEADER ================= -->
-    <header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+
+    <!-- ================= Header ================= -->
+    <header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
         <div class="container">
-            <!-- ✅ Logo chuẩn -->
-            <a class="navbar-brand fw-bold text-primary d-flex align-items-center" href="/index.html">
-                <i class="bi bi-camera fs-4 me-2"></i> TechX
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
+                <i class="bi bi-camera fs-4 me-2"></i>
+                <span>TechX</span>
             </a>
 
-            <!-- ✅ Nút toggle cho mobile -->
+            <!-- Toggle (mobile) -->
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="bi bi-list fs-2 text-primary"></i>
             </button>
 
-            <!-- ✅ Menu chính -->
+            <!-- Nav links -->
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-lg-center">
-                    <li class="nav-item"><a class="nav-link" href="/index.html">Trang chủ</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="/pages/shop.html">Cửa hàng</a></li>
+                <ul class="navbar-nav align-items-lg-center gap-lg-3">
+                    <li class="nav-item"><a class="nav-link active" href="/index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/pages/shop.html">Cửa hàng</a></li>
+
+                    <!-- Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Sản phẩm</a>
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Sản phẩm
+                        </a>
                         <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/pages/products.html">Tất cả sản phẩm</a></li>
                             <li>
@@ -75,419 +56,794 @@
                             <li><a class="dropdown-item" href="/pages/products.html#fun-tech">Đồ chơi công nghệ</a></li>
                         </ul>
                     </li>
+
                     <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
                     <li class="nav-item"><a class="nav-link" href="/pages/order-history.html">Đơn hàng</a></li>
                     <li class="nav-item"><a class="nav-link" href="/pages/profile.html">Tài khoản</a></li>
                 </ul>
 
-                <!-- ✅ Nút đăng nhập + giỏ hàng -->
+                <!-- Login & Cart -->
                 <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-                    <a href="/pages/login.html" class="btn btn-outline-primary btn-sm px-3">
-                        <i class="bi bi-box-arrow-in-right me-1"></i>Đăng nhập
+                    <a href="/pages/login.html" class="btn btn-outline-primary btn-sm d-flex align-items-center">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
                     </a>
-                    <a href="/pages/cart.html" class="btn btn-primary btn-sm px-3">
-                        <i class="bi bi-cart3 me-1"></i>Giỏ hàng
+                    <a href="/pages/cart.html" class="btn btn-primary btn-sm d-flex align-items-center">
+                        <i class="bi bi-cart3 me-1"></i> Giỏ hàng
                     </a>
                 </div>
             </div>
         </div>
     </header>
 
-    <main> <!-- ================= HERO SECTION ================= -->
+    <!-- Hero -->
+    <main>
+
         <section class="hero">
-            <div class="hero-content">
-                <h1>Lựa chọn tối ưu chuẩn sống của bạn</h1>
+            <div class="hero-inner">
+                <h1 class="hero-title">Khơi mở chất chơi công nghệ</h1>
             </div>
         </section>
 
-        <!-- ================= CATEGORY NAV ================= -->
+
+
+
+        <!-- ================= CATEGORIES ================= -->
+
+
         <section class="categories">
-            <div class="category-item active" data-category="featured">
+            <button class="category-item active" data-category="featured">
                 <div class="icon">⭐</div>
                 <p>Mới & Nổi bật</p>
-            </div>
-            <div class="category-item" data-category="mobile">
+            </button>
+
+            <button class="category-item" data-category="mobile">
                 <div class="icon">📱</div>
                 <p>Di động</p>
-            </div>
-            <div class="category-item" data-category="tv">
+            </button>
+
+            <button class="category-item" data-category="tv">
                 <div class="icon">📺</div>
                 <p>TV & AV</p>
-            </div>
-            <div class="category-item" data-category="home">
+            </button>
+
+            <button class="category-item" data-category="home">
                 <div class="icon">🏠</div>
                 <p>Gia dụng</p>
-            </div>
-            <div class="category-item" data-category="it">
+            </button>
+
+            <button class="category-item" data-category="it">
                 <div class="icon">💻</div>
                 <p>IT</p>
-            </div>
-            <div class="category-item" data-category="wearable">
+            </button>
+
+            <button class="category-item" data-category="wearable">
                 <div class="icon">⌚</div>
                 <p>Thiết bị đeo</p>
-            </div>
-            <div class="category-item" data-category="accessory">
+            </button>
+
+            <button class="category-item" data-category="accessory">
                 <div class="icon">🎧</div>
                 <p>Phụ kiện</p>
-            </div>
+            </button>
         </section>
 
-        <!-- ================= PRODUCTS ================= -->
         <section class="products">
-            <div class="product-list active" id="featured">
-                <div class="product-card">
-                    <img src="" id="img-s25plus" alt="Galaxy S25+" />
-                    <h3>Galaxy S25+</h3>
-                    <p>29.935.637 VND</p>
-                </div>
-                <div class="product-card">
-                    <img src="" id="img-maygiatai" alt="Máy giặt AI" />
-                    <h3>Máy giặt AI</h3>
-                    <p>18.990.000 VND</p>
-                </div>
-                <div class="product-card">
-                    <img src="" id="img-tvu4k" alt="TV 4K UHD" />
-                    <h3>TV 4K UHD</h3>
-                    <p>12.990.000 VND</p>
-                </div>
-                <div class="product-card">
-                    <img src="" id="img-tvu4k" alt="TV 4K UHD" />
-                    <h3>TV 4K UHD</h3>
-                    <p>12.990.000 VND</p>
-                </div>
-                <div class="product-card">
-                    <img src="" id="img-tvu4k" alt="TV 4K UHD" />
-                    <h3>TV 4K UHD</h3>
-                    <p>12.990.000 VND</p>
-                </div>
-                <div class="product-card">
-                    <img src="" id="img-tvu4k" alt="TV 4K UHD" />
-                    <h3>TV 4K UHD</h3>
-                    <p>12.990.000 VND</p>
-                </div>
-                <div class="product-card">
-                    <img src="" id="img-tvu4k" alt="TV 4K UHD" />
-                    <h3>TV 4K UHD</h3>
-                    <p>12.990.000 VND</p>
-                </div>
-                <div class="product-card">
-                    <img src="" id="img-tvu4k" alt="TV 4K UHD" />
-                    <h3>TV 4K UHD</h3>
-                    <p>12.990.000 VND</p>
-                </div>
-            </div>
 
+            <div class="product-list active" id="featured">
+
+                <article class="product-card">
+                    <img class="img-mini-projector" />
+                    <h3>Máy chiếu mini Nebula Capsule 3</h3>
+                    <p>6.490.000 VND</p>
+                </article>
+
+                <article class="product-card">
+                    <img class="img-hologram-fan" />
+                    <h3>Quạt trình chiếu Hologram 3D</h3>
+                    <p>3.990.000 VND</p>
+                </article>
+
+                <article class="product-card">
+                    <img class="img-mini-printer" />
+                    <h3>Máy in mini bỏ túi Phomemo</h3>
+                    <p>1.090.000 VND</p>
+                </article>
+
+                <article class="product-card">
+                    <img class="img-gravastar" />
+                    <h3>Loa robot Gravastar Mars Pro</h3>
+                    <p>4.890.000 VND</p>
+                </article>
+
+                <article class="product-card">
+                    <img class="img-instax-pal" />
+                    <h3>Máy ảnh mini Instax Pal</h3>
+                    <p>2.490.000 VND</p>
+                </article>
+
+                <article class="product-card">
+                    <img class="img-mini-drone" />
+                    <h3>Drone siêu nhỏ DJI Mini SE</h3>
+                    <p>6.990.000 VND</p>
+                </article>
+
+                <article class="product-card">
+                    <img class="img-freestyle" />
+                    <h3>Samsung The Freestyle Mini</h3>
+                    <p>16.900.000 VND</p>
+                </article>
+
+                <article class="product-card">
+                    <img class="img-airmini" />
+                    <h3>Máy lọc không khí bỏ túi</h3>
+                    <p>690.000 VND</p>
+                </article>
+
+                <article class="product-card">
+                    <img class="img-pixelclock" />
+                    <h3>Đèn đồng hồ pixel RGB</h3>
+                    <p>890.000 VND</p>
+                </article>
+
+            </div>
             <div class="product-list" id="mobile">
-                <div class="product-card">
-                    <img src="" id="img-s25" alt="Galaxy S25" />
-                    <h3>Galaxy S25</h3>
-                    <p>22.572.000 VND</p>
-                </div>
-                <div class="product-card">
-                    <img src="" id="img-s25ultra" alt="Galaxy S25 Ultra" />
-                    <h3>Galaxy S25 Ultra</h3>
-                    <p>33.372.000 VND</p>
-                </div>
+                <article class="product-card">
+                    <img class="img-jellystar" />
+                    <h3>Jelly Star – Smartphone siêu nhỏ</h3>
+                    <p>3.490.000 VND</p>
+                </article>
+
+                <article class="product-card">
+                    <img class="img-nothingmini" />
+                    <h3>Nothing Mini – Điện thoại trong suốt</h3>
+                    <p>4.990.000 VND</p>
+                </article>
             </div>
 
             <div class="product-list" id="tv">
-                <div class="product-card">
-                    <img src="" id="img-tv-oled" alt="77 Inch OLED S90F" />
-                    <h3>77 Inch OLED S90F</h3>
-                    <p>49.990.000 VND</p>
-                </div>
+                <article class="product-card">
+                    <img class="img-rokid" />
+                    <h3>Kính chiếu AR Rokid Max</h3>
+                    <p>9.990.000 VND</p>
+                </article>
+
+                <article class="product-card">
+                    <img class="img-transparenttv" />
+                    <h3>TV trong suốt Xiaomi 55 inch</h3>
+                    <p>89.900.000 VND</p>
+                </article>
             </div>
 
             <div class="product-list" id="home">
-                <div class="product-card">
-                    <img src="" id="img-may-giat-ai" alt="Máy giặt AI Bespoke" />
-                    <h3>Máy giặt AI Bespoke</h3>
-                    <p>18.900.000 VND</p>
-                </div>
+                <article class="product-card">
+                    <img class="img-robotwindow" />
+                    <h3>Robot lau kính T10</h3>
+                    <p>4.290.000 VND</p>
+                </article>
+
+                <article class="product-card">
+                    <img class="img-foldimate" />
+                    <h3>Máy gấp áo tự động mini</h3>
+                    <p>12.900.000 VND</p>
+                </article>
             </div>
 
             <div class="product-list" id="it">
-                <div class="product-card">
-                    <img src="" id="img-galaxy-book4" alt="Galaxy Book4" />
-                    <h3>Galaxy Book4</h3>
-                    <p>25.000.000 VND</p>
-                </div>
+                <article class="product-card">
+                    <img class="img-transkb" />
+                    <h3>Bàn phím cơ trong suốt Womier</h3>
+                    <p>2.190.000 VND</p>
+                </article>
+
+                <article class="product-card">
+                    <img class="img-rgbpad" />
+                    <h3>Bàn di chuột RGB thông minh</h3>
+                    <p>590.000 VND</p>
+                </article>
             </div>
 
             <div class="product-list" id="wearable">
-                <div class="product-card">
-                    <img src="" id="img-watch8" alt="Galaxy Watch 8" />
-                    <h3>Galaxy Watch 8</h3>
-                    <p>9.000.000 VND</p>
-                </div>
+                <article class="product-card">
+                    <img class="img-oura" />
+                    <h3>Oura Ring – Nhẫn sức khỏe thông minh</h3>
+                    <p>7.490.000 VND</p>
+                </article>
+
+                <article class="product-card">
+                    <img class="img-aiglass" />
+                    <h3>Kính dịch thuật AI Timekettle</h3>
+                    <p>5.990.000 VND</p>
+                </article>
             </div>
 
             <div class="product-list" id="accessory">
-                <div class="product-card">
-                    <img src="" id="img-sac-doi" alt="Sạc đôi không dây" />
-                    <h3>Sạc đôi không dây</h3>
-                    <p>1.490.000 VND</p>
-                </div>
+                <article class="product-card">
+                    <img class="img-solarcharger" />
+                    <h3>Sạc năng lượng mặt trời mini</h3>
+                    <p>390.000 VND</p>
+                </article>
+
+                <article class="product-card">
+                    <img class="img-flyingcharger" />
+                    <h3>Sạc không dây bay lơ lửng</h3>
+                    <p>1.990.000 VND</p>
+                </article>
             </div>
         </section>
 
+        <!-- ================= BEST SELLERS ================= -->
+        <section class="best-sellers section-padding">
+            <div class="container">
+                <h2 class="section-title">Bán chạy nhất tuần</h2>
+
+                <div class="row g-4 ">
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="bs-card card-soft soft-hover">
+                            <img src="data:image/jpeg;base64,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"
+                                class="bs-img" alt="Nebula Mini Projector">
+                            <h4 class="bs-name">Máy chiếu bỏ túi Nebula</h4>
+                            <p class="bs-price">6.490.000 VND</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="bs-card card-soft soft-hover">
+                            <img src="https://www.maychieuminhtan.com/uploaded/qu%E1%BA%A1t%203D1.png" class="bs-img"
+                                alt="Hologram Fan">
+                            <h4 class="bs-name">Quạt trình chiếu Hologram 3D</h4>
+                            <p class="bs-price">3.990.000 VND</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="bs-card card-soft soft-hover">
+                            <img src="https://i0.wp.com/www.seriousinsights.net/wp-content/uploads/3_1.png.webp?resize=750%2C420&ssl=1"
+                                class="bs-img" alt="Gravastar Speaker">
+                            <h4 class="bs-name">Loa robot Gravastar</h4>
+                            <p class="bs-price">4.890.000 VND</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="bs-card card-soft soft-hover">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6Ich99_2XVAcW8s8vo6ZsXKy7E3own3Wiw&s"
+                                class="bs-img" alt="Mini AI Speaker">
+                            <h4 class="bs-name">Loa mini AI</h4>
+                            <p class="bs-price">790.000 VND</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- ================= NEW ARRIVALS ================= -->
+        <section class="new-arrivals section-padding">
+            <h2 class="section-title">Hàng mới ra lò</h2>
+            <div class="na-grid">
+
+                <div class="na-card card-soft soft-hover">
+                    <img src="/assets/img/pr/freestyle.jpg" alt="">
+                    <span class="na-tag">NEW</span>
+                    <h4>Samsung Freestyle Mini 2</h4>
+                    <p>17.900.000 VND</p>
+                </div>
+
+                <div class="na-card card-soft soft-hover">
+                    <img src="/assets/img/pr/foldimatemini.jpg" alt="">
+                    <span class="na-tag">NEW</span>
+                    <h4>Máy gấp áo tự động mini</h4>
+                    <p>12.900.000 VND</p>
+                </div>
+
+                <div class="na-card card-soft soft-hover">
+                    <img src="/assets/img/pr/aiglasses.jpg" alt="">
+                    <span class="na-tag">NEW</span>
+                    <h4>Kính dịch thuật AI</h4>
+                    <p>5.990.000 VND</p>
+                </div>
+
+                <div class="na-card card-soft soft-hover">
+                    <img src="/assets/img/pr/nebula.jpg" alt="">
+                    <span class="na-tag">NEW</span>
+                    <h4>Máy chiếu mini Capsule Max</h4>
+                    <p>7.290.000 VND</p>
+                </div>
+
+            </div>
+        </section>
+
+
         <!-- ================= OFFER GRID ================= -->
         <section class="offers">
+
             <div class="offer left">
-                <img id="offer-galaxy" alt="Galaxy Offer" />
+                <img id="offer-galaxy" />
                 <div class="offer-text">
-                    <h2>Khám phá dòng Galaxy S mới</h2>
-                    <p>Nhận ngay ưu đãi hấp dẫn khi đặt trước Galaxy S24</p>
-                    <button class="btn-ghost">Xem chi tiết</button>
+                    <h2>Công nghệ mini – Sức mạnh tối đa</h2>
+                    <p>Những thiết bị độc lạ giúp mỗi ngày của bạn trở nên thú vị hơn.</p>
+                    <button class="btn-ghost">Khám phá ngay</button>
                 </div>
             </div>
 
             <div class="offer right">
                 <div class="offer-text">
-                    <h2>Ưu đãi Smart TV</h2>
-                    <p>Tận hưởng hình ảnh sống động và âm thanh vượt trội</p>
-                    <button class="btn-ghost">Xem chi tiết</button>
+                    <h2>Màn hình tương lai</h2>
+                    <p>Không chỉ hiển thị. Chúng phản hồi, hòa vào không gian và sáng tạo cùng bạn.</p>
+                    <button class="btn-ghost">Xem sản phẩm</button>
                 </div>
-                <img id="offer-tv" alt="TV Offer" />
+                <img id="offer-tv" />
             </div>
 
             <div class="offer left">
-                <img id="offer-home" alt="Home Offer" />
+                <img id="offer-home" />
                 <div class="offer-text">
-                    <h2>Thiết bị gia dụng thông minh</h2>
-                    <p>Biến ngôi nhà bạn trở nên hiện đại và tiện nghi hơn</p>
-                    <button class="btn-ghost">Xem chi tiết</button>
+                    <h2>Nhà nhỏ – Ý tưởng lớn</h2>
+                    <p>Các thiết bị mini độc đáo biến căn phòng của bạn thành phòng lab cá nhân.</p>
+                    <button class="btn-ghost">Tìm hiểu thêm</button>
+                </div>
+            </div>
+
+        </section>
+        <!-- ================= COLLECTIONS ================= -->
+        <section class="collections section-padding">
+            <div class="container">
+                <h2 class="section-title">Bộ sưu tập dành cho bạn</h2>
+
+                <div class="collection-grid">
+
+                    <div class="collection-item">
+                        <img src="/assets/img/Banner/tivi.jpg" alt="">
+                        <div class="collection-text">
+                            <h3>Setup góc làm việc tương lai</h3>
+                        </div>
+                    </div>
+
+                    <div class="collection-item">
+                        <img src="/assets/img/pr/airmini.jpg" alt="">
+                        <div class="collection-text">
+                            <h3>Công nghệ bỏ túi</h3>
+                        </div>
+                    </div>
+
+                    <div class="collection-item">
+                        <img src="/assets/img/pr/hologramfan.jpg" alt="">
+                        <div class="collection-text">
+                            <h3>Không gian số – Không giới hạn</h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- ================= TECH HIGHLIGHTS ================= -->
+        <section class="tech-highlights section-padding">
+            <div class="container">
+                <h2 class="section-title">Điểm nhấn công nghệ</h2>
+
+                <div class="th-grid">
+
+                    <div class="th-card card-soft">
+                        <h3>AI trong thiết bị mini</h3>
+                        <p>Từ dịch thuật đến tự động hóa, AI len lỏi vào mọi thiết bị nhỏ gọn.</p>
+                    </div>
+
+                    <div class="th-card card-soft">
+                        <h3>Không gian thông minh</h3>
+                        <p>Góc bàn làm việc trở thành trung tâm cảm hứng với ánh sáng RGB và ambient.</p>
+                    </div>
+
+                    <div class="th-card card-soft">
+                        <h3>Kết nối đa tầng</h3>
+                        <p>Các thiết bị mini kết nối liền mạch qua Bluetooth LE và Fast Pair.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- ================= BLOG PREVIEW ================= -->
+        <section class="blog-preview section-padding">
+            <div class="container">
+                <h2 class="section-title">Tin & mẹo công nghệ</h2>
+
+                <div class="blog-grid">
+
+                    <article class="blog-card card-soft soft-hover">
+                        <img src="/assets/img/pr/minigame.jpg" alt="">
+                        <h4>Top 7 thiết bị độc lạ bạn chưa từng thấy</h4>
+                        <p>Danh sách các sản phẩm nhỏ mà ai cũng muốn thử ít nhất 1 lần.</p>
+                    </article>
+
+                    <article class="blog-card card-soft soft-hover">
+                        <img src="/assets/img/pr/freestyle.jpg" alt="">
+                        <h4>Biến phòng trọ thành phòng chiếu</h4>
+                        <p>Chỉ cần một chiếc máy chiếu mini – mọi thứ thay đổi.</p>
+                    </article>
+
+                    <article class="blog-card card-soft soft-hover">
+                        <img src="/assets/img/pr/aiglasses.jpg" alt="">
+                        <h4>Kính AI có gì đặc biệt?</h4>
+                        <p>Từ dịch thuật, nhận diện đến thực tế tăng cường.</p>
+                    </article>
+
                 </div>
             </div>
         </section>
 
-        <!-- ================= RECOMMENDED CAROUSEL ================= -->
-        <section class="recommended container my-5">
-            <h2 class="fw-bold mb-4 text-center">Được đề xuất cho bạn</h2>
 
-            <div class="carousel-wrapper position-relative">
-                <!-- Nút điều hướng -->
+
+
+        <!-- ================= RECOMMENDED CAROUSEL ================= -->
+        <section class="recommended section-padding">
+            <h2 class="section-title">Được đề xuất cho bạn</h2>
+
+            <div class="carousel-wrapper">
                 <button class="carousel-btn prev"><i class="bi bi-chevron-left"></i></button>
                 <button class="carousel-btn next"><i class="bi bi-chevron-right"></i></button>
 
-                <!-- Vùng chứa sản phẩm -->
                 <div class="carousel-track d-flex">
-                    <div class="product-card text-center p-3 shadow-sm rounded-4 bg-white">
-                        <img id="img-a56" class="img-fluid mb-3 rounded-3">
-                        <h6 class="fw-semibold">Galaxy A56 5G</h6>
-                        <p class="fw-bold text-dark mb-1">11.469.000 VND</p>
-                        <p class="text-primary small mb-0">chiết khấu 303.000 VND <span
-                                class="text-muted">(11.772.000)</span></p>
+
+                    <div class="product-card p-3 bg-white">
+                        <img id="img-pocket-projector">
+                        <h6 class="fw-semibold mt-2">Pocket Projector – Hình ảnh trong lòng bàn tay</h6>
+                        <p class="fw-bold text-dark">3.490.000 VND</p>
                     </div>
 
-                    <div class="product-card text-center p-3 shadow-sm rounded-4 bg-white">
-                        <img id="img-fit3" class="img-fluid mb-3 rounded-3">
-                        <h6 class="fw-semibold">Galaxy Fit3</h6>
-                        <p class="fw-bold text-dark mb-1">959.000 VND</p>
-                        <p class="text-primary small mb-0">chiết khấu 405.727 VND <span
-                                class="text-muted">(1.364.727)</span></p>
+                    <div class="product-card p-3 bg-white">
+                        <img id="img-mini-handheld">
+                        <h6 class="fw-semibold mt-2">Console mini – Chơi mọi lúc</h6>
+                        <p class="fw-bold text-dark">1.590.000 VND</p>
                     </div>
 
-                    <div class="product-card text-center p-3 shadow-sm rounded-4 bg-white">
-                        <img id="img-fridge-ai" class="img-fluid mb-3 rounded-3">
-                        <h6 class="fw-semibold">Tủ Lạnh Bespoke AI</h6>
-                        <p class="fw-bold text-dark mb-1">19.390.000 VND</p>
-                        <p class="text-primary small mb-0">chiết khấu 5.047.160 VND <span
-                                class="text-muted">(24.437.160)</span></p>
+                    <div class="product-card p-3 bg-white">
+                        <img id="img-mini-speaker">
+                        <h6 class="fw-semibold mt-2">Loa mini AI – Gọn, mạnh, độc</h6>
+                        <p class="fw-bold text-dark">790.000 VND</p>
                     </div>
 
-                    <div class="product-card text-center p-3 shadow-sm rounded-4 bg-white">
-                        <img id="img-fridge-rs64" class="img-fluid mb-3 rounded-3">
-                        <h6 class="fw-semibold">Tủ Lạnh Samsung RS64</h6>
-                        <p class="fw-bold text-dark mb-1">15.990.000 VND</p>
-                        <p class="text-primary small mb-0">chiết khấu 4.530.000 VND <span
-                                class="text-muted">(20.520.000)</span></p>
+                    <div class="product-card p-3 bg-white">
+                        <img id="img-ai-lamp">
+                        <h6 class="fw-semibold mt-2">Đèn AI tự động nhận diện</h6>
+                        <p class="fw-bold text-dark">1.290.000 VND</p>
                     </div>
 
-                    <div class="product-card text-center p-3 shadow-sm rounded-4 bg-white">
-                        <img id="img-zflip5" class="img-fluid mb-3 rounded-3">
-                        <h6 class="fw-semibold">Galaxy Z Flip5</h6>
-                        <p class="fw-bold text-dark mb-1">24.990.000 VND</p>
-                        <p class="text-primary small mb-0">chiết khấu 3.000.000 VND <span
-                                class="text-muted">(27.990.000)</span></p>
+                    <div class="product-card p-3 bg-white">
+                        <img id="img-air-gesture">
+                        <h6 class="fw-semibold mt-2">Bộ điều khiển cử chỉ AI</h6>
+                        <p class="fw-bold text-dark">2.690.000 VND</p>
                     </div>
+
                 </div>
             </div>
         </section>
-    </main>
+        <!-- ================= DEALS ================= -->
+        <section class="deals section-padding">
+            <div class="container">
+                <h2 class="section-title">Ưu đãi độc quyền</h2>
 
-    <!-- ================= Footer ================= -->
-    <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
-        <div class="container">
-            <div class="row gy-4">
-                <!-- Logo + Giới thiệu -->
-                <div class="col-md-4">
-                    <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
-                        <i class="bi bi-camera fs-3 text-primary me-2"></i>
-                        <span class="fw-bold fs-5 text-primary">TechX</span>
-                    </a>
-                    <p class="text-muted">
-                        Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
-                        Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
-                    </p>
+                <div class="deal-grid">
+
+                    <div class="deal-card">
+                        <img src="/assets/img/pr/rgbpad.jpg" alt="">
+                        <div class="deal-info">
+                            <h3>Giảm 20% bàn di chuột RGB</h3>
+                            <p>Nâng cấp góc làm việc tương lai</p>
+                        </div>
+                    </div>
+
+                    <div class="deal-card">
+                        <img src="/assets/img/pr/robotwindow.jpg" alt="">
+                        <div class="deal-info">
+                            <h3>Giảm 15% Robot lau kính T10</h3>
+                            <p>Tự động hóa mọi góc nhà</p>
+                        </div>
+                    </div>
+
+                    <div class="deal-card">
+                        <img src="/assets/img/pr/minigame.jpg" alt="">
+                        <div class="deal-info">
+                            <h3>Giảm 10% console mini</h3>
+                            <p>Giải trí mọi lúc mọi nơi</p>
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+        </section>
 
-                <!-- Danh mục -->
-                <div class="col-md-2">
-                    <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
-                        <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
-                        <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
-                        <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
-                    </ul>
+
+        <!-- ================= FAQ ================= -->
+        <section class="faq section-padding">
+            <div class="container">
+                <h2 class="section-title">Câu hỏi thường gặp</h2>
+
+                <div class="accordion mt-4" id="faqBox">
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" data-bs-target="#f1" data-bs-toggle="collapse">
+                                Sản phẩm có bảo hành không?
+                            </button>
+                        </h2>
+                        <div id="f1" class="accordion-collapse collapse show">
+                            <div class="accordion-body">
+                                Tất cả sản phẩm đều được bảo hành từ 6–12 tháng tùy loại.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" data-bs-target="#f2" data-bs-toggle="collapse">
+                                Có hỗ trợ đổi trả không?
+                            </button>
+                        </h2>
+                        <div id="f2" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                Bạn được đổi trả trong vòng 7 ngày nếu lỗi từ nhà sản xuất.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" data-bs-target="#f3" data-bs-toggle="collapse">
+                                Có ship nhanh không?
+                            </button>
+                        </h2>
+                        <div id="f3" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                TechX hỗ trợ giao nhanh 2–4 giờ trong nội thành HCM.
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+        </section>
 
-                <!-- Hỗ trợ -->
-                <div class="col-md-2">
-                    <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-                        <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
-                        <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
-                        <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
-                    </ul>
-                </div>
+        <!-- ================= Footer ================= -->
+        <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
+            <div class="container">
+                <div class="row gy-4">
+                    <!-- Logo + Giới thiệu -->
+                    <div class="col-md-4">
+                        <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
+                            <i class="bi bi-camera fs-3 text-primary me-2"></i>
+                            <span class="fw-bold fs-5 text-primary">TechX</span>
+                        </a>
+                        <p class="text-muted">
+                            Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
+                            Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
+                        </p>
+                    </div>
 
-                <!-- Liên hệ -->
-                <div class="col-md-4">
-                    <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
-                    <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh
-                    </p>
-                    <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
-                    <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
-                    <div class="mt-3">
-                        <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
-                        <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
+                    <!-- Danh mục -->
+                    <div class="col-md-2">
+                        <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
+                        <ul class="list-unstyled">
+                            <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
+                            <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
+                            <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
+                            <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Hỗ trợ -->
+                    <div class="col-md-2">
+                        <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
+                        <ul class="list-unstyled">
+                            <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
+                            <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
+                            <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
+                            <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Liên hệ -->
+                    <div class="col-md-4">
+                        <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
+                        <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí
+                            Minh
+                        </p>
+                        <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
+                        <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
+                        <div class="mt-3">
+                            <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
+                            <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
+                        </div>
                     </div>
                 </div>
+
+                <hr class="mt-4 mb-3">
+                <div class="text-center small text-muted">
+                    © 2025 <strong>TechX</strong>. All rights reserved.
+                </div>
             </div>
-
-            <hr class="mt-4 mb-3">
-            <div class="text-center small text-muted">
-                © 2025 <strong>TechX</strong>. All rights reserved.
-            </div>
-        </div>
-    </footer>
+        </footer>
 
 
 
 
-    <!-- ✅ Bootstrap Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // ==============================
-        // offer.js
-        // Kích hoạt hiệu ứng cuộn (fade-in) cho từng section
-        // ==============================
+        <!-- ✅ Bootstrap Bundle -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // ==============================
+            // offer.js
+            // Kích hoạt hiệu ứng cuộn (fade-in) cho từng section
+            // ==============================
 
-        const categories = document.querySelectorAll('.category-item');
-        const productLists = document.querySelectorAll('.product-list');
+            const categories = document.querySelectorAll('.category-item');
+            const productLists = document.querySelectorAll('.product-list');
 
-        categories.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // remove old active
-                categories.forEach(b => b.classList.remove('active'));
-                productLists.forEach(p => p.classList.remove('active'));
-
-                // add new active
-                btn.classList.add('active');
-                document.getElementById(btn.dataset.category).classList.add('active');
-            });
-        });
-
-
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('show');
-                    }
-                });
-            }, { threshold: 0.2 });
-
-            const sections = document.querySelectorAll('.offer, .hero-content, .categories');
-            sections.forEach((el) => observer.observe(el));
-
-            // Xử lý nút category chọn active
-            const catBtns = document.querySelectorAll('.cat-btn');
-            catBtns.forEach((btn) => {
+            categories.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    catBtns.forEach((b) => b.classList.remove('active'));
+                    // remove old active
+                    categories.forEach(b => b.classList.remove('active'));
+                    productLists.forEach(p => p.classList.remove('active'));
+
+                    // add new active
                     btn.classList.add('active');
+                    document.getElementById(btn.dataset.category).classList.add('active');
                 });
             });
 
-            // Hiệu ứng nút CTA trong hero (scroll xuống offers)
-            const exploreBtn = document.querySelector('.btn-main');
-            exploreBtn.addEventListener('click', () => {
-                document.querySelector('.offers').scrollIntoView({ behavior: 'smooth' });
+
+
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('show');
+                        }
+                    });
+                }, { threshold: 0.2 });
+
+                const sections = document.querySelectorAll('.offer, .hero-content, .categories');
+                sections.forEach((el) => observer.observe(el));
+
+                // Xử lý nút category chọn active
+                const catBtns = document.querySelectorAll('.cat-btn');
+                catBtns.forEach((btn) => {
+                    btn.addEventListener('click', () => {
+                        catBtns.forEach((b) => b.classList.remove('active'));
+                        btn.classList.add('active');
+                    });
+                });
+
+                // Hiệu ứng nút CTA trong hero (scroll xuống offers)
+                const exploreBtn = document.querySelector('.btn-main');
+                exploreBtn.addEventListener('click', () => {
+                    document.querySelector('.offers').scrollIntoView({ behavior: 'smooth' });
+                });
             });
-        });
-        // ================= Carousel Logic =================
-        const track = document.querySelector(".carousel-track");
-        const prevBtn = document.querySelector(".carousel-btn.prev");
-        const nextBtn = document.querySelector(".carousel-btn.next");
+            // ================= Carousel Logic =================
+            const track = document.querySelector(".carousel-track");
+            const prevBtn = document.querySelector(".carousel-btn.prev");
+            const nextBtn = document.querySelector(".carousel-btn.next");
 
-        let currentSlide = 0;
-        const items = document.querySelectorAll(".product-card");
-        const totalItems = items.length;
-        const visibleCount = 4;
-        const totalSlides = Math.ceil(totalItems / visibleCount);
+            let currentSlide = 0;
+            const items = document.querySelectorAll(".product-card");
+            const totalItems = items.length;
+            const visibleCount = 4;
+            const totalSlides = Math.ceil(totalItems / visibleCount);
 
-        function updateCarousel() {
-            const width = items[0].offsetWidth + 20; // khoảng cách gap
-            const offset = currentSlide * width * visibleCount;
-            track.style.transform = `translateX(-${offset}px)`;
-        }
+            function updateCarousel() {
+                const width = items[0].offsetWidth + 20; // khoảng cách gap
+                const offset = currentSlide * width * visibleCount;
+                track.style.transform = `translateX(-${offset}px)`;
+            }
 
-        nextBtn.addEventListener("click", () => {
-            if (currentSlide < totalSlides - 1) currentSlide++;
-            else currentSlide = 0;
-            updateCarousel();
-        });
+            nextBtn.addEventListener("click", () => {
+                if (currentSlide < totalSlides - 1) currentSlide++;
+                else currentSlide = 0;
+                updateCarousel();
+            });
 
-        prevBtn.addEventListener("click", () => {
-            if (currentSlide > 0) currentSlide--;
-            else currentSlide = totalSlides - 1;
-            updateCarousel();
-        });
+            prevBtn.addEventListener("click", () => {
+                if (currentSlide > 0) currentSlide--;
+                else currentSlide = totalSlides - 1;
+                updateCarousel();
+            });
 
-    </script>
-    <script>
-        // ===== Gán ảnh cho phần OFFER =====
-        document.getElementById("offer-galaxy").src = IMG.OFFER_GALAXY;
-        document.getElementById("offer-tv").src = IMG.OFFER_TV;
-        document.getElementById("offer-home").src = IMG.OFFER_HOME;
-        // Gán ảnh CATEGORY PRODUCTS
-        document.getElementById("img-s25plus").src = IMG.GALAXY_S25_ULTRA; // ví dụ
-        document.getElementById("img-maygiatai").src = IMG.MAY_GIAT_AI;
-        document.getElementById("img-tvu4k").src = IMG.TV_OLED;
-        document.getElementById("img-s25").src = IMG.GALAXY_S25;
-        document.getElementById("img-s25ultra").src = IMG.GALAXY_S25_ULTRA;
-        document.getElementById("img-may-giat-ai").src = IMG.MAY_GIAT_AI;
-        document.getElementById("img-galaxy-book4").src = IMG.GALAXY_BOOK4;
-        document.getElementById("img-watch8").src = IMG.WATCH8;
-        document.getElementById("img-sac-doi").src = IMG.SAC_DOI;
-        // ===== Gán ảnh cho sản phẩm RECOMMENDED =====
-        document.getElementById("img-a56").src = IMG.GALAXY_A56;
-        document.getElementById("img-fit3").src = IMG.GALAXY_FIT3;
-        document.getElementById("img-fridge-ai").src = IMG.FRIDGE_AI;
-        document.getElementById("img-fridge-rs64").src = IMG.FRIDGE_RS64;
-        document.getElementById("img-zflip5").src = IMG.Z_FLIP5;
+        </script>
+        <script>
+            /* ================================
+               GÁN ẢNH SẢN PHẨM TỰ ĐỘNG (JS)
+            ================================ */
+            const IMG = {
+                // OFFER
+                OFFER_GALAXY: "https://cdn-media.sforum.vn/storage/app/media/ctvseo_phung/chip-dien-thoai-manh-nhat/chip-dien-thoai-manh-nhat-3.jpg",
+                OFFER_TV: "https://cdn.tgdd.vn//News/1174380//Thuong-hieu-tivi-cao-cap-nhat-hien-nay-9-730x404.jpg",
+                OFFER_HOME: "https://s3-api.fpt.vn/fptvn-storage/2025-04-15/1744684695_xu-huong-nha-thong-minh-smart-home-trong-tuong-lai.png",
 
+                // FEATURED PRODUCTS
+                MINI_PROJECTOR: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS21nn7-0LPqF3sLCzLJvMPcIapG8Udr1f6lA&s",
+                HOLOGRAM_FAN: "https://sgp1.digitaloceanspaces.com/adtechasia.sg/wp-content/uploads/2024/11/11203510/65cm-hologram-fan-with-high-resolutionc1f738f3-fb00-4746-a621-21f39a90c432-3.jpg",
+                MINI_PRINTER: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLZWS2LeMYpX5MULT8FmdiHStXC2Rgm59NKQ&s",
+                GRAVASTAR: "https://azaudio.vn/wp-content/uploads/2024/09/gravastar-mars-pro-black-6.jpg",
+                INSTA_PAL: "https://instax.com/pal/assets/images/pic_pal_green_01.png",
+                MINI_DRONE: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTK1uXvEH5JzgR53H8biyV2MBWkiHtC7mG_w&s",
+                FREESTYLE: "data:image/jpeg;base64,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",
+                AIR_PURIFIER: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq3uojjbnD60bDRY8X6Iw-rU-fPCuHekA2eQ&s",
+                PIXEL_CLOCK: "https://cdn.shopify.com/s/files/1/0136/3119/3188/files/7_5346e792-b108-422d-b173-219ec426ee2e.jpg?v=1698399241",
 
-    </script>
+                // MOBILE
+                JELLY_STAR: "https://www.unihertz.com/cdn/shop/files/JellyStar_Blue_01_1800x1800.jpg",
+                NOTHING_MINI: "https://cdn.tgdd.vn/Files/2023/08/01/1538790/nothing-phone-2-transparent.jpg",
+
+                // TV
+                ROKID_MAX: "https://cdn.shopify.com/s/files/1/0709/4422/0017/files/Rokid_Max_3_600x600.jpg",
+                TRANSPARENT_TV: "https://images.samsung.com/is/image/samsung/assets/global/about-us/brand/logo/transparent-oled-tv.jpg",
+
+                // HOME
+                ROBOT_WINDOW: "https://cdn.tgdd.vn/Files/2023/07/10/1536318/robot-lau-kinh.jpg",
+                FOLDIMATE: "https://cdn.tgdd.vn/Files/2023/08/09/1539702/foldimate.jpg",
+
+                // IT
+                TRANSPARENT_KEYBOARD: "https://m.media-amazon.com/images/I/71rLvsNnBiL._AC_SL1500_.jpg",
+                RGB_PAD: "https://cdn.tgdd.vn/Files/2023/08/01/1538754/mousepad-rgb-02.jpg",
+
+                // WEARABLE
+                OURA: "https://m.media-amazon.com/images/I/61chvE3hIfL._AC_SL1500_.jpg",
+                AI_GLASSES: "https://cdn.tgdd.vn/Files/2023/08/15/1541101/kinh-ai-translation.jpg",
+
+                // ACCESSORY
+                SOLAR_CHARGER: "https://cdn.tgdd.vn/Files/2022/11/18/1488550/solar-charger.jpg",
+                FLYING_CHARGER: "https://cdn.tgdd.vn/Files/2023/06/01/1531802/floating-charger.jpg",
+
+                // RECOMMENDED
+                POCKET_PROJECTOR: "https://cdn.tgdd.vn/Files/2023/06/10/1532709/pocket-projector.jpg",
+                MINI_HANDHELD: "https://cdn.tgdd.vn/Files/2023/08/01/1538802/mini-console.jpg",
+                MINI_SPEAKER: "https://cdn.tgdd.vn/Files/2023/08/02/1538933/mini-ai-speaker.jpg",
+                AI_LAMP: "https://cdn.tgdd.vn/Files/2023/07/30/1538665/ai-smart-lamp.jpg",
+                AIR_GESTURE: "https://cdn.tgdd.vn/Files/2023/08/03/1539041/ai-gesture-controller.jpg"
+            };
+
+            // Map class → ảnh tương ứng
+            const mapping = {
+                ".img-mini-projector": IMG.MINI_PROJECTOR,
+                ".img-hologram-fan": IMG.HOLOGRAM_FAN,
+                ".img-mini-printer": IMG.MINI_PRINTER,
+                ".img-gravastar": IMG.GRAVASTAR,
+                ".img-instax-pal": IMG.INSTA_PAL,
+                ".img-mini-drone": IMG.MINI_DRONE,
+                ".img-freestyle": IMG.FREESTYLE,
+                ".img-airmini": IMG.AIR_PURIFIER,
+                ".img-pixelclock": IMG.PIXEL_CLOCK,
+                ".img-jellystar": IMG.JELLY_STAR,
+                ".img-nothingmini": IMG.NOTHING_MINI,
+                ".img-rokid": IMG.ROKID_MAX,
+                ".img-transparenttv": IMG.TRANSPARENT_TV,
+                ".img-robotwindow": IMG.ROBOT_WINDOW,
+                ".img-foldimate": IMG.FOLDIMATE,
+                ".img-transkb": IMG.TRANSPARENT_KEYBOARD,
+                ".img-rgbpad": IMG.RGB_PAD,
+                ".img-oura": IMG.OURA,
+                ".img-aiglass": IMG.AI_GLASSES,
+                ".img-solarcharger": IMG.SOLAR_CHARGER,
+                ".img-flyingcharger": IMG.FLYING_CHARGER,
+                "#offer-galaxy": IMG.OFFER_GALAXY,
+                "#offer-tv": IMG.OFFER_TV,
+                "#offer-home": IMG.OFFER_HOME,
+                "#img-pocket-projector": IMG.POCKET_PROJECTOR,
+                "#img-mini-handheld": IMG.MINI_HANDHELD,
+                "#img-mini-speaker": IMG.MINI_SPEAKER,
+                "#img-ai-lamp": IMG.AI_LAMP,
+                "#img-air-gesture": IMG.AIR_GESTURE
+            };
+
+            // Gán src cho từng phần tử tồn tại
+            for (const [selector, src] of Object.entries(mapping)) {
+                const el = document.querySelector(selector);
+                if (el) el.src = src;
+            }
+        </script>
+
 </body>
 
 
