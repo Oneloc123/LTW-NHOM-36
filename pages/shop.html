@@ -129,9 +129,8 @@
         </section>
 
         <section class="products">
-
+            <!-- FEATURED -->
             <div class="product-list active" id="featured">
-
                 <article class="product-card">
                     <img class="img-mini-projector" />
                     <h3>Máy chiếu mini Nebula Capsule 3</h3>
@@ -185,8 +184,9 @@
                     <h3>Đèn đồng hồ pixel RGB</h3>
                     <p>890.000 VND</p>
                 </article>
-
             </div>
+
+            <!-- MOBILE -->
             <div class="product-list" id="mobile">
                 <article class="product-card">
                     <img class="img-jellystar" />
@@ -201,6 +201,7 @@
                 </article>
             </div>
 
+            <!-- TV -->
             <div class="product-list" id="tv">
                 <article class="product-card">
                     <img class="img-rokid" />
@@ -215,6 +216,7 @@
                 </article>
             </div>
 
+            <!-- HOME -->
             <div class="product-list" id="home">
                 <article class="product-card">
                     <img class="img-robotwindow" />
@@ -229,6 +231,7 @@
                 </article>
             </div>
 
+            <!-- IT -->
             <div class="product-list" id="it">
                 <article class="product-card">
                     <img class="img-transkb" />
@@ -243,6 +246,7 @@
                 </article>
             </div>
 
+            <!-- WEARABLE -->
             <div class="product-list" id="wearable">
                 <article class="product-card">
                     <img class="img-oura" />
@@ -257,6 +261,7 @@
                 </article>
             </div>
 
+            <!-- ACCESSORY -->
             <div class="product-list" id="accessory">
                 <article class="product-card">
                     <img class="img-solarcharger" />
@@ -843,6 +848,38 @@
                 if (el) el.src = src;
             }
         </script>
+        <script>
+            document.querySelectorAll('.product-scroll').forEach(scrollArea => {
+                const list = scrollArea.querySelector('.product-list');
+                const thumb = scrollArea.querySelector('.scroll-thumb');
+                const track = scrollArea.querySelector('.scroll-track');
+
+                function updateThumb() {
+                    const visible = list.clientWidth;
+                    const total = list.scrollWidth;
+                    const scrollLeft = list.scrollLeft;
+
+                    // Chiều rộng thanh thumb tỉ lệ với phần hiển thị
+                    const thumbWidth = (visible / total) * track.clientWidth;
+                    thumb.style.width = `${thumbWidth}px`;
+
+                    // Vị trí thumb theo phần đã cuộn
+                    const maxScroll = total - visible;
+                    const maxMove = track.clientWidth - thumbWidth;
+                    const move = (scrollLeft / maxScroll) * maxMove;
+
+                    thumb.style.transform = `translateX(${move}px)`;
+                }
+
+                // Cập nhật khi load & khi cuộn
+                updateThumb();
+                list.addEventListener('scroll', updateThumb);
+                window.addEventListener('resize', updateThumb);
+            });
+        </script>
+        
+
+
 
 </body>
 
