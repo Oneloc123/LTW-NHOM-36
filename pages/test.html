@@ -1,84 +1,229 @@
 <!doctype html>
 <html lang="vi">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Quên Mật Khẩu - TechZone</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-      body {
-        background-color: #f4f6fb;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      }
-      .container {
-        max-width: 960px;
-        margin-top: 50px;
-      }
-      .card {
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-      }
-      .form-control {
-        border-radius: 8px;
-      }
-      .btn-primary {
-        border-radius: 8px;
-        background-color: #007bff;
-        border: none;
-        font-weight: 500;
-      }
-      .btn-primary:hover {
-        background-color: #0069d9;
-      }
-      .summary-card {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        padding: 20px;
-      }
-      h2 {
-        color: #007bff;
-        font-weight: 600;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h2 class="text-center mb-2">Quên Mật Khẩu</h2>
-      <p class="text-center text-muted mb-4">Nhập email của bạn để nhận liên kết đặt lại mật khẩu</p>
-      <div class="row g-4">
-        <!-- Form quên mật khẩu -->
-        <div class="col-md-7">
-          <div class="card p-4">
-            <form>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Nhập địa chỉ email" required>
-              </div>
-              <div class="mb-3">
-                <label for="otp" class="form-label">Mã xác nhận (nếu có)</label>
-                <input type="text" class="form-control" id="otp" placeholder="Nhập mã xác nhận từ email">
-              </div>
-              <button type="submit" class="btn btn-primary w-100 py-2">Gửi liên kết đặt lại mật khẩu</button>
-            </form>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Đăng ký - TechZone | Đồ Công Nghệ Độc Lạ</title>
+  <style>
+    :root{
+      --bg:#05060a;
+      --card:#0b0d12;
+      --accent:#00ffd5; /* cyan neon */
+      --accent-2:#7b61ff; /* purple */
+      --muted:#9aa3b2;
+      --glass: rgba(255,255,255,0.04);
+      --success:#00d28a;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background: radial-gradient(1200px 600px at 10% 10%, rgba(123,97,255,0.06), transparent), radial-gradient(900px 500px at 90% 90%, rgba(0,255,213,0.04), transparent), var(--bg); color:#e6eef6}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;border-bottom:1px solid rgba(255,255,255,0.03)}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo .mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(139,92,255,0.18);font-weight:700;color:#051018}
+    .logo h1{font-size:18px;margin:0}
+    nav{display:flex;gap:18px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-size:14px}
+    .cart{display:flex;gap:12px;align-items:center}
+    .cart .btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:8px;color:var(--muted)}
+
+    /* Main layout */
+    .container{max-width:1100px;margin:36px auto;padding:24px;display:grid;grid-template-columns:1fr 420px;gap:28px}
+
+    /* Left: form card */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);padding:28px;border-radius:14px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+    .card h2{margin:0 0 8px 0;font-size:22px}
+    .card p.lead{margin:0 0 18px;color:var(--muted)}
+
+    form .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea{width:100%;padding:12px 14px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);color:inherit;font-size:14px}
+    textarea{min-height:76px;resize:vertical}
+
+    .full{grid-column:1/-1}
+    .actions{display:flex;align-items:center;gap:12px;margin-top:14px}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:none;color:#051018;padding:12px 18px;border-radius:10px;font-weight:600;cursor:pointer;box-shadow:0 10px 30px rgba(123,97,255,0.12)}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:10px 14px;border-radius:10px;cursor:pointer}
+
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent);margin:18px 0}
+
+    .socials{display:flex;gap:12px}
+    .socials .sbtn{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;display:flex;align-items:center;gap:10px;justify-content:center;color:var(--muted);cursor:pointer}
+
+    .note{font-size:13px;color:var(--muted);margin-top:8px}
+
+    /* Right: product banner */
+    .aside{display:flex;flex-direction:column;gap:16px}
+    .promo{background:linear-gradient(135deg, rgba(123,97,255,0.12), rgba(0,255,213,0.06));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .promo h3{margin:0 0 6px 0}
+    .product-card{display:flex;gap:12px;align-items:center;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
+    .product-card img{width:84px;height:84px;border-radius:8px;object-fit:cover}
+    .product-card .meta{flex:1}
+    .tag{display:inline-block;padding:6px 8px;border-radius:999px;background:rgba(0,0,0,0.36);font-size:12px;color:var(--muted);margin-top:6px}
+
+    /* form errors & success */
+    .error{color:#ff6575;font-size:13px;margin-top:6px}
+    .success-banner{display:none;padding:14px;border-radius:10px;background:linear-gradient(90deg, rgba(0,210,138,0.12), rgba(0,210,138,0.06));border:1px solid rgba(0,210,138,0.14);color:var(--success);margin-bottom:12px}
+
+    /* responsive */
+    @media (max-width:980px){.container{grid-template-columns:1fr;padding:18px}.aside{order:2}.card{order:1}}
+
+    /* small flourish */
+    .glow{box-shadow:0 6px 30px rgba(0,255,213,0.06), inset 0 1px 0 rgba(255,255,255,0.02)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="mark">TZ</div>
+      <div>
+        <h1>TechZone</h1>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">Đồ Công Nghệ Độc Lạ</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#">Trang chủ</a>
+      <a href="#">Sản phẩm</a>
+      <a href="#">Ưu đãi</a>
+      <a href="#">Liên hệ</a>
+    </nav>
+    <div class="cart">
+      <button class="btn">Giỏ hàng (0)</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <div class="success-banner" id="successBanner">Đăng ký thành công! Chào mừng bạn đến TechZone 🎉</div>
+      <h2>Tạo tài khoản TechZone</h2>
+      <p class="lead">Tham gia cộng đồng những người mê đồ công nghệ độc lạ — nhận thông báo ưu đãi & sản phẩm hiếm.</p>
+
+      <div class="divider"></div>
+
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+        <button class="sbtn btn-ghost" style="flex:1">Đăng ký bằng Google</button>
+        <button class="sbtn btn-ghost" style="flex:1">Đăng ký bằng Facebook</button>
+      </div>
+
+      <form id="signupForm" novalidate>
+        <div class="grid">
+          <div>
+            <label for="fullname">Họ và tên</label>
+            <input id="fullname" name="fullname" type="text" placeholder="Nguyễn Văn A" required />
+            <div class="error" data-for="fullname"></div>
+          </div>
+
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="ban@example.com" required />
+            <div class="error" data-for="email"></div>
+          </div>
+
+          <div>
+            <label for="phone">Số điện thoại</label>
+            <input id="phone" name="phone" type="tel" placeholder="09xxxxxxxx" />
+            <div class="error" data-for="phone"></div>
+          </div>
+
+          <div>
+            <label for="password">Mật khẩu</label>
+            <input id="password" name="password" type="password" placeholder="Ít nhất 8 ký tự" required />
+            <div class="error" data-for="password"></div>
+          </div>
+
+          <div class="full">
+            <label for="confirm">Xác nhận mật khẩu</label>
+            <input id="confirm" name="confirm" type="password" placeholder="Nhập lại mật khẩu" required />
+            <div class="error" data-for="confirm"></div>
+          </div>
+
+          <div class="full">
+            <label for="address">Địa chỉ (tùy chọn)</label>
+            <textarea id="address" name="address" placeholder="Số nhà, đường, quận, thành phố"></textarea>
+          </div>
+
+          <div class="full">
+            <label style="display:flex;align-items:center;gap:10px"><input id="subscribe" type="checkbox" /> <span>Nhận email thông báo sản phẩm độc lạ & ưu đãi</span></label>
           </div>
         </div>
 
-        <!-- Hướng dẫn -->
-        <div class="col-md-5">
-          <div class="summary-card">
-            <h5 class="fw-bold mb-3">Hướng dẫn khôi phục</h5>
-            <ol class="text-muted small">
-              <li class="mb-2">Nhập địa chỉ email đã đăng ký tài khoản.</li>
-              <li class="mb-2">Kiểm tra hộp thư đến (hoặc thư rác) để nhận liên kết đặt lại mật khẩu.</li>
-              <li class="mb-2">Nhấn vào liên kết để tạo mật khẩu mới an toàn hơn.</li>
-            </ol>
-            <hr>
-            <p class="text-muted small mb-0">Nhớ lại mật khẩu? <a href="#">Đăng nhập ngay</a></p>
+        <div class="actions">
+          <button type="submit" class="btn-primary">Tạo tài khoản</button>
+          <button type="button" class="btn-ghost" onclick="document.getElementById('signupForm').reset()">Xóa</button>
+        </div>
+
+        <div class="note">Đã có tài khoản? <a href="#" style="color:var(--accent);text-decoration:none">Đăng nhập ngay</a></div>
+      </form>
+
+    </section>
+
+    <aside class="aside">
+      <div class="promo card glow">
+        <h3>Đồ mới nổi bật</h3>
+        <p style="margin:0;color:var(--muted)">Sản phẩm độc lạ vừa về kho — chỉ dành cho thành viên đăng ký sớm.</p>
+        <div style="height:12px"></div>
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1587829741301-dc798b82b1f8?w=800&q=60&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="product"/>
+          <div class="meta">
+            <strong>Bluetooth Speaker Bulb</strong>
+            <div style="color:var(--muted);font-size:13px;margin-top:6px">Loa LED hình bóng đèn đổi màu</div>
+            <div class="tag">Hàng hiếm</div>
           </div>
         </div>
       </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+
+      <div class="promo card">
+        <h3>Lý do nên đăng ký</h3>
+        <ul style="margin:8px 0 0 18px;color:var(--muted)">
+          <li>Tích điểm & ưu đãi riêng</li>
+          <li>Thông báo restock sản phẩm hiếm</li>
+          <li>Giao hàng nhanh & hỗ trợ đổi trả</li>
+        </ul>
+      </div>
+
+    </aside>
+  </main>
+
+  <script>
+    const form = document.getElementById('signupForm');
+    const successBanner = document.getElementById('successBanner');
+
+    function setError(name,msg){
+      const el = document.querySelector('[data-for="'+name+'"]');
+      if(el) el.textContent = msg || '';
+    }
+    function clearErrors(){
+      document.querySelectorAll('[data-for]').forEach(el=>el.textContent='');
+    }
+
+    form.addEventListener('submit', e=>{
+      e.preventDefault();
+      clearErrors();
+      const fullname = form.fullname.value.trim();
+      const email = form.email.value.trim();
+      const phone = form.phone.value.trim();
+      const pw = form.password.value;
+      const conf = form.confirm.value;
+      let ok = true;
+
+      if(fullname.length < 2){ setError('fullname','Vui lòng nhập họ và tên.'); ok=false }
+      if(!/^[\w.+\-]+@([\w\-]+\.)+[A-Za-z]{2,}$/.test(email)){ setError('email','Email không hợp lệ.'); ok=false }
+      if(pw.length < 8){ setError('password','Mật khẩu cần ít nhất 8 ký tự.'); ok=false }
+      if(pw !== conf){ setError('confirm','Mật khẩu chưa khớp.'); ok=false }
+      if(phone && !/^\+?\d{8,15}$/.test(phone)){ setError('phone','Số điện thoại không hợp lệ.'); ok=false }
+
+      if(!ok) return;
+
+      // Hiệu ứng success (giả lập):
+      successBanner.style.display = 'block';
+      window.scrollTo({top:0,behavior:'smooth'});
+      setTimeout(()=>{
+        form.reset();
+      },800);
+
+      // Ẩn sau 5s
+      setTimeout(()=>{ successBanner.style.display = 'none'; },5000);
+    })
+  </script>
+</body>
 </html>
