@@ -1,229 +1,552 @@
 <!doctype html>
 <html lang="vi">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Đăng ký - TechZone | Đồ Công Nghệ Độc Lạ</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lịch sử đơn hàng</title>
   <style>
-    :root{
-      --bg:#05060a;
-      --card:#0b0d12;
-      --accent:#00ffd5; /* cyan neon */
-      --accent-2:#7b61ff; /* purple */
-      --muted:#9aa3b2;
-      --glass: rgba(255,255,255,0.04);
-      --success:#00d28a;
+    :root {
+      --bg: #f8faff;
+      --primary: #0b66ff;
+      /* xanh dương nổi bật */
+      --card: #ffffff;
+      --muted: #6b7280;
+      --shadow: 0 6px 18px rgba(9, 30, 66, 0.08);
+      --radius: 12px;
+      --success: #10B981;
+      --danger: #EF4444;
+      --warning: #F59E0B;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background: radial-gradient(1200px 600px at 10% 10%, rgba(123,97,255,0.06), transparent), radial-gradient(900px 500px at 90% 90%, rgba(0,255,213,0.04), transparent), var(--bg); color:#e6eef6}
 
-    /* Header */
-    header{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;border-bottom:1px solid rgba(255,255,255,0.03)}
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo .mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(139,92,255,0.18);font-weight:700;color:#051018}
-    .logo h1{font-size:18px;margin:0}
-    nav{display:flex;gap:18px;align-items:center}
-    nav a{color:var(--muted);text-decoration:none;font-size:14px}
-    .cart{display:flex;gap:12px;align-items:center}
-    .cart .btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:8px;color:var(--muted)}
+    * {
+      box-sizing: border-box
+    }
 
-    /* Main layout */
-    .container{max-width:1100px;margin:36px auto;padding:24px;display:grid;grid-template-columns:1fr 420px;gap:28px}
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: #0f1724;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.4;
+      padding: 32px;
+    }
 
-    /* Left: form card */
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);padding:28px;border-radius:14px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
-    .card h2{margin:0 0 8px 0;font-size:22px}
-    .card p.lead{margin:0 0 18px;color:var(--muted)}
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-    form .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-    input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea{width:100%;padding:12px 14px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);color:inherit;font-size:14px}
-    textarea{min-height:76px;resize:vertical}
+    header {
+      display: flex;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 20px;
+    }
 
-    .full{grid-column:1/-1}
-    .actions{display:flex;align-items:center;gap:12px;margin-top:14px}
-    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:none;color:#051018;padding:12px 18px;border-radius:10px;font-weight:600;cursor:pointer;box-shadow:0 10px 30px rgba(123,97,255,0.12)}
-    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:10px 14px;border-radius:10px;cursor:pointer}
+    h1 {
+      margin: 0;
+      color: var(--primary);
+      font-size: 28px;
+      letter-spacing: -0.2px;
+    }
 
-    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent);margin:18px 0}
+    p.lead {
+      margin: 0;
+      color: var(--muted)
+    }
 
-    .socials{display:flex;gap:12px}
-    .socials .sbtn{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;display:flex;align-items:center;gap:10px;justify-content:center;color:var(--muted);cursor:pointer}
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
 
-    .note{font-size:13px;color:var(--muted);margin-top:8px}
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
 
-    /* Right: product banner */
-    .aside{display:flex;flex-direction:column;gap:16px}
-    .promo{background:linear-gradient(135deg, rgba(123,97,255,0.12), rgba(0,255,213,0.06));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-    .promo h3{margin:0 0 6px 0}
-    .product-card{display:flex;gap:12px;align-items:center;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
-    .product-card img{width:84px;height:84px;border-radius:8px;object-fit:cover}
-    .product-card .meta{flex:1}
-    .tag{display:inline-block;padding:6px 8px;border-radius:999px;background:rgba(0,0,0,0.36);font-size:12px;color:var(--muted);margin-top:6px}
+    /* Filters area */
+    .filters {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
 
-    /* form errors & success */
-    .error{color:#ff6575;font-size:13px;margin-top:6px}
-    .success-banner{display:none;padding:14px;border-radius:10px;background:linear-gradient(90deg, rgba(0,210,138,0.12), rgba(0,210,138,0.06));border:1px solid rgba(0,210,138,0.14);color:var(--success);margin-bottom:12px}
+    select,
+    input[type="search"] {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(15, 23, 36, 0.06);
+      outline: none;
+      background: transparent;
+      min-width: 180px;
+      font-size: 14px;
+    }
 
-    /* responsive */
-    @media (max-width:980px){.container{grid-template-columns:1fr;padding:18px}.aside{order:2}.card{order:1}}
+    input[type="search"] {
+      min-width: 260px
+    }
 
-    /* small flourish */
-    .glow{box-shadow:0 6px 30px rgba(0,255,213,0.06), inset 0 1px 0 rgba(255,255,255,0.02)}
+    /* Orders list */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 12px 8px;
+      border-bottom: 1px solid rgba(15, 23, 36, 0.06);
+    }
+
+    tbody td {
+      padding: 14px 8px;
+      vertical-align: middle;
+      border-bottom: 1px solid rgba(15, 23, 36, 0.04);
+      font-size: 14px;
+    }
+
+    .order-id {
+      color: var(--primary);
+      font-weight: 600
+    }
+
+    .amount {
+      font-weight: 700
+    }
+
+    .status {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status.processing {
+      background: rgba(11, 102, 255, 0.08);
+      color: var(--primary);
+    }
+
+    .status.shipping {
+      background: rgba(240, 173, 78, 0.08);
+      color: var(--warning);
+    }
+
+    .status.delivered {
+      background: rgba(16, 185, 129, 0.08);
+      color: var(--success);
+    }
+
+    .status.canceled {
+      background: rgba(239, 68, 68, 0.06);
+      color: var(--danger);
+    }
+
+    .btn {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 6px 14px rgba(11, 102, 255, 0.12);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid rgba(11, 102, 255, 0.12);
+      box-shadow: none
+    }
+
+    /* Responsive: stack on small screens */
+    @media (max-width:780px) {
+      thead {
+        display: none
+      }
+
+      table,
+      tbody,
+      tr,
+      td {
+        display: block;
+        width: 100%
+      }
+
+      tr {
+        margin-bottom: 12px
+      }
+
+      td {
+        padding: 12px;
+        background: var(--card);
+        border-radius: 10px
+      }
+
+      td .row {
+        display: flex;
+        justify-content: space-between
+      }
+    }
+
+    /* Modal details */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 60
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 760px;
+      background: var(--card);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(2, 6, 23, 0.3);
+      transform: translateY(12px);
+      transition: transform .18s ease
+    }
+
+    .modal.show {
+      transform: none
+    }
+
+    .order-items {
+      margin-top: 12px
+    }
+
+    .order-items li {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(15, 23, 36, 0.04)
+    }
+
+    .meta {
+      font-size: 14px;
+      color: var(--muted)
+    }
+
+    .empty {
+      padding: 28px;
+      text-align: center;
+      color: var(--muted)
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="logo">
-      <div class="mark">TZ</div>
+  <div class="container">
+    <header>
       <div>
-        <h1>TechZone</h1>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">Đồ Công Nghệ Độc Lạ</div>
+        <h1>Lịch sử đơn hàng</h1>
+        <p class="lead">Xem lại đơn hàng đã đặt, lọc theo trạng thái hoặc sắp xếp theo ngày.</p>
       </div>
-    </div>
-    <nav>
-      <a href="#">Trang chủ</a>
-      <a href="#">Sản phẩm</a>
-      <a href="#">Ưu đãi</a>
-      <a href="#">Liên hệ</a>
-    </nav>
-    <div class="cart">
-      <button class="btn">Giỏ hàng (0)</button>
-    </div>
-  </header>
+    </header>
 
-  <main class="container">
     <section class="card">
-      <div class="success-banner" id="successBanner">Đăng ký thành công! Chào mừng bạn đến TechZone 🎉</div>
-      <h2>Tạo tài khoản TechZone</h2>
-      <p class="lead">Tham gia cộng đồng những người mê đồ công nghệ độc lạ — nhận thông báo ưu đãi & sản phẩm hiếm.</p>
+      <div class="controls">
+        <div class="filters">
+          <select id="statusFilter" aria-label="Lọc theo trạng thái">
+            <option value="all">Tất cả trạng thái</option>
+            <option value="processing">Đang xử lý</option>
+            <option value="shipping">Đang giao</option>
+            <option value="delivered">Đã giao</option>
+            <option value="canceled">Đã hủy</option>
+          </select>
 
-      <div class="divider"></div>
+          <select id="sortBy" aria-label="Sắp xếp">
+            <option value="newest">Ngày: Mới nhất</option>
+            <option value="oldest">Ngày: Cũ nhất</option>
+            <option value="amount-desc">Tổng tiền: Cao → Thấp</option>
+            <option value="amount-asc">Tổng tiền: Thấp → Cao</option>
+          </select>
 
-      <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
-        <button class="sbtn btn-ghost" style="flex:1">Đăng ký bằng Google</button>
-        <button class="sbtn btn-ghost" style="flex:1">Đăng ký bằng Facebook</button>
+          <input id="searchInput" type="search" placeholder="Tìm kiếm mã đơn / địa chỉ / sản phẩm...">
+        </div>
+
+        <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+          <button class="btn" id="refreshBtn">Làm mới</button>
+          <button class="btn ghost" id="createTestBtn">Tạo dữ liệu thử</button>
+        </div>
       </div>
 
-      <form id="signupForm" novalidate>
-        <div class="grid">
-          <div>
-            <label for="fullname">Họ và tên</label>
-            <input id="fullname" name="fullname" type="text" placeholder="Nguyễn Văn A" required />
-            <div class="error" data-for="fullname"></div>
-          </div>
-
-          <div>
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="ban@example.com" required />
-            <div class="error" data-for="email"></div>
-          </div>
-
-          <div>
-            <label for="phone">Số điện thoại</label>
-            <input id="phone" name="phone" type="tel" placeholder="09xxxxxxxx" />
-            <div class="error" data-for="phone"></div>
-          </div>
-
-          <div>
-            <label for="password">Mật khẩu</label>
-            <input id="password" name="password" type="password" placeholder="Ít nhất 8 ký tự" required />
-            <div class="error" data-for="password"></div>
-          </div>
-
-          <div class="full">
-            <label for="confirm">Xác nhận mật khẩu</label>
-            <input id="confirm" name="confirm" type="password" placeholder="Nhập lại mật khẩu" required />
-            <div class="error" data-for="confirm"></div>
-          </div>
-
-          <div class="full">
-            <label for="address">Địa chỉ (tùy chọn)</label>
-            <textarea id="address" name="address" placeholder="Số nhà, đường, quận, thành phố"></textarea>
-          </div>
-
-          <div class="full">
-            <label style="display:flex;align-items:center;gap:10px"><input id="subscribe" type="checkbox" /> <span>Nhận email thông báo sản phẩm độc lạ & ưu đãi</span></label>
-          </div>
-        </div>
-
-        <div class="actions">
-          <button type="submit" class="btn-primary">Tạo tài khoản</button>
-          <button type="button" class="btn-ghost" onclick="document.getElementById('signupForm').reset()">Xóa</button>
-        </div>
-
-        <div class="note">Đã có tài khoản? <a href="#" style="color:var(--accent);text-decoration:none">Đăng nhập ngay</a></div>
-      </form>
-
+      <div id="ordersWrap">
+        <!-- table rendered by JS -->
+      </div>
     </section>
+  </div>
 
-    <aside class="aside">
-      <div class="promo card glow">
-        <h3>Đồ mới nổi bật</h3>
-        <p style="margin:0;color:var(--muted)">Sản phẩm độc lạ vừa về kho — chỉ dành cho thành viên đăng ký sớm.</p>
-        <div style="height:12px"></div>
-        <div class="product-card">
-          <img src="https://images.unsplash.com/photo-1587829741301-dc798b82b1f8?w=800&q=60&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="product"/>
-          <div class="meta">
-            <strong>Bluetooth Speaker Bulb</strong>
-            <div style="color:var(--muted);font-size:13px;margin-top:6px">Loa LED hình bóng đèn đổi màu</div>
-            <div class="tag">Hàng hiếm</div>
-          </div>
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-hidden="true">
+    <div class="modal" role="document" id="modal">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700;color:var(--primary);font-size:16px" id="modalOrderId">Mã đơn: #0000</div>
+          <div class="meta" id="modalDate">Ngày đặt: —</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div id="modalStatus"></div>
+          <button class="btn ghost" id="closeModalBtn">Đóng</button>
         </div>
       </div>
 
-      <div class="promo card">
-        <h3>Lý do nên đăng ký</h3>
-        <ul style="margin:8px 0 0 18px;color:var(--muted)">
-          <li>Tích điểm & ưu đãi riêng</li>
-          <li>Thông báo restock sản phẩm hiếm</li>
-          <li>Giao hàng nhanh & hỗ trợ đổi trả</li>
-        </ul>
-      </div>
+      <hr style="margin:12px 0 18px">
 
-    </aside>
-  </main>
+      <div id="modalContent">
+        <h3 style="margin:0 0 8px">Sản phẩm</h3>
+        <ul class="order-items" id="modalItems"></ul>
+
+        <div style="display:flex;gap:18px;margin-top:16px;flex-wrap:wrap">
+          <div style="flex:1;min-width:220px">
+            <h4 style="margin:0 0 8px">Phí & Thanh toán</h4>
+            <div class="meta">Phí vận chuyển: <strong id="modalShipping">—</strong></div>
+            <div class="meta">Phương thức thanh toán: <strong id="modalPayment">—</strong></div>
+          </div>
+
+          <div style="flex:1;min-width:240px">
+            <h4 style="margin:0 0 8px">Giao hàng</h4>
+            <div class="meta">Địa chỉ: <div id="modalAddress">—</div>
+            </div>
+            <div class="meta">Ngày giao dự kiến: <strong id="modalETA">—</strong></div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;text-align:right;font-size:15px">
+          Tổng thanh toán: <span style="font-weight:800;font-size:18px" id="modalTotal">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
-    const form = document.getElementById('signupForm');
-    const successBanner = document.getElementById('successBanner');
+    // Mẫu dữ liệu - bạn có thể thay bằng API call
+    const orders = [
+      {
+        id: 'DH-20251101-001',
+        date: '2025-11-01',
+        total: 1250000,
+        status: 'processing',
+        items: [
+          { name: 'Áo thun Basic', qty: 2, price: 150000 },
+          { name: 'Quần jeans', qty: 1, price: 350000 }
+        ],
+        shipping: 30000,
+        payment: 'Thanh toán khi nhận hàng (COD)',
+        address: '123 Lê Lợi, Quận 1, TP. HCM',
+        eta: '2025-11-05'
+      },
+      {
+        id: 'DH-20251028-045',
+        date: '2025-10-28',
+        total: 450000,
+        status: 'delivered',
+        items: [
+          { name: 'Balo du lịch', qty: 1, price: 450000 }
+        ],
+        shipping: 20000,
+        payment: 'Thanh toán online (Thẻ)',
+        address: '45 Nguyễn Huệ, Quận 2, TP. HCM',
+        eta: '2025-11-01'
+      },
+      {
+        id: 'DH-20251103-078',
+        date: '2025-11-03',
+        total: 220000,
+        status: 'shipping',
+        items: [
+          { name: 'Túi xách nhỏ', qty: 1, price: 200000 }
+        ],
+        shipping: 20000,
+        payment: 'Thanh toán online (Ví điện tử)',
+        address: '200 Trần Hưng Đạo, Quận 5, TP. HCM',
+        eta: '2025-11-07'
+      },
+      {
+        id: 'DH-20251015-012',
+        date: '2025-10-15',
+        total: 980000,
+        status: 'canceled',
+        items: [
+          { name: 'Giày thể thao', qty: 1, price: 980000 }
+        ],
+        shipping: 0,
+        payment: 'Thanh toán online (Thẻ)',
+        address: '78 Phan Đăng Lưu, Quận 3, TP. HCM',
+        eta: '—'
+      }
+    ];
 
-    function setError(name,msg){
-      const el = document.querySelector('[data-for="'+name+'"]');
-      if(el) el.textContent = msg || '';
+    // Helpers
+    function formatVND(n) {
+      return n.toLocaleString('vi-VN') + ' ₫';
     }
-    function clearErrors(){
-      document.querySelectorAll('[data-for]').forEach(el=>el.textContent='');
+
+    // Render danh sách đơn
+    function renderOrders(data) {
+      const wrap = document.getElementById('ordersWrap');
+      if (!data.length) {
+        wrap.innerHTML = `<div class="empty card">Không có đơn hàng phù hợp.</div>`;
+        return;
+      }
+
+      let html = `
+        <table aria-label="Danh sách đơn hàng">
+          <thead>
+            <tr>
+              <th>Mã đơn</th>
+              <th>Ngày đặt</th>
+              <th>Tổng tiền</th>
+              <th>Trạng thái</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      for (const o of data) {
+        html += `
+          <tr>
+            <td><div class="order-id">${o.id}</div></td>
+            <td>${o.date}</td>
+            <td class="amount">${formatVND(o.total)}</td>
+            <td><span class="status ${o.status}">${statusLabel(o.status)}</span></td>
+            <td><button class="btn" onclick="showDetails('${o.id}')">Xem chi tiết</button></td>
+          </tr>
+        `;
+      }
+
+      html += `</tbody></table>`;
+      wrap.innerHTML = html;
     }
 
-    form.addEventListener('submit', e=>{
-      e.preventDefault();
-      clearErrors();
-      const fullname = form.fullname.value.trim();
-      const email = form.email.value.trim();
-      const phone = form.phone.value.trim();
-      const pw = form.password.value;
-      const conf = form.confirm.value;
-      let ok = true;
+    function statusLabel(k) {
+      switch (k) {
+        case 'processing': return 'Đang xử lý';
+        case 'shipping': return 'Đang giao';
+        case 'delivered': return 'Đã giao';
+        case 'canceled': return 'Đã hủy';
+        default: return k;
+      }
+    }
 
-      if(fullname.length < 2){ setError('fullname','Vui lòng nhập họ và tên.'); ok=false }
-      if(!/^[\w.+\-]+@([\w\-]+\.)+[A-Za-z]{2,}$/.test(email)){ setError('email','Email không hợp lệ.'); ok=false }
-      if(pw.length < 8){ setError('password','Mật khẩu cần ít nhất 8 ký tự.'); ok=false }
-      if(pw !== conf){ setError('confirm','Mật khẩu chưa khớp.'); ok=false }
-      if(phone && !/^\+?\d{8,15}$/.test(phone)){ setError('phone','Số điện thoại không hợp lệ.'); ok=false }
+    // Tương tác: filters, sort, search
+    const statusFilter = document.getElementById('statusFilter');
+    const sortBy = document.getElementById('sortBy');
+    const searchInput = document.getElementById('searchInput');
 
-      if(!ok) return;
+    function applyControls() {
+      const st = statusFilter.value;
+      const sort = sortBy.value;
+      const q = searchInput.value.trim().toLowerCase();
 
-      // Hiệu ứng success (giả lập):
-      successBanner.style.display = 'block';
-      window.scrollTo({top:0,behavior:'smooth'});
-      setTimeout(()=>{
-        form.reset();
-      },800);
+      let filtered = orders.slice();
+      if (st !== 'all') filtered = filtered.filter(o => o.status === st);
 
-      // Ẩn sau 5s
-      setTimeout(()=>{ successBanner.style.display = 'none'; },5000);
-    })
+      if (q) {
+        filtered = filtered.filter(o => (
+          o.id.toLowerCase().includes(q) ||
+          o.address.toLowerCase().includes(q) ||
+          o.items.some(it => it.name.toLowerCase().includes(q))
+        ));
+      }
+
+      if (sort === 'newest') filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+      else if (sort === 'oldest') filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+      else if (sort === 'amount-desc') filtered.sort((a, b) => b.total - a.total);
+      else if (sort === 'amount-asc') filtered.sort((a, b) => a.total - b.total);
+
+      renderOrders(filtered);
+    }
+
+    statusFilter.addEventListener('change', applyControls);
+    sortBy.addEventListener('change', applyControls);
+    searchInput.addEventListener('input', () => { setTimeout(applyControls, 120); });
+
+    document.getElementById('refreshBtn').addEventListener('click', () => {
+      // Nếu dùng API, ở đây sẽ gọi fetch() để cập nhật
+      applyControls();
+    });
+
+    document.getElementById('createTestBtn').addEventListener('click', () => {
+      // Thêm đơn giả để test nhanh
+      const id = 'DH-T' + Math.floor(Math.random() * 9000 + 1000);
+      orders.push({
+        id, date: new Date().toISOString().slice(0, 10), total: Math.floor(Math.random() * 1000000) + 50000,
+        status: ['processing', 'shipping', 'delivered', 'canceled'][Math.floor(Math.random() * 4)],
+        items: [{ name: 'Sản phẩm thử', qty: 1, price: Math.floor(Math.random() * 500000) + 20000 }],
+        shipping: 20000, payment: 'Thanh toán khi nhận hàng (COD)', address: 'Địa chỉ thử', eta: '2025-11-20'
+      });
+      applyControls();
+    });
+
+    // Modal logic
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modal = document.getElementById('modal');
+
+    function showDetails(orderId) {
+      const o = orders.find(x => x.id === orderId);
+      if (!o) return;
+
+      document.getElementById('modalOrderId').textContent = 'Mã đơn: ' + o.id;
+      document.getElementById('modalDate').textContent = 'Ngày đặt: ' + o.date;
+      const statusEl = document.getElementById('modalStatus');
+      statusEl.innerHTML = `<span class="status ${o.status}">${statusLabel(o.status)}</span>`;
+
+      const itemsWrap = document.getElementById('modalItems');
+      itemsWrap.innerHTML = '';
+      o.items.forEach(it => {
+        const li = document.createElement('li');
+        li.innerHTML = `<div>${it.name} <span class="meta">(x${it.qty})</span></div><div>${formatVND(it.price)}</div>`;
+        itemsWrap.appendChild(li);
+      });
+
+      document.getElementById('modalShipping').textContent = formatVND(o.shipping);
+      document.getElementById('modalPayment').textContent = o.payment;
+      document.getElementById('modalAddress').textContent = o.address;
+      document.getElementById('modalETA').textContent = o.eta;
+      document.getElementById('modalTotal').textContent = formatVND(o.total + o.shipping);
+
+      modalBackdrop.style.display = 'flex';
+      modalBackdrop.setAttribute('aria-hidden', 'false');
+      setTimeout(() => modal.classList.add('show'), 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
+
+    function closeModal() {
+      modal.classList.remove('show');
+      setTimeout(() => {
+        modalBackdrop.style.display = 'none';
+        modalBackdrop.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }, 160);
+    }
+
+    // init
+    applyControls();
   </script>
 </body>
+
 </html>
