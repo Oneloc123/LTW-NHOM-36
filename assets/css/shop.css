@@ -643,3 +643,15 @@ section:not(.hero) {
   display: flex;
   gap: 20px;
 }
+.product-card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards;
+}
+.product-card:nth-child(odd) { animation-delay: 0.1s; }
+.product-card:nth-child(even) { animation-delay: 0.2s; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
