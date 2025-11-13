@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lịch sử đơn hàng</title>
+  <style>
+    :root {
+      --bg: #f8faff;
+      --primary: #0b66ff;
+      /* xanh dương nổi bật */
+      --card: #ffffff;
+      --muted: #6b7280;
+      --shadow: 0 6px 18px rgba(9, 30, 66, 0.08);
+      --radius: 12px;
+      --success: #10B981;
+      --danger: #EF4444;
+      --warning: #F59E0B;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: #0f1724;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.4;
+      padding: 32px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--primary);
+      font-size: 28px;
+      letter-spacing: -0.2px;
+    }
+
+    p.lead {
+      margin: 0;
+      color: var(--muted)
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    /* Filters area */
+    .filters {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    select,
+    input[type="search"] {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(15, 23, 36, 0.06);
+      outline: none;
+      background: transparent;
+      min-width: 180px;
+      font-size: 14px;
+    }
+
+    input[type="search"] {
+      min-width: 260px
+    }
+
+    /* Orders list */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 12px 8px;
+      border-bottom: 1px solid rgba(15, 23, 36, 0.06);
+    }
+
+    tbody td {
+      padding: 14px 8px;
+      vertical-align: middle;
+      border-bottom: 1px solid rgba(15, 23, 36, 0.04);
+      font-size: 14px;
+    }
+
+    .order-id {
+      color: var(--primary);
+      font-weight: 600
+    }
+
+    .amount {
+      font-weight: 700
+    }
+
+    .status {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status.processing {
+      background: rgba(11, 102, 255, 0.08);
+      color: var(--primary);
+    }
+
+    .status.shipping {
+      background: rgba(240, 173, 78, 0.08);
+      color: var(--warning);
+    }
+
+    .status.delivered {
+      background: rgba(16, 185, 129, 0.08);
+      color: var(--success);
+    }
+
+    .status.canceled {
+      background: rgba(239, 68, 68, 0.06);
+      color: var(--danger);
+    }
+
+    .btn {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 6px 14px rgba(11, 102, 255, 0.12);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid rgba(11, 102, 255, 0.12);
+      box-shadow: none
+    }
+
+    /* Responsive: stack on small screens */
+    @media (max-width:780px) {
+      thead {
+        display: none
+      }
+
+      table,
+      tbody,
+      tr,
+      td {
+        display: block;
+        width: 100%
+      }
+
+      tr {
+        margin-bottom: 12px
+      }
+
+      td {
+        padding: 12px;
+        background: var(--card);
+        border-radius: 10px
+      }
+
+      td .row {
+        display: flex;
+        justify-content: space-between
+      }
+    }
+
+    /* Modal details */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 60
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 760px;
+      background: var(--card);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(2, 6, 23, 0.3);
+      transform: translateY(12px);
+      transition: transform .18s ease
+    }
+
+    .modal.show {
+      transform: none
+    }
+
+    .order-items {
+      margin-top: 12px
+    }
+
+    .order-items li {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(15, 23, 36, 0.04)
+    }
+
+    .meta {
+      font-size: 14px;
+      color: var(--muted)
+    }
+
+    .empty {
+      padding: 28px;
+      text-align: center;
+      color: var(--muted)
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Lịch sử đơn hàng</h1>
+        <p class="lead">Xem lại đơn hàng đã đặt, lọc theo trạng thái hoặc sắp xếp theo ngày.</p>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="controls">
+        <div class="filters">
+          <select id="statusFilter" aria-label="Lọc theo trạng thái">
+            <option value="all">Tất cả trạng thái</option>
+            <option value="processing">Đang xử lý</option>
+            <option value="shipping">Đang giao</option>
+            <option value="delivered">Đã giao</option>
+            <option value="canceled">Đã hủy</option>
+          </select>
+
+          <select id="sortBy" aria-label="Sắp xếp">
+            <option value="newest">Ngày: Mới nhất</option>
+            <option value="oldest">Ngày: Cũ nhất</option>
+            <option value="amount-desc">Tổng tiền: Cao → Thấp</option>
+            <option value="amount-asc">Tổng tiền: Thấp → Cao</option>
+          </select>
+
+          <input id="searchInput" type="search" placeholder="Tìm kiếm mã đơn / địa chỉ / sản phẩm...">
+        </div>
+
+        <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+          <button class="btn" id="refreshBtn">Làm mới</button>
+          <button class="btn ghost" id="createTestBtn">Tạo dữ liệu thử</button>
+        </div>
+      </div>
+
+      <div id="ordersWrap">
+        <!-- table rendered by JS -->
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-hidden="true">
+    <div class="modal" role="document" id="modal">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700;color:var(--primary);font-size:16px" id="modalOrderId">Mã đơn: #0000</div>
+          <div class="meta" id="modalDate">Ngày đặt: —</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div id="modalStatus"></div>
+          <button class="btn ghost" id="closeModalBtn">Đóng</button>
+        </div>
+      </div>
+
+      <hr style="margin:12px 0 18px">
+
+      <div id="modalContent">
+        <h3 style="margin:0 0 8px">Sản phẩm</h3>
+        <ul class="order-items" id="modalItems"></ul>
+
+        <div style="display:flex;gap:18px;margin-top:16px;flex-wrap:wrap">
+          <div style="flex:1;min-width:220px">
+            <h4 style="margin:0 0 8px">Phí & Thanh toán</h4>
+            <div class="meta">Phí vận chuyển: <strong id="modalShipping">—</strong></div>
+            <div class="meta">Phương thức thanh toán: <strong id="modalPayment">—</strong></div>
+          </div>
+
+          <div style="flex:1;min-width:240px">
+            <h4 style="margin:0 0 8px">Giao hàng</h4>
+            <div class="meta">Địa chỉ: <div id="modalAddress">—</div>
+            </div>
+            <div class="meta">Ngày giao dự kiến: <strong id="modalETA">—</strong></div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;text-align:right;font-size:15px">
+          Tổng thanh toán: <span style="font-weight:800;font-size:18px" id="modalTotal">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mẫu dữ liệu - bạn có thể thay bằng API call
+    const orders = [
+      {
+        id: 'DH-20251101-001',
+        date: '2025-11-01',
+        total: 1250000,
+        status: 'processing',
+        items: [
+          { name: 'Áo thun Basic', qty: 2, price: 150000 },
+          { name: 'Quần jeans', qty: 1, price: 350000 }
+        ],
+        shipping: 30000,
+        payment: 'Thanh toán khi nhận hàng (COD)',
+        address: '123 Lê Lợi, Quận 1, TP. HCM',
+        eta: '2025-11-05'
+      },
+      {
+        id: 'DH-20251028-045',
+        date: '2025-10-28',
+        total: 450000,
+        status: 'delivered',
+        items: [
+          { name: 'Balo du lịch', qty: 1, price: 450000 }
+        ],
+        shipping: 20000,
+        payment: 'Thanh toán online (Thẻ)',
+        address: '45 Nguyễn Huệ, Quận 2, TP. HCM',
+        eta: '2025-11-01'
+      },
+      {
+        id: 'DH-20251103-078',
+        date: '2025-11-03',
+        total: 220000,
+        status: 'shipping',
+        items: [
+          { name: 'Túi xách nhỏ', qty: 1, price: 200000 }
+        ],
+        shipping: 20000,
+        payment: 'Thanh toán online (Ví điện tử)',
+        address: '200 Trần Hưng Đạo, Quận 5, TP. HCM',
+        eta: '2025-11-07'
+      },
+      {
+        id: 'DH-20251015-012',
+        date: '2025-10-15',
+        total: 980000,
+        status: 'canceled',
+        items: [
+          { name: 'Giày thể thao', qty: 1, price: 980000 }
+        ],
+        shipping: 0,
+        payment: 'Thanh toán online (Thẻ)',
+        address: '78 Phan Đăng Lưu, Quận 3, TP. HCM',
+        eta: '—'
+      }
+    ];
+
+    // Helpers
+    function formatVND(n) {
+      return n.toLocaleString('vi-VN') + ' ₫';
+    }
+
+    // Render danh sách đơn
+    function renderOrders(data) {
+      const wrap = document.getElementById('ordersWrap');
+      if (!data.length) {
+        wrap.innerHTML = `<div class="empty card">Không có đơn hàng phù hợp.</div>`;
+        return;
+      }
+
+      let html = `
+        <table aria-label="Danh sách đơn hàng">
+          <thead>
+            <tr>
+              <th>Mã đơn</th>
+              <th>Ngày đặt</th>
+              <th>Tổng tiền</th>
+              <th>Trạng thái</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      for (const o of data) {
+        html += `
+          <tr>
+            <td><div class="order-id">${o.id}</div></td>
+            <td>${o.date}</td>
+            <td class="amount">${formatVND(o.total)}</td>
+            <td><span class="status ${o.status}">${statusLabel(o.status)}</span></td>
+            <td><button class="btn" onclick="showDetails('${o.id}')">Xem chi tiết</button></td>
+          </tr>
+        `;
+      }
+
+      html += `</tbody></table>`;
+      wrap.innerHTML = html;
+    }
+
+    function statusLabel(k) {
+      switch (k) {
+        case 'processing': return 'Đang xử lý';
+        case 'shipping': return 'Đang giao';
+        case 'delivered': return 'Đã giao';
+        case 'canceled': return 'Đã hủy';
+        default: return k;
+      }
+    }
+
+    // Tương tác: filters, sort, search
+    const statusFilter = document.getElementById('statusFilter');
+    const sortBy = document.getElementById('sortBy');
+    const searchInput = document.getElementById('searchInput');
+
+    function applyControls() {
+      const st = statusFilter.value;
+      const sort = sortBy.value;
+      const q = searchInput.value.trim().toLowerCase();
+
+      let filtered = orders.slice();
+      if (st !== 'all') filtered = filtered.filter(o => o.status === st);
+
+      if (q) {
+        filtered = filtered.filter(o => (
+          o.id.toLowerCase().includes(q) ||
+          o.address.toLowerCase().includes(q) ||
+          o.items.some(it => it.name.toLowerCase().includes(q))
+        ));
+      }
+
+      if (sort === 'newest') filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+      else if (sort === 'oldest') filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+      else if (sort === 'amount-desc') filtered.sort((a, b) => b.total - a.total);
+      else if (sort === 'amount-asc') filtered.sort((a, b) => a.total - b.total);
+
+      renderOrders(filtered);
+    }
+
+    statusFilter.addEventListener('change', applyControls);
+    sortBy.addEventListener('change', applyControls);
+    searchInput.addEventListener('input', () => { setTimeout(applyControls, 120); });
+
+    document.getElementById('refreshBtn').addEventListener('click', () => {
+      // Nếu dùng API, ở đây sẽ gọi fetch() để cập nhật
+      applyControls();
+    });
+
+    document.getElementById('createTestBtn').addEventListener('click', () => {
+      // Thêm đơn giả để test nhanh
+      const id = 'DH-T' + Math.floor(Math.random() * 9000 + 1000);
+      orders.push({
+        id, date: new Date().toISOString().slice(0, 10), total: Math.floor(Math.random() * 1000000) + 50000,
+        status: ['processing', 'shipping', 'delivered', 'canceled'][Math.floor(Math.random() * 4)],
+        items: [{ name: 'Sản phẩm thử', qty: 1, price: Math.floor(Math.random() * 500000) + 20000 }],
+        shipping: 20000, payment: 'Thanh toán khi nhận hàng (COD)', address: 'Địa chỉ thử', eta: '2025-11-20'
+      });
+      applyControls();
+    });
+
+    // Modal logic
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modal = document.getElementById('modal');
+
+    function showDetails(orderId) {
+      const o = orders.find(x => x.id === orderId);
+      if (!o) return;
+
+      document.getElementById('modalOrderId').textContent = 'Mã đơn: ' + o.id;
+      document.getElementById('modalDate').textContent = 'Ngày đặt: ' + o.date;
+      const statusEl = document.getElementById('modalStatus');
+      statusEl.innerHTML = `<span class="status ${o.status}">${statusLabel(o.status)}</span>`;
+
+      const itemsWrap = document.getElementById('modalItems');
+      itemsWrap.innerHTML = '';
+      o.items.forEach(it => {
+        const li = document.createElement('li');
+        li.innerHTML = `<div>${it.name} <span class="meta">(x${it.qty})</span></div><div>${formatVND(it.price)}</div>`;
+        itemsWrap.appendChild(li);
+      });
+
+      document.getElementById('modalShipping').textContent = formatVND(o.shipping);
+      document.getElementById('modalPayment').textContent = o.payment;
+      document.getElementById('modalAddress').textContent = o.address;
+      document.getElementById('modalETA').textContent = o.eta;
+      document.getElementById('modalTotal').textContent = formatVND(o.total + o.shipping);
+
+      modalBackdrop.style.display = 'flex';
+      modalBackdrop.setAttribute('aria-hidden', 'false');
+      setTimeout(() => modal.classList.add('show'), 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
+
+    function closeModal() {
+      modal.classList.remove('show');
+      setTimeout(() => {
+        modalBackdrop.style.display = 'none';
+        modalBackdrop.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }, 160);
+    }
+
+    // init
+    applyControls();
+  </script>
+</body>
+
+</html>
