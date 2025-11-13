@@ -1,15 +1,10 @@
 body {
-    font-family: "Times New Roman", sans-serif;
     background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
-    min-height: 100vh;
-    background-attachment: fixed;
-    background-size: cover;
-    overflow-x: hidden;
 }
 .cart-header {
     text-align: center;
-    margin: 60px 0 40px;
-    color: #fcfdf9;
+    margin: 10px 0 40px;
+    color: #052772;
     text-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 .cart-header h1 {
@@ -17,38 +12,43 @@ body {
     letter-spacing: 1px;
 }
 .cart-item {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin-bottom: 20px;
-    transition: all 0.35s ease;
-    position: relative;
-    overflow: hidden;
+    background: rgb(245, 251, 252);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100px;
 }
 
 .cart-item:hover {
-    transform: translateY(-6px) scale(1.01);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .product-img {
-    width: 100px;
-    height: 100px;
-    border-radius: 15px;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
     object-fit: cover;
-    border: 3px solid #fff;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 2px solid #fff;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
 .product-name {
+    font-size: 1rem;
     font-weight: 600;
     color: #212529;
+    margin-bottom: 2px;
 }
 
 .product-price {
+    font-size: 0.95rem;
     font-weight: 700;
-    color: #28a745;
+    color: #198754;
 }
 
 .quantity-control button {
@@ -58,9 +58,19 @@ body {
 }
 
 .delete-btn {
-    transition: 0.3s;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
 }
-
+.quantity-control input.quantity {
+    width: 50px;
+    height: 36px;
+    font-size: 0.9rem;
+    padding: 4px;
+}
 .delete-btn:hover {
     background-color: #dc3545;
     color: white;
