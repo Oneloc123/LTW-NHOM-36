@@ -186,7 +186,7 @@ a{color:var(--primary); text-decoration:none}
 /* Quantity + CTA (right column of page) */
 .side-panel {
   position:sticky;
-  top:20px;
+  top:120px;
   align-self:start;
   background:linear-gradient(180deg,#fff,#fbfdff);
   border-radius:var(--radius);
