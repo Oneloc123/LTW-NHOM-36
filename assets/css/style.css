@@ -36,71 +36,72 @@
     background-color: #f0f6ff;
     color: #0d6efd;
 }
-/* ===== FOOTER ===== */
-.footer {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
-}
+/*!* ===== FOOTER ===== *!*/
+/*.footer {*/
+/*    font-family: 'Poppins', sans-serif;*/
+/*    background-color: #f8f9fa;*/
+/*}*/
 
-.footer h6 {
-    color: #212529;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
-}
+/*.footer h6 {*/
+/*    color: #212529;*/
+/*    font-size: 0.95rem;*/
+/*    letter-spacing: 0.5px;*/
+/*}*/
 
-.footer-link {
-    color: #555;
-    text-decoration: none;
-    display: block;
-    padding: 4px 0;
-    transition: all 0.3s ease;
-}
+/*.footer-link {*/
+/*    color: #555;*/
+/*    text-decoration: none;*/
+/*    display: block;*/
+/*    padding: 4px 0;*/
+/*    transition: all 0.3s ease;*/
+/*}*/
 
-.footer-link:hover {
-    color: var(--bs-primary);
-    transform: translateX(4px);
-}
+/*.footer-link:hover {*/
+/*    color: var(--bs-primary);*/
+/*    transform: translateX(4px);*/
+/*}*/
 
-/* Mạng xã hội */
-.social-link {
-    display: inline-flex;
-    width: 34px;
-    height: 34px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: white;
-    border: 1px solid #ddd;
-    color: #333;
-    transition: all 0.3s ease;
-}
+/*!* Mạng xã hội *!*/
+/*.social-link {*/
+/*    display: inline-flex;*/
+/*    width: 34px;*/
+/*    height: 34px;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    border-radius: 50%;*/
+/*    background: white;*/
+/*    border: 1px solid #ddd;*/
+/*    color: #333;*/
+/*    transition: all 0.3s ease;*/
+/*}*/
 
-.social-link:hover {
-    background: var(--bs-primary);
-    color: #fff;
-    border-color: var(--bs-primary);
-    transform: translateY(-2px);
-}
+/*.social-link:hover {*/
+/*    background: var(--bs-primary);*/
+/*    color: #fff;*/
+/*    border-color: var(--bs-primary);*/
+/*    transform: translateY(-2px);*/
+/*}*/
 
 /* Responsive */
-@media (max-width: 767px) {
-    .footer .col-md-4,
-    .footer .col-md-2 {
-        text-align: center;
-    }
-    .social-link {
-        margin: 4px;
-    }
-}
-/* Giữ phần tóm tắt đơn hàng không đè lên header */
-.checkout-wrapper .sticky-top {
-    top: 90px; /* đẩy xuống cách header */
-    z-index: 10; /* thấp hơn header */
-}
+/*@media (max-width: 767px) {*/
+/*    .footer .col-md-4,*/
+/*    .footer .col-md-2 {*/
+/*        text-align: center;*/
+/*    }*/
+/*    .social-link {*/
+/*        margin: 4px;*/
+/*    }*/
+/*}*/
+/*!*!* Giữ phần tóm tắt đơn hàng không đè lên header *!*!*/
+/*.checkout-wrapper .sticky-top {*/
+/*    top: 90px; !* đẩy xuống cách header *!*/
+/*    z-index: 10; !* thấp hơn header *!*/
+/*}*/
 
-/* Đảm bảo header luôn trên cùng */
-.header-main {
-    z-index: 1050 !important; /* cao hơn sticky-top */
-    position: sticky;
-    top: 0;
-}
+/*!* Đảm bảo header luôn trên cùng *!*/
+/*.header-main {*/
+/*    z-index: 1050 !important; !* cao hơn sticky-top *!*/
+/*    position: sticky;*/
+/*    top: 0;*/
+/*}*/
+
