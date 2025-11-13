@@ -15,7 +15,7 @@ html, body {
     margin: 0;
     font-family: "Poppins", "Inter", system-ui, sans-serif;
     color: var(--text-dark);
-
+    background: var(--soft-bg);
 }
 
 /* ---------- Navbar ---------- */
