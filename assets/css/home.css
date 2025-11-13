@@ -1,92 +1,342 @@
-/* ========== TechX Home Style ========== */
+/* ============================
+   Samsung Premium – HOME PAGE
+   Đồng bộ hoàn toàn với shop.css
+============================ */
+
+/* Reset & Font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 body {
-    background-color: #f8f9fb;
-    font-family: 'Poppins', sans-serif;
-    color: #222;
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f6f9;
+  color: #1b1d1f;
 }
 
-/* Hero Slider */
-#heroSlider img {
-    height: 600px;
-    object-fit: cover;
-    filter: brightness(70%);
-}
-.carousel-caption {
-    bottom: 25%;
-}
-.carousel-caption h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    text-shadow: 0 4px 15px rgba(0,0,0,0.6);
-}
-.carousel-caption p {
-    font-size: 1.2rem;
+/* VARIABLES (copy từ shop.css) */
+:root {
+  --s-blue: #0078d7;
+  --s-red: #d70036;
+  --s-blue-dark: #004a99;
+  --s-gray: #dddddd;
+  --surface: #ffffff;
+  --muted: #6b7280;
+  --text: #0f1724;
+  --primary: #0b69ff;
+  --shadow: 0 10px 30px rgba(15, 23, 36, 0.08);
+  --radius: 20px;
+  --transition: 200ms cubic-bezier(.2, .8, .2, 1);
 }
 
-/* Section Title */
-.section-title h2 {
-    font-weight: 700;
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    border-left: 5px solid var(--bs-primary);
-    padding-left: 12px;
+/* SECTIONS WIDTH */
+section {
+  width: 80%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* Product Card */
+/* ============================
+     BANNER HERO SLIDESHOW
+============================ */
+.banner-container {
+  margin: 20px auto 40px;
+  width: 80%;
+  max-width: 1400px;
+  height: 600px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #fff, #f9fbff);
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.banner-slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  background: #d7dce2;
+  /* placeholder */
+}
+
+.banner-text {
+  position: absolute;
+  top: 25%;
+  left: 7%;
+  color: #000;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 18px 26px;
+  border-radius: 16px;
+  backdrop-filter: blur(3px);
+}
+
+.banner-text h2 {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.banner-text p {
+  font-size: 17px;
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+.btn {
+  margin-top: 12px;
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 14px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(11, 105, 255, 0.16);
+  transition: var(--transition);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+/* dots */
+.banner-dots {
+  position: absolute;
+  bottom: 14px;
+  width: 100%;
+  text-align: center;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 6px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: var(--primary);
+  box-shadow: 0 0 10px rgba(11, 105, 255, 0.3);
+}
+
+/* ============================
+     CATEGORY SECTION
+============================ */
+.category {
+  padding: 10px 0 20px;
+}
+
+.category h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--s-blue-dark);
+  margin-bottom: 18px;
+}
+
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.category-card {
+  background: var(--surface);
+  border: 1px solid var(--s-gray);
+  border-radius: var(--radius);
+  padding: 14px;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.35s cubic-bezier(.25, .46, .45, .94);
+  box-shadow: var(--shadow);
+  color: var(--text);
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
+}
+
+.cat-img {
+  width: 100%;
+  height: 160px;
+  background: #e1e3e6;
+  border-radius: 14px;
+  margin-bottom: 10px;
+}
+
+/* ============================
+     PRODUCT LIST HOME
+============================ */
+.recommend {
+  margin-top: 20px;
+}
+
+.recommend h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--s-blue-dark);
+  margin-bottom: 18px;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
 .product-card {
-    transition: all 0.3s ease;
-    border: none;
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--s-gray);
+  padding: 18px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: 0.35s cubic-bezier(.25, .46, .45, .94);
+  color: var(--text);
 }
-.product-card img {
-    transition: transform 0.4s ease;
-    border-bottom: 1px solid #eee;
-}
-.product-card:hover img {
-    transform: scale(1.05);
-}
+
 .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transform: translateY(-8px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.15);
 }
 
-/* Buttons */
-.btn-outline-primary:hover {
-    background: var(--bs-primary);
-    color: #fff;
-}
-.btn-light:hover {
-    background: #fff;
-    color: var(--bs-primary);
+.product-img {
+  width: 100%;
+  height: 200px;
+  background: #e0e2e5;
+  border-radius: 14px;
+  margin-bottom: 12px;
 }
 
-/* CTA Section (banner nhỏ cuối trang) */
-.cta-section {
-    background: linear-gradient(135deg, #007bff, #6610f2);
-    color: white;
-    text-align: center;
-    padding: 80px 20px;
-    border-radius: 0;
-    margin-top: 80px;
-}
-.cta-section h2 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-.cta-section p {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
+.price {
+  color: var(--s-blue-dark);
+  font-size: 17px;
+  font-weight: 700;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    #heroSlider img {
-        height: 350px;
-    }
-    .carousel-caption h1 {
-        font-size: 1.6rem;
-    }
+/* ============================
+   PREMIUM BANNER – Đồng bộ UI
+============================ */
+/* ============================
+   PREMIUM BANNERS – CLEAN VERSION
+============================ */
+.premium-banner {
+    width: 80%;
+    max-width: 1400px;
+    margin: 50px auto;
+    height: 450px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    padding: 40px 50px;
 }
+
+/* LEFT SIDE */
+.premium-left {
+    flex: 1.1;
+}
+
+.premium-left h2 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.premium-left p {
+    font-size: 18px;
+    color: var(--muted);
+    margin-bottom: 26px;
+}
+
+/* BUTTONS */
+.premium-buttons {
+    display: flex;
+    gap: 14px;
+}
+
+/* MEDIA AREA */
+.premium-media {
+    flex: 1;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+/* ============================
+   ADD IMAGES HERE
+============================ */
+
+/* Banner 1 */
+.banner-media-1 {
+    background-image: url("../assets/img/banner1.jpg");
+}
+
+/* Banner 2 */
+.banner-media-2 {
+    background-image: url("../assets/img/banner2.jpg");
+}
+
+/* Banner 3 */
+.banner-media-3 {
+    background-image: url("../assets/img/banner3.jpg");
+}
+
+/* BUTTONS */
+.premium-buttons {
+  display: flex;
+  gap: 14px;
+}
+
+/* BUTTON STYLES (đã tối ưu đồng bộ UI) */
+.btn-outline-dark {
+  padding: 10px 22px;
+  border-radius: 40px;
+  border: 2px solid #000;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  transition: .25s;
+}
+
+.btn-outline-dark:hover {
+  background: #000;
+  color: #fff;
+}
+
+.btn-ghost-dark {
+  padding: 10px 22px;
+  border-radius: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  text-decoration: none;
+  transition: .25s;
+}
+
+.btn-ghost-dark:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* RIGHT MEDIA (ẢNH hoặc VIDEO) */
+
