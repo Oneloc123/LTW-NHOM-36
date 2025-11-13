@@ -1,3 +1,7 @@
-body {
-    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
+
+body{
+    height: 100%;
+    margin: 0;
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: var(--text-dark);
 }
