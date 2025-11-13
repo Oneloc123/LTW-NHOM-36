@@ -1,169 +1,358 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Giỏ hàng</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/header.css">
-  <link rel="stylesheet" href="assets/css/footer.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng Siêu Cấp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylgitesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/Cart.css">
 </head>
-
 <body>
-  <!-- ================= Header ================= -->
-  <header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
+<header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
     <div class="container">
-      <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
-        <i class="bi bi-camera fs-4 me-2"></i>
-        <span>TechX</span>
-      </a>
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
+            <i class="bi bi-camera fs-4 me-2"></i>
+            <span>TechX</span>
+        </a>
 
-      <!-- Toggle (mobile) -->
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="bi bi-list fs-2 text-primary"></i>
-      </button>
+        <!-- Toggle (mobile) -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list fs-2 text-primary"></i>
+        </button>
 
-      <!-- Nav links -->
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav align-items-lg-center gap-lg-3">
-          <li class="nav-item"><a class="nav-link active" href="/index.html">Trang chủ</a></li>
-          <li class="nav-item"><a class="nav-link" href="/pages/shop.html">Cửa hàng</a></li>
+        <!-- Nav links -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-lg-center gap-lg-3">
+                <li class="nav-item"><a class="nav-link active" href="../pages/Home.html">Trang chủ</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pages/shop.html">Cửa hàng</a></li>
 
-          <!-- Dropdown -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Sản phẩm
-            </a>
-            <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/pages/products.html">Tất cả sản phẩm</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="/pages/products.html#mini-tech">Công nghệ mini</a></li>
-              <li><a class="dropdown-item" href="/pages/products.html#ai-device">Thiết bị AI</a></li>
-              <li><a class="dropdown-item" href="/pages/products.html#creative">Phụ kiện sáng tạo</a></li>
-              <li><a class="dropdown-item" href="/pages/products.html#fun-tech">Đồ chơi công nghệ</a></li>
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Sản phẩm
+                    </a>
+                    <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/pages/products.html">Tất cả sản phẩm</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../pages/products.html#mini-tech">Công nghệ mini</a></li>
+                        <li><a class="dropdown-item" href="../pages/products.html#ai-device">Thiết bị AI</a></li>
+                        <li><a class="dropdown-item" href="../pages/products.html#creative">Phụ kiện sáng tạo</a></li>
+                        <li><a class="dropdown-item" href="../pages/products.html#fun-tech">Đồ chơi công nghệ</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" href="../pages/blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pages/contact.html">Liên hệ</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pages/order-history.html">Đơn hàng</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pages/profile.html">Tài khoản</a></li>
             </ul>
-          </li>
 
-          <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
-          <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
-          <li class="nav-item"><a class="nav-link" href="/pages/order-history.html">Đơn hàng</a></li>
-          <li class="nav-item"><a class="nav-link" href="/pages/profile.html">Tài khoản</a></li>
-        </ul>
-
-        <!-- Login & Cart -->
-        <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-          <a href="/pages/login.html" class="btn btn-outline-primary btn-sm d-flex align-items-center">
-            <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
-          </a>
-          <a href="/pages/cart.html" class="btn btn-primary btn-sm d-flex align-items-center">
-            <i class="bi bi-cart3 me-1"></i> Giỏ hàng
-          </a>
+            <!-- Login & Cart -->
+            <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
+                <a href="/pages/login.html" class="btn btn-outline-primary btn-sm d-flex align-items-center">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
+                </a>
+                <a href="/pages/cart.html" class="btn btn-primary btn-sm d-flex align-items-center">
+                    <i class="bi bi-cart3 me-1"></i> Giỏ hàng
+                </a>
+            </div>
         </div>
-      </div>
     </div>
-  </header>
+</header>
 
-  <main class="container my-5">
-    <h1>Giỏ hàng</h1>
-    <div class="table-responsive">
-      <table class="table align-middle">
-        <thead>
-          <tr>
-            <th>Ảnh</th>
-            <th>Sản phẩm</th>
-            <th>Giá</th>
-            <th>Số lượng</th>
-            <th>Thành tiền</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="width:120px"><img src="../assets/img/products/product1.jpg" style="height:70px;object-fit:cover">
-            </td>
-            <td>Canon EOS R5</td>
-            <td>39.000.000đ</td>
-            <td><input type="number" class="form-control" value="1" style="max-width:120px"></td>
-            <td>39.000.000đ</td>
-          </tr>
-        </tbody>
-      </table>
+<section></section>
+<div class="container">
+    <div class="cart-header">
+        <h1><i class="bi bi-cart4 me-2"></i>Giỏ Hàng Của Bạn</h1>
+        <p>Kiểm tra và hoàn tất thông tin đơn hàng của bạn</p>
     </div>
-    <div class="d-flex justify-content-end mt-3">
-      <a href="checkout.html" class="btn btn-primary">Thanh toán</a>
-    </div>
-  </main>
 
-  <!-- ================= Footer ================= -->
-  <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
+    <div class="row g-4">
+        <!-- LEFT -->
+        <div class="col-lg-8">
+            <div class="cart-item d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <img src="https://cdn.tgdd.vn/Products/Images/42/329102/iphone-16-pro-max-natural-titanium-thumb-600x600.jpg"
+                         class="product-img me-3" alt="sp1">
+                    <div>
+                        <h6 class="product-name mb-1">iPhone 16 Pro Max 512GB</h6>
+                        <p class="text-muted small mb-1">Titan tự nhiên | Bản cao cấp</p>
+                        <span class="product-price" data-price="45990000">45.990.000₫</span>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <div class="quantity-control input-group me-3">
+                        <button class="btn btn-outline-secondary minus">-</button>
+                        <input type="number" class="form-control text-center quantity" value="1" min="1">
+                        <button class="btn btn-outline-secondary plus">+</button>
+                    </div>
+                    <button class="btn btn-outline-danger delete-btn"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+
+            <div class="cart-item d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <img src="https://cdn.tgdd.vn/Products/Images/7077/322833/tai-nghe-airpods-pro-2-thumb-600x600.jpg"
+                         class="product-img me-3" alt="sp2">
+                    <div>
+                        <h6 class="product-name mb-1">AirPods Pro 2</h6>
+                        <p class="text-muted small mb-1">Chống ồn chủ động | USB-C</p>
+                        <span class="product-price" data-price="5490000">5.490.000₫</span>
+                    </div>
+                </div>
+
+
+                <div class="d-flex align-items-center">
+                    <div class="quantity-control input-group me-3">
+                        <button class="btn btn-outline-secondary minus">-</button>
+                        <input type="number" class="form-control text-center quantity" value="1" min="1">
+                        <button class="btn btn-outline-secondary plus">+</button>
+                    </div>
+                    <button class="btn btn-outline-danger delete-btn"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 3 -->
+            <div class="cart-item d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <img src="https://cdn.tgdd.vn/Products/Images/7077/303358/petoi-bittle-thumb-600x600.jpg"
+                         class="product-img me-3" alt="sp3">
+                    <div>
+                        <h6 class="product-name mb-1">Petoi Bittle – Chú chó robot STEM</h6>
+                        <p class="text-muted small mb-1">Robot mini học lập trình, điều khiển qua app</p>
+                        <span class="product-price" data-price="2990000">2.990.000₫</span>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <div class="quantity-control input-group me-3">
+                        <button class="btn btn-outline-secondary minus">-</button>
+                        <input type="number" class="form-control text-center quantity" value="1" min="1">
+                        <button class="btn btn-outline-secondary plus">+</button>
+                    </div>
+                    <button class="btn btn-outline-danger delete-btn"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 4 -->
+            <div class="cart-item d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <img src="https://cdn.tgdd.vn/Products/Images/7077/301144/mars-pro-speaker-thumb-600x600.jpg"
+                         class="product-img me-3" alt="sp4">
+                    <div>
+                        <h6 class="product-name mb-1">MARS Pro – Loa Bluetooth cực ngầu</h6>
+                        <p class="text-muted small mb-1">Âm thanh 360° | Đèn RGB động | Pin 15h</p>
+                        <span class="product-price" data-price="4590000">4.590.000₫</span>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <div class="quantity-control input-group me-3">
+                        <button class="btn btn-outline-secondary minus">-</button>
+                        <input type="number" class="form-control text-center quantity" value="1" min="1">
+                        <button class="btn btn-outline-secondary plus">+</button>
+                    </div>
+                    <button class="btn btn-outline-danger delete-btn"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-4">
+            <div class="summary-box">
+                <h5>Tổng kết đơn hàng</h5>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Tạm tính:</span>
+                    <span id="subtotal" class="highlight">59.060.000₫</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Phí vận chuyển:</span>
+                    <span>Miễn phí</span>
+                </div>
+                <div class="d-flex justify-content-between border-top pt-2 mb-3">
+                    <strong>Tổng cộng:</strong>
+                    <strong id="total" class="highlight">59.060.000₫</strong>
+                </div>
+
+
+                <div class="input-group mt-3">
+                    <input type="text" class="form-control" placeholder="Nhập mã giảm giá">
+                    <button class="btn btn-outline-success">Áp dụng</button>
+                </div>
+                <p class="text-success small mt-2">Giảm 10% cho đơn trên 500.000đ!</p>
+
+
+                <div class="mb-3">
+                    <label class="form-label">Ghi chú đơn hàng</label>
+                    <textarea class="form-control mt-3" rows="2"
+                              placeholder="Ghi chú cho đơn hàng (VD: Giao buổi sáng)..."></textarea>
+
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Phương thức giao hàng</label>
+                    <select class="form-select">
+                        <option>Giao tiêu chuẩn (Miễn phí)</option>
+                        <option>Giao nhanh 2h (+30.000đ)</option>
+                        <option>Nhận tại cửa hàng</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Hình thức thanh toán</label>
+                    <select class="form-select">
+                        <option>Thanh toán khi nhận hàng (COD)</option>
+                        <option>Chuyển khoản ngân hàng</option>
+                        <option>Ví Momo / ZaloPay</option>
+                        <option>Thẻ tín dụng / Ghi nợ</option>
+                    </select>
+                </div>
+
+                <button class="btn-checkout">Thanh toán ngay</button>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<div class="modal fade" id="confirmDelete" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 rounded-4">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title"><i class="bi bi-exclamation-triangle me-2"></i>Xác nhận xóa</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container">
+    <div id="toastMsg" class="toast text-bg-success border-0">
+        <div class="d-flex">
+            <div class="toast-body">Đã xóa sản phẩm!</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    </div>
+</div>
+<footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
     <div class="container">
-      <div class="row gy-4">
-        <!-- Logo + Giới thiệu -->
-        <div class="col-md-4">
-          <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
-            <i class="bi bi-camera fs-3 text-primary me-2"></i>
-            <span class="fw-bold fs-5 text-primary">TechX</span>
-          </a>
-          <p class="text-muted">
-            Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
-            Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
-          </p>
+        <div class="row gy-4">
+            <!-- Logo + Giới thiệu -->
+            <div class="col-md-4">
+                <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
+                    <i class="bi bi-camera fs-3 text-primary me-2"></i>
+                    <span class="fw-bold fs-5 text-primary">TechX</span>
+                </a>
+                <p class="text-muted">
+                    Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
+                    Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
+                </p>
+            </div>
+
+            <!-- Danh mục -->
+            <div class="col-md-2">
+                <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
+                <ul class="list-unstyled">
+                    <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
+                    <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
+                    <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
+                    <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
+                </ul>
+            </div>
+
+            <!-- Hỗ trợ -->
+            <div class="col-md-2">
+                <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
+                <ul class="list-unstyled">
+                    <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
+                    <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
+                    <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
+                    <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
+                </ul>
+            </div>
+
+            <!-- Liên hệ -->
+            <div class="col-md-4">
+                <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
+                <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh</p>
+                <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
+                <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
+                <div class="mt-3">
+                    <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
+                </div>
+            </div>
         </div>
 
-        <!-- Danh mục -->
-        <div class="col-md-2">
-          <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
-          <ul class="list-unstyled">
-            <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
-            <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
-            <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
-            <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
-          </ul>
+        <hr class="mt-4 mb-3">
+        <div class="text-center small text-muted">
+            © 2025 <strong>TechX</strong>. All rights reserved.
         </div>
-
-        <!-- Hỗ trợ -->
-        <div class="col-md-2">
-          <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
-          <ul class="list-unstyled">
-            <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-            <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
-            <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
-            <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
-          </ul>
-        </div>
-
-        <!-- Liên hệ -->
-        <div class="col-md-4">
-          <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
-          <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh</p>
-          <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
-          <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
-          <div class="mt-3">
-            <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
-            <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <hr class="mt-4 mb-3">
-      <div class="text-center small text-muted">
-        © 2025 <strong>TechX</strong>. All rights reserved.
-      </div>
     </div>
-  </footer>
+</footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    //   let toDelete = null;
+    //   const modal = new bootstrap.Modal('#confirmDelete');
+    //   const toast = new bootstrap.Toast('#toastMsg');
+    //
+    //   const updateTotal = () => {
+    //     let subtotal = 0;
+    //     document.querySelectorAll('.cart-item').forEach(item => {
+    //       const price = parseInt(item.querySelector('.product-price').dataset.price);
+    //       const qty = parseInt(item.querySelector('.quantity').value);
+    //       subtotal += price * qty;
+    //     });
+    //     const formatted = subtotal.toLocaleString('vi-VN') + '₫';
+    //     document.getElementById('subtotal').textContent = formatted;
+    //     document.getElementById('total').textContent = formatted;
+    //   };
+    //
+    //   document.querySelectorAll('.plus').forEach(btn => btn.onclick = e => {
+    //     const input = e.target.closest('.quantity-control').querySelector('.quantity');
+    //     input.value = parseInt(input.value) + 1;
+    //     updateTotal();
+    //   });
+    //
+    //   document.querySelectorAll('.minus').forEach(btn => btn.onclick = e => {
+    //     const input = e.target.closest('.quantity-control').querySelector('.quantity');
+    //     if (parseInt(input.value) > 1) input.value = parseInt(input.value) - 1;
+    //     updateTotal();
+    //   });
+    //
+    //   document.querySelectorAll('.delete-btn').forEach(btn => btn.onclick = e => {
+    //     toDelete = e.target.closest('.cart-item');
+    //     modal.show();
+    //   });
+    //
+    //   document.getElementById('confirmDeleteBtn').onclick = () => {
+    //     if (toDelete) {
+    //       toDelete.remove();
+    //       updateTotal();
+    //       toast.show();
+    //       modal.hide();
+    //     }
+    //   };
+    //
+    // updateTotal();
+</script>
 </body>
-
 </html>

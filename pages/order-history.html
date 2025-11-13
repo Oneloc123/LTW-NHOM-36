@@ -1,15 +1,71 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>order-history</title>
-    <link rel="stylesheet" href="/assets/css/reset.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/order-history.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e8f0ff, #f6faff);
+        }
 
+        main .container {
+            justify-content: center;
+            width: 1200px;
+            margin-top: 50px;
+        }
+
+        .summary-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            padding: 5px;
+        }
+
+        .Card1 {
+            width: 950px;
+        }
+
+
+        .btn {
+            margin: 5px;
+        }
+
+        .form1 {
+            width: 100px;
+        }
+
+        .bi {
+            margin-right: 10px;
+        }
+
+        .form1 {
+            border-radius: 20px;
+            width: 242px;
+        }
+
+        select {
+            padding: 5px;
+            border-radius: 20px;
+            border-color: #aabcdf;
+            margin-right: 8px;
+        }
+
+        .item th {
+            color: #7a7676;
+        }
+
+        .row1 {
+            display: flex;
+            justify-content: center;
+            width: 1200px;
+        }
+    </style>
 </head>
 
 <body>
@@ -70,102 +126,236 @@
             </div>
         </div>
     </header>
-
-    <!-- ================= Main ================= -->
     <main>
-        <div class="container container-main ">
-            <div class="banner box">
-                <div class="banner-title">
-                    <img class="logoBanner" src="/assets/img/box.png" alt="logo">
-                    <h2 class="title">Lịch sử đặt hàng</h2>
+        <div class="container">
+            <h2 class="text-center text-primary mb-2"><i class="bi bi-box-seam"></i>Danh sách đơn hàng</h2>
+            <p class="text-center text-muted mb-4">Xem lại các đơn hàng mà bạn đã giao dịch </p>
+            <div class="row2 row g-4">
+                <!-- Danh sách đơn hàng -->
+                <div>
+                    <div class="card p-4">
+                        <div class="filters row ">
+                            <select id="statusFilter" class=" mb-3 col-2 " aria-label="Lọc theo trạng thái">
+                                <option value="all">Tất cả trạng thái</option>
+                                <option value="processing">Đang xử lý</option>
+                                <option value="shipping">Đang giao</option>
+                                <option value="delivered">Đã giao</option>
+                                <option value="canceled">Đã hủy</option>
+                            </select>
+
+                            <select id="sortBy" aria-label="Sắp xếp" class=" mb-3 col-2">
+                                <option value="newest">Ngày: Mới nhất</option>
+                                <option value="oldest">Ngày: Cũ nhất</option>
+                                <option value="amount-desc">Tổng tiền: Cao → Thấp</option>
+                                <option value="amount-asc">Tổng tiền: Thấp → Cao</option>
+                            </select>
+                            <input style="height: 35px; border-radius: 20px;" type="search" class="col form-control "
+                                id="searchInput" placeholder="Tìm kiếm mã đơn / địa chỉ / sản phẩm...">
+                            <a class="btn btn-white btn-outline-primary border -primary col-2"
+                                style="max-height: 35px; padding-top: 5px; margin-top: 0px;"><i
+                                    class="bi bi-search"></i>tìm kiếm</a>
+                        </div>
+                        <table class="table table-hover">
+                            <tr class="table-light">
+                                <th>Mã đơn</th>
+                                <th>Ngày đặt</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                            <tr class="item">
+                                <th class="idOrder" style="color: #007bff;">DH-20251103-078</th>
+                                <th>2025-11-03</th>
+                                <th>2.210.000 ₫</th>
+                                <th class="text-warning">Đang xử lý</th>
+                                <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem chi
+                                        tiết</a></th>
+                            </tr>
+                            <tr class="item">
+                                <th class="idOrder" style="color: #007bff;">DH-20251103-079</th>
+                                <th>2025-11-15</th>
+                                <th>220.000 ₫</th>
+                                <th>Đang giao</th>
+                                <th> <a class="btn btn-primary bi" data-bs-toggle="modal" data-bs-target="#modal">Xem
+                                        chi tiết</a></th>
+                            </tr>
+                            <tr class="item">
+                                <th class="idOrder" style="color: #007bff;">DH-20251103-080</th>
+                                <th>2025-11-30</th>
+                                <th>1.000.000 ₫</th>
+                                <th class="text-success">Đã giao</th>
+                                <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem chi
+                                        tiết</a></th>
+                            </tr>
+                            <tr class="item">
+                                <th class="idOrder" style="color: #007bff;">DH-20251103-081</th>
+                                <th>2025-12-15</th>
+                                <th>220.000 ₫</th>
+                                <th class="text-danger">Đã huỷ</th>
+                                <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem chi
+                                        tiết</a></th>
+                            </tr>
+                            <tr class="item">
+                                <th class="idOrder" style="color: #007bff;">DH-20251103-080</th>
+                                <th>2025-11-30</th>
+                                <th>1.000.000 ₫</th>
+                                <th class="text-success">Đã giao</th>
+                                <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem chi
+                                        tiết</a></th>
+                            </tr>
+                            <tr class="item">
+                                <th class="idOrder" style="color: #007bff;">DH-20251103-079</th>
+                                <th>2025-11-15</th>
+                                <th>220.000 ₫</th>
+                                <th>Đang giao</th>
+                                <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem chi
+                                        tiết</a></th>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-                <p class="detail">Quản lý và theo dỏi tất cả đơn của bạn</p>
             </div>
-            <div class="search box">
-                <ul class="filter">
-                    <li class="item-filter">
-                        <select id="status-filter">
-                            <option value="all">Tất cả trạng thái</option>
-                            <option value="processing">Đang xử lý</option>
-                            <option value="shipping">Đang giao</option>
-                            <option value="completed">Hoàn thành</option>
-                            <option value="cancelled">Đã hủy</option>
-                        </select>
-                    </li>
-                    <li class="item-filter">
-                        <input type="text" id="searchOrder" placeholder="Tìm kiếm mã đơn hàng...">
-                    </li>
-                </ul>
-            </div>
-            <div class="itemOrder box">
-                <div class="top-order order-box">
-                    <h2 class="order-id">Đơn hàng #DH001</h2>
-                    <p>Ngày đặt: 25/10/2025</p>
-                    <div class="states-order">
-                        <p class="states-order-text">Hoàn thành</p>
+        </div>
+        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="orderDetailLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold" id="orderDetailLabel">Chi tiết đơn hàng</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
                     </div>
-                </div>
-                <hr>
-                <div class="center-order order-box">
-                    <div class="item item1">
-                        <img class="img-item" src="" alt="sanPham">
-                        <div class="product-title">
-                            <h2>Máy tính bình dương</h2>
-                            <p>Số lượng: 2</p>
+
+                    <div class="modal-body row" style="background: linear-gradient(135deg, #e8f0ff, #f6faff);">
+                        <div class="col-8">
+                            <!-- Thông tin chung -->
+                            <div class="row d-flex justify-content-between mb-0">
+                                <div class="summary-card ">
+                                    <h5 class="fw-bold mb-3">Đơn hàng: 0223434555</h5>
+                                    <ol class="list-unstyled text-muted">
+                                        <li class="mb-2">02/01/2022-23:51 | NV tư vấn: Nguyễn Văn A -
+                                            @nguyenvana@example.com</li>
+
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="row">   
+                                <!-- Khách hàng & Người nhận -->
+                                <div class="row g-2 mb-3">
+                                    <div class="col-md-6">
+                                        <div class="summary-card ">
+                                            <h5 class="fw-bold mb-3">Khách hàng</h5>
+                                            <hr>
+                                            <p class="fw-bold mb-3"> Nguyễn Văn B</p>
+                                    <ol class="list-unstyled text-muted">
+                                        <li class="mb-2">0826452949</li>
+        
+                                    </ol>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="summary-card ">
+                                            <h5 class="fw-bold mb-3">Người nhận</h5>
+                                    <hr>
+                                            <p class="fw-bold mb-3"> Nguyễn Văn B</p>
+                                    <ol class="list-unstyled text-muted">
+                                        <li class="mb-2">0826452949</li>
+
+                                    </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Danh sách sản phẩm -->
+                                <table class="table">
+                                    <tr>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                        <th>Tổng tiền</th>
+                                    </tr>
+                                    <tr class="item">
+                                        <th>máy hút bụi mini</th>
+                                        <th>1</th>
+                                        <th>200.000Đ</th>
+                                        <th>200.000Đ</th>
+                                    </tr>
+                                    <tr class="item">
+                                        <th>máy hút bụi mini</th>
+                                        <th>1</th>
+                                        <th>200.000Đ</th>
+                                        <th>200.000Đ</th>
+                                    </tr>
+                                    <tr class="item">
+                                        <th>máy hút bụi mini</th>
+                                        <th>1</th>
+                                        <th>200.000Đ</th>
+                                        <th>200.000Đ</th>
+                                    </tr>
+                                    <tr class="item">
+                                        <th>máy hút bụi mini</th>
+                                        <th>1</th>
+                                        <th>200.000Đ</th>
+                                        <th>200.000Đ</th>
+                                    </tr>
+                                </table>
+                            </div>
+
                         </div>
-                        <h2 class="item-value">299.000đ</h2>
-                    </div>  
-                     <div class="item item2">
-                        <img class="img-item" src="" alt="sanPham">
-                        <div class="product-title">
-                            <h2>Xe máy bình dương</h2>
-                            <p>Số lượng: 1</p>
+                        <!-- Phương thức thanh toán -->
+                        <div class="col-4 mt-4">
+                            <div class="col">
+                                <div class="border rounded p-3">
+                                    <h6 class="fw-bold mb-3">PHƯƠNG THỨC THANH TOÁN</h6>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Tiền mặt</span>
+                                        <span>10.000.000 đ</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>VnpayQR</span>
+                                        <span>6.000.000 đ</span>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Tạm tính</span>
+                                        <span>16.000.000 đ</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between text-danger">
+                                        <span>Khuyến mãi</span>
+                                        <span>-30.000 đ</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Phí vận chuyển</span>
+                                        <span class="text-success">Miễn phí</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Mã giảm giá <strong>VNSHOP123</strong></span>
+                                        <span class="text-danger">-10.000 đ</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Thành tiền</span>
+                                        <span>15.600.000 đ</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>+1.500 điểm</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Dùng điểm <strong>20.000 VNPOINT</strong></span>
+                                        <span class="text-danger">-20.000 đ</span>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between fw-bold fs-5">
+                                        <span>Cần thanh toán</span>
+                                        <span class="text-danger">1.540.000 đ</span>
+                                    </div>
+                                    <p class="text-end text-muted mb-0">(Đã bao gồm VAT - 6 sản phẩm)</p>
+                                </div>
+                            </div>
                         </div>
-                        <h2 class="item-value">599.000đ</h2>
                     </div>
-                </div>
-                <hr>
-                <div class="bottom-order order-box">
-                    <h2>Tổng: 1.197.000đ</h2>
-                    <div class="btn-item">
-                        <p class="btn-item-bot btn-detail">Xem chi tiết</p>
-                        <p class="btn-item-bot btn-buy-again">Mua lại</p>
-                    </div>
-                </div>
-            </div>
-            <div class="itemOrder box">
-                <div class="top-order order-box">
-                    <h2 class="order-id">Đơn hàng #DH001</h2>
-                    <p>Ngày đặt: 25/10/2025</p>
-                    <div class="states-order">
-                        <p class="states-order-text">Hoàn thành</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="center-order order-box">
-                    <div class="item item1">
-                        <img class="img-item" src="" alt="sanPham">
-                        <div class="product-title">
-                            <h2>Máy tính bình dương</h2>
-                            <p>Số lượng: 2</p>
-                        </div>
-                        <h2 class="item-value">299.000đ</h2>
-                    </div>  
-                     <div class="item item2">
-                        <img class="img-item" src="" alt="sanPham">
-                        <div class="product-title">
-                            <h2>Xe máy bình dương</h2>
-                            <p>Số lượng: 1</p>
-                        </div>
-                        <h2 class="item-value">599.000đ</h2>
-                    </div>
-                </div>
-                <hr>
-                <div class="bottom-order order-box">
-                    <h2>Tổng: 1.197.000đ</h2>
-                    <div class="btn-item">
-                        <p class="btn-item-bot btn-detail">Xem chi tiết</p>
-                        <p class="btn-item-bot btn-buy-again">Mua lại</p>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-secondary">Ghi chú</button>
+                        <button class="btn btn-outline-primary">Sửa đơn</button>
+                        <button class="btn btn-outline-danger">Hủy đơn</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đóng</button>
                     </div>
                 </div>
             </div>
@@ -212,7 +402,8 @@
                 <!-- Liên hệ -->
                 <div class="col-md-4">
                     <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
-                    <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh
+                    <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí
+                        Minh
                     </p>
                     <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
                     <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
@@ -231,7 +422,8 @@
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
