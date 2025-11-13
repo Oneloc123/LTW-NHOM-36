@@ -16,7 +16,7 @@
 
         main .container {
             justify-content: center;
-            width: 1200px;
+            width: 2000px;
             margin-top: 50px;
         }
 
@@ -64,6 +64,14 @@
             display: flex;
             justify-content: center;
             width: 1200px;
+        }
+
+        .item {
+            height: 80px;
+        }
+
+        table .btn {
+            margin-top: -2px;
         }
     </style>
 </head>
@@ -130,97 +138,145 @@
         <div class="container">
             <h2 class="text-center text-primary mb-2"><i class="bi bi-box-seam"></i>Danh sách đơn hàng</h2>
             <p class="text-center text-muted mb-4">Xem lại các đơn hàng mà bạn đã giao dịch </p>
-            <div class="row2 row g-4">
-                <!-- Danh sách đơn hàng -->
-                <div>
-                    <div class="card p-4">
-                        <div class="filters row ">
-                            <select id="statusFilter" class=" mb-3 col-2 " aria-label="Lọc theo trạng thái">
-                                <option value="all">Tất cả trạng thái</option>
-                                <option value="processing">Đang xử lý</option>
-                                <option value="shipping">Đang giao</option>
-                                <option value="delivered">Đã giao</option>
-                                <option value="canceled">Đã hủy</option>
-                            </select>
+            <div class="row">
+                <div class="row2 col-8 g-4">
+                    <!-- Danh sách đơn hàng -->
+                    <div>
+                        <div class="card p-4">
+                            <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-box-seam"></i>Danh sách các đơn hàng
+                                mà bạn đã giao dịch</h5>
+                            <div class="filters row ">
+                                <select id="statusFilter" class=" mb-3 col-2 " aria-label="Lọc theo trạng thái">
+                                    <option value="all">Tất cả trạng thái</option>
+                                    <option value="processing">Đang xử lý</option>
+                                    <option value="shipping">Đang giao</option>
+                                    <option value="delivered">Đã giao</option>
+                                    <option value="canceled">Đã hủy</option>
+                                </select>
 
-                            <select id="sortBy" aria-label="Sắp xếp" class=" mb-3 col-2">
-                                <option value="newest">Ngày: Mới nhất</option>
-                                <option value="oldest">Ngày: Cũ nhất</option>
-                                <option value="amount-desc">Tổng tiền: Cao → Thấp</option>
-                                <option value="amount-asc">Tổng tiền: Thấp → Cao</option>
-                            </select>
-                            <input style="height: 35px; border-radius: 20px;" type="search" class="col form-control "
-                                id="searchInput" placeholder="Tìm kiếm mã đơn / địa chỉ / sản phẩm...">
-                            <a class="btn btn-white btn-outline-primary border -primary col-2"
-                                style="max-height: 35px; padding-top: 5px; margin-top: 0px;"><i
-                                    class="bi bi-search"></i>tìm kiếm</a>
+                                <select id="sortBy" aria-label="Sắp xếp" class=" mb-3 col-3">
+                                    <option value="newest">Ngày: Mới nhất</option>
+                                    <option value="oldest">Ngày: Cũ nhất</option>
+                                    <option value="amount-desc">Tổng tiền: Cao → Thấp</option>
+                                    <option value="amount-asc">Tổng tiền: Thấp → Cao</option>
+                                </select>
+                                <input style="height: 35px; border-radius: 20px;" type="search"
+                                    class="col form-control " id="searchInput"
+                                    placeholder="Tìm kiếm mã đơn / địa chỉ / sản phẩm...">
+                                <a class="btn btn-white btn-outline-primary border -primary col-2"
+                                    style="max-height: 35px; padding-top: 5px; margin-top: 0px;"><i
+                                        class="bi bi-search"></i>tìm kiếm</a>
+                            </div>
+                            <table class="table table-hover">
+                                <tr class="table-light">
+                                    <th>Mã đơn</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                                <tr class="item">
+                                    <th class="idOrder" style="color: #007bff;">DH-20251103-078</th>
+                                    <th>2025-11-03</th>
+                                    <th>2.210.000 ₫</th>
+                                    <th class="text-warning">Đang xử lý</th>
+                                    <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem
+                                            chi
+                                            tiết</a></th>
+                                </tr>
+                                <tr class="item">
+                                    <th class="idOrder" style="color: #007bff;">DH-20251103-079</th>
+                                    <th>2025-11-15</th>
+                                    <th>220.000 ₫</th>
+                                    <th>Đang giao</th>
+                                    <th> <a class="btn btn-primary bi" data-bs-toggle="modal"
+                                            data-bs-target="#modal">Xem
+                                            chi tiết</a></th>
+                                </tr>
+                                <tr class="item">
+                                    <th class="idOrder" style="color: #007bff;">DH-20251103-080</th>
+                                    <th>2025-11-30</th>
+                                    <th>1.000.000 ₫</th>
+                                    <th class="text-success">Đã giao</th>
+                                    <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem
+                                            chi
+                                            tiết</a></th>
+                                </tr>
+                                <tr class="item">
+                                    <th class="idOrder" style="color: #007bff;">DH-20251103-081</th>
+                                    <th>2025-12-15</th>
+                                    <th>220.000 ₫</th>
+                                    <th class="text-danger">Đã huỷ</th>
+                                    <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem
+                                            chi
+                                            tiết</a></th>
+                                </tr>
+                                <tr class="item">
+                                    <th class="idOrder" style="color: #007bff;">DH-20251103-080</th>
+                                    <th>2025-11-30</th>
+                                    <th>1.000.000 ₫</th>
+                                    <th class="text-success">Đã giao</th>
+                                    <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem
+                                            chi
+                                            tiết</a></th>
+                                </tr>
+                                <tr class="item">
+                                    <th class="idOrder" style="color: #007bff;">DH-20251103-079</th>
+                                    <th>2025-11-15</th>
+                                    <th>220.000 ₫</th>
+                                    <th>Đang giao</th>
+                                    <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem
+                                            chi
+                                            tiết</a></th>
+                                </tr>
+                            </table>
+                            <!-- Pagination (HTML-only) -->
+                <div class="d-flex justify-content-center mt-4 mb-2">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination pagination-sm">
+                            <li class="page-item disabled"><a class="page-link">«</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">»</a></li>
+                        </ul>
+                    </nav>
+                </div>
                         </div>
-                        <table class="table table-hover">
-                            <tr class="table-light">
-                                <th>Mã đơn</th>
-                                <th>Ngày đặt</th>
-                                <th>Tổng tiền</th>
-                                <th>Trạng thái</th>
-                                <th>Hành động</th>
-                            </tr>
-                            <tr class="item">
-                                <th class="idOrder" style="color: #007bff;">DH-20251103-078</th>
-                                <th>2025-11-03</th>
-                                <th>2.210.000 ₫</th>
-                                <th class="text-warning">Đang xử lý</th>
-                                <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem chi
-                                        tiết</a></th>
-                            </tr>
-                            <tr class="item">
-                                <th class="idOrder" style="color: #007bff;">DH-20251103-079</th>
-                                <th>2025-11-15</th>
-                                <th>220.000 ₫</th>
-                                <th>Đang giao</th>
-                                <th> <a class="btn btn-primary bi" data-bs-toggle="modal" data-bs-target="#modal">Xem
-                                        chi tiết</a></th>
-                            </tr>
-                            <tr class="item">
-                                <th class="idOrder" style="color: #007bff;">DH-20251103-080</th>
-                                <th>2025-11-30</th>
-                                <th>1.000.000 ₫</th>
-                                <th class="text-success">Đã giao</th>
-                                <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem chi
-                                        tiết</a></th>
-                            </tr>
-                            <tr class="item">
-                                <th class="idOrder" style="color: #007bff;">DH-20251103-081</th>
-                                <th>2025-12-15</th>
-                                <th>220.000 ₫</th>
-                                <th class="text-danger">Đã huỷ</th>
-                                <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem chi
-                                        tiết</a></th>
-                            </tr>
-                            <tr class="item">
-                                <th class="idOrder" style="color: #007bff;">DH-20251103-080</th>
-                                <th>2025-11-30</th>
-                                <th>1.000.000 ₫</th>
-                                <th class="text-success">Đã giao</th>
-                                <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem chi
-                                        tiết</a></th>
-                            </tr>
-                            <tr class="item">
-                                <th class="idOrder" style="color: #007bff;">DH-20251103-079</th>
-                                <th>2025-11-15</th>
-                                <th>220.000 ₫</th>
-                                <th>Đang giao</th>
-                                <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem chi
-                                        tiết</a></th>
-                            </tr>
-                        </table>
+                    </div>
+                </div>
+                <div class="row2 col-4 g-4">
+                    <!-- Danh sách đơn hàng -->
+                    <div class="">
+                        <div class="row card p-4">
+                            <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-bar-chart"></i>Thông tin chung về các
+                                đơn hàng của bạn</h5>
+                            <hr>
+                            <h6 class="fw-bold mb-3">Thống kê trạng thái đơn hàng</h6>
+                            <ol class="list-unstyled text-muted">
+                                <li class="mb-2 text-success">Tổng đơn đã giao: 2</li>
+                                <li class="mb-2 text-warning">Tổng đơn đang xử lý: 1</li>
+                                <li class="mb-2">Tổng đơn đang giao: 2</li>
+                                <li class="mb-2 text-danger">Tổng đơn đã huỷ: 2</li>
+                            </ol>
+                            <hr>
+                            <h6 class="fw-bold mb-3">Thống kê khác</h6>
+                            <ol class="list-unstyled text-muted">
+                                <li class="mb-2 ">Tổng số tiền đã giao dịch: 3.540.000Đ</li>
+                                <li class="mb-2 ">Sản phẩm mua nhiều nhất: tivi đèn led</li>
+                                <li class="mb-2 ">Sản phẩm đã giao dịch có giá trị cao nhất: i-phone 21</li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="orderDetailLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title fw-bold" id="orderDetailLabel">Chi tiết đơn hàng</h5>
+                        <h5 class="modal-title fw-bold text-primary" id="orderDetailLabel">Chi tiết đơn hàng</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
                     </div>
 
@@ -228,8 +284,9 @@
                         <div class="col-8">
                             <!-- Thông tin chung -->
                             <div class="row d-flex justify-content-between mb-0">
-                                <div class="summary-card ">
-                                    <h5 class="fw-bold mb-3">Đơn hàng: 0223434555</h5>
+                                <div class="summary-card border rounded p-3">
+                                    <h5 class="fw-bold mb-3 text-primary">Đơn hàng: 0223434555</h5>
+                                    <hr>
                                     <ol class="list-unstyled text-muted">
                                         <li class="mb-2">02/01/2022-23:51 | NV tư vấn: Nguyễn Văn A -
                                             @nguyenvana@example.com</li>
@@ -237,63 +294,73 @@
                                     </ol>
                                 </div>
                             </div>
-                            <div class="row">   
+                            <div class="row">
                                 <!-- Khách hàng & Người nhận -->
                                 <div class="row g-2 mb-3">
                                     <div class="col-md-6">
-                                        <div class="summary-card ">
-                                            <h5 class="fw-bold mb-3">Khách hàng</h5>
+                                        <div class="summary-card border rounded p-3">
+                                            <h5 class="fw-bold mb-3 text-primary">Khách hàng</h5>
                                             <hr>
                                             <p class="fw-bold mb-3"> Nguyễn Văn B</p>
-                                    <ol class="list-unstyled text-muted">
-                                        <li class="mb-2">0826452949</li>
-        
-                                    </ol>
+                                            <ol class="list-unstyled text-muted">
+                                                <li class="mb-2">0826452949</li>
+                                                <li class="mb-2">số 11, Phường Linh Trung, Thủ Đức, Tp.Hồ Chí Minh</li>
+
+                                            </ol>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="summary-card ">
-                                            <h5 class="fw-bold mb-3">Người nhận</h5>
-                                    <hr>
+                                        <div class="summary-card border rounded p-3">
+                                            <h5 class="fw-bold mb-3 text-primary">Người nhận</h5>
+                                            <hr>
                                             <p class="fw-bold mb-3"> Nguyễn Văn B</p>
-                                    <ol class="list-unstyled text-muted">
-                                        <li class="mb-2">0826452949</li>
-
-                                    </ol>
+                                            <ol class="list-unstyled text-muted">
+                                                <li class="mb-2">0826452949</li>
+                                                <li class="mb-2">số 11, Phường Linh Trung, Thủ Đức, Tp.Hồ Chí Minh</li>
+                                            </ol>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Danh sách sản phẩm -->
-                                <table class="table">
+                                <table class="table border rounded p-3 table-hover">
                                     <tr>
                                         <th>Tên sản phẩm</th>
                                         <th>Số lượng</th>
                                         <th>Đơn giá</th>
                                         <th>Tổng tiền</th>
+                                        <th>Hành động</th>
                                     </tr>
                                     <tr class="item">
                                         <th>máy hút bụi mini</th>
                                         <th>1</th>
                                         <th>200.000Đ</th>
                                         <th>200.000Đ</th>
+                                        <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
+                                                phẩm</a></th>
                                     </tr>
                                     <tr class="item">
                                         <th>máy hút bụi mini</th>
                                         <th>1</th>
                                         <th>200.000Đ</th>
                                         <th>200.000Đ</th>
+                                        <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
+                                                phẩm</a></th>
                                     </tr>
                                     <tr class="item">
                                         <th>máy hút bụi mini</th>
                                         <th>1</th>
                                         <th>200.000Đ</th>
                                         <th>200.000Đ</th>
+                                        <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
+                                                phẩm</a></th>
                                     </tr>
                                     <tr class="item">
                                         <th>máy hút bụi mini</th>
                                         <th>1</th>
                                         <th>200.000Đ</th>
                                         <th>200.000Đ</th>
+                                        <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
+                                                phẩm</a></th>
                                     </tr>
                                 </table>
                             </div>
@@ -302,50 +369,52 @@
                         <!-- Phương thức thanh toán -->
                         <div class="col-4 mt-4">
                             <div class="col">
-                                <div class="border rounded p-3">
-                                    <h6 class="fw-bold mb-3">PHƯƠNG THỨC THANH TOÁN</h6>
-                                    <div class="d-flex justify-content-between">
-                                        <span>Tiền mặt</span>
-                                        <span>10.000.000 đ</span>
+                                <div class="card">
+                                    <div class="border rounded p-3">
+                                        <h6 class="fw-bold mb-3 text-primary">PHƯƠNG THỨC THANH TOÁN</h6>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Tiền mặt</span>
+                                            <span>10.000.000 đ</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>VnpayQR</span>
+                                            <span>6.000.000 đ</span>
+                                        </div>
+                                        <hr>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Tạm tính</span>
+                                            <span>16.000.000 đ</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between text-danger">
+                                            <span>Khuyến mãi</span>
+                                            <span>-30.000 đ</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Phí vận chuyển</span>
+                                            <span class="text-success">Miễn phí</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Mã giảm giá <strong>VNSHOP123</strong></span>
+                                            <span class="text-danger">-10.000 đ</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Thành tiền</span>
+                                            <span>15.600.000 đ</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>+1.500 điểm</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Dùng điểm <strong>20.000 VNPOINT</strong></span>
+                                            <span class="text-danger">-20.000 đ</span>
+                                        </div>
+                                        <hr>
+                                        <div class="d-flex justify-content-between fw-bold fs-5">
+                                            <span>Cần thanh toán</span>
+                                            <span class="text-danger">1.540.000 đ</span>
+                                        </div>
+                                        <p class="text-end text-muted mb-0">(Đã bao gồm VAT - 6 sản phẩm)</p>
                                     </div>
-                                    <div class="d-flex justify-content-between">
-                                        <span>VnpayQR</span>
-                                        <span>6.000.000 đ</span>
-                                    </div>
-                                    <hr>
-                                    <div class="d-flex justify-content-between">
-                                        <span>Tạm tính</span>
-                                        <span>16.000.000 đ</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between text-danger">
-                                        <span>Khuyến mãi</span>
-                                        <span>-30.000 đ</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <span>Phí vận chuyển</span>
-                                        <span class="text-success">Miễn phí</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <span>Mã giảm giá <strong>VNSHOP123</strong></span>
-                                        <span class="text-danger">-10.000 đ</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <span>Thành tiền</span>
-                                        <span>15.600.000 đ</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <span>+1.500 điểm</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <span>Dùng điểm <strong>20.000 VNPOINT</strong></span>
-                                        <span class="text-danger">-20.000 đ</span>
-                                    </div>
-                                    <hr>
-                                    <div class="d-flex justify-content-between fw-bold fs-5">
-                                        <span>Cần thanh toán</span>
-                                        <span class="text-danger">1.540.000 đ</span>
-                                    </div>
-                                    <p class="text-end text-muted mb-0">(Đã bao gồm VAT - 6 sản phẩm)</p>
                                 </div>
                             </div>
                         </div>
