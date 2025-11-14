@@ -46,6 +46,159 @@
     .btn-danger {
       border-radius: 10px;
     }
+
+    .profile-wrapper {
+      max-width: 900px;
+      margin: auto;
+      padding: 25px;
+    }
+
+    .profile-card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      border: 1px solid #eee;
+    }
+
+    .profile-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #0d6efd;
+      margin-bottom: 15px;
+    }
+
+    .info-label {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .info-box {
+      border: 1px solid #e2e6f0;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #f8f9fc;
+    }
+
+    .edit-btn {
+      border-radius: 10px;
+    }
+
+    .profile-section {
+      margin-bottom: 30px;
+    }
+
+    .avatar-box {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .avatar-box img {
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #dce7ff;
+    }
+
+    .change-avatar-btn {
+      padding: 6px 14px;
+      border-radius: 10px;
+    }
+
+    .security-box {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    }
+
+    .security-box .item {
+      border-bottom: 1px solid #f1f1f1;
+      padding: 10px 0;
+    }
+
+    .security-box .item:last-child {
+      border-bottom: none;
+    }
+
+    .promo-banner {
+      margin-top: 40px !important;
+    }
+    .edit-wrapper {
+    max-width: 850px;
+    margin: auto;
+    padding: 25px;
+  }
+
+  .edit-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    border: 1px solid #eee;
+  }
+
+  .edit-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0d6efd;
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .form-control {
+    border-radius: 12px;
+    padding: 10px 14px;
+    border: 1px solid #d8def0;
+  }
+
+  .form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+  }
+
+  .btn-techx {
+    border-radius: 12px;
+    padding: 10px 22px;
+  }
+
+  .btn-cancel {
+    background: #f1f3f5;
+    border-radius: 12px;
+    padding: 10px 22px;
+  }
+
+  /* Avatar Upload */
+  .avatar-edit-box {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 30px;
+  }
+
+  .avatar-edit-box img {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #dbe5ff;
+  }
+
+  .avatar-edit-box input {
+    display: none;
+  }
+
+  .upload-btn {
+    padding: 8px 16px;
+    border-radius: 10px;
+  }
   </style>
 </head>
 
@@ -99,77 +252,169 @@
 
   <!-- MAIN -->
   <main class="container py-4">
-
     <!-- Hồ sơ -->
-    <div class="profile-card p-4 mb-4">
-      <div class="row">
-        <div class="col-2">
-          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="profile-avatar rounded-circle" />
-        </div>
-
-        <div class="col-10">
-          <h4 class="fw-bold text-primary">Nguyễn Văn A</h4>
-          <p class="text-muted mb-1">Thành viên từ: <b>2024</b></p>
-          <p class="text-success fw-bold">Tình trạng: Hoạt động</p>
-        </div>
-      </div>
-    </div>
-
     <div class="row g-4">
-
       <!-- Thông tin người dùng -->
-      <div class="col-md-7">
-        <div class="profile-card p-4">
+      <div class="col-md-8">
 
-          <h5 class="fw-bold text-primary">Thông tin cơ bản</h5>
-          <ul class="list-unstyled text-muted">
-            <li><b>Họ tên:</b> Nguyễn Văn A</li>
-            <li><b>Giới tính:</b> Nam</li>
-            <li><b>Ngày sinh:</b> 12/05/2000</li>
-          </ul>
 
-          <hr />
+        <section class="profile-wrapper">
 
-          <h5 class="fw-bold text-primary">Liên hệ</h5>
-          <ul class="list-unstyled text-muted">
-            <li><b>Email:</b> nguyenvana@example.com</li>
-            <li><b>SĐT:</b> 0909 123 456</li>
-          </ul>
+          <!-- ẢNH ĐẠI DIỆN -->
+          <div class="profile-card profile-section">
+            <h3 class="profile-title">Ảnh đại diện</h3>
 
-          <hr />
+            <div class="avatar-box">
+              <img src="https://i.pravatar.cc/150?img=12" alt="avatar">
 
-          <h5 class="fw-bold text-primary">Địa chỉ</h5>
-          <p class="text-muted"><b>Địa chỉ:</b> 123 Lê Lợi, Quận 1, TP.HCM</p>
+              <div>
+                <p class="text-muted small mb-2">Dung lượng tối đa: 2MB – JPG, PNG</p>
+                <button class="btn btn-outline-primary change-avatar-btn"><i class="bi bi-upload"></i> Thay đổi
+                  ảnh</button>
+              </div>
+            </div>
+          </div>
 
-          <hr />
+          <!-- THÔNG TIN CÁ NHÂN -->
+          <div class="profile-card profile-section">
+            <h3 class="profile-title">Thông tin cá nhân</h3>
 
-          <h5 class="fw-bold text-primary">Thanh toán mặc định</h5>
-          <p class="text-muted"><b>Ví MoMo:</b> Liên kết ngày 02/03/2024</p>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="info-label">Họ và tên</label>
+                <div class="info-box">Nguyễn Văn B</div>
+              </div>
 
-        </div>
+              <div class="col-md-6">
+                <label class="info-label">Email</label>
+                <div class="info-box">nguyenb@example.com</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="info-label">Số điện thoại</label>
+                <div class="info-box">0826 452 949</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="info-label">Ngày sinh</label>
+                <div class="info-box">14/04/1997</div>
+              </div>
+
+              <div class="col-12">
+                <label class="info-label">Địa chỉ</label>
+                <div class="info-box">
+                  Số 11, Phường Linh Trung, Thủ Đức, TP. Hồ Chí Minh
+                </div>
+              </div>
+            </div>
+
+            <div class="text-end mt-3">
+              <a  class="btn btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#modal"><i class="bi bi-pencil"></i> Chỉnh sửa</a>
+            </div>
+          </div>
+
+          <!-- BẢO MẬT -->
+          <div class="security-box profile-section">
+            <h3 class="profile-title mb-3">Bảo mật tài khoản</h3>
+
+            <div class="item d-flex justify-content-between align-items-center">
+              <div>
+                <strong>Mật khẩu</strong>
+                <p class="text-muted small mb-0">Lần thay đổi cuối: 12/02/2025</p>
+              </div>
+              <a href="/pages/changPassword.html" class="btn btn-outline-secondary btn-sm"><i class="bi bi-lock"></i> Đổi mật khẩu</a>
+            </div>
+
+            <div class="item d-flex justify-content-between align-items-center">
+              <div>
+                <strong>Xác thực 2 bước</strong>
+                <p class="text-muted small mb-0">Khuyến nghị bật để tăng bảo mật</p>
+              </div>
+              <button class="btn btn-outline-primary btn-sm"><i class="bi bi-shield-check"></i> Bật bảo mật</button>
+            </div>
+          </div>
+
+        </section>
+
       </div>
 
       <!-- Tùy chọn -->
-      <div class="col-md-5">
-        <div class="option-card mb-4">
-          <h5 class="fw-bold text-primary mb-3">Tùy chọn tài khoản</h5>
-
-          <a href="/pages/profile-edit.html" class="btn btn-primary w-100 mb-2">Chỉnh sửa thông tin</a>
-          <a href="../pages/changPassword.html" class="btn btn-primary w-100 mb-2">Đổi mật khẩu</a>
-          <a href="../index.html" class="btn btn-danger w-100">Đăng xuất</a>
-        </div>
-
+      <div class="col-md-4" style="margin-top: 50px;">
         <div class="option-card">
-          <h5 class="fw-bold text-primary mb-3">Tùy chọn khác</h5>
+          <h5 class="fw-bold text-primary mb-3">Tùy chọn </h5>
 
-          <a href="/pages/wishList.html" class="btn btn-primary w-100 mb-2">Sản phẩm yêu thích</a>
-          <a href="../pages/order-history.html" class="btn btn-primary w-100">Lịch sử đơn hàng</a>
+          <a href="/pages/wishList.html" class="btn btn-primary w-100 mb-2"><i class="bi bi-heart-fill" style="margin-right: 10px;"></i>Sản phẩm yêu thích</a>
+          <a href="../pages/order-history.html" class="btn btn-primary w-100"><i class="bi bi-clock-history"style="margin-right: 10px;" ></i>Lịch sử đơn hàng</a>
+          <a href="../index.html" class="btn btn-danger w-100 " style="margin-top: 8px;">Đăng xuất</a>
         </div>
       </div>
 
     </div>
   </main>
 
+  <!-- Modal -->
+  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="orderDetailLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <section class="edit-wrapper">
+          <div class="edit-card">
+
+            <h3 class="edit-title">Thông tin cá nhân</h3>
+
+            <!-- ẢNH ĐẠI DIỆN -->
+            <div class="avatar-edit-box">
+              <img id="previewAvatar" src="https://i.pravatar.cc/150?img=12" alt="avatar">
+
+              <div>
+                <label for="avatarUpload" class="btn btn-outline-primary upload-btn">
+                  <i class="bi bi-upload"></i> Thay ảnh
+                </label>
+                <input type="file" id="avatarUpload" accept="image/*">
+                <p class="text-muted small mt-2 mb-0">Dung lượng tối đa 2MB – JPG, PNG</p>
+              </div>
+            </div>
+
+            <!-- FORM -->
+            <form>
+              <div class="row g-3">
+
+                <div class="col-md-6">
+                  <label class="form-label">Họ và tên</label>
+                  <input type="text" class="form-control" value="Nguyễn Văn B">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" value="nguyenb@example.com">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Số điện thoại</label>
+                  <input type="text" class="form-control" value="0826452949">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Ngày sinh</label>
+                  <input type="date" class="form-control" value="1997-04-14">
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label">Địa chỉ</label>
+                  <textarea class="form-control" rows="3">Số 11, Phường Linh Trung, Thủ Đức, TP.HCM</textarea>
+                </div>
+
+              </div>
+
+              <div class="text-end mt-4">
+                <a href="/pages/profile.html" class="btn btn-cancel me-2">Hủy</a>
+                <button type="submit" class="btn btn-primary btn-techx">
+                  <i class="bi bi-check-circle"></i> Lưu thay đổi
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+    </div>
+  </div>
   <!-- FOOTER -->
   <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
     <div class="container">
@@ -221,6 +466,7 @@
       </div>
     </div>
   </footer>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -2,76 +2,216 @@
 <html lang="vi">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tài khoản người dùng | TechX</title>
-
-  <!-- Bootstrap + Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
-
-  <!-- CSS chung -->
-  <link rel="stylesheet" href="../assets/css/header.css" />
-  <link rel="stylesheet" href="../assets/css/footer.css" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order-History</title>
+  <link rel="stylesheet" href="../assets/css/products.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/header.css">
+  <link rel="stylesheet" href="../assets/css/footer.css">
   <style>
-    body {
-      background: #f4f6f9;
-      font-family: "Segoe UI", sans-serif;
+    /* =============================
+   MODAL – PHONG CÁCH TRANG ĐƠN HÀNG
+============================= */
+
+    .modal-content {
+      border-radius: 16px;
+      overflow: hidden;
+      border: none;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12);
     }
 
-    .profile-card {
+    .modal-header {
+      background: #eaf1ff;
+      border-bottom: 1px solid #d4e2ff;
+    }
+
+    .modal-title {
+      font-weight: 700;
+      font-size: 20px;
+      color: #0d6efd !important;
+    }
+
+    .modal-body {
+  background-color: #f4f6f9;
+    }
+
+    /* SUMMARY CARD – BOX THÔNG TIN */
+    .summary-card {
+      border-radius: 14px;
       background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      padding: 18px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid #f0f0f0;
     }
 
-    .profile-avatar {
-      width: 100px;
-      height: 100px;
+    /* TABLE – DANH SÁCH SẢN PHẨM */
+    .modal-body table {
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .modal-body table thead {
+      background: #eef3ff;
+      border-bottom: 2px solid #dce5ff;
+    }
+
+    .modal-body table th {
+      font-weight: 600;
+      
+    }
+
+    .modal-body table td,
+    .modal-body table th {
+      padding: 12px 16px;
+      vertical-align: middle;
+    }
+    .modal-body table .title-col th{
+      color: #1875fd;
+    }
+
+    .modal-body table tr:hover {
+      background: #f4f8ff;
+    }
+
+    /* PAYMENT BOX */
+    .modal-body .payment-box {
+      border-radius: 16px;
+      padding: 20px;
+      background: #fff;
+      border: 1px solid #edf0ff;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .payment-box h6 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0d6efd;
+    }
+
+    .payment-box div {
+      margin-bottom: 8px;
+    }
+
+    .payment-box hr {
+      margin: 12px 0;
+    }
+
+    /* FOOTER */
+    .modal-footer {
+      border-top: 1px solid #e8e8e8;
+    }
+
+    .modal-footer .btn {
+      border-radius: 10px;
+    }
+
+    .order-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid #eee;
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .order-code {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0d6efd;
+    }
+
+    .order-status {
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .status-delivered {
+      background: #d1f5d3;
+      color: #2f9e44;
+    }
+
+    .status-shipping {
+      background: #fff3bf;
+      color: #e67700;
+    }
+
+    .status-canceled {
+      background: #ffe3e3;
+      color: #c92a2a;
+    }
+
+    .order-products img {
+      width: 65px;
+      height: 65px;
+      border-radius: 10px;
       object-fit: cover;
     }
 
-    .option-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    .order-total {
+      font-size: 18px;
+      font-weight: bold;
+      color: #dc3545;
+      text-align: right;
     }
 
-    .btn-primary {
-      border-radius: 10px;
+    .order-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .btn-danger {
-      border-radius: 10px;
+    .order-footer a {
+      text-decoration: none;
     }
   </style>
 </head>
 
 <body>
-  <!-- HEADER -->
+  <!-- ================= Header ================= -->
   <header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
     <div class="container">
+      <!-- Logo -->
       <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
         <i class="bi bi-camera fs-4 me-2"></i>
-        TechX
+        <span>TechX</span>
       </a>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <!-- Toggle (mobile) -->
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <i class="bi bi-list fs-2 text-primary"></i>
       </button>
 
+      <!-- Nav links -->
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav align-items-lg-center gap-lg-3">
           <li class="nav-item"><a class="nav-link active" href="/index.html">Trang chủ</a></li>
           <li class="nav-item"><a class="nav-link" href="/pages/shop.html">Cửa hàng</a></li>
 
+          <!-- Dropdown -->
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Sản phẩm</a>
-            <ul class="dropdown-menu shadow border-0 rounded-3">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Sản phẩm
+            </a>
+            <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/pages/products.html">Tất cả sản phẩm</a></li>
-              <hr class="dropdown-divider" />
+              <li>
+                <hr class="dropdown-divider">
+              </li>
               <li><a class="dropdown-item" href="/pages/products.html#mini-tech">Công nghệ mini</a></li>
               <li><a class="dropdown-item" href="/pages/products.html#ai-device">Thiết bị AI</a></li>
               <li><a class="dropdown-item" href="/pages/products.html#creative">Phụ kiện sáng tạo</a></li>
@@ -85,108 +225,200 @@
           <li class="nav-item"><a class="nav-link" href="/pages/profile.html">Tài khoản</a></li>
         </ul>
 
+        <!-- Login & Cart -->
         <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-          <a href="/pages/login.html" class="btn btn-outline-primary btn-sm">
-            <i class="bi bi-box-arrow-in-right me-1"></i>Đăng nhập
+          <a href="/pages/login.html" class="btn btn-outline-primary btn-sm d-flex align-items-center">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
           </a>
-          <a href="/pages/cart.html" class="btn btn-primary btn-sm">
-            <i class="bi bi-cart3 me-1"></i>Giỏ hàng
+          <a href="/pages/cart.html" class="btn btn-primary btn-sm d-flex align-items-center">
+            <i class="bi bi-cart3 me-1"></i> Giỏ hàng
           </a>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- MAIN -->
-  <main class="container py-4">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-box">
+    <h1 class="hero-title">Chỉnh sửa thông tin</h1>
+    <p class="hero-subtitle">Cập nhật thông tin cá nhân của bạn</p>
+  </div>
+</section>
 
-    <!-- Hồ sơ -->
-    <div class="profile-card p-4 mb-4">
-      <div class="row">
-        <div class="col-2">
-          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="profile-avatar rounded-circle" />
-        </div>
+<style>
+  /* =============================
+     EDIT PROFILE – TECHX STYLE
+  ============================= */
 
-        <div class="col-10">
-          <h4 class="fw-bold text-primary">Nguyễn Văn A</h4>
-          <p class="text-muted mb-1">Thành viên từ: <b>2024</b></p>
-          <p class="text-success fw-bold">Tình trạng: Hoạt động</p>
-        </div>
+  .edit-wrapper {
+    max-width: 850px;
+    margin: auto;
+    padding: 25px;
+  }
+
+  .edit-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    border: 1px solid #eee;
+  }
+
+  .edit-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0d6efd;
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .form-control {
+    border-radius: 12px;
+    padding: 10px 14px;
+    border: 1px solid #d8def0;
+  }
+
+  .form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+  }
+
+  .btn-techx {
+    border-radius: 12px;
+    padding: 10px 22px;
+  }
+
+  .btn-cancel {
+    background: #f1f3f5;
+    border-radius: 12px;
+    padding: 10px 22px;
+  }
+
+  /* Avatar Upload */
+  .avatar-edit-box {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 30px;
+  }
+
+  .avatar-edit-box img {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #dbe5ff;
+  }
+
+  .avatar-edit-box input {
+    display: none;
+  }
+
+  .upload-btn {
+    padding: 8px 16px;
+    border-radius: 10px;
+  }
+</style>
+
+<section class="edit-wrapper">
+  <div class="edit-card">
+
+    <h3 class="edit-title">Thông tin cá nhân</h3>
+
+    <!-- ẢNH ĐẠI DIỆN -->
+    <div class="avatar-edit-box">
+      <img id="previewAvatar" src="https://i.pravatar.cc/150?img=12" alt="avatar">
+
+      <div>
+        <label for="avatarUpload" class="btn btn-outline-primary upload-btn">
+          <i class="bi bi-upload"></i> Thay ảnh
+        </label>
+        <input type="file" id="avatarUpload" accept="image/*">
+        <p class="text-muted small mt-2 mb-0">Dung lượng tối đa 2MB – JPG, PNG</p>
       </div>
     </div>
 
-    <div class="row g-4">
+    <!-- FORM -->
+    <form>
+      <div class="row g-3">
 
-      <!-- Thông tin người dùng -->
-      <div class="col-md-7">
-        <div class="profile-card p-4">
-
-          <h5 class="fw-bold text-primary">Thông tin cơ bản</h5>
-          <ul class="list-unstyled text-muted">
-            <li><b>Họ tên:</b> Nguyễn Văn A</li>
-            <li><b>Giới tính:</b> Nam</li>
-            <li><b>Ngày sinh:</b> 12/05/2000</li>
-          </ul>
-
-          <hr />
-
-          <h5 class="fw-bold text-primary">Liên hệ</h5>
-          <ul class="list-unstyled text-muted">
-            <li><b>Email:</b> nguyenvana@example.com</li>
-            <li><b>SĐT:</b> 0909 123 456</li>
-          </ul>
-
-          <hr />
-
-          <h5 class="fw-bold text-primary">Địa chỉ</h5>
-          <p class="text-muted"><b>Địa chỉ:</b> 123 Lê Lợi, Quận 1, TP.HCM</p>
-
-          <hr />
-
-          <h5 class="fw-bold text-primary">Thanh toán mặc định</h5>
-          <p class="text-muted"><b>Ví MoMo:</b> Liên kết ngày 02/03/2024</p>
-
+        <div class="col-md-6">
+          <label class="form-label">Họ và tên</label>
+          <input type="text" class="form-control" value="Nguyễn Văn B">
         </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" value="nguyenb@example.com">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Số điện thoại</label>
+          <input type="text" class="form-control" value="0826452949">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Ngày sinh</label>
+          <input type="date" class="form-control" value="1997-04-14">
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Địa chỉ</label>
+          <textarea class="form-control" rows="3">Số 11, Phường Linh Trung, Thủ Đức, TP.HCM</textarea>
+        </div>
+
       </div>
 
-      <!-- Tùy chọn -->
-      <div class="col-md-5">
-        <div class="option-card mb-4">
-          <h5 class="fw-bold text-primary mb-3">Tùy chọn tài khoản</h5>
-
-          <a href="/pages/profile-edit.html" class="btn btn-primary w-100 mb-2">Chỉnh sửa thông tin</a>
-          <a href="../pages/changPassword.html" class="btn btn-primary w-100 mb-2">Đổi mật khẩu</a>
-          <a href="../index.html" class="btn btn-danger w-100">Đăng xuất</a>
-        </div>
-
-        <div class="option-card">
-          <h5 class="fw-bold text-primary mb-3">Tùy chọn khác</h5>
-
-          <a href="/pages/wishList.html" class="btn btn-primary w-100 mb-2">Sản phẩm yêu thích</a>
-          <a href="../pages/order-history.html" class="btn btn-primary w-100">Lịch sử đơn hàng</a>
-        </div>
+      <div class="text-end mt-4">
+        <a href="/pages/profile.html" class="btn btn-cancel me-2">Hủy</a>
+        <button type="submit" class="btn btn-primary btn-techx">
+          <i class="bi bi-check-circle"></i> Lưu thay đổi
+        </button>
       </div>
+    </form>
+  </div>
+</section>
 
-    </div>
-  </main>
+<script>
+  // Preview ảnh đại diện
+  document.getElementById("avatarUpload").addEventListener("change", function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
 
-  <!-- FOOTER -->
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      document.getElementById("previewAvatar").src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+</script>
+
+
+
+  <!-- ================= Footer ================= -->
   <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
     <div class="container">
       <div class="row gy-4">
-
+        <!-- Logo + Giới thiệu -->
         <div class="col-md-4">
-          <a href="/index.html" class="d-flex align-items-center text-decoration-none mb-3">
+          <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
             <i class="bi bi-camera fs-3 text-primary me-2"></i>
             <span class="fw-bold fs-5 text-primary">TechX</span>
           </a>
           <p class="text-muted">
             Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
+            Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
           </p>
         </div>
 
+        <!-- Danh mục -->
         <div class="col-md-2">
-          <h6 class="fw-bold text-uppercase mb-3">Danh mục</h6>
+          <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
           <ul class="list-unstyled">
             <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
             <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
@@ -195,8 +427,9 @@
           </ul>
         </div>
 
+        <!-- Hỗ trợ -->
         <div class="col-md-2">
-          <h6 class="fw-bold text-uppercase mb-3">Hỗ trợ</h6>
+          <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
           <ul class="list-unstyled">
             <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
             <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
@@ -205,24 +438,78 @@
           </ul>
         </div>
 
+        <!-- Liên hệ -->
         <div class="col-md-4">
-          <h6 class="fw-bold text-uppercase mb-3">Liên hệ</h6>
-          <p><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP.HCM</p>
-          <p><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
+          <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
+          <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh
+          </p>
+          <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
           <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
+          <div class="mt-3">
+            <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
+          </div>
         </div>
-
       </div>
 
-      <hr />
-
+      <hr class="mt-4 mb-3">
       <div class="text-center small text-muted">
         © 2025 <strong>TechX</strong>. All rights reserved.
       </div>
     </div>
   </footer>
 
+  <!-- js -->
+
+  <script>
+    const cards = [...document.querySelectorAll('.product-card')];
+    let visible = 12;
+    function updateVisible() {
+      cards.forEach((c, i) => c.style.display = i < visible ? 'flex' : 'none');
+    }
+    updateVisible();
+
+    document.getElementById('loadMoreBtn').addEventListener('click', () => {
+      visible += 4;
+      if (visible >= cards.length) document.getElementById('loadMoreBtn').style.display = 'none';
+      updateVisible();
+    });
+
+    document.getElementById('filterBtn').addEventListener('click', () => {
+      const min = +document.getElementById('minPrice').value || 0;
+      const max = +document.getElementById('maxPrice').value || Infinity;
+      const brand = document.getElementById('brandSelect').value;
+      cards.forEach(c => {
+        const price = +c.dataset.price;
+        const b = c.dataset.brand;
+        c.style.display = price >= min && price <= max && (!brand || b === brand) ? 'flex' : 'none';
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      cards.forEach(c => {
+        const name = c.querySelector('h3').textContent.toLowerCase();
+        c.style.display = name.includes(q) ? 'flex' : 'none';
+      });
+    });
+
+    document.getElementById('sortSelect').addEventListener('change', e => {
+      const grid = document.getElementById('productGrid');
+      const sorted = [...cards].sort((a, b) => {
+        const pa = +a.dataset.price, pb = +b.dataset.price;
+        return e.target.value === 'asc' ? pa - pb : pb - pa;
+      });
+      grid.innerHTML = '';
+      sorted.forEach(c => grid.appendChild(c));
+      updateVisible();
+    });
+  </script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
