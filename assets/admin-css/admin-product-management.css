@@ -1,0 +1,52 @@
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9fafc;
+    color: #333;
+}
+
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    height: 100%;
+    width: 250px;
+    background: #111827;
+    color: #fff;
+    padding: 25px;
+}
+
+.sidebar .logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 35px;
+    color: #38bdf8;
+}
+.sidebar a {
+    color: #ffffff;
+    padding: 12px 20px;
+    display: block;
+    transition: 0.3s;
+}
+.sidebar a:hover, .sidebar a.active {
+    background: #41edf3;
+    color: #fff;
+}
+.product-card {
+    border-radius: 18px;
+    overflow: hidden;
+    transition: 0.25s;
+    background: #fff;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.product-img {
+    height: 160px;
+    object-fit: cover;
+    width: 100%;
+}

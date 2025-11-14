@@ -47,62 +47,108 @@ body {
     color: #38bdf8;
 }
 
-/* Main content */
+/* ====== MAIN ====== */
+
 .main-content {
-    flex: 1;
-    padding: 30px;
+    background: #f5f6fa;
+    min-height: 100vh;
 }
 
-.header {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 15px;
+.header h3 {
+    font-weight: 600;
 }
 
 .search-bar input {
-    border-radius: 8px 0 0 8px;
+    width: 220px;
 }
 
-.search-bar button {
-    border-radius: 0 8px 8px 0;
+/* ====== TABLE IMAGE ====== */
+.table-img {
+    width: 70px;
+    height: 50px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.table-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ====== ACTION BUTTONS ====== */
+.action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.action-buttons a,
+.action-buttons button {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.action-buttons i {
+    font-size: 17px;
+}
+
+/* ====== STATUS BADGE ====== */
 .status {
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
     font-weight: 600;
-    color: white;
+    display: inline-block;
 }
 
 .status.published {
-    background-color: #16a34a;
+    background: #d1f7d6;
+    color: #1e7e34;
+    border: 1px solid #8de2a1;
 }
 
 .status.pending {
-    background-color: #facc15;
-    color: #333;
+    background: #fff3cd;
+    color: #b68400;
+    border: 1px solid #ffe49b;
 }
 
 .status.draft {
-    background-color: #6b7280;
+    background: #e2e3e5;
+    color: #6c757d;
+    border: 1px solid #bfc2c4;
 }
 
-.card {
-    border-radius: 15px;
-    overflow: hidden;
+/* ====== HOVER EFFECT ====== */
+.table-hover tbody tr:hover {
+    background-color: #eef3ff;
+    cursor: pointer;
 }
 
-.btn-outline-info:hover {
-    background-color: #38bdf8;
-    color: #fff;
-}
+@media (max-width: 768px) {
+    .actions {
+        flex-direction: column;
+        width: 100%;
+    }
 
-.btn-outline-warning:hover {
-    background-color: #f59e0b;
-    color: #fff;
-}
+    .search-bar input {
+        width: 100%;
+    }
 
-.btn-outline-danger:hover {
-    background-color: #ef4444;
-    color: #fff;
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
 }

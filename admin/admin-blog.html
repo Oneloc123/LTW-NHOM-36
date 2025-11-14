@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Quản lý Blog | TechX</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../assets/admin-css/admin-blog.css">
 
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- FontAwesome cho icon trong bảng -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- File CSS Admin -->
+    <link rel="stylesheet" href="../assets/admin-css/admin-blog.css">
 </head>
 <body>
+
 <div class="admin-container">
-    <!-- Sidebar -->
+
+    <!-- SIDEBAR -->
     <aside class="sidebar">
         <h2 class="logo"><i class="bi bi-cpu me-2"></i>TechX Admin</h2>
+
         <nav>
             <ul>
                 <li><a href="admin-dashboard.html"><i class="bi bi-house"></i> Dashboard</a></li>
@@ -27,21 +38,27 @@
         </nav>
     </aside>
 
-    <!-- Main -->
-    <main class="main-content">
-        <header class="header d-flex justify-content-between align-items-center">
-            <h3>Quản lý Blog</h3>
-            <div class="actions d-flex align-items-center gap-2">
+    <!-- MAIN CONTENT -->
+    <main class="main-content p-4">
+
+        <!-- Header -->
+        <header class="header d-flex justify-content-between align-items-center mb-4">
+            <h3 class="fw-bold m-0">Quản lý Blog</h3>
+
+            <div class="actions d-flex align-items-center gap-3">
                 <div class="search-bar d-flex">
                     <input type="text" class="form-control" placeholder="Tìm bài viết...">
-                    <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+                    <button class="btn btn-primary ms-2"><i class="bi bi-search"></i></button>
                 </div>
-                <button class="btn btn-success"><i class="bi bi-plus-lg me-1"></i> Thêm bài viết</button>
+
+                <button class="btn btn-success">
+                    <i class="bi bi-plus-lg me-1"></i> Thêm bài viết
+                </button>
             </div>
         </header>
 
-        <!-- Bộ lọc -->
-        <section class="filters mt-4">
+        <!-- Filters -->
+        <section class="filters">
             <div class="row g-3">
                 <div class="col-md-4">
                     <select class="form-select">
@@ -51,79 +68,124 @@
                         <option>Khuyến mãi</option>
                     </select>
                 </div>
+
                 <div class="col-md-4">
                     <select class="form-select">
                         <option value="">Tất cả trạng thái</option>
                         <option>Đã xuất bản</option>
-                        <option>Bản nháp</option>
                         <option>Đang duyệt</option>
+                        <option>Bản nháp</option>
                     </select>
                 </div>
+
                 <div class="col-md-4 text-end">
                     <button class="btn btn-info"><i class="bi bi-funnel"></i> Lọc</button>
                 </div>
             </div>
         </section>
 
-        <!-- Bảng bài viết -->
+        <!-- TABLE -->
         <section class="blog-table mt-4">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title mb-3"><i class="bi bi-journal-richtext me-2"></i>Danh sách bài viết</h5>
+                    <h5 class="card-title mb-3 fw-bold">
+                        <i class="bi bi-journal-richtext me-2"></i>Danh sách bài viết
+                    </h5>
+
                     <table class="table table-hover align-middle">
                         <thead class="table-light">
                         <tr>
                             <th>#</th>
+                            <th>Ảnh</th>
                             <th>Tiêu đề</th>
                             <th>Tác giả</th>
                             <th>Chuyên mục</th>
                             <th>Ngày đăng</th>
+                            <th>Cập nhật</th>
+                            <th>Lượt xem</th>
+                            <th>Bình luận</th>
                             <th>Trạng thái</th>
-                            <th>Hành động</th>
+                            <th class="text-center">Hành động</th>
                         </tr>
                         </thead>
+
                         <tbody>
+
+                        <!-- Row 1 -->
                         <tr>
                             <td>1</td>
+                            <td>
+                                <div class="table-img">
+                                    <img src="https://via.placeholder.com/60">
+                                </div>
+                            </td>
+
                             <td>Công nghệ AI mới trong camera 2025</td>
                             <td>Nguyễn Văn A</td>
                             <td>Công nghệ mới</td>
                             <td>25/10/2025</td>
+                            <td>26/10/2025</td>
+                            <td>1532</td>
+                            <td>8</td>
+
                             <td><span class="status published">Đã xuất bản</span></td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-info"><i class="bi bi-eye"></i></button>
-                                <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
-                                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+
+                            <td class="text-center">
+                                <div class="action-buttons">
+                                    <a class="btn btn-outline-info"><i class="fa fa-eye"></i></a>
+                                    <a class="btn btn-outline-warning"><i class="fa fa-edit"></i></a>
+                                    <button class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                </div>
                             </td>
                         </tr>
+
+                        <!-- Row 2 -->
                         <tr>
                             <td>2</td>
+                            <td><div class="table-img"><img src="https://via.placeholder.com/60"></div></td>
                             <td>Top 5 thiết bị độc lạ 2025</td>
                             <td>Trần Thị B</td>
                             <td>Đánh giá thiết bị</td>
                             <td>22/10/2025</td>
+                            <td>23/10/2025</td>
+                            <td>987</td>
+                            <td>4</td>
                             <td><span class="status pending">Đang duyệt</span></td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-info"><i class="bi bi-eye"></i></button>
-                                <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
-                                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+
+                            <td class="text-center">
+                                <div class="action-buttons">
+                                    <a class="btn btn-outline-info"><i class="fa fa-eye"></i></a>
+                                    <a class="btn btn-outline-warning"><i class="fa fa-edit"></i></a>
+                                    <button class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                </div>
                             </td>
                         </tr>
+
+                        <!-- Row 3 -->
                         <tr>
                             <td>3</td>
+                            <td><div class="table-img"><img src="https://via.placeholder.com/60"></div></td>
                             <td>Khuyến mãi siêu hot tháng 11</td>
                             <td>Lê Minh C</td>
                             <td>Khuyến mãi</td>
                             <td>20/10/2025</td>
+                            <td>21/10/2025</td>
+                            <td>523</td>
+                            <td>2</td>
                             <td><span class="status draft">Bản nháp</span></td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-info"><i class="bi bi-eye"></i></button>
-                                <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
-                                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+
+                            <td class="text-center">
+                                <div class="action-buttons">
+                                    <a class="btn btn-outline-info"><i class="fa fa-eye"></i></a>
+                                    <a class="btn btn-outline-warning"><i class="fa fa-edit"></i></a>
+                                    <button class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                </div>
                             </td>
                         </tr>
+
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </section>
@@ -132,5 +194,6 @@
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
