@@ -10,7 +10,7 @@
   box-sizing: border-box;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=vietnamese');
 
 body {
   font-family: 'Inter', sans-serif;
@@ -229,76 +229,86 @@ section {
 /* ============================
    PREMIUM BANNER – Đồng bộ UI
 ============================ */
-/* ============================
-   PREMIUM BANNERS – CLEAN VERSION
-============================ */
+
 .premium-banner {
-    width: 80%;
-    max-width: 1400px;
-    margin: 50px auto;
-    height: 450px;
+  width: 80%;
+  max-width: 1400px;
+  margin: 50px auto;
+  height: 450px;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    padding: 40px 50px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: 40px 50px;
 }
 
 /* LEFT SIDE */
 .premium-left {
-    flex: 1.1;
+  flex: 1.1;
 }
 
 .premium-left h2 {
-    font-size: 42px;
-    font-weight: 800;
-    margin-bottom: 12px;
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 12px;
 }
 
 .premium-left p {
-    font-size: 18px;
-    color: var(--muted);
-    margin-bottom: 26px;
+  font-size: 18px;
+  color: var(--muted);
+  margin-bottom: 26px;
 }
 
 /* BUTTONS */
 .premium-buttons {
-    display: flex;
-    gap: 14px;
+  display: flex;
+  gap: 14px;
 }
 
 /* MEDIA AREA */
 .premium-media {
-    flex: 1;
-    height: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center;
+  flex: 1;
+  height: 100%;
+  border-radius: 20px;
+  background-position: center;
 }
 
 /* ============================
    ADD IMAGES HERE
 ============================ */
+.premium-banner img {
+  transition: 0.6s;
+}
+
+.premium-banner:hover img {
+  transform: translateY(80px) translateX(-20px) rotate(-25deg);
+  scale: 2;
+}
 
 /* Banner 1 */
 .banner-media-1 {
-    background-image: url("../assets/img/banner1.jpg");
+  object-fit: contain;
+  object-position: center;
+
+
+  background-image: url("");
 }
 
 /* Banner 2 */
 .banner-media-2 {
-    background-image: url("../assets/img/banner2.jpg");
+  overflow: hidden;
+  background-size: cover;
+  background-image: url("../assets/img/banner2.jpg");
 }
 
 /* Banner 3 */
 .banner-media-3 {
-    background-image: url("../assets/img/banner3.jpg");
+  background-image: url("../assets/img/banner3.jpg");
 }
 
 /* BUTTONS */
@@ -339,4 +349,3 @@ section {
 }
 
 /* RIGHT MEDIA (ẢNH hoặc VIDEO) */
-
