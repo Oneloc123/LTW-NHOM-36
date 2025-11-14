@@ -1,552 +1,228 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Lịch sử đơn hàng</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tài khoản người dùng | TechX</title>
+
+  <!-- Bootstrap + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <!-- CSS chung -->
+  <link rel="stylesheet" href="../assets/css/header.css" />
+  <link rel="stylesheet" href="../assets/css/footer.css" />
+
   <style>
-    :root {
-      --bg: #f8faff;
-      --primary: #0b66ff;
-      /* xanh dương nổi bật */
-      --card: #ffffff;
-      --muted: #1650c5;
-      --shadow: 0 6px 18px rgba(9, 30, 66, 0.08);
-      --radius: 12px;
-      --success: #10B981;
-      --danger: #EF4444;
-      --warning: #F59E0B;
-    }
-
-    * {
-      box-sizing: border-box
-    }
-
     body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: var(--bg);
-      color: #0f1724;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      line-height: 1.4;
-      padding: 32px;
+      background: #f4f6f9;
+      font-family: "Segoe UI", sans-serif;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    header {
-      display: flex;
-      gap: 20px;
-      align-items: end;
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      margin: 0;
-      color: var(--primary);
-      font-size: 28px;
-      letter-spacing: -0.2px;
-    }
-
-    p.lead {
-      margin: 0;
-      color: var(--muted)
-    }
-
-    .controls {
-      display: flex;
-      gap: 12px;
-      margin-top: 16px;
-      flex-wrap: wrap;
-    }
-
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px;
-    }
-
-    /* Filters area */
-    .filters {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    select,
-    input[type="search"] {
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(15, 23, 36, 0.06);
-      outline: none;
-      background: transparent;
-      min-width: 180px;
-      font-size: 14px;
-    }
-
-    input[type="search"] {
-      min-width: 260px
-    }
-
-    /* Orders list */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 16px;
-    }
-
-    thead th {
-      text-align: left;
-      font-size: 13px;
-      color: var(--muted);
-      padding: 12px 8px;
-      border-bottom: 1px solid rgba(15, 23, 36, 0.06);
-    }
-
-    tbody td {
-      padding: 14px 8px;
-      vertical-align: middle;
-      border-bottom: 1px solid rgba(15, 23, 36, 0.04);
-      font-size: 14px;
-    }
-
-    .order-id {
-      color: var(--primary);
-      font-weight: 600
-    }
-
-    .amount {
-      font-weight: 700
-    }
-
-    .status {
-      display: inline-flex;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 600;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .status.processing {
-      background: rgba(11, 102, 255, 0.08);
-      color: var(--primary);
-    }
-
-    .status.shipping {
-      background: rgba(240, 173, 78, 0.08);
-      color: var(--warning);
-    }
-
-    .status.delivered {
-      background: rgba(16, 185, 129, 0.08);
-      color: var(--success);
-    }
-
-    .status.canceled {
-      background: rgba(239, 68, 68, 0.06);
-      color: var(--danger);
-    }
-
-    .btn {
-      border: 0;
-      background: var(--primary);
-      color: white;
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      box-shadow: 0 6px 14px rgba(11, 102, 255, 0.12);
-    }
-
-    .btn.ghost {
-      background: transparent;
-      color: var(--primary);
-      border: 1px solid rgba(11, 102, 255, 0.12);
-      box-shadow: none
-    }
-
-    /* Responsive: stack on small screens */
-    @media (max-width:780px) {
-      thead {
-        display: none
-      }
-
-      table,
-      tbody,
-      tr,
-      td {
-        display: block;
-        width: 100%
-      }
-
-      tr {
-        margin-bottom: 12px
-      }
-
-      td {
-        padding: 12px;
-        background: var(--card);
-        border-radius: 10px
-      }
-
-      td .row {
-        display: flex;
-        justify-content: space-between
-      }
-    }
-
-    /* Modal details */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(2, 6, 23, 0.45);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      z-index: 60
-    }
-
-    .modal {
-      width: 100%;
-      max-width: 760px;
-      background: var(--card);
-      padding: 20px;
+    .profile-card {
+      background: #fff;
       border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(2, 6, 23, 0.3);
-      transform: translateY(12px);
-      transition: transform .18s ease
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
-    .modal.show {
-      transform: none
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
     }
 
-    .order-items {
-      margin-top: 12px
+    .option-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
-    .order-items li {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px dashed rgba(15, 23, 36, 0.04)
+    .btn-primary {
+      border-radius: 10px;
     }
 
-    .meta {
-      font-size: 14px;
-      color: var(--muted)
-    }
-
-    .empty {
-      padding: 28px;
-      text-align: center;
-      color: var(--muted)
+    .btn-danger {
+      border-radius: 10px;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <div>
-        <h1>Lịch sử đơn hàng</h1>
-        <p class="lead">Xem lại đơn hàng đã đặt, lọc theo trạng thái hoặc sắp xếp theo ngày.</p>
-      </div>
-    </header>
+  <!-- HEADER -->
+  <header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
+        <i class="bi bi-camera fs-4 me-2"></i>
+        TechX
+      </a>
 
-    <section class="card">
-      <div class="controls">
-        <div class="filters">
-          <select id="statusFilter" aria-label="Lọc theo trạng thái">
-            <option value="all">Tất cả trạng thái</option>
-            <option value="processing">Đang xử lý</option>
-            <option value="shipping">Đang giao</option>
-            <option value="delivered">Đã giao</option>
-            <option value="canceled">Đã hủy</option>
-          </select>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <i class="bi bi-list fs-2 text-primary"></i>
+      </button>
 
-          <select id="sortBy" aria-label="Sắp xếp">
-            <option value="newest">Ngày: Mới nhất</option>
-            <option value="oldest">Ngày: Cũ nhất</option>
-            <option value="amount-desc">Tổng tiền: Cao → Thấp</option>
-            <option value="amount-asc">Tổng tiền: Thấp → Cao</option>
-          </select>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-lg-center gap-lg-3">
+          <li class="nav-item"><a class="nav-link active" href="/index.html">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pages/shop.html">Cửa hàng</a></li>
 
-          <input id="searchInput" type="search" placeholder="Tìm kiếm mã đơn / địa chỉ / sản phẩm...">
-        </div>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Sản phẩm</a>
+            <ul class="dropdown-menu shadow border-0 rounded-3">
+              <li><a class="dropdown-item" href="/pages/products.html">Tất cả sản phẩm</a></li>
+              <hr class="dropdown-divider" />
+              <li><a class="dropdown-item" href="/pages/products.html#mini-tech">Công nghệ mini</a></li>
+              <li><a class="dropdown-item" href="/pages/products.html#ai-device">Thiết bị AI</a></li>
+              <li><a class="dropdown-item" href="/pages/products.html#creative">Phụ kiện sáng tạo</a></li>
+              <li><a class="dropdown-item" href="/pages/products.html#fun-tech">Đồ chơi công nghệ</a></li>
+            </ul>
+          </li>
 
-        <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
-          <button class="btn" id="refreshBtn">Làm mới</button>
-          <button class="btn ghost" id="createTestBtn">Tạo dữ liệu thử</button>
-        </div>
-      </div>
+          <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pages/order-history.html">Đơn hàng</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pages/profile.html">Tài khoản</a></li>
+        </ul>
 
-      <div id="ordersWrap">
-        <!-- table rendered by JS -->
-      </div>
-    </section>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-hidden="true">
-    <div class="modal" role="document" id="modal">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div>
-          <div style="font-weight:700;color:var(--primary);font-size:16px" id="modalOrderId">Mã đơn: #0000</div>
-          <div class="meta" id="modalDate">Ngày đặt: —</div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <div id="modalStatus"></div>
-          <button class="btn ghost" id="closeModalBtn">Đóng</button>
-        </div>
-      </div>
-
-      <hr style="margin:12px 0 18px">
-
-      <div id="modalContent">
-        <h3 style="margin:0 0 8px">Sản phẩm</h3>
-        <ul class="order-items" id="modalItems"></ul>
-
-        <div style="display:flex;gap:18px;margin-top:16px;flex-wrap:wrap">
-          <div style="flex:1;min-width:220px">
-            <h4 style="margin:0 0 8px">Phí & Thanh toán</h4>
-            <div class="meta">Phí vận chuyển: <strong id="modalShipping">—</strong></div>
-            <div class="meta">Phương thức thanh toán: <strong id="modalPayment">—</strong></div>
-          </div>
-
-          <div style="flex:1;min-width:240px">
-            <h4 style="margin:0 0 8px">Giao hàng</h4>
-            <div class="meta">Địa chỉ: <div id="modalAddress">—</div>
-            </div>
-            <div class="meta">Ngày giao dự kiến: <strong id="modalETA">—</strong></div>
-          </div>
-        </div>
-
-        <div style="margin-top:18px;text-align:right;font-size:15px">
-          Tổng thanh toán: <span style="font-weight:800;font-size:18px" id="modalTotal">—</span>
+        <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
+          <a href="/pages/login.html" class="btn btn-outline-primary btn-sm">
+            <i class="bi bi-box-arrow-in-right me-1"></i>Đăng nhập
+          </a>
+          <a href="/pages/cart.html" class="btn btn-primary btn-sm">
+            <i class="bi bi-cart3 me-1"></i>Giỏ hàng
+          </a>
         </div>
       </div>
     </div>
-  </div>
+  </header>
 
-  <script>
-    // Mẫu dữ liệu - bạn có thể thay bằng API call
-    const orders = [
-      {
-        id: 'DH-20251101-001',
-        date: '2025-11-01',
-        total: 1250000,
-        status: 'processing',
-        items: [
-          { name: 'Áo thun Basic', qty: 2, price: 150000 },
-          { name: 'Quần jeans', qty: 1, price: 350000 }
-        ],
-        shipping: 30000,
-        payment: 'Thanh toán khi nhận hàng (COD)',
-        address: '123 Lê Lợi, Quận 1, TP. HCM',
-        eta: '2025-11-05'
-      },
-      {
-        id: 'DH-20251028-045',
-        date: '2025-10-28',
-        total: 450000,
-        status: 'delivered',
-        items: [
-          { name: 'Balo du lịch', qty: 1, price: 450000 }
-        ],
-        shipping: 20000,
-        payment: 'Thanh toán online (Thẻ)',
-        address: '45 Nguyễn Huệ, Quận 2, TP. HCM',
-        eta: '2025-11-01'
-      },
-      {
-        id: 'DH-20251103-078',
-        date: '2025-11-03',
-        total: 220000,
-        status: 'shipping',
-        items: [
-          { name: 'Túi xách nhỏ', qty: 1, price: 200000 }
-        ],
-        shipping: 20000,
-        payment: 'Thanh toán online (Ví điện tử)',
-        address: '200 Trần Hưng Đạo, Quận 5, TP. HCM',
-        eta: '2025-11-07'
-      },
-      {
-        id: 'DH-20251015-012',
-        date: '2025-10-15',
-        total: 980000,
-        status: 'canceled',
-        items: [
-          { name: 'Giày thể thao', qty: 1, price: 980000 }
-        ],
-        shipping: 0,
-        payment: 'Thanh toán online (Thẻ)',
-        address: '78 Phan Đăng Lưu, Quận 3, TP. HCM',
-        eta: '—'
-      }
-    ];
+  <!-- MAIN -->
+  <main class="container py-4">
 
-    // Helpers
-    function formatVND(n) {
-      return n.toLocaleString('vi-VN') + ' ₫';
-    }
+    <!-- Hồ sơ -->
+    <div class="profile-card p-4 mb-4">
+      <div class="row">
+        <div class="col-2">
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="profile-avatar rounded-circle" />
+        </div>
 
-    // Render danh sách đơn
-    function renderOrders(data) {
-      const wrap = document.getElementById('ordersWrap');
-      if (!data.length) {
-        wrap.innerHTML = `<div class="empty card">Không có đơn hàng phù hợp.</div>`;
-        return;
-      }
+        <div class="col-10">
+          <h4 class="fw-bold text-primary">Nguyễn Văn A</h4>
+          <p class="text-muted mb-1">Thành viên từ: <b>2024</b></p>
+          <p class="text-success fw-bold">Tình trạng: Hoạt động</p>
+        </div>
+      </div>
+    </div>
 
-      let html = `
-        <table aria-label="Danh sách đơn hàng">
-          <thead>
-            <tr>
-              <th>Mã đơn</th>
-              <th>Ngày đặt</th>
-              <th>Tổng tiền</th>
-              <th>Trạng thái</th>
-              <th>Hành động</th>
-            </tr>
-          </thead>
-          <tbody>
-      `;
+    <div class="row g-4">
 
-      for (const o of data) {
-        html += `
-          <tr>
-            <td><div class="order-id">${o.id}</div></td>
-            <td>${o.date}</td>
-            <td class="amount">${formatVND(o.total)}</td>
-            <td><span class="status ${o.status}">${statusLabel(o.status)}</span></td>
-            <td><button class="btn" onclick="showDetails('${o.id}')">Xem chi tiết</button></td>
-          </tr>
-        `;
-      }
+      <!-- Thông tin người dùng -->
+      <div class="col-md-7">
+        <div class="profile-card p-4">
 
-      html += `</tbody></table>`;
-      wrap.innerHTML = html;
-    }
+          <h5 class="fw-bold text-primary">Thông tin cơ bản</h5>
+          <ul class="list-unstyled text-muted">
+            <li><b>Họ tên:</b> Nguyễn Văn A</li>
+            <li><b>Giới tính:</b> Nam</li>
+            <li><b>Ngày sinh:</b> 12/05/2000</li>
+          </ul>
 
-    function statusLabel(k) {
-      switch (k) {
-        case 'processing': return 'Đang xử lý';
-        case 'shipping': return 'Đang giao';
-        case 'delivered': return 'Đã giao';
-        case 'canceled': return 'Đã hủy';
-        default: return k;
-      }
-    }
+          <hr />
 
-    // Tương tác: filters, sort, search
-    const statusFilter = document.getElementById('statusFilter');
-    const sortBy = document.getElementById('sortBy');
-    const searchInput = document.getElementById('searchInput');
+          <h5 class="fw-bold text-primary">Liên hệ</h5>
+          <ul class="list-unstyled text-muted">
+            <li><b>Email:</b> nguyenvana@example.com</li>
+            <li><b>SĐT:</b> 0909 123 456</li>
+          </ul>
 
-    function applyControls() {
-      const st = statusFilter.value;
-      const sort = sortBy.value;
-      const q = searchInput.value.trim().toLowerCase();
+          <hr />
 
-      let filtered = orders.slice();
-      if (st !== 'all') filtered = filtered.filter(o => o.status === st);
+          <h5 class="fw-bold text-primary">Địa chỉ</h5>
+          <p class="text-muted"><b>Địa chỉ:</b> 123 Lê Lợi, Quận 1, TP.HCM</p>
 
-      if (q) {
-        filtered = filtered.filter(o => (
-          o.id.toLowerCase().includes(q) ||
-          o.address.toLowerCase().includes(q) ||
-          o.items.some(it => it.name.toLowerCase().includes(q))
-        ));
-      }
+          <hr />
 
-      if (sort === 'newest') filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
-      else if (sort === 'oldest') filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
-      else if (sort === 'amount-desc') filtered.sort((a, b) => b.total - a.total);
-      else if (sort === 'amount-asc') filtered.sort((a, b) => a.total - b.total);
+          <h5 class="fw-bold text-primary">Thanh toán mặc định</h5>
+          <p class="text-muted"><b>Ví MoMo:</b> Liên kết ngày 02/03/2024</p>
 
-      renderOrders(filtered);
-    }
+        </div>
+      </div>
 
-    statusFilter.addEventListener('change', applyControls);
-    sortBy.addEventListener('change', applyControls);
-    searchInput.addEventListener('input', () => { setTimeout(applyControls, 120); });
+      <!-- Tùy chọn -->
+      <div class="col-md-5">
+        <div class="option-card mb-4">
+          <h5 class="fw-bold text-primary mb-3">Tùy chọn tài khoản</h5>
 
-    document.getElementById('refreshBtn').addEventListener('click', () => {
-      // Nếu dùng API, ở đây sẽ gọi fetch() để cập nhật
-      applyControls();
-    });
+          <a href="/pages/profile-edit.html" class="btn btn-primary w-100 mb-2">Chỉnh sửa thông tin</a>
+          <a href="../pages/changPassword.html" class="btn btn-primary w-100 mb-2">Đổi mật khẩu</a>
+          <a href="../index.html" class="btn btn-danger w-100">Đăng xuất</a>
+        </div>
 
-    document.getElementById('createTestBtn').addEventListener('click', () => {
-      // Thêm đơn giả để test nhanh
-      const id = 'DH-T' + Math.floor(Math.random() * 9000 + 1000);
-      orders.push({
-        id, date: new Date().toISOString().slice(0, 10), total: Math.floor(Math.random() * 1000000) + 50000,
-        status: ['processing', 'shipping', 'delivered', 'canceled'][Math.floor(Math.random() * 4)],
-        items: [{ name: 'Sản phẩm thử', qty: 1, price: Math.floor(Math.random() * 500000) + 20000 }],
-        shipping: 20000, payment: 'Thanh toán khi nhận hàng (COD)', address: 'Địa chỉ thử', eta: '2025-11-20'
-      });
-      applyControls();
-    });
+        <div class="option-card">
+          <h5 class="fw-bold text-primary mb-3">Tùy chọn khác</h5>
 
-    // Modal logic
-    const modalBackdrop = document.getElementById('modalBackdrop');
-    const modal = document.getElementById('modal');
+          <a href="/pages/wishList.html" class="btn btn-primary w-100 mb-2">Sản phẩm yêu thích</a>
+          <a href="../pages/order-history.html" class="btn btn-primary w-100">Lịch sử đơn hàng</a>
+        </div>
+      </div>
 
-    function showDetails(orderId) {
-      const o = orders.find(x => x.id === orderId);
-      if (!o) return;
+    </div>
+  </main>
 
-      document.getElementById('modalOrderId').textContent = 'Mã đơn: ' + o.id;
-      document.getElementById('modalDate').textContent = 'Ngày đặt: ' + o.date;
-      const statusEl = document.getElementById('modalStatus');
-      statusEl.innerHTML = `<span class="status ${o.status}">${statusLabel(o.status)}</span>`;
+  <!-- FOOTER -->
+  <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
+    <div class="container">
+      <div class="row gy-4">
 
-      const itemsWrap = document.getElementById('modalItems');
-      itemsWrap.innerHTML = '';
-      o.items.forEach(it => {
-        const li = document.createElement('li');
-        li.innerHTML = `<div>${it.name} <span class="meta">(x${it.qty})</span></div><div>${formatVND(it.price)}</div>`;
-        itemsWrap.appendChild(li);
-      });
+        <div class="col-md-4">
+          <a href="/index.html" class="d-flex align-items-center text-decoration-none mb-3">
+            <i class="bi bi-camera fs-3 text-primary me-2"></i>
+            <span class="fw-bold fs-5 text-primary">TechX</span>
+          </a>
+          <p class="text-muted">
+            Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
+          </p>
+        </div>
 
-      document.getElementById('modalShipping').textContent = formatVND(o.shipping);
-      document.getElementById('modalPayment').textContent = o.payment;
-      document.getElementById('modalAddress').textContent = o.address;
-      document.getElementById('modalETA').textContent = o.eta;
-      document.getElementById('modalTotal').textContent = formatVND(o.total + o.shipping);
+        <div class="col-md-2">
+          <h6 class="fw-bold text-uppercase mb-3">Danh mục</h6>
+          <ul class="list-unstyled">
+            <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
+            <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
+            <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
+            <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
+          </ul>
+        </div>
 
-      modalBackdrop.style.display = 'flex';
-      modalBackdrop.setAttribute('aria-hidden', 'false');
-      setTimeout(() => modal.classList.add('show'), 10);
-      document.body.style.overflow = 'hidden';
-    }
+        <div class="col-md-2">
+          <h6 class="fw-bold text-uppercase mb-3">Hỗ trợ</h6>
+          <ul class="list-unstyled">
+            <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
+            <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
+            <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
+            <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
+          </ul>
+        </div>
 
-    document.getElementById('closeModalBtn').addEventListener('click', closeModal);
-    modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
+        <div class="col-md-4">
+          <h6 class="fw-bold text-uppercase mb-3">Liên hệ</h6>
+          <p><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP.HCM</p>
+          <p><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
+          <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
+        </div>
 
-    function closeModal() {
-      modal.classList.remove('show');
-      setTimeout(() => {
-        modalBackdrop.style.display = 'none';
-        modalBackdrop.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }, 160);
-    }
+      </div>
 
-    // init
-    applyControls();
-  </script>
+      <hr />
+
+      <div class="text-center small text-muted">
+        © 2025 <strong>TechX</strong>. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
