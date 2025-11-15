@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="../assets/css/header.css">
     <link rel="stylesheet" href="../assets/css/cart.css">
 
-
 </head>
 <body>
 <header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
@@ -41,7 +40,9 @@
                     </a>
                     <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/pages/products.html">Tất cả sản phẩm</a></li>
-                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li><a class="dropdown-item" href="../pages/products.html#mini-tech">Công nghệ mini</a></li>
                         <li><a class="dropdown-item" href="../pages/products.html#ai-device">Thiết bị AI</a></li>
                         <li><a class="dropdown-item" href="../pages/products.html#creative">Phụ kiện sáng tạo</a></li>
@@ -84,8 +85,7 @@
                          class="product-img me-3" alt="sp1"/>
                     <div>
                         <h6 class="product-name mb-1">4URPC sạc không dây</h6>
-                        <p class="text-muted small mb-1"> Bản cao cấp</p>
-                        <p class="product-variant text-muted small mb-1">Màu: Đen | SKU: 12466</p>
+                        <p class="product-variant text-muted small mb-1">Màu: Bản cao cấp | Đen | SKU: 12466</p>
                         <span class="product-price" data-price="999000">999.000₫</span>
                     </div>
                 </div>
@@ -108,8 +108,7 @@
 
                     <div>
                         <h6 class="product-name mb-1">ChargeStick</h6>
-                        <p class="text-muted small mb-1">Sạc không dây | USB-C</p>
-                        <p class="product-variant text-muted small mb-1">Màu: Đen | SKU: 12346</p>
+                        <p class="product-variant text-muted small mb-1"> Sạc không dây | Đen | SKU: 12346</p>
                         <span class="product-price" data-price="1290000">1.290.000₫</span>
                     </div>
                 </div>
@@ -132,8 +131,7 @@
 
                     <div>
                         <h6 class="product-name mb-1">Donomo AquaCam-Cammera thông minh</h6>
-                        <p class="text-muted small mb-1">Camera thông minh</p>
-                        <p class="product-variant text-muted small mb-1">Màu: Đen | SKU: 12347</p>
+                        <p class="product-variant text-muted small mb-1">Camera thông minh| Đen | SKU: 12347</p>
                         <span class="product-price" data-price="2990000">3.990.000₫</span>
                     </div>
 
@@ -156,8 +154,7 @@
                     <img src="../assets/img/Cart/nimo.png" height="656" width="862" class="product-img me-3" alt="sp4">
                     <div>
                         <h6 class="product-name mb-1">Nimo – Bạn đồng hành thông minh</h6>
-                        <p class="text-muted small mb-1">Robot AI</p>
-                        <p class="product-variant text-muted small mb-1">Màu: Trắng | SKU: 13345</p>
+                        <p class="product-variant text-muted small mb-1">Robot AI | Trắng | SKU: 13345</p>
                         <span class="product-price" data-price="8590000">8.590.000₫</span>
                     </div>
                 </div>
@@ -251,51 +248,6 @@
         </div>
     </div>
 </div>
-<script>
-    //   let toDelete = null;
-    //   const modal = new bootstrap.Modal('#confirmDelete');
-    //   const toast = new bootstrap.Toast('#toastMsg');
-    //
-    //   const updateTotal = () => {
-    //     let subtotal = 0;
-    //     document.querySelectorAll('.cart-item').forEach(item => {
-    //       const price = parseInt(item.querySelector('.product-price').dataset.price);
-    //       const qty = parseInt(item.querySelector('.quantity').value);
-    //       subtotal += price * qty;
-    //     });
-    //     const formatted = subtotal.toLocaleString('vi-VN') + '₫';
-    //     document.getElementById('subtotal').textContent = formatted;
-    //     document.getElementById('total').textContent = formatted;
-    //   };
-    //
-    //   document.querySelectorAll('.plus').forEach(btn => btn.onclick = e => {
-    //     const input = e.target.closest('.quantity-control').querySelector('.quantity');
-    //     input.value = parseInt(input.value) + 1;
-    //     updateTotal();
-    //   });
-    //
-    //   document.querySelectorAll('.minus').forEach(btn => btn.onclick = e => {
-    //     const input = e.target.closest('.quantity-control').querySelector('.quantity');
-    //     if (parseInt(input.value) > 1) input.value = parseInt(input.value) - 1;
-    //     updateTotal();
-    //   });
-    //
-    //   document.querySelectorAll('.delete-btn').forEach(btn => btn.onclick = e => {
-    //     toDelete = e.target.closest('.cart-item');
-    //     modal.show();
-    //   });
-    //
-    //   document.getElementById('confirmDeleteBtn').onclick = () => {
-    //     if (toDelete) {
-    //       toDelete.remove();
-    //       updateTotal();
-    //       toast.show();
-    //       modal.hide();
-    //     }
-    //   };
-    //
-    // updateTotal();
-</script>
 
 <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
     <div class="container">
