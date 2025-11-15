@@ -31,7 +31,33 @@ body {
   --shadow: 0 10px 30px rgba(15, 23, 36, 0.08);
   --radius: 20px;
   --transition: 200ms cubic-bezier(.2, .8, .2, 1);
-  --bg:linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
+  --bg: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
+  --bg1: linear-gradient(135deg,
+      #e3f0ff 0%,
+      #d7e6ff 20%,
+      #bcd6ff 45%,
+      #95baff 75%,
+      #6ea6ff 100%);
+  --bg2: linear-gradient(140deg,
+      rgba(255, 255, 255, 0.65) 0%,
+      rgba(245, 247, 252, 0.9) 25%,
+      rgba(225, 235, 255, 1) 60%,
+      rgba(210, 225, 255, 1) 100%);
+  --bg3: linear-gradient(130deg,
+      #1e3c72 0%,
+      #2a5298 40%,
+      #4e89ff 80%,
+      #78aaff 100%);
+--bg4: linear-gradient(135deg,
+      rgba(223, 233, 255, 0.4) 0%,
+      rgba(245, 225, 255, 0.4) 40%,
+      rgba(255, 231, 243, 0.4) 75%,
+      rgba(255, 242, 229, 0.4) 100%);
+  --bg5: linear-gradient(135deg,
+      #8ec5fc 0%,
+      #b6e0ff 30%,
+      #e9d5ff 65%,
+      #fbc2eb 100%);
 }
 
 /* SECTIONS WIDTH */
@@ -83,13 +109,14 @@ section {
   z-index: 10;
   bottom: 4%;
   left: 2%;
-  color: #ffffff;
-  background: rgba(201, 226, 255, 0.2);
+  color: var(--s-blue);
+  background: rgba(166, 216, 254, 0.22);
   box-shadow: 0 0 17px rgba(144, 186, 254, 0.3);
   padding: 18px 26px;
   border-radius: 16px;
   backdrop-filter: blur(1px);
 }
+
 
 .banner-text h2 {
   font-size: 36px;
@@ -103,7 +130,7 @@ section {
 
 .btn_unline {
   display: inline-block;
-  color: #fff;
+  color: var(--s-blue);
   font-weight: 600;
   text-decoration: none;
   position: relative;
@@ -122,12 +149,12 @@ section {
 }
 
 .btn_unline:hover {
-  color: black;
+  color: rgb(150, 210, 255);
 
 }
 
 .btn_unline:hover::after {
-  background: black;
+  background: rgb(150, 210, 255);
   width: 100%;
 }
 
@@ -309,12 +336,13 @@ section {
   font-size: 50px;
   font-weight: 700;
   margin-bottom: 12px;
+  color: var(--s-blue-dark);
 }
 
 .premium-left p {
   font-weight: 100;
   font-size: 25px;
-  color: black;
+  color: var(--s-blue-dark);
   margin-bottom: 26px;
 }
 
@@ -404,22 +432,22 @@ section {
 .btn-outline-dark {
   padding: 10px 22px;
   border-radius: 40px;
-  border: 2px solid #000;
+  border: 2px solid var(--s-blue-dark);
   text-decoration: none;
-  color: #000;
+  color: var(--s-blue-dark);
   font-weight: 600;
   transition: .25s;
 }
 
 .btn-outline-dark:hover {
-  background: #000;
+  background: var(--s-blue-dark);
   color: #fff;
 }
 
 .btn-ghost-dark {
   margin: 10px 0px;
   background: #fff;
-  color: #000;
+  color: var(--s-blue-dark);
   font-weight: 600;
   text-decoration: none;
   transition: .25s;
