@@ -1,4 +1,4 @@
-/* ====== LAYOUT ====== */
+/* Layout */
 body {
     background: #f5f6fa;
     font-family: Arial, sans-serif;
@@ -9,7 +9,7 @@ body {
     display: flex;
 }
 
-/* ====== SIDEBAR ====== */
+/* SIDEBAR */
 .sidebar {
     width: 260px;
     min-height: 100vh;
@@ -42,20 +42,19 @@ body {
     color: white;
 }
 
-/* ====== MAIN CONTENT ====== */
+/* MAIN */
 .main-content {
     width: 100%;
-    padding: 20px;
 }
 
-/* ====== HEADER ====== */
+/* HEADER */
 .header {
     background: white;
     border-radius: 10px;
     border: 1px solid #e5e5e5;
 }
 
-/* ====== SEARCH BOX ====== */
+/* SEARCH BOX */
 .search-box {
     display: flex;
     align-items: center;
@@ -74,25 +73,18 @@ body {
     border: none;
     outline: none;
     background: transparent;
-    width: 220px;
+    width: 200px;
 }
 
-/* ====== FILTERS ====== */
+/* FILTERS */
 .filters select {
     height: 42px;
-    border-radius: 8px;
 }
 
-/* ====== BLOG TABLE ====== */
-
-.table th {
-    background: #f8f9fa;
-    font-weight: 600;
-}
-
+/* TABLE */
 .table-img {
-    width: 70px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     overflow: hidden;
     border-radius: 8px;
 }
@@ -109,22 +101,21 @@ body {
     font-size: 13px;
 }
 
-.published {
+.instock {
     background: #d1ffd6;
     color: #0a8f26;
 }
 
-.draft {
+.outstock {
     background: #ffe1e1;
     color: #d11a1a;
 }
 
-/* ACTION BUTTONS */
 .action-buttons .btn {
     margin: 0 2px;
 }
 
-/* ====== PAGINATION ====== */
+/* PAGINATION */
 .pagination .page-link {
     border-radius: 6px;
     padding: 6px 12px;
