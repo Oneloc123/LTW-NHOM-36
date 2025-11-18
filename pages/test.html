@@ -35,7 +35,7 @@
     }
 
     .modal-body {
-  background-color: #f4f6f9;
+      background-color: #f4f6f9;
     }
 
     /* SUMMARY CARD – BOX THÔNG TIN */
@@ -61,7 +61,7 @@
 
     .modal-body table th {
       font-weight: 600;
-      
+
     }
 
     .modal-body table td,
@@ -69,7 +69,8 @@
       padding: 12px 16px;
       vertical-align: middle;
     }
-    .modal-body table .title-col th{
+
+    .modal-body table .title-col th {
       color: #1875fd;
     }
 
@@ -238,167 +239,242 @@
     </div>
   </header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-box">
-    <h1 class="hero-title">Chỉnh sửa thông tin</h1>
-    <p class="hero-subtitle">Cập nhật thông tin cá nhân của bạn</p>
-  </div>
-</section>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-box">
+      <h1 class="hero-title">Chỉnh sửa thông tin</h1>
+      <p class="hero-subtitle">Cập nhật thông tin cá nhân của bạn</p>
+    </div>
+  </section>
 
-<style>
-  /* =============================
+  <style>
+    /* =============================
      EDIT PROFILE – TECHX STYLE
   ============================= */
 
-  .edit-wrapper {
-    max-width: 850px;
-    margin: auto;
-    padding: 25px;
-  }
+    .edit-wrapper {
+      max-width: 850px;
+      margin: auto;
+      padding: 25px;
+    }
 
-  .edit-card {
-    background: #fff;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-    border: 1px solid #eee;
-  }
+    .edit-card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      border: 1px solid #eee;
+    }
 
-  .edit-title {
-    font-size: 22px;
-    font-weight: 700;
-    color: #0d6efd;
-    margin-bottom: 20px;
-  }
+    .edit-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #0d6efd;
+      margin-bottom: 20px;
+    }
 
-  .form-label {
-    font-weight: 600;
-    color: #333;
-  }
+    .form-label {
+      font-weight: 600;
+      color: #333;
+    }
 
-  .form-control {
-    border-radius: 12px;
-    padding: 10px 14px;
-    border: 1px solid #d8def0;
-  }
+    .form-control {
+      border-radius: 12px;
+      padding: 10px 14px;
+      border: 1px solid #d8def0;
+    }
 
-  .form-control:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
-  }
+    .form-control:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+    }
 
-  .btn-techx {
-    border-radius: 12px;
-    padding: 10px 22px;
-  }
+    .btn-techx {
+      border-radius: 12px;
+      padding: 10px 22px;
+    }
 
-  .btn-cancel {
-    background: #f1f3f5;
-    border-radius: 12px;
-    padding: 10px 22px;
-  }
+    .btn-cancel {
+      background: #f1f3f5;
+      border-radius: 12px;
+      padding: 10px 22px;
+    }
 
-  /* Avatar Upload */
-  .avatar-edit-box {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    margin-bottom: 30px;
-  }
+    /* Avatar Upload */
+    .avatar-edit-box {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
 
-  .avatar-edit-box img {
-    width: 105px;
-    height: 105px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #dbe5ff;
-  }
+    .avatar-edit-box img {
+      width: 105px;
+      height: 105px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #dbe5ff;
+    }
 
-  .avatar-edit-box input {
-    display: none;
-  }
+    .avatar-edit-box input {
+      display: none;
+    }
 
-  .upload-btn {
-    padding: 8px 16px;
-    border-radius: 10px;
-  }
-</style>
+    .upload-btn {
+      padding: 8px 16px;
+      border-radius: 10px;
+    }
+  </style>
 
-<section class="edit-wrapper">
-  <div class="edit-card">
+  <section class="edit-wrapper">
+    <div class="edit-card">
 
-    <h3 class="edit-title">Thông tin cá nhân</h3>
+      <h3 class="edit-title">Thông tin cá nhân</h3>
 
-    <!-- ẢNH ĐẠI DIỆN -->
-    <div class="avatar-edit-box">
-      <img id="previewAvatar" src="https://i.pravatar.cc/150?img=12" alt="avatar">
+      <!-- ẢNH ĐẠI DIỆN -->
+      <div class="avatar-edit-box">
+        <img id="previewAvatar" src="https://i.pravatar.cc/150?img=12" alt="avatar">
 
-      <div>
-        <label for="avatarUpload" class="btn btn-outline-primary upload-btn">
-          <i class="bi bi-upload"></i> Thay ảnh
-        </label>
-        <input type="file" id="avatarUpload" accept="image/*">
-        <p class="text-muted small mt-2 mb-0">Dung lượng tối đa 2MB – JPG, PNG</p>
+        <div>
+          <label for="avatarUpload" class="btn btn-outline-primary upload-btn">
+            <i class="bi bi-upload"></i> Thay ảnh
+          </label>
+          <input type="file" id="avatarUpload" accept="image/*">
+          <p class="text-muted small mt-2 mb-0">Dung lượng tối đa 2MB – JPG, PNG</p>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <form>
+        <div class="row g-3">
+
+          <div class="col-md-6">
+            <label class="form-label">Họ và tên</label>
+            <input type="text" class="form-control" value="Nguyễn Văn B">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" value="nguyenb@example.com">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Số điện thoại</label>
+            <input type="text" class="form-control" value="0826452949">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Ngày sinh</label>
+            <input type="date" class="form-control" value="1997-04-14">
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Địa chỉ</label>
+            <textarea class="form-control" rows="3">Số 11, Phường Linh Trung, Thủ Đức, TP.HCM</textarea>
+          </div>
+
+        </div>
+
+        <div class="text-end mt-4">
+          <a href="/pages/profile.html" class="btn btn-cancel me-2">Hủy</a>
+          <button type="submit" class="btn btn-primary btn-techx">
+            <i class="bi bi-check-circle"></i> Lưu thay đổi
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    // Preview ảnh đại diện
+    document.getElementById("avatarUpload").addEventListener("change", function (e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        document.getElementById("previewAvatar").src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="orderDetailLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: white  ;">
+          <h5 class="modal-title fw-bold text-primary" id="orderDetailLabel">Chi tiết đơn hàng</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+        </div>
+
+        <section class="edit-wrapper">
+          <div class="edit-card">
+
+            <h3 class="edit-title">Thông tin cá nhân</h3>
+
+            <!-- ẢNH ĐẠI DIỆN -->
+            <div class="avatar-edit-box">
+              <img id="previewAvatar" src="https://i.pravatar.cc/150?img=12" alt="avatar">
+
+              <div>
+                <label for="avatarUpload" class="btn btn-outline-primary upload-btn">
+                  <i class="bi bi-upload"></i> Thay ảnh
+                </label>
+                <input type="file" id="avatarUpload" accept="image/*">
+                <p class="text-muted small mt-2 mb-0">Dung lượng tối đa 2MB – JPG, PNG</p>
+              </div>
+            </div>
+
+            <!-- FORM -->
+            <form>
+              <div class="row g-3">
+
+                <div class="col-md-6">
+                  <label class="form-label">Họ và tên</label>
+                  <input type="text" class="form-control" value="Nguyễn Văn B">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" value="nguyenb@example.com">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Số điện thoại</label>
+                  <input type="text" class="form-control" value="0826452949">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Ngày sinh</label>
+                  <input type="date" class="form-control" value="1997-04-14">
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label">Địa chỉ</label>
+                  <textarea class="form-control" rows="3">Số 11, Phường Linh Trung, Thủ Đức, TP.HCM</textarea>
+                </div>
+
+              </div>
+
+              <div class="text-end mt-4">
+                <a href="/pages/profile.html" class="btn btn-cancel me-2">Hủy</a>
+                <button type="submit" class="btn btn-primary btn-techx">
+                  <i class="bi bi-check-circle"></i> Lưu thay đổi
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary">Ghi chú</button>
+          <button class="btn btn-outline-danger">Hủy đơn</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đóng</button>
+        </div>
       </div>
     </div>
-
-    <!-- FORM -->
-    <form>
-      <div class="row g-3">
-
-        <div class="col-md-6">
-          <label class="form-label">Họ và tên</label>
-          <input type="text" class="form-control" value="Nguyễn Văn B">
-        </div>
-
-        <div class="col-md-6">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-control" value="nguyenb@example.com">
-        </div>
-
-        <div class="col-md-6">
-          <label class="form-label">Số điện thoại</label>
-          <input type="text" class="form-control" value="0826452949">
-        </div>
-
-        <div class="col-md-6">
-          <label class="form-label">Ngày sinh</label>
-          <input type="date" class="form-control" value="1997-04-14">
-        </div>
-
-        <div class="col-12">
-          <label class="form-label">Địa chỉ</label>
-          <textarea class="form-control" rows="3">Số 11, Phường Linh Trung, Thủ Đức, TP.HCM</textarea>
-        </div>
-
-      </div>
-
-      <div class="text-end mt-4">
-        <a href="/pages/profile.html" class="btn btn-cancel me-2">Hủy</a>
-        <button type="submit" class="btn btn-primary btn-techx">
-          <i class="bi bi-check-circle"></i> Lưu thay đổi
-        </button>
-      </div>
-    </form>
   </div>
-</section>
-
-<script>
-  // Preview ảnh đại diện
-  document.getElementById("avatarUpload").addEventListener("change", function (e) {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      document.getElementById("previewAvatar").src = event.target.result;
-    };
-    reader.readAsDataURL(file);
-  });
-</script>
-
-
 
   <!-- ================= Footer ================= -->
   <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
