@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WishList</title>
+    <title>Viewed-Product</title>
     <link rel="stylesheet" href="../assets/css/products.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,96 +16,95 @@
    MODAL – PHONG CÁCH TRANG ĐƠN HÀNG
 ============================= */
 
-.modal-content {
-    border-radius: 16px;
-    overflow: hidden;
-    border: none;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.12);
-}
+        .modal-content {
+            border-radius: 16px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12);
+        }
 
-.modal-header {
-    background: #eaf1ff;
-    border-bottom: 1px solid #d4e2ff;
-}
+        .modal-header {
+            background: #eaf1ff;
+            border-bottom: 1px solid #d4e2ff;
+        }
 
-.modal-title {
-    font-weight: 700;
-    font-size: 20px;
-    color: #0d6efd !important;
-}
+        .modal-title {
+            font-weight: 700;
+            font-size: 20px;
+            color: #0d6efd !important;
+        }
 
-.modal-body {
-    background: linear-gradient(135deg, #eef4ff, #f7faff);
-}
+        .modal-body {
+            background: linear-gradient(135deg, #eef4ff, #f7faff);
+        }
 
-/* SUMMARY CARD – BOX THÔNG TIN */
-.summary-card {
-    border-radius: 14px;
-    background: #fff;
-    padding: 18px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.05);
-    border: 1px solid #f0f0f0;
-}
+        /* SUMMARY CARD – BOX THÔNG TIN */
+        .summary-card {
+            border-radius: 14px;
+            background: #fff;
+            padding: 18px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+        }
 
-/* TABLE – DANH SÁCH SẢN PHẨM */
-.modal-body table {
-    border-radius: 12px;
-    overflow: hidden;
-    background: #fff;
-}
+        /* TABLE – DANH SÁCH SẢN PHẨM */
+        .modal-body table {
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+        }
 
-.modal-body table thead {
-    background: #eef3ff;
-    border-bottom: 2px solid #dce5ff;
-}
+        .modal-body table thead {
+            background: #eef3ff;
+            border-bottom: 2px solid #dce5ff;
+        }
 
-.modal-body table th {
-    font-weight: 600;
-    color: #0d6efd;
-}
+        .modal-body table th {
+            font-weight: 600;
+            color: #0d6efd;
+        }
 
-.modal-body table td, 
-.modal-body table th {
-    padding: 12px 16px;
-    vertical-align: middle;
-}
+        .modal-body table td,
+        .modal-body table th {
+            padding: 12px 16px;
+            vertical-align: middle;
+        }
 
-.modal-body table tr:hover {
-    background: #f4f8ff;
-}
+        .modal-body table tr:hover {
+            background: #f4f8ff;
+        }
 
-/* PAYMENT BOX */
-.modal-body .payment-box {
-    border-radius: 16px;
-    padding: 20px;
-    background: #fff;
-    border: 1px solid #edf0ff;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-}
+        /* PAYMENT BOX */
+        .modal-body .payment-box {
+            border-radius: 16px;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #edf0ff;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+        }
 
-.payment-box h6 {
-    font-size: 16px;
-    font-weight: 700;
-    color: #0d6efd;
-}
+        .payment-box h6 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0d6efd;
+        }
 
-.payment-box div {
-    margin-bottom: 8px;
-}
+        .payment-box div {
+            margin-bottom: 8px;
+        }
 
-.payment-box hr {
-    margin: 12px 0;
-}
+        .payment-box hr {
+            margin: 12px 0;
+        }
 
-/* FOOTER */
-.modal-footer {
-    border-top: 1px solid #e8e8e8;
-}
+        /* FOOTER */
+        .modal-footer {
+            border-top: 1px solid #e8e8e8;
+        }
 
-.modal-footer .btn {
-    border-radius: 10px;
-}
-
+        .modal-footer .btn {
+            border-radius: 10px;
+        }
     </style>
 </head>
 
@@ -152,7 +151,7 @@
                     <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
                     <li class="nav-item"><a class="nav-link" href="/pages/order-history.html">Đơn hàng</a></li>
-                    <!-- Dropdown -->
+                     <!-- Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -188,8 +187,8 @@
     <!-- HERO -->
     <section class="hero">
         <div class="hero-box">
-            <h1 class="hero-title">Danh sách sản phẩm yêu thích của bạn</h1>
-            <p class="hero-subtitle"></p>
+            <h1 class="hero-title">Sản phẩm bạn đã xem gần đây</h1>
+            <p class="hero-subtitle">Dựa trên lịch sử hoạt động của bạn</p>
         </div>
     </section>
 
@@ -217,16 +216,17 @@
                 <button id="filterBtn"><i class="bi bi-funnel"></i> Lọc</button>
             </div>
         </div>
+
         <div class="filter-status" aria-live="polite">
-            <span id="resultCount">Hiển thị tất cả sản phẩm</span>
+            <span id="resultCount">Danh sách sản phẩm đã xem</span>
         </div>
     </section>
 
-
     <!-- PRODUCT GRID -->
     <section class="product-grid" id="productGrid">
-        <!-- 20 sản phẩm -->
-        <div class="product-card new" data-price="6490000" data-brand="Nebula">
+
+        <!-- ITEM 1 -->
+        <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
             <img src="https://product.hstatic.net/1000069970/product/61m0szmyrzl_bca067e9480843a3b43be72eee4137fe_large.jpg"
                 alt="Nebula Capsule 3">
             <h3>Robot Elilik</h3>
@@ -252,14 +252,17 @@
             <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
 
             <div class="card-footer">
-                <a class="buy-btn" style="text-decoration: none;" href="../pages/product-detail.html">Xem chi tiết</a>
+                <a class="buy-btn" style="text-decoration: none;" href="../pages/product-detail.html">Xem lại sản
+                    phẩm</a>
                 <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
             </div>
         </div>
-        <div class="product-card" data-price="6490000" data-brand="Nebula">
+
+        <!-- ITEM 2 -->
+        <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
             <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
                 alt="Nebula Capsule 3">
-            <h3>Humane Ai Pin</h3>
+            <h3>Humane AI Pin</h3>
 
             <div class="product-rating">
                 <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -268,6 +271,7 @@
             </div>
 
             <p style="font-size:14px; color:#444;">Xám bạc</p>
+
             <div class="color-options">
                 <div class="color-circle active" style="background:#ccc;"></div>
                 <div class="color-circle" style="background:#222;"></div>
@@ -282,14 +286,16 @@
             <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
 
             <div class="card-footer">
-                <a class="buy-btn" style="text-decoration: none;" href="../pages/product-detail.html">Xem chi tiết</a>
+                <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
                 <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
             </div>
         </div>
-        <div class="product-card" data-price="6490000" data-brand="Nebula">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqL1WZZrX-QgZG9wgywPYgdSo_DiIcwRfqLg&s"
+
+        <!-- ITEM 2 -->
+        <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
+            <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
                 alt="Nebula Capsule 3">
-            <h3>Rabbit R1</h3>
+            <h3>Humane AI Pin</h3>
 
             <div class="product-rating">
                 <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -298,28 +304,30 @@
             </div>
 
             <p style="font-size:14px; color:#444;">Xám bạc</p>
+
             <div class="color-options">
                 <div class="color-circle active" style="background:#ccc;"></div>
                 <div class="color-circle" style="background:#222;"></div>
             </div>
 
             <div class="capacity-options">
-                <button class="capacity-btn active">128 GB</button>
-                <button class="capacity-btn">64 GB</button>
+                <button class="capacity-btn active"></button>
+                <button class="capacity-btn"></button>
             </div>
 
             <div class="product-price">6.490.000 VND</div>
             <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
 
             <div class="card-footer">
-                <a class="buy-btn" style="text-decoration: none;" href="../pages/product-detail.html">Xem chi tiết</a>
+                <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
                 <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
             </div>
         </div>
-        <div class="product-card" data-price="6490000" data-brand="Nebula">
-            <img src="https://m.media-amazon.com/images/I/612JyzcWVLL.jpg_BO30,255,255,255_UF900,850_SR1910,1000,0,C_QL100_.jpg"
+        <!-- ITEM 2 -->
+        <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
+            <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
                 alt="Nebula Capsule 3">
-            <h3>ChatGPT Mini Device</h3>
+            <h3>Humane AI Pin</h3>
 
             <div class="product-rating">
                 <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -328,28 +336,30 @@
             </div>
 
             <p style="font-size:14px; color:#444;">Xám bạc</p>
+
             <div class="color-options">
                 <div class="color-circle active" style="background:#ccc;"></div>
                 <div class="color-circle" style="background:#222;"></div>
             </div>
 
             <div class="capacity-options">
-                <button class="capacity-btn active">128 GB</button>
-                <button class="capacity-btn">64 GB</button>
+                <button class="capacity-btn active"></button>
+                <button class="capacity-btn"></button>
             </div>
 
             <div class="product-price">6.490.000 VND</div>
             <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
 
             <div class="card-footer">
-                <a class="buy-btn" style="text-decoration: none;" href="../pages/product-detail.html">Xem chi tiết</a>
+                <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
                 <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
             </div>
         </div>
-        <div class="product-card" data-price="6490000" data-brand="Nebula">
-            <img src="https://www.droidshop.vn/wp-content/uploads/2022/06/Cac-chuc-nang-tren-mot-kinh-thong-minh.jpg"
+        <!-- ITEM 2 -->
+        <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
+            <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
                 alt="Nebula Capsule 3">
-            <h3>AI Smart Glasses</h3>
+            <h3>Humane AI Pin</h3>
 
             <div class="product-rating">
                 <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -358,28 +368,30 @@
             </div>
 
             <p style="font-size:14px; color:#444;">Xám bạc</p>
+
             <div class="color-options">
                 <div class="color-circle active" style="background:#ccc;"></div>
                 <div class="color-circle" style="background:#222;"></div>
             </div>
 
             <div class="capacity-options">
-                <button class="capacity-btn active">128 GB</button>
-                <button class="capacity-btn">64 GB</button>
+                <button class="capacity-btn active"></button>
+                <button class="capacity-btn"></button>
             </div>
 
             <div class="product-price">6.490.000 VND</div>
             <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
 
             <div class="card-footer">
-                <a class="buy-btn" style="text-decoration: none;" href="../pages/product-detail.html">Xem chi tiết</a>
+                <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
                 <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
             </div>
         </div>
-        <div class="product-card" data-price="6490000" data-brand="Nebula">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxpWgCCDeGAZAtp59Sv7u3wB-_TI6RRp0ZIA&s"
+        <!-- ITEM 2 -->
+        <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
+            <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
                 alt="Nebula Capsule 3">
-            <h3>Dog Robot</h3>
+            <h3>Humane AI Pin</h3>
 
             <div class="product-rating">
                 <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -388,88 +400,38 @@
             </div>
 
             <p style="font-size:14px; color:#444;">Xám bạc</p>
+
             <div class="color-options">
                 <div class="color-circle active" style="background:#ccc;"></div>
                 <div class="color-circle" style="background:#222;"></div>
             </div>
 
             <div class="capacity-options">
-                <button class="capacity-btn active">128 GB</button>
-                <button class="capacity-btn">64 GB</button>
+                <button class="capacity-btn active"></button>
+                <button class="capacity-btn"></button>
             </div>
 
             <div class="product-price">6.490.000 VND</div>
             <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
 
             <div class="card-footer">
-                <a class="buy-btn" style="text-decoration: none;" href="../pages/product-detail.html">Xem chi tiết</a>
-                <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
-            </div>
-        </div>
-        <div class="product-card" data-price="6490000" data-brand="Nebula">
-            <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
-            <h3>AI Desk Lamp</h3>
-
-            <div class="product-rating">
-                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                    class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                <span>4.5 (12)</span>
-            </div>
-
-            <p style="font-size:14px; color:#444;">Xám bạc</p>
-            <div class="color-options">
-                <div class="color-circle active" style="background:#ccc;"></div>
-                <div class="color-circle" style="background:#222;"></div>
-            </div>
-
-            <div class="capacity-options">
-                <button class="capacity-btn active">128 GB</button>
-                <button class="capacity-btn">64 GB</button>
-            </div>
-
-            <div class="product-price">6.490.000 VND</div>
-            <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-            <div class="card-footer">
-                <a class="buy-btn" style="text-decoration: none;" href="../pages/product-detail.html">Xem chi tiết</a>
-                <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
-            </div>
-        </div>
-        <div class="product-card" data-price="6490000" data-brand="Nebula">
-            <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
-            <h3>AI Desk Lamp</h3>
-
-            <div class="product-rating">
-                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                    class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                <span>4.5 (12)</span>
-            </div>
-
-            <p style="font-size:14px; color:#444;">Xám bạc</p>
-            <div class="color-options">
-                <div class="color-circle active" style="background:#ccc;"></div>
-                <div class="color-circle" style="background:#222;"></div>
-            </div>
-
-            <div class="capacity-options">
-                <button class="capacity-btn active">128 GB</button>
-                <button class="capacity-btn">64 GB</button>
-            </div>
-
-            <div class="product-price">6.490.000 VND</div>
-            <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-            <div class="card-footer">
-                <a class="buy-btn" style="text-decoration: none;" href="../pages/product-detail.html">Xem chi tiết</a>
+                <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
                 <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
             </div>
         </div>
     </section>
 
-    <div class="load-more-wrapper">
-        <button id="loadMoreBtn">Xem thêm</button>
-    </div>
-
+    <div class="d-flex justify-content-center mt-4 mb-2">
+    <nav aria-label="Page navigation">
+      <ul class="pagination pagination-sm">
+        <li class="page-item disabled"><a class="page-link">«</a></li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">»</a></li>
+      </ul>
+    </nav>
+  </div>
 
 
 
@@ -547,166 +509,166 @@
         </div>
     </footer>
 
-    <!-- js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- ================= Modal ================== -->
-      <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="orderDetailLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title fw-bold text-primary" id="orderDetailLabel">Chi tiết đơn hàng</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-                    </div>
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="orderDetailLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold text-primary" id="orderDetailLabel">Chi tiết đơn hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
 
-                    <div class="modal-body row" style="background: linear-gradient(135deg, #e8f0ff, #f6faff);">
-                        <div class="col-8">
-                            <!-- Thông tin chung -->
-                            <div class="row d-flex justify-content-between mb-0" style="margin-left: 16px;">
-                                <div class="summary-card border rounded p-3">
-                                    <h5 class="fw-bold mb-3 text-primary">Đơn hàng: 0223434555</h5>
+                <div class="modal-body row" style="background: linear-gradient(135deg, #e8f0ff, #f6faff);">
+                    <div class="col-8">
+                        <!-- Thông tin chung -->
+                        <div class="row d-flex justify-content-between mb-0" style="margin-left: 16px;">
+                            <div class="summary-card border rounded p-3">
+                                <h5 class="fw-bold mb-3 text-primary">Đơn hàng: 0223434555</h5>
+                                <hr>
+                                <ol class="list-unstyled text-muted">
+                                    <li class="mb-2">02/01/2022-23:51 | NV tư vấn: Nguyễn Văn A -
+                                        @nguyenvana@example.com</li>
+
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-left: 16px;">
+                            <!-- Khách hàng & Người nhận -->
+                            <div class="row g-2 mb-3">
+                                <div class="col-md-6">
+                                    <div class="summary-card border rounded p-3" style="margin-left: -4px;">
+                                        <h5 class="fw-bold mb-3 text-primary">Khách hàng</h5>
+                                        <hr>
+                                        <p class="fw-bold mb-3"> Nguyễn Văn B</p>
+                                        <ol class="list-unstyled text-muted">
+                                            <li class="mb-2">0826452949</li>
+                                            <li class="mb-2">số 11, Phường Linh Trung, Thủ Đức, Tp.Hồ Chí Minh</li>
+
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="summary-card border rounded p-3" style="margin-right: -10px;">
+                                        <h5 class="fw-bold mb-3 text-primary">Người nhận</h5>
+                                        <hr>
+                                        <p class="fw-bold mb-3"> Nguyễn Văn B</p>
+                                        <ol class="list-unstyled text-muted">
+                                            <li class="mb-2">0826452949</li>
+                                            <li class="mb-2">số 11, Phường Linh Trung, Thủ Đức, Tp.Hồ Chí Minh</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Danh sách sản phẩm -->
+                            <table class="table border rounded p-3 table-hover">
+                                <tr class="">
+                                    <th>Tên sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Đơn giá</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Hành động</th>
+                                </tr>
+                                <tr class="item">
+                                    <th>máy hút bụi mini</th>
+                                    <th>1</th>
+                                    <th>200.000Đ</th>
+                                    <th>200.000Đ</th>
+                                    <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
+                                            phẩm</a></th>
+                                </tr>
+                                <tr class="item">
+                                    <th>máy hút bụi mini</th>
+                                    <th>1</th>
+                                    <th>200.000Đ</th>
+                                    <th>200.000Đ</th>
+                                    <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
+                                            phẩm</a></th>
+                                </tr>
+                                <tr class="item">
+                                    <th>máy hút bụi mini</th>
+                                    <th>1</th>
+                                    <th>200.000Đ</th>
+                                    <th>200.000Đ</th>
+                                    <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
+                                            phẩm</a></th>
+                                </tr>
+                                <tr class="item">
+                                    <th>máy hút bụi mini</th>
+                                    <th>1</th>
+                                    <th>200.000Đ</th>
+                                    <th>200.000Đ</th>
+                                    <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
+                                            phẩm</a></th>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                    <!-- Phương thức thanh toán -->
+                    <div class="col-4 mt-4" style="margin-top: 0px;">
+                        <div class="col">
+                            <div class="card" style="margin-top: -24px ;">
+                                <div class="border rounded p-3">
+                                    <h6 class="fw-bold mb-3 text-primary">PHƯƠNG THỨC THANH TOÁN</h6>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Tiền mặt</span>
+                                        <span>10.000.000 đ</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>VnpayQR</span>
+                                        <span>6.000.000 đ</span>
+                                    </div>
                                     <hr>
-                                    <ol class="list-unstyled text-muted">
-                                        <li class="mb-2">02/01/2022-23:51 | NV tư vấn: Nguyễn Văn A -
-                                            @nguyenvana@example.com</li>
-
-                                    </ol>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-left: 16px;">
-                                <!-- Khách hàng & Người nhận -->
-                                <div class="row g-2 mb-3">
-                                    <div class="col-md-6">
-                                        <div class="summary-card border rounded p-3" style="margin-left: -4px;">
-                                            <h5 class="fw-bold mb-3 text-primary">Khách hàng</h5>
-                                            <hr>
-                                            <p class="fw-bold mb-3"> Nguyễn Văn B</p>
-                                            <ol class="list-unstyled text-muted">
-                                                <li class="mb-2">0826452949</li>
-                                                <li class="mb-2">số 11, Phường Linh Trung, Thủ Đức, Tp.Hồ Chí Minh</li>
-
-                                            </ol>
-                                        </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Tạm tính</span>
+                                        <span>16.000.000 đ</span>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="summary-card border rounded p-3" style="margin-right: -10px;">
-                                            <h5 class="fw-bold mb-3 text-primary">Người nhận</h5>
-                                            <hr>
-                                            <p class="fw-bold mb-3"> Nguyễn Văn B</p>
-                                            <ol class="list-unstyled text-muted">
-                                                <li class="mb-2">0826452949</li>
-                                                <li class="mb-2">số 11, Phường Linh Trung, Thủ Đức, Tp.Hồ Chí Minh</li>
-                                            </ol>
-                                        </div>
+                                    <div class="d-flex justify-content-between text-danger">
+                                        <span>Khuyến mãi</span>
+                                        <span>-30.000 đ</span>
                                     </div>
-                                </div>
-                                <!-- Danh sách sản phẩm -->
-                                <table class="table border rounded p-3 table-hover">
-                                    <tr class="">
-                                        <th>Tên sản phẩm</th>
-                                        <th>Số lượng</th>
-                                        <th>Đơn giá</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Hành động</th>
-                                    </tr>
-                                    <tr class="item">
-                                        <th>máy hút bụi mini</th>
-                                        <th>1</th>
-                                        <th>200.000Đ</th>
-                                        <th>200.000Đ</th>
-                                        <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
-                                                phẩm</a></th>
-                                    </tr>
-                                    <tr class="item">
-                                        <th>máy hút bụi mini</th>
-                                        <th>1</th>
-                                        <th>200.000Đ</th>
-                                        <th>200.000Đ</th>
-                                        <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
-                                                phẩm</a></th>
-                                    </tr>
-                                    <tr class="item">
-                                        <th>máy hút bụi mini</th>
-                                        <th>1</th>
-                                        <th>200.000Đ</th>
-                                        <th>200.000Đ</th>
-                                        <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
-                                                phẩm</a></th>
-                                    </tr>
-                                    <tr class="item">
-                                        <th>máy hút bụi mini</th>
-                                        <th>1</th>
-                                        <th>200.000Đ</th>
-                                        <th>200.000Đ</th>
-                                        <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
-                                                phẩm</a></th>
-                                    </tr>
-                                </table>
-                            </div>
-
-                        </div>
-                        <!-- Phương thức thanh toán -->
-                        <div class="col-4 mt-4" style="margin-top: 0px;">
-                            <div class="col">
-                                <div class="card" style="margin-top: -24px ;">
-                                    <div class="border rounded p-3">
-                                        <h6 class="fw-bold mb-3 text-primary">PHƯƠNG THỨC THANH TOÁN</h6>
-                                        <div class="d-flex justify-content-between">
-                                            <span>Tiền mặt</span>
-                                            <span>10.000.000 đ</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>VnpayQR</span>
-                                            <span>6.000.000 đ</span>
-                                        </div>
-                                        <hr>
-                                        <div class="d-flex justify-content-between">
-                                            <span>Tạm tính</span>
-                                            <span>16.000.000 đ</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between text-danger">
-                                            <span>Khuyến mãi</span>
-                                            <span>-30.000 đ</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>Phí vận chuyển</span>
-                                            <span class="text-success">Miễn phí</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>Mã giảm giá <strong>VNSHOP123</strong></span>
-                                            <span class="text-danger">-10.000 đ</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>Thành tiền</span>
-                                            <span>15.600.000 đ</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>+1.500 điểm</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>Dùng điểm <strong>20.000 VNPOINT</strong></span>
-                                            <span class="text-danger">-20.000 đ</span>
-                                        </div>
-                                        <hr>
-                                        <div class="d-flex justify-content-between fw-bold fs-5">
-                                            <span>Cần thanh toán</span>
-                                            <span class="text-danger">1.540.000 đ</span>
-                                        </div>
-                                        <p class="text-end text-muted mb-0">(Đã bao gồm VAT - 6 sản phẩm)</p>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Phí vận chuyển</span>
+                                        <span class="text-success">Miễn phí</span>
                                     </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Mã giảm giá <strong>VNSHOP123</strong></span>
+                                        <span class="text-danger">-10.000 đ</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Thành tiền</span>
+                                        <span>15.600.000 đ</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>+1.500 điểm</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Dùng điểm <strong>20.000 VNPOINT</strong></span>
+                                        <span class="text-danger">-20.000 đ</span>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between fw-bold fs-5">
+                                        <span>Cần thanh toán</span>
+                                        <span class="text-danger">1.540.000 đ</span>
+                                    </div>
+                                    <p class="text-end text-muted mb-0">(Đã bao gồm VAT - 6 sản phẩm)</p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="modal-footer">
-                        <button class="btn btn-outline-secondary">Ghi chú</button>
-                        <button class="btn btn-outline-danger">Hủy đơn</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đóng</button>
-                    </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-secondary">Ghi chú</button>
+                    <button class="btn btn-outline-danger">Hủy đơn</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đóng</button>
                 </div>
             </div>
         </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+
     <script>
         const cards = [...document.querySelectorAll('.product-card')];
         let visible = 12;
