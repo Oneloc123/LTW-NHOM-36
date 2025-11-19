@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
         rel="stylesheet">
-    <link rel="stylesheet" href="../assets/admin-css/admin-blog.css">
+    <link rel="stylesheet" href="../assets/admin-css/admin-product.css">
 
 </head>
 
@@ -21,8 +21,8 @@
             <nav>
                 <ul>
                     <li><a href="admin-dashboard.html"><i class="bi bi-house"></i> Dashboard</a></li>
-                    <li><a href="admin-products.html"><i class="bi bi-box"></i> Sản phẩm</a></li>
-                    <li><a href="admin-orders.html" class="active"><i class="bi bi-cart"></i> Đơn hàng</a></li>
+                    <li><a href="admin-products.html" class="active"><i class="bi bi-box"></i> Sản phẩm</a></li>
+                    <li><a href="admin-orders.html" ><i class="bi bi-cart"></i> Đơn hàng</a></li>
                     <li><a href="admin-payment.html"><i class="bi bi-credit-card"></i> Thanh toán</a></li>
                     <li><a href="admin-users.html"><i class="bi bi-people"></i> Người dùng</a></li>
                     <li><a href="admin-blog.html"><i class="bi bi-journal-text"></i> Blog</a></li>
@@ -95,47 +95,66 @@
                             <tbody id="productTable">
                                 <tr>
                                     <td>1</td>
-                                    <td><img src="https://cdn.tgdd.vn/Products/Images/7264/293446/apple-macbook-pro-14-m3-pro-2023-thumb-600x600.jpg"
+                                    <td><img src="https://mac24h.vn/images/detailed/93/Macbook_Pro_M3_2023_Mac24h.png"
                                             class="product-img" alt="MacBook"></td>
                                     <td>MacBook Pro M3 2023</td>
                                     <td>Laptop</td>
                                     <td>₫48,990,000</td>
                                     <td>15</td>
-                                    <td><span class="badge bg-success">Còn hàng</span></td>
+                                    <td><span class="badge badge-success-soft">Còn hàng</span></td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-warning me-2"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                        <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
+                                        <button class="action-btn action-edit"><i
+                                                class="bi bi-pencil-square"></i></button>
+                                        <button class="action-btn action-delete"><i class="bi bi-trash"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td><img src="https://cdn.tgdd.vn/Products/Images/7077/307146/samsung-galaxy-s24-ultra-titanium-vang-thumb-600x600.jpg"
+                                    <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL2sCsS4Fp8xzLyHlES-RlK7pLhWB19EtCRw&s"
                                             class="product-img" alt="S24"></td>
                                     <td>Samsung Galaxy S24 Ultra</td>
                                     <td>Điện thoại</td>
                                     <td>₫32,990,000</td>
                                     <td>20</td>
-                                    <td><span class="badge bg-success">Còn hàng</span></td>
+                                    <td><span class="badge badge-success-soft">Còn hàng</span></td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-warning me-2"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                        <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
+                                        <button class="action-btn action-edit"><i
+                                                class="bi bi-pencil-square"></i></button>
+                                        <button class="action-btn action-delete"><i class="bi bi-trash"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    <td><img src="https://cdn.tgdd.vn/Products/Images/7162/309553/dong-ho-thong-minh-huawei-watch-fit-3-thumb-1-600x600.jpg"
+                                    <td><img src="https://bizweb.dktcdn.net/100/021/944/products/huawei-watch-fit-3-den-techwearvn.jpg?v=1747740005877"
                                             class="product-img" alt="Watch"></td>
                                     <td>Huawei Watch Fit 3</td>
                                     <td>Đồng hồ</td>
                                     <td>₫3,990,000</td>
                                     <td>45</td>
-                                    <td><span class="badge bg-success">Còn hàng</span></td>
+                                    <td><span class="badge badge-success-soft">Còn hàng</span></td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-warning me-2"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                        <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
+                                        <button class="action-btn action-edit"><i
+                                                class="bi bi-pencil-square"></i></button>
+                                        <button class="action-btn action-delete"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><img src="https://bizweb.dktcdn.net/100/021/944/products/huawei-watch-fit-3-den-techwearvn.jpg?v=1747740005877"
+                                            class="product-img" alt="Watch"></td>
+                                    <td>Huawei Watch Fit 3</td>
+                                    <td>Đồng hồ</td>
+                                    <td>₫3,990,000</td>
+                                    <td>0</td>
+                                    <td><span class="badge badge-danger-soft">Hết hàng</span></td>
+                                    <td class="text-center">
+                                        <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
+                                        <button class="action-btn action-edit"><i
+                                                class="bi bi-pencil-square"></i></button>
+                                        <button class="action-btn action-delete"><i class="bi bi-trash"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
