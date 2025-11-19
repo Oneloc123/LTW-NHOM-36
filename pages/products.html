@@ -56,24 +56,24 @@
           <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
           <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
           <li class="nav-item"><a class="nav-link" href="/pages/order-history.html">Đơn hàng</a></li>
-           <!-- Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Tài khoản 
-                        </a>
-                        <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/pages/profile.html">Thông tin tài khoản</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="../pages/wishList.html">Danh sách sản phẩm yêu thích</a></li>
-                            <li><a class="dropdown-item" href="../pages/notification.html">Xem thông báo</a></li>
-                            <li><a class="dropdown-item" href="../pages/viewed-product.html">Sản phẩm đã xem</a>
-                            </li>
-                           
-                        </ul>
-                    </li>
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Tài khoản
+            </a>
+            <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/pages/profile.html">Thông tin tài khoản</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="../pages/wishList.html">Danh sách sản phẩm yêu thích</a></li>
+              <li><a class="dropdown-item" href="../pages/notification.html">Xem thông báo</a></li>
+              <li><a class="dropdown-item" href="../pages/viewed-product.html">Sản phẩm đã xem</a>
+              </li>
+
+            </ul>
+          </li>
         </ul>
 
         <!-- Login & Cart -->
@@ -89,539 +89,534 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-box">
-      <h1 class="hero-title">Thiết bị AI Mini</h1>
-      <p class="hero-subtitle">Công nghệ tương lai gói gọn trong lòng bàn tay – Nhỏ nhưng đầy sức mạnh.</p>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-box">
+        <h1 class="hero-title">Thiết bị AI Mini</h1>
+        <p class="hero-subtitle">Công nghệ tương lai gói gọn trong lòng bàn tay – Nhỏ nhưng đầy sức mạnh.</p>
+      </div>
+    </section>
+
+    <!-- FILTER BAR -->
+    <section class="filter-bar">
+      <div class="filter-group">
+        <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm sản phẩm, thương hiệu...">
+        <select id="sortSelect">
+          <option value="">Sắp xếp</option>
+          <option value="asc">Giá tăng dần</option>
+          <option value="desc">Giá giảm dần</option>
+          <option value="new">Mới nhất</option>
+        </select>
+    
+        <div class="price-filter">
+          <input type="number" id="minPrice" placeholder="Giá từ">
+          <span>-</span>
+          <input type="number" id="maxPrice" placeholder="đến">
+          
+        </div>
+      </div>
+      <div class="filter-status" aria-live="polite">
+        <span id="resultCount"></span>
+      </div>
+    </section>
+
+
+    <!-- PRODUCT GRID -->
+    <section class="product-grid" id="productGrid">
+      <!-- sản phẩm -->
+      <div class="product-card new" data-price="6490000" data-brand="Nebula">
+        <img src="https://product.hstatic.net/1000069970/product/61m0szmyrzl_bca067e9480843a3b43be72eee4137fe_large.jpg"
+          alt="Nebula Capsule 3">
+        <h3>Robot Elilik</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Hồng</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active"></button>
+          <button class="capacity-btn"></button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+      <div class="product-card" data-price="6490000" data-brand="Nebula">
+        <img
+          src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
+          alt="Nebula Capsule 3">
+        <h3>Humane Ai Pin</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Xám bạc</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active"></button>
+          <button class="capacity-btn"></button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+      <div class="product-card" data-price="6490000" data-brand="Nebula">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqL1WZZrX-QgZG9wgywPYgdSo_DiIcwRfqLg&s"
+          alt="Nebula Capsule 3">
+        <h3>Rabbit R1</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Xám bạc</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active">128 GB</button>
+          <button class="capacity-btn">64 GB</button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+      <div class="product-card" data-price="6490000" data-brand="Nebula">
+        <img
+          src="https://m.media-amazon.com/images/I/612JyzcWVLL.jpg_BO30,255,255,255_UF900,850_SR1910,1000,0,C_QL100_.jpg"
+          alt="Nebula Capsule 3">
+        <h3>ChatGPT Mini Device</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Xám bạc</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active">128 GB</button>
+          <button class="capacity-btn">64 GB</button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+      <div class="product-card" data-price="6490000" data-brand="Nebula">
+        <img src="https://www.droidshop.vn/wp-content/uploads/2022/06/Cac-chuc-nang-tren-mot-kinh-thong-minh.jpg"
+          alt="Nebula Capsule 3">
+        <h3>AI Smart Glasses</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Xám bạc</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active">128 GB</button>
+          <button class="capacity-btn">64 GB</button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+      <div class="product-card" data-price="6490000" data-brand="Nebula">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxpWgCCDeGAZAtp59Sv7u3wB-_TI6RRp0ZIA&s"
+          alt="Nebula Capsule 3">
+        <h3>Dog Robot</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Xám bạc</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active">128 GB</button>
+          <button class="capacity-btn">64 GB</button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+      <div class="product-card" data-price="6490000" data-brand="Nebula">
+        <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
+        <h3>AI Desk Lamp</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Xám bạc</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active">128 GB</button>
+          <button class="capacity-btn">64 GB</button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+      <div class="product-card" data-price="6490000" data-brand="Nebula">
+        <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
+        <h3>AI Desk Lamp</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Xám bạc</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active">128 GB</button>
+          <button class="capacity-btn">64 GB</button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+      <div class="product-card" data-price="6490000" data-brand="Nebula">
+        <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
+        <h3>AI Desk Lamp</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Xám bạc</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active">128 GB</button>
+          <button class="capacity-btn">64 GB</button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+      <div class="product-card" data-price="6490000" data-brand="Nebula">
+        <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
+        <h3>AI Desk Lamp</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Xám bạc</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active">128 GB</button>
+          <button class="capacity-btn">64 GB</button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+      <div class="product-card" data-price="6490000" data-brand="Nebula">
+        <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
+        <h3>AI Desk Lamp</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Xám bạc</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active">128 GB</button>
+          <button class="capacity-btn">64 GB</button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+      <div class="product-card" data-price="6490000" data-brand="Nebula">
+        <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
+        <h3>AI Desk Lamp</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Xám bạc</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active">128 GB</button>
+          <button class="capacity-btn">64 GB</button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+      <div class="product-card" data-price="6490000" data-brand="Nebula">
+        <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
+        <h3>AI Desk Lamp</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Xám bạc</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active">128 GB</button>
+          <button class="capacity-btn">64 GB</button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+      <div class="product-card" data-price="6490000" data-brand="Nebula">
+        <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
+        <h3>AI Desk Lamp</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Xám bạc</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active">128 GB</button>
+          <button class="capacity-btn">64 GB</button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+      <div class="product-card" data-price="6490000" data-brand="Nebula">
+        <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
+        <h3>AI Desk Lamp</h3>
+
+        <div class="product-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+            class="fa fa-star-o"></i>
+          <span>4.5 (12)</span>
+        </div>
+
+        <p style="font-size:14px; color:#444;">Xám bạc</p>
+        <div class="color-options">
+          <div class="color-circle active" style="background:#ccc;"></div>
+          <div class="color-circle" style="background:#222;"></div>
+        </div>
+
+        <div class="capacity-options">
+          <button class="capacity-btn active">128 GB</button>
+          <button class="capacity-btn">64 GB</button>
+        </div>
+
+        <div class="product-price">6.490.000 VND</div>
+        <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+        <div class="card-footer">
+          <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
+        </div>
+      </div>
+
+
+    </section>
+
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-4 mb-2">
+      <nav aria-label="Page navigation">
+        <ul class="pagination pagination-sm">
+          <li class="page-item disabled"><a class="page-link">«</a></li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">»</a></li>
+        </ul>
+      </nav>
     </div>
-  </section>
 
-  <!-- FILTER BAR -->
-  <section class="filter-bar">
-    <div class="filter-group">
-      <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm sản phẩm, thương hiệu...">
-      <select id="sortSelect">
-        <option value="">Sắp xếp</option>
-        <option value="asc">Giá tăng dần</option>
-        <option value="desc">Giá giảm dần</option>
-        <option value="new">Mới nhất</option>
-      </select>
-      <select id="brandSelect">
-        <option value="">Thương hiệu</option>
-        <option value="Nebula">Nebula</option>
-        <option value="Anker">Anker</option>
-        <option value="MiniX">MiniX</option>
-        <option value="AIcube">AIcube</option>
-      </select>
-      <div class="price-filter">
-        <input type="number" id="minPrice" placeholder="Giá từ">
-        <span>-</span>
-        <input type="number" id="maxPrice" placeholder="đến">
-        <button id="filterBtn"><i class="bi bi-funnel"></i> Lọc</button>
+    <!-- CART DRAWER SIMULATION (checkbox hack) -->
+    <input type="checkbox" id="cart-toggle" hidden>
+    <label for="cart-toggle" class="cart-floating" aria-hidden="false" title="Mở giỏ hàng">
+      <span class="cart-count">0</span>
+      🛒
+    </label>
+    <aside class="cart-drawer" aria-label="Giỏ hàng">
+      <div class="cart-header">
+        <h3>Giỏ hàng của bạn</h3>
+        <label for="cart-toggle" class="cart-close" aria-label="Đóng giỏ">✕</label>
       </div>
-    </div>
-    <div class="filter-status" aria-live="polite">
-      <span id="resultCount">Hiển thị tất cả sản phẩm</span>
-    </div>
-  </section>
-
-
-  <!-- PRODUCT GRID -->
-  <section class="product-grid" id="productGrid">
-    <!-- sản phẩm -->
-    <div class="product-card new" data-price="6490000" data-brand="Nebula">
-      <img src="https://product.hstatic.net/1000069970/product/61m0szmyrzl_bca067e9480843a3b43be72eee4137fe_large.jpg"
-        alt="Nebula Capsule 3">
-      <h3>Robot Elilik</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
+      <div class="cart-body">
+        <p class="muted">Giỏ hàng demo (tĩnh). Links "Thêm vào giỏ" trong trang sẽ dẫn tới đây nhưng không
+          update số lượng do không dùng JS.</p>
+        <ul class="cart-items">
+          <li class="cart-item">
+            <img src="https://via.placeholder.com/80x80.png?text=Item" alt="">
+            <div class="cart-info">
+              <strong>Galaxy Mini 1</strong>
+              <span class="muted">1 x 6.490.000₫</span>
+            </div>
+            <div class="cart-actions"><a href="#" class="link-more">Xóa</a></div>
+          </li>
+        </ul>
       </div>
-
-      <p style="font-size:14px; color:#444;">Hồng</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
+      <div class="cart-footer">
+        <div class="cart-total"><span>Tổng</span><strong>6.490.000₫</strong></div>
+        <div class="cart-cta">
+          <a class="btn btn-ghost" href="#">Tiếp tục mua</a>
+          <a class="btn btn-primary" href="#">Thanh toán</a>
+        </div>
       </div>
+    </aside>
 
-      <div class="capacity-options">
-        <button class="capacity-btn active"></button>
-        <button class="capacity-btn"></button>
+    <!-- PROMO BANNER -->
+    <section class="promo-banner premium">
+      <div class="promo-content">
+        <h2>Ưu đãi siêu HOT 🔥</h2>
+        <p>Giảm ngay <strong>20%</strong> cho thiết bị AI Mini đầu tiên của bạn.<br>Chương trình đến hết
+          <b>30/11/2025</b>.
+        </p>
+        <button class="promo-btn ripple"><i class="bi bi-ticket"></i> Nhận ưu đãi</button>
       </div>
+    </section>
 
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-    <div class="product-card" data-price="6490000" data-brand="Nebula">
-      <img
-        src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
-        alt="Nebula Capsule 3">
-      <h3>Humane Ai Pin</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
-      </div>
-
-      <p style="font-size:14px; color:#444;">Xám bạc</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
-      </div>
-
-      <div class="capacity-options">
-        <button class="capacity-btn active"></button>
-        <button class="capacity-btn"></button>
-      </div>
-
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-    <div class="product-card" data-price="6490000" data-brand="Nebula">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqL1WZZrX-QgZG9wgywPYgdSo_DiIcwRfqLg&s"
-        alt="Nebula Capsule 3">
-      <h3>Rabbit R1</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
-      </div>
-
-      <p style="font-size:14px; color:#444;">Xám bạc</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
-      </div>
-
-      <div class="capacity-options">
-        <button class="capacity-btn active">128 GB</button>
-        <button class="capacity-btn">64 GB</button>
-      </div>
-
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-    <div class="product-card" data-price="6490000" data-brand="Nebula">
-      <img
-        src="https://m.media-amazon.com/images/I/612JyzcWVLL.jpg_BO30,255,255,255_UF900,850_SR1910,1000,0,C_QL100_.jpg"
-        alt="Nebula Capsule 3">
-      <h3>ChatGPT Mini Device</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
-      </div>
-
-      <p style="font-size:14px; color:#444;">Xám bạc</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
-      </div>
-
-      <div class="capacity-options">
-        <button class="capacity-btn active">128 GB</button>
-        <button class="capacity-btn">64 GB</button>
-      </div>
-
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-    <div class="product-card" data-price="6490000" data-brand="Nebula">
-      <img src="https://www.droidshop.vn/wp-content/uploads/2022/06/Cac-chuc-nang-tren-mot-kinh-thong-minh.jpg"
-        alt="Nebula Capsule 3">
-      <h3>AI Smart Glasses</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
-      </div>
-
-      <p style="font-size:14px; color:#444;">Xám bạc</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
-      </div>
-
-      <div class="capacity-options">
-        <button class="capacity-btn active">128 GB</button>
-        <button class="capacity-btn">64 GB</button>
-      </div>
-
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-    <div class="product-card" data-price="6490000" data-brand="Nebula">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxpWgCCDeGAZAtp59Sv7u3wB-_TI6RRp0ZIA&s"
-        alt="Nebula Capsule 3">
-      <h3>Dog Robot</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
-      </div>
-
-      <p style="font-size:14px; color:#444;">Xám bạc</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
-      </div>
-
-      <div class="capacity-options">
-        <button class="capacity-btn active">128 GB</button>
-        <button class="capacity-btn">64 GB</button>
-      </div>
-
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-    <div class="product-card" data-price="6490000" data-brand="Nebula">
-      <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
-      <h3>AI Desk Lamp</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
-      </div>
-
-      <p style="font-size:14px; color:#444;">Xám bạc</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
-      </div>
-
-      <div class="capacity-options">
-        <button class="capacity-btn active">128 GB</button>
-        <button class="capacity-btn">64 GB</button>
-      </div>
-
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-    <div class="product-card" data-price="6490000" data-brand="Nebula">
-      <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
-      <h3>AI Desk Lamp</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
-      </div>
-
-      <p style="font-size:14px; color:#444;">Xám bạc</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
-      </div>
-
-      <div class="capacity-options">
-        <button class="capacity-btn active">128 GB</button>
-        <button class="capacity-btn">64 GB</button>
-      </div>
-
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-    <div class="product-card" data-price="6490000" data-brand="Nebula">
-      <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
-      <h3>AI Desk Lamp</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
-      </div>
-
-      <p style="font-size:14px; color:#444;">Xám bạc</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
-      </div>
-
-      <div class="capacity-options">
-        <button class="capacity-btn active">128 GB</button>
-        <button class="capacity-btn">64 GB</button>
-      </div>
-
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-    <div class="product-card" data-price="6490000" data-brand="Nebula">
-      <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
-      <h3>AI Desk Lamp</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
-      </div>
-
-      <p style="font-size:14px; color:#444;">Xám bạc</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
-      </div>
-
-      <div class="capacity-options">
-        <button class="capacity-btn active">128 GB</button>
-        <button class="capacity-btn">64 GB</button>
-      </div>
-
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-    <div class="product-card" data-price="6490000" data-brand="Nebula">
-      <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
-      <h3>AI Desk Lamp</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
-      </div>
-
-      <p style="font-size:14px; color:#444;">Xám bạc</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
-      </div>
-
-      <div class="capacity-options">
-        <button class="capacity-btn active">128 GB</button>
-        <button class="capacity-btn">64 GB</button>
-      </div>
-
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-    <div class="product-card" data-price="6490000" data-brand="Nebula">
-      <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
-      <h3>AI Desk Lamp</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
-      </div>
-
-      <p style="font-size:14px; color:#444;">Xám bạc</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
-      </div>
-
-      <div class="capacity-options">
-        <button class="capacity-btn active">128 GB</button>
-        <button class="capacity-btn">64 GB</button>
-      </div>
-
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-    <div class="product-card" data-price="6490000" data-brand="Nebula">
-      <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
-      <h3>AI Desk Lamp</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
-      </div>
-
-      <p style="font-size:14px; color:#444;">Xám bạc</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
-      </div>
-
-      <div class="capacity-options">
-        <button class="capacity-btn active">128 GB</button>
-        <button class="capacity-btn">64 GB</button>
-      </div>
-
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-    <div class="product-card" data-price="6490000" data-brand="Nebula">
-      <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
-      <h3>AI Desk Lamp</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
-      </div>
-
-      <p style="font-size:14px; color:#444;">Xám bạc</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
-      </div>
-
-      <div class="capacity-options">
-        <button class="capacity-btn active">128 GB</button>
-        <button class="capacity-btn">64 GB</button>
-      </div>
-
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-    <div class="product-card" data-price="6490000" data-brand="Nebula">
-      <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="Nebula Capsule 3">
-      <h3>AI Desk Lamp</h3>
-
-      <div class="product-rating">
-        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-          class="fa fa-star-o"></i>
-        <span>4.5 (12)</span>
-      </div>
-
-      <p style="font-size:14px; color:#444;">Xám bạc</p>
-      <div class="color-options">
-        <div class="color-circle active" style="background:#ccc;"></div>
-        <div class="color-circle" style="background:#222;"></div>
-      </div>
-
-      <div class="capacity-options">
-        <button class="capacity-btn active">128 GB</button>
-        <button class="capacity-btn">64 GB</button>
-      </div>
-
-      <div class="product-price">6.490.000 VND</div>
-      <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-      <div class="card-footer">
-        <button onclick="window.location.href='product-detail.html'" class="buy-btn">Mua</button>
-      </div>
-    </div>
-
-
-  </section>
-
-
-  <!-- Pagination -->
-  <div class="d-flex justify-content-center mt-4 mb-2">
-    <nav aria-label="Page navigation">
-      <ul class="pagination pagination-sm">
-        <li class="page-item disabled"><a class="page-link">«</a></li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">»</a></li>
-      </ul>
-    </nav>
-  </div>
-
-  <!-- CART DRAWER SIMULATION (checkbox hack) -->
-  <input type="checkbox" id="cart-toggle" hidden>
-  <label for="cart-toggle" class="cart-floating" aria-hidden="false" title="Mở giỏ hàng">
-    <span class="cart-count">0</span>
-    🛒
-  </label>
-  <aside class="cart-drawer" aria-label="Giỏ hàng">
-    <div class="cart-header">
-      <h3>Giỏ hàng của bạn</h3>
-      <label for="cart-toggle" class="cart-close" aria-label="Đóng giỏ">✕</label>
-    </div>
-    <div class="cart-body">
-      <p class="muted">Giỏ hàng demo (tĩnh). Links "Thêm vào giỏ" trong trang sẽ dẫn tới đây nhưng không
-        update số lượng do không dùng JS.</p>
-      <ul class="cart-items">
-        <li class="cart-item">
-          <img src="https://via.placeholder.com/80x80.png?text=Item" alt="">
-          <div class="cart-info">
-            <strong>Galaxy Mini 1</strong>
-            <span class="muted">1 x 6.490.000₫</span>
-          </div>
-          <div class="cart-actions"><a href="#" class="link-more">Xóa</a></div>
-        </li>
-      </ul>
-    </div>
-    <div class="cart-footer">
-      <div class="cart-total"><span>Tổng</span><strong>6.490.000₫</strong></div>
-      <div class="cart-cta">
-        <a class="btn btn-ghost" href="#">Tiếp tục mua</a>
-        <a class="btn btn-primary" href="#">Thanh toán</a>
-      </div>
-    </div>
-  </aside>
-
-  <!-- PROMO BANNER -->
-  <section class="promo-banner premium">
-    <div class="promo-content">
-      <h2>Ưu đãi siêu HOT 🔥</h2>
-      <p>Giảm ngay <strong>20%</strong> cho thiết bị AI Mini đầu tiên của bạn.<br>Chương trình đến hết
-        <b>30/11/2025</b>.
-      </p>
-      <button class="promo-btn ripple"><i class="bi bi-ticket"></i> Nhận ưu đãi</button>
-    </div>
-  </section>
-
-
+  </main>
 
   <!-- ================= Footer ================= -->
   <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
