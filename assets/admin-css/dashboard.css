@@ -27,6 +27,7 @@ body {
     list-style: none;
     padding-left: 0;
 }
+
 .sidebar ul {
     list-style: none;
     padding-left: 0;
@@ -49,7 +50,7 @@ body {
 
 /* ===== MAIN AREA ===== */
 .main-content {
-    width: 100%;
+    flex: 1;
 }
 
 /* ===== HEADER ===== */
@@ -128,6 +129,17 @@ body {
     font-size: 13px;
 }
 
-.order-status.success { background: #d1ffd6; color: #0a8f26; }
-.order-status.pending { background: #fff3cd; color: #b08900; }
-.order-status.fail { background: #ffe1e1; color: #d11a1a; }
+.order-status.success {
+    background: #d1ffd6;
+    color: #0a8f26;
+}
+
+.order-status.pending {
+    background: #fff3cd;
+    color: #b08900;
+}
+
+.order-status.fail {
+    background: #ffe1e1;
+    color: #d11a1a;
+}
