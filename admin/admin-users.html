@@ -1,78 +1,171 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Quản lý Người dùng | TechX</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/admin-css/admin-users.css">
+    <link rel="stylesheet" href="../assets/admin-css/style.css">
 </head>
+
 <body>
-<div class="d-flex">
-    <!-- Sidebar -->
-    <aside class="sidebar bg-dark text-white p-3 vh-100" style="width:250px;">
-        <h3 class="text-center mb-4"><i class="bi bi-cpu me-2"></i>TechX Admin</h3>
-        <ul class="nav flex-column">
-            <li class="nav-item"><a href="admin-dashboard.html" class="nav-link text-white"><i class="bi bi-house me-2"></i>Dashboard</a></li>
-            <li class="nav-item"><a href="admin-products.html" class="nav-link text-white"><i class="bi bi-box me-2"></i>Sản phẩm</a></li>
-            <li class="nav-item"><a href="admin-orders.html" class="nav-link text-white"><i class="bi bi-cart me-2"></i>Đơn hàng</a></li>
-            <li class="nav-item"><a href="admin-users.html" class="nav-link active bg-secondary rounded"><i class="bi bi-people me-2"></i>Người dùng</a></li>
-            <li class="nav-item"><a href="admin-blog.html" class="nav-link text-white"><i class="bi bi-journal-text me-2"></i>Blog</a></li>
-            <li class="nav-item"><a href="admin-settings.html" class="nav-link text-white"><i class="bi bi-gear me-2"></i>Cài đặt</a></li>
-        </ul>
-    </aside>
+    <div class="d-flex">
 
-    <!-- Main -->
-    <main class="flex-grow-1 p-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2><i class="bi bi-people-fill me-2"></i>Quản lý người dùng</h2>
-            <button class="btn btn-success"><i class="bi bi-person-plus me-1"></i> Thêm người dùng</button>
-        </div>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2 class="logo"><i class="bi bi-cpu me-2"></i>TechX Admin</h2>
+            <nav>
+                <ul>
+                    <li><a href="admin-dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+                    <li><a href="admin-products.html"><i class="bi bi-box"></i> Sản phẩm</a></li>
+                    <li><a href="admin-orders.html"><i class="bi bi-cart"></i> Đơn hàng</a></li>
+                    <li><a href="admin-payment.html"><i class="bi bi-credit-card"></i> Thanh toán</a></li>
+                    <li><a href="admin-users.html" class="active"><i class="bi bi-people"></i> Người dùng</a></li>
+                    <li><a href="admin-blog.html"><i class="bi bi-journal-text"></i> Blog</a></li>
+                    <li><a href="#"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-        <!-- Bộ lọc -->
-        <section class="filters mb-4">
-            <div class="row g-3">
-                <div class="col-md-3">
-                    <input type="text" class="form-control" placeholder="Tìm theo tên hoặc email...">
+
+        <!-- Main -->
+        <main class="main-content">
+
+            <!-- HEADER -->
+            <header class="header d-flex justify-content-between align-items-center">
+                <h3 class="fw-bold m-0"><i class="bi-people"></i> Người dùng</h3>
+                <div class="actions d-flex align-items-center gap-2">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                        <i class="bi bi-plus-lg"></i> Thêm người dùng
+                    </button>
                 </div>
-                <div class="col-md-3">
-                    <select class="form-select">
-                        <option>Tất cả vai trò</option>
-                        <option>Quản trị viên</option>
-                        <option>Người bán</option>
-                        <option>Khách hàng</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-select">
-                        <option>Tất cả trạng thái</option>
-                        <option>Hoạt động</option>
-                        <option>Bị khóa</option>
-                    </select>
-                </div>
-                <div class="col-md-3 text-end">
-                    <button class="btn btn-primary"><i class="bi bi-funnel me-1"></i>Lọc</button>
-                </div>
+            </header>
+
+            <!-- Search Bar -->
+            <div class="input-group mb-4">
+                <input type="text" class="form-control" id="searchInput" placeholder="Tìm kiếm người dùng theo tên...">
+                <button class="btn btn-outline-secondary"><i class="bi bi-search"></i></button>
             </div>
-        </section>
 
-        <!-- Bảng người dùng -->
-        <section class="user-table">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title mb-3"><i class="bi bi-list-ul me-2"></i>Danh sách người dùng</h5>
-                    <table class="table table-hover align-middle">
-                        <thead class="table-light">
-                        <tr>
-                            <th>#</th>
-                            <th>Tên</th>
-                            <th>Email</th>
-                            <th>Vai trò</th>
-                            <th>Trạng thái</th>
-                            <th>Ngày tạo</th>
-                            <th>Hành động</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <
+            <!-- Bộ lọc -->
+            <section class="filters mb-4">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <select class="form-select">
+                            <option>Tất cả vai trò</option>
+                            <option>Quản trị viên</option>
+                            <option>Người bán</option>
+                            <option>Khách hàng</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select">
+                            <option>Tất cả trạng thái</option>
+                            <option>Hoạt động</option>
+                            <option>Bị khóa</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <button class="btn btn-primary"><i class="bi bi-funnel me-1"></i>Lọc</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bảng người dùng -->
+            <section class="blog-table mt-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tên</th>
+                                    <th>Email</th>
+                                    <th>Vai trò</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Đoàn Ngọc Ánh</td>
+                                    <td>dnagg@gmail.com</td>
+                                    <td>user</td>
+                                    <td> <span class="badge badge-success-soft">Online</span>
+                                    </td>
+                                    <td>02-01-2025</td>
+                                    <td class="">
+                                        <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
+                                        <button class="action-btn action-edit"><i
+                                                class="bi bi-pencil-square"></i></button>
+                                        <button class="action-btn action-delete"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>2</td>
+                                    <td>Đoàn Ngọc B</td>
+                                    <td>dnagg@gmail.com</td>
+                                    <td>user</td>
+                                    <td> <span class="badge badge-danger-soft">Ban</span>
+                                    </td>
+                                    <td>02-01-2025</td>
+                                    <td class="">
+                                        <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
+                                        <button class="action-btn action-edit"><i
+                                                class="bi bi-pencil-square"></i></button>
+                                        <button class="action-btn action-delete"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>3</td>
+                                    <td>Đoàn Ngọc C</td>
+                                    <td>dnagg@gmail.com</td>
+                                    <td>user</td>
+                                    <td> <span class="badge badge-warning-soft">Offline</span>
+                                    </td>
+                                    <td>02-01-2025</td>
+                                    <td class="">
+                                        <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
+                                        <button class="action-btn action-edit"><i
+                                                class="bi bi-pencil-square"></i></button>
+                                        <button class="action-btn action-delete"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-end mt-3">
+                <nav>
+                    <ul class="pagination custom-pagination">
+                        <li class="page-item disabled"><a class="page-link">Trước</a></li>
+                        <li class="page-item active"><a class="page-link">1</a></li>
+                        <li class="page-item"><a class="page-link">2</a></li>
+                        <li class="page-item"><a class="page-link">3</a></li>
+                        <li class="page-item"><a class="page-link">Sau</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+
+
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
