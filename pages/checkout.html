@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thanh toán - TechX</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/footer.css">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/checkout.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+
 </head>
-
-<body class="bg-light">
-
+<body>
 <header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
     <div class="container">
         <!-- Logo -->
@@ -31,7 +31,7 @@
         <!-- Nav links -->
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav align-items-lg-center gap-lg-3">
-                <li class="nav-item"><a class="nav-link active" href="../pages/Home.html">Trang chủ</a></li>
+                <li class="nav-item"><a class="nav-link " href="../pages/Home.html">Trang chủ</a></li>
                 <li class="nav-item"><a class="nav-link" href="../pages/shop.html">Cửa hàng</a></li>
 
                 <!-- Dropdown -->
@@ -41,7 +41,7 @@
                         Sản phẩm
                     </a>
                     <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/pages/products.html">Tất cả sản phẩm</a></li>
+                        <li><a class="dropdown-item" href="../pages/products.html">Tất cả sản phẩm</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="../pages/products.html#mini-tech">Công nghệ mini</a></li>
                         <li><a class="dropdown-item" href="../pages/products.html#ai-device">Thiết bị AI</a></li>
@@ -53,32 +53,15 @@
                 <li class="nav-item"><a class="nav-link" href="../pages/blog.html">Blog</a></li>
                 <li class="nav-item"><a class="nav-link" href="../pages/contact.html">Liên hệ</a></li>
                 <li class="nav-item"><a class="nav-link" href="../pages/order-history.html">Đơn hàng</a></li>
-                 <!-- Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Tài khoản 
-                        </a>
-                        <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/pages/profile.html">Thông tin tài khoản</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="../pages/wishList.html">Danh sách sản phẩm yêu thích</a></li>
-                            <li><a class="dropdown-item" href="../pages/notification.html">Xem thông báo</a></li>
-                            <li><a class="dropdown-item" href="../pages/viewed-product.html">Sản phẩm đã xem</a>
-                            </li>
-                           
-                        </ul>
-                    </li>
+                <li class="nav-item"><a class="nav-link" href="../pages/profile.html">Tài khoản</a></li>
             </ul>
 
             <!-- Login & Cart -->
             <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-                <a href="/pages/login.html" class="btn btn-outline-primary btn-sm d-flex align-items-center">
+                <a href="../pages/login.html" class="btn btn-outline-primary btn-sm d-flex align-items-center">
                     <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
                 </a>
-                <a href="/pages/cart.html" class="btn btn-primary btn-sm d-flex align-items-center">
+                <a href="../pages/cart.html" class="btn btn-primary btn-sm d-flex align-items-center">
                     <i class="bi bi-cart3 me-1"></i> Giỏ hàng
                 </a>
             </div>
@@ -86,115 +69,172 @@
     </div>
 </header>
 
-<main>
-    <div class="checkout-wrapper container my-5">
 
-        <!-- Header -->
-        <div class="checkout-header text-center mb-5">
-            <h1 class="fw-bold text-primary">Thanh Toán Đơn Hàng</h1>
-            <p class="text-muted">Hoàn tất thông tin để nhận hàng nhanh chóng và an toàn.</p>
-        </div>
+<div class="container checkout-container">
+    <div class="row g-4">
+        <!-- LEFT COLUMN -->
+        <div class="col-lg-8">
 
-        <div class="row g-5">
+            <!-- THÔNG TIN NGƯỜI NHẬN -->
+            <div class="checkout-box mb-4">
+                <h4 class="section-title"><i class="bi bi-person-circle me-2"></i>Thông tin người nhận</h4>
 
-            <!-- Left: Customer Info -->
-            <div class="col-lg-7">
-                <div class="card shadow-sm rounded-4 border-0 p-4 bg-white">
-                    <h4 class="fw-semibold mb-4">Thông tin khách hàng</h4>
-                    <form>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Họ và tên</label>
-                            <input type="text" class="form-control form-control-lg" id="name"
-                                   placeholder="Nhập họ tên của bạn">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control form-control-lg" id="email"
-                                   placeholder="Nhập địa chỉ email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Số điện thoại</label>
-                            <input type="tel" class="form-control form-control-lg" id="phone"
-                                   placeholder="Nhập số điện thoại">
-                        </div>
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Địa chỉ giao hàng</label>
-                            <textarea class="form-control form-control-lg" id="address" rows="3"
-                                      placeholder="Nhập địa chỉ cụ thể"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Phương thức thanh toán</label>
-                            <div class="d-flex flex-column gap-2">
-                                <label class="payment-option p-3 border rounded-3 d-flex align-items-center gap-3">
-                                    <input type="radio" name="payment" checked>
-                                    <i class="bi bi-cash-stack fs-4 text-primary"></i>
-                                    <span>Thanh toán khi nhận hàng (COD)</span>
-                                </label>
-                                <label class="payment-option p-3 border rounded-3 d-flex align-items-center gap-3">
-                                    <input type="radio" name="payment">
-                                    <i class="bi bi-bank fs-4 text-primary"></i>
-                                    <span>Chuyển khoản ngân hàng</span>
-                                </label>
-                                <label class="payment-option p-3 border rounded-3 d-flex align-items-center gap-3">
-                                    <input type="radio" name="payment">
-                                    <i class="bi bi-wallet2 fs-4 text-primary"></i>
-                                    <span>Ví MoMo</span>
-                                </label>
-                            </div>
-                        </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Họ và tên</label>
+                        <input type="text" class="form-control" placeholder="Nguyễn Văn A">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Số điện thoại</label>
+                        <input type="text" class="form-control" placeholder="0123 456 789">
+                    </div>
 
-                        <a href="/pages/order-success.html">
-                            <button type="button" class="btn btn-primary w-100 btn-lg mt-3">
-                                <i class="bi bi-credit-card me-2"></i>Xác nhận thanh toán
-                            </button>
-                        </a>
-                    </form>
-                </div>
-            </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Địa chỉ</label>
+                        <input type="text" class="form-control" placeholder="Số nhà, đường, phường/xã, quận/huyện">
+                    </div>
 
-            <!-- Right: Order Summary -->
-            <div class="col-lg-5">
-                <div class="card shadow-sm rounded-4 border-0 p-4 bg-white sticky-top">
-                    <h4 class="fw-semibold mb-4">Tóm tắt đơn hàng</h4>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Máy ảnh Sony A7 III</span>
-                            <strong>20.000.000₫</strong>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Ống kính 50mm f/1.8</span>
-                            <strong>4.500.000₫</strong>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Phí giao hàng</span>
-                            <strong>30.000₫</strong>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center total">
-                            <span class="fw-bold">Tổng cộng</span>
-                            <strong class="fw-bold">24.530.000₫</strong>
-                        </li>
-                    </ul>
-                    <div class="alert alert-info d-flex align-items-center rounded-3">
-                        <i class="bi bi-info-circle-fill me-2"></i> Vui lòng kiểm tra kỹ thông tin trước khi thanh toán.
+                    <div class="col-md-6">
+                        <label class="form-label">Tỉnh/Thành</label>
+                        <select class="form-select">
+                            <option>TP. Hồ Chí Minh</option>
+                            <option>Hà Nội</option>
+                            <option>Đà Nẵng</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Quận/Huyện</label>
+                        <select class="form-select">
+                            <option>Quận 1</option>
+                            <option>Quận 7</option>
+                            <option>Thủ Đức</option>
+                        </select>
                     </div>
                 </div>
             </div>
 
-        </div>
-    </div>
-</main>
+            <!-- PHƯƠNG THỨC NHẬN HÀNG -->
+            <div class="checkout-box mb-4">
+                <h4 class="section-title"><i class="bi bi-truck me-2"></i>Phương thức giao hàng</h4>
+                <select class="form-select">
+                    <option>Giao tiêu chuẩn (Miễn phí)</option>
+                    <option>Giao nhanh trong 2h (+30.000đ)</option>
+                    <option>Nhận tại cửa hàng</option>
+                </select>
+            </div>
 
+            <!-- HÌNH THỨC THANH TOÁN -->
+            <div class="checkout-box mb-4">
+                <h4 class="section-title"><i class="bi bi-credit-card me-2"></i>Hình thức thanh toán</h4>
+                <select class="form-select">
+                    <option>Thanh toán khi nhận hàng (COD)</option>
+                    <option>Chuyển khoản ngân hàng</option>
+                    <option>Ví điện tử (Momo / ZaloPay)</option>
+                    <option>Thẻ tín dụng / Ghi nợ</option>
+                </select>
+            </div>
+
+            <!-- GHI CHÚ -->
+            <div class="checkout-box mb-4">
+                <h4 class="section-title"><i class="bi bi-pencil-square me-2"></i>Ghi chú đơn hàng</h4>
+                <textarea class="form-control" rows="3" placeholder="VD: Giao buổi sáng, gọi trước khi đến..."></textarea>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: ORDER SUMMARY -->
+        <div class="col-lg-4">
+            <div class="summary-box">
+                <h4 class="section-title"><i class="bi bi-receipt me-2"></i>Tổng kết đơn hàng</h4>
+
+                <!-- SP 1 -->
+                <div class="product-item">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="../assets/img/Cart/4urpc.png" alt="">
+                        <div>
+                            <div class="fw-semibold">Sạc 4URPC</div>
+                            <div class="text-muted small">x1</div>
+                        </div>
+                    </div>
+                    <div class="fw-bold highlight">999.000đ</div>
+                </div>
+
+                <!-- SP 2 -->
+                <div class="product-item">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="../assets/img/Cart/ChargeStick.png" alt="">
+                        <div>
+                            <div class="fw-semibold">ChargeStick</div>
+                            <div class="text-muted small">x1</div>
+                        </div>
+                    </div>
+                    <div class="fw-bold highlight">1.290.000đ</div>
+                </div>
+
+                <!-- SP 3 -->
+                <div class="product-item">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="../assets/img/Cart/dônmo.png" alt="">
+                        <div>
+                            <div class="fw-semibold">AquaCam</div>
+                            <div class="text-muted small">x1</div>
+                        </div>
+                    </div>
+                    <div class="fw-bold highlight">3.990.000đ</div>
+                </div>
+
+                <!-- SP 4 -->
+                <div class="product-item">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="../assets/img/Cart/nimo.png" alt="">
+                        <div>
+                            <div class="fw-semibold">Robot Nimo</div>
+                            <div class="text-muted small">x1</div>
+                        </div>
+                    </div>
+                    <div class="fw-bold highlight">8.590.000đ</div>
+                </div>
+
+                <!-- TOTAL -->
+                <div class="d-flex justify-content-between mt-3">
+                    <span class="fw-semibold">Tạm tính:</span>
+                    <span class="highlight">14.869.000đ</span>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                    <span class="fw-semibold">Phí vận chuyển:</span>
+                    <span class="text-success fw-bold">Miễn phí</span>
+                </div>
+
+                <hr>
+
+                <div class="d-flex justify-content-between fs-5 fw-bold mb-3">
+                    <span>Tổng cộng:</span>
+                    <span class="highlight">14.869.000đ</span>
+                </div>
+
+                <button class="btn-checkout"><i class="bi bi-shield-check me-2"></i>Thanh toán ngay</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- ================= Footer ================= -->
 <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
     <div class="container">
         <div class="row gy-4">
+            <!-- Logo + Giới thiệu -->
             <div class="col-md-4">
                 <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
                     <i class="bi bi-camera fs-3 text-primary me-2"></i>
                     <span class="fw-bold fs-5 text-primary">TechX</span>
                 </a>
-                <p class="text-muted">Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo. Chúng tôi mang
-                    đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.</p>
+                <p class="text-muted">
+                    Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
+                    Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
+                </p>
             </div>
+
+            <!-- Danh mục -->
             <div class="col-md-2">
                 <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
                 <ul class="list-unstyled">
@@ -204,6 +244,8 @@
                     <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
                 </ul>
             </div>
+
+            <!-- Hỗ trợ -->
             <div class="col-md-2">
                 <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
                 <ul class="list-unstyled">
@@ -213,6 +255,8 @@
                     <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
                 </ul>
             </div>
+
+            <!-- Liên hệ -->
             <div class="col-md-4">
                 <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
                 <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh</p>
@@ -226,13 +270,13 @@
                 </div>
             </div>
         </div>
+
         <hr class="mt-4 mb-3">
         <div class="text-center small text-muted">
             © 2025 <strong>TechX</strong>. All rights reserved.
         </div>
     </div>
 </footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
