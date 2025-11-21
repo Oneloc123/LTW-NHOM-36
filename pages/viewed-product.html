@@ -110,7 +110,7 @@
 
 <body>
     <!-- ================= Header ================= -->
-    <header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
+    <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
         <div class="container">
             <!-- Logo -->
             <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
@@ -127,7 +127,7 @@
             <!-- Nav links -->
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav align-items-lg-center gap-lg-3">
-                    <li class="nav-item"><a class="nav-link active" href="/index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link  " href="/index.html">Trang chủ</a></li>
                     <li class="nav-item"><a class="nav-link" href="/pages/shop.html">Cửa hàng</a></li>
 
                     <!-- Dropdown -->
@@ -150,23 +150,24 @@
 
                     <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/pages/order-history.html">Đơn hàng</a></li>
-                     <!-- Dropdown -->
+                    <li class="nav-item"><a class="nav-link " href="/pages/order-history.html">Đơn hàng</a></li>
+                    <!-- Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Tài khoản 
+                            Tài khoản
                         </a>
                         <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/pages/profile.html">Thông tin tài khoản</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../pages/wishList.html">Danh sách sản phẩm yêu thích</a></li>
+                            <li><a class="dropdown-item" href="../pages/wishList.html">Danh sách sản phẩm yêu thích</a>
+                            </li>
                             <li><a class="dropdown-item" href="../pages/notification.html">Xem thông báo</a></li>
                             <li><a class="dropdown-item" href="../pages/viewed-product.html">Sản phẩm đã xem</a>
                             </li>
-                           
+
                         </ul>
                     </li>
                 </ul>
@@ -184,269 +185,270 @@
         </div>
     </header>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-box">
-            <h1 class="hero-title">Sản phẩm bạn đã xem gần đây</h1>
-            <p class="hero-subtitle">Dựa trên lịch sử hoạt động của bạn</p>
+    <main class="products-page">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-box">
+                <h1 class="hero-title">Sản phẩm bạn đã xem gần đây</h1>
+                <p class="hero-subtitle">Dựa trên lịch sử hoạt động của bạn</p>
+            </div>
+        </section>
+
+        <!-- FILTER BAR -->
+        <section class="filter-bar">
+            <div class="filter-group">
+                <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm sản phẩm, thương hiệu...">
+                <select id="sortSelect">
+                    <option value="">Sắp xếp</option>
+                    <option value="asc">Giá tăng dần</option>
+                    <option value="desc">Giá giảm dần</option>
+                    <option value="new">Mới nhất</option>
+                </select>
+                <select id="brandSelect">
+                    <option value="">Thương hiệu</option>
+                    <option value="Nebula">Nebula</option>
+                    <option value="Anker">Anker</option>
+                    <option value="MiniX">MiniX</option>
+                    <option value="AIcube">AIcube</option>
+                </select>
+                <div class="price-filter">
+                    <input type="number" id="minPrice" placeholder="Giá từ">
+                    <span>-</span>
+                    <input type="number" id="maxPrice" placeholder="đến">
+                    <button id="filterBtn"><i class="bi bi-funnel"></i> Lọc</button>
+                </div>
+            </div>
+
+            <div class="filter-status" aria-live="polite">
+                <span id="resultCount">Danh sách sản phẩm đã xem</span>
+            </div>
+        </section>
+
+        <!-- PRODUCT GRID -->
+        <section class="product-grid" id="productGrid">
+
+            <!-- ITEM 1 -->
+            <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
+                <img src="https://product.hstatic.net/1000069970/product/61m0szmyrzl_bca067e9480843a3b43be72eee4137fe_large.jpg"
+                    alt="Nebula Capsule 3">
+                <h3>Robot Elilik</h3>
+
+                <div class="product-rating">
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                        class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                    <span>4.5 (12)</span>
+                </div>
+
+                <p style="font-size:14px; color:#444;">Hồng</p>
+                <div class="color-options">
+                    <div class="color-circle active" style="background:#ccc;"></div>
+                    <div class="color-circle" style="background:#222;"></div>
+                </div>
+
+                <div class="capacity-options">
+                    <button class="capacity-btn active"></button>
+                    <button class="capacity-btn"></button>
+                </div>
+
+                <div class="product-price">6.490.000 VND</div>
+                <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+                <div class="card-footer">
+                    <a class="buy-btn" style="text-decoration: none;" href="../pages/product-detail.html">Xem lại sản
+                        phẩm</a>
+                    <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                </div>
+            </div>
+
+            <!-- ITEM 2 -->
+            <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
+                <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
+                    alt="Nebula Capsule 3">
+                <h3>Humane AI Pin</h3>
+
+                <div class="product-rating">
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                        class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                    <span>4.5 (12)</span>
+                </div>
+
+                <p style="font-size:14px; color:#444;">Xám bạc</p>
+
+                <div class="color-options">
+                    <div class="color-circle active" style="background:#ccc;"></div>
+                    <div class="color-circle" style="background:#222;"></div>
+                </div>
+
+                <div class="capacity-options">
+                    <button class="capacity-btn active"></button>
+                    <button class="capacity-btn"></button>
+                </div>
+
+                <div class="product-price">6.490.000 VND</div>
+                <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+                <div class="card-footer">
+                    <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
+                    <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                </div>
+            </div>
+
+            <!-- ITEM 2 -->
+            <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
+                <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
+                    alt="Nebula Capsule 3">
+                <h3>Humane AI Pin</h3>
+
+                <div class="product-rating">
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                        class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                    <span>4.5 (12)</span>
+                </div>
+
+                <p style="font-size:14px; color:#444;">Xám bạc</p>
+
+                <div class="color-options">
+                    <div class="color-circle active" style="background:#ccc;"></div>
+                    <div class="color-circle" style="background:#222;"></div>
+                </div>
+
+                <div class="capacity-options">
+                    <button class="capacity-btn active"></button>
+                    <button class="capacity-btn"></button>
+                </div>
+
+                <div class="product-price">6.490.000 VND</div>
+                <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+                <div class="card-footer">
+                    <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
+                    <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                </div>
+            </div>
+            <!-- ITEM 2 -->
+            <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
+                <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
+                    alt="Nebula Capsule 3">
+                <h3>Humane AI Pin</h3>
+
+                <div class="product-rating">
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                        class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                    <span>4.5 (12)</span>
+                </div>
+
+                <p style="font-size:14px; color:#444;">Xám bạc</p>
+
+                <div class="color-options">
+                    <div class="color-circle active" style="background:#ccc;"></div>
+                    <div class="color-circle" style="background:#222;"></div>
+                </div>
+
+                <div class="capacity-options">
+                    <button class="capacity-btn active"></button>
+                    <button class="capacity-btn"></button>
+                </div>
+
+                <div class="product-price">6.490.000 VND</div>
+                <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+                <div class="card-footer">
+                    <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
+                    <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                </div>
+            </div>
+            <!-- ITEM 2 -->
+            <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
+                <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
+                    alt="Nebula Capsule 3">
+                <h3>Humane AI Pin</h3>
+
+                <div class="product-rating">
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                        class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                    <span>4.5 (12)</span>
+                </div>
+
+                <p style="font-size:14px; color:#444;">Xám bạc</p>
+
+                <div class="color-options">
+                    <div class="color-circle active" style="background:#ccc;"></div>
+                    <div class="color-circle" style="background:#222;"></div>
+                </div>
+
+                <div class="capacity-options">
+                    <button class="capacity-btn active"></button>
+                    <button class="capacity-btn"></button>
+                </div>
+
+                <div class="product-price">6.490.000 VND</div>
+                <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+                <div class="card-footer">
+                    <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
+                    <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                </div>
+            </div>
+            <!-- ITEM 2 -->
+            <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
+                <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
+                    alt="Nebula Capsule 3">
+                <h3>Humane AI Pin</h3>
+
+                <div class="product-rating">
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                        class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                    <span>4.5 (12)</span>
+                </div>
+
+                <p style="font-size:14px; color:#444;">Xám bạc</p>
+
+                <div class="color-options">
+                    <div class="color-circle active" style="background:#ccc;"></div>
+                    <div class="color-circle" style="background:#222;"></div>
+                </div>
+
+                <div class="capacity-options">
+                    <button class="capacity-btn active"></button>
+                    <button class="capacity-btn"></button>
+                </div>
+
+                <div class="product-price">6.490.000 VND</div>
+                <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
+
+                <div class="card-footer">
+                    <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
+                    <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <div class="d-flex justify-content-center mt-4 mb-2">
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-sm">
+                    <li class="page-item disabled"><a class="page-link">«</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">»</a></li>
+                </ul>
+            </nav>
         </div>
-    </section>
 
-    <!-- FILTER BAR -->
-    <section class="filter-bar">
-        <div class="filter-group">
-            <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm sản phẩm, thương hiệu...">
-            <select id="sortSelect">
-                <option value="">Sắp xếp</option>
-                <option value="asc">Giá tăng dần</option>
-                <option value="desc">Giá giảm dần</option>
-                <option value="new">Mới nhất</option>
-            </select>
-            <select id="brandSelect">
-                <option value="">Thương hiệu</option>
-                <option value="Nebula">Nebula</option>
-                <option value="Anker">Anker</option>
-                <option value="MiniX">MiniX</option>
-                <option value="AIcube">AIcube</option>
-            </select>
-            <div class="price-filter">
-                <input type="number" id="minPrice" placeholder="Giá từ">
-                <span>-</span>
-                <input type="number" id="maxPrice" placeholder="đến">
-                <button id="filterBtn"><i class="bi bi-funnel"></i> Lọc</button>
+
+
+        <!-- PROMO BANNER -->
+        <section class="promo-banner premium">
+            <div class="promo-content">
+                <h2>Ưu đãi siêu HOT 🔥</h2>
+                <p>Giảm ngay <strong>20%</strong> cho thiết bị AI Mini đầu tiên của bạn.<br>Chương trình đến hết
+                    <b>30/11/2025</b>.
+                </p>
+                <button class="promo-btn ripple"><i class="bi bi-ticket"></i> Nhận ưu đãi</button>
             </div>
-        </div>
+        </section>
 
-        <div class="filter-status" aria-live="polite">
-            <span id="resultCount">Danh sách sản phẩm đã xem</span>
-        </div>
-    </section>
-
-    <!-- PRODUCT GRID -->
-    <section class="product-grid" id="productGrid">
-
-        <!-- ITEM 1 -->
-        <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
-            <img src="https://product.hstatic.net/1000069970/product/61m0szmyrzl_bca067e9480843a3b43be72eee4137fe_large.jpg"
-                alt="Nebula Capsule 3">
-            <h3>Robot Elilik</h3>
-
-            <div class="product-rating">
-                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                    class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                <span>4.5 (12)</span>
-            </div>
-
-            <p style="font-size:14px; color:#444;">Hồng</p>
-            <div class="color-options">
-                <div class="color-circle active" style="background:#ccc;"></div>
-                <div class="color-circle" style="background:#222;"></div>
-            </div>
-
-            <div class="capacity-options">
-                <button class="capacity-btn active"></button>
-                <button class="capacity-btn"></button>
-            </div>
-
-            <div class="product-price">6.490.000 VND</div>
-            <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-            <div class="card-footer">
-                <a class="buy-btn" style="text-decoration: none;" href="../pages/product-detail.html">Xem lại sản
-                    phẩm</a>
-                <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
-            </div>
-        </div>
-
-        <!-- ITEM 2 -->
-        <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
-            <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
-                alt="Nebula Capsule 3">
-            <h3>Humane AI Pin</h3>
-
-            <div class="product-rating">
-                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                    class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                <span>4.5 (12)</span>
-            </div>
-
-            <p style="font-size:14px; color:#444;">Xám bạc</p>
-
-            <div class="color-options">
-                <div class="color-circle active" style="background:#ccc;"></div>
-                <div class="color-circle" style="background:#222;"></div>
-            </div>
-
-            <div class="capacity-options">
-                <button class="capacity-btn active"></button>
-                <button class="capacity-btn"></button>
-            </div>
-
-            <div class="product-price">6.490.000 VND</div>
-            <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-            <div class="card-footer">
-                <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
-                <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
-            </div>
-        </div>
-
-        <!-- ITEM 2 -->
-        <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
-            <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
-                alt="Nebula Capsule 3">
-            <h3>Humane AI Pin</h3>
-
-            <div class="product-rating">
-                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                    class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                <span>4.5 (12)</span>
-            </div>
-
-            <p style="font-size:14px; color:#444;">Xám bạc</p>
-
-            <div class="color-options">
-                <div class="color-circle active" style="background:#ccc;"></div>
-                <div class="color-circle" style="background:#222;"></div>
-            </div>
-
-            <div class="capacity-options">
-                <button class="capacity-btn active"></button>
-                <button class="capacity-btn"></button>
-            </div>
-
-            <div class="product-price">6.490.000 VND</div>
-            <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-            <div class="card-footer">
-                <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
-                <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
-            </div>
-        </div>
-        <!-- ITEM 2 -->
-        <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
-            <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
-                alt="Nebula Capsule 3">
-            <h3>Humane AI Pin</h3>
-
-            <div class="product-rating">
-                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                    class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                <span>4.5 (12)</span>
-            </div>
-
-            <p style="font-size:14px; color:#444;">Xám bạc</p>
-
-            <div class="color-options">
-                <div class="color-circle active" style="background:#ccc;"></div>
-                <div class="color-circle" style="background:#222;"></div>
-            </div>
-
-            <div class="capacity-options">
-                <button class="capacity-btn active"></button>
-                <button class="capacity-btn"></button>
-            </div>
-
-            <div class="product-price">6.490.000 VND</div>
-            <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-            <div class="card-footer">
-                <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
-                <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
-            </div>
-        </div>
-        <!-- ITEM 2 -->
-        <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
-            <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
-                alt="Nebula Capsule 3">
-            <h3>Humane AI Pin</h3>
-
-            <div class="product-rating">
-                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                    class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                <span>4.5 (12)</span>
-            </div>
-
-            <p style="font-size:14px; color:#444;">Xám bạc</p>
-
-            <div class="color-options">
-                <div class="color-circle active" style="background:#ccc;"></div>
-                <div class="color-circle" style="background:#222;"></div>
-            </div>
-
-            <div class="capacity-options">
-                <button class="capacity-btn active"></button>
-                <button class="capacity-btn"></button>
-            </div>
-
-            <div class="product-price">6.490.000 VND</div>
-            <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-            <div class="card-footer">
-                <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
-                <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
-            </div>
-        </div>
-        <!-- ITEM 2 -->
-        <div class="product-card viewed" data-price="6490000" data-brand="Nebula">
-            <img src="https://static01.nyt.com/images/2024/04/11/multimedia/11TECHFIX-promo-jcpg/11TECHFIX-promo-jcpg-master1050.jpg"
-                alt="Nebula Capsule 3">
-            <h3>Humane AI Pin</h3>
-
-            <div class="product-rating">
-                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                    class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                <span>4.5 (12)</span>
-            </div>
-
-            <p style="font-size:14px; color:#444;">Xám bạc</p>
-
-            <div class="color-options">
-                <div class="color-circle active" style="background:#ccc;"></div>
-                <div class="color-circle" style="background:#222;"></div>
-            </div>
-
-            <div class="capacity-options">
-                <button class="capacity-btn active"></button>
-                <button class="capacity-btn"></button>
-            </div>
-
-            <div class="product-price">6.490.000 VND</div>
-            <p class="product-discount">Giá gốc <span class="product-old-price">6.990.000 VND</span></p>
-
-            <div class="card-footer">
-                <a class="buy-btn" href="../pages/product-detail.html">Xem lại sản phẩm</a>
-                <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <div class="d-flex justify-content-center mt-4 mb-2">
-    <nav aria-label="Page navigation">
-      <ul class="pagination pagination-sm">
-        <li class="page-item disabled"><a class="page-link">«</a></li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">»</a></li>
-      </ul>
-    </nav>
-  </div>
-
-
-
-    <!-- PROMO BANNER -->
-    <section class="promo-banner premium">
-        <div class="promo-content">
-            <h2>Ưu đãi siêu HOT 🔥</h2>
-            <p>Giảm ngay <strong>20%</strong> cho thiết bị AI Mini đầu tiên của bạn.<br>Chương trình đến hết
-                <b>30/11/2025</b>.
-            </p>
-            <button class="promo-btn ripple"><i class="bi bi-ticket"></i> Nhận ưu đãi</button>
-        </div>
-    </section>
-
-
+    </main>
 
     <!-- ================= Footer ================= -->
     <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
