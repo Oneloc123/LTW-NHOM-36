@@ -1,497 +1,735 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>order-history</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/header.css">
-    <link rel="stylesheet" href="../assets/css/footer.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #e8f0ff, #f6faff);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order-History</title>
+  <link rel="stylesheet" href="../assets/css/products.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/header.css">
+  <link rel="stylesheet" href="../assets/css/footer.css">
+  <style>
+    
+    /* MODAL TECHX NEW STYLE */
+#orderDetailModal .modal-content {
+  border-radius: 18px;
+  border: none;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+}
 
-        main .container {
-            justify-content: center;
-            width: 2000px;
-            margin-top: 50px;
-        }
+#orderDetailModal .modal-header {
+  background: #eef4ff;
+  border-bottom: 1px solid #d6e2ff;
+}
 
-        .summary-card {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            padding: 5px;
-        }
+#orderDetailModal .modal-title {
+  font-weight: 700;
+  color: #0d6efd;
+}
 
-        .Card1 {
-            width: 950px;
-        }
+.order-info-card,
+.receiver-card,
+.payment-summary-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px;
+  border: 1px solid #eef0f5;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.table-product {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+}
+
+.table-product thead {
+  background: #f0f4ff;
+  font-weight: 600;
+}
+
+.table-product tr:hover {
+  background: #f6f9ff;
+}
+
+.payment-summary-card span {
+  font-size: 15px;
+}
+
+.payment-summary-card .total {
+  font-size: 20px;
+  font-weight: 700;
+  color: #dc3545;
+}
 
 
-        .btn {
-            margin: 5px;
-        }
+    .order-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid #eee;
+    }
 
-        .form1 {
-            width: 100px;
-        }
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
 
-        .bi {
-            margin-right: 10px;
-        }
+    .order-code {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0d6efd;
+    }
 
-        .form1 {
-            border-radius: 20px;
-            width: 242px;
-        }
+    .order-status {
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
 
-        select {
-            padding: 5px;
-            border-radius: 20px;
-            border-color: #aabcdf;
-            margin-right: 8px;
-        }
+    .status-delivered {
+      background: #d1f5d3;
+      color: #2f9e44;
+    }
 
-        .item th {
-            color: #7a7676;
-        }
+    .status-shipping {
+      background: #fff3bf;
+      color: #e67700;
+    }
 
-        .row1 {
-            display: flex;
-            justify-content: center;
-            width: 1200px;
-        }
+    .status-canceled {
+      background: #ffe3e3;
+      color: #c92a2a;
+    }
 
-        .item {
-            height: 80px;
-        }
+    .order-products img {
+      width: 65px;
+      height: 65px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
 
-        table .btn {
-            margin-top: -2px;
-        }
-    </style>
+    .order-total {
+      font-size: 18px;
+      font-weight: bold;
+      color: #dc3545;
+      text-align: right;
+    }
+
+    .order-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .order-footer a {
+      text-decoration: none;
+    }
+  </style>
 </head>
 
 <body>
-    <!-- ================= Header ================= -->
-    <header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
-        <div class="container">
-            <!-- Logo -->
-            <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
-                <i class="bi bi-camera fs-4 me-2"></i>
-                <span>TechX</span>
+  <!-- ================= Header ================= -->
+  <header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
+        <i class="bi bi-camera fs-4 me-2"></i>
+        <span>TechX</span>
+      </a>
+
+      <!-- Toggle (mobile) -->
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list fs-2 text-primary"></i>
+      </button>
+
+      <!-- Nav links -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-lg-center gap-lg-3">
+          <li class="nav-item"><a class="nav-link active" href="/index.html">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pages/shop.html">Cửa hàng</a></li>
+
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Sản phẩm
             </a>
+            <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/pages/products.html">Tất cả sản phẩm</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/pages/products.html#mini-tech">Công nghệ mini</a></li>
+              <li><a class="dropdown-item" href="/pages/products.html#ai-device">Thiết bị AI</a></li>
+              <li><a class="dropdown-item" href="/pages/products.html#creative">Phụ kiện sáng tạo</a></li>
+              <li><a class="dropdown-item" href="/pages/products.html#fun-tech">Đồ chơi công nghệ</a></li>
+            </ul>
+          </li>
 
-            <!-- Toggle (mobile) -->
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="bi bi-list fs-2 text-primary"></i>
-            </button>
-
-            <!-- Nav links -->
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-lg-center gap-lg-3">
-                    <li class="nav-item"><a class="nav-link active" href="/index.html">Trang chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/pages/shop.html">Cửa hàng</a></li>
-
-                    <!-- Dropdown -->
+          <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pages/order-history.html">Đơn hàng</a></li>
+           <!-- Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Sản phẩm
+                            Tài khoản 
                         </a>
                         <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/pages/products.html">Tất cả sản phẩm</a></li>
+                            <li><a class="dropdown-item" href="/pages/profile.html">Thông tin tài khoản</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="/pages/products.html#mini-tech">Công nghệ mini</a></li>
-                            <li><a class="dropdown-item" href="/pages/products.html#ai-device">Thiết bị AI</a></li>
-                            <li><a class="dropdown-item" href="/pages/products.html#creative">Phụ kiện sáng tạo</a></li>
-                            <li><a class="dropdown-item" href="/pages/products.html#fun-tech">Đồ chơi công nghệ</a></li>
+                            <li><a class="dropdown-item" href="../pages/wishList.html">Danh sách sản phẩm yêu thích</a></li>
+                            <li><a class="dropdown-item" href="../pages/notification.html">Xem thông báo</a></li>
+                            <li><a class="dropdown-item" href="../pages/viewed-product.html">Sản phẩm đã xem</a>
+                            </li>
+                           
                         </ul>
                     </li>
+        </ul>
 
-                    <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/pages/order-history.html">Đơn hàng</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/pages/profile.html">Tài khoản</a></li>
-                </ul>
-
-                <!-- Login & Cart -->
-                <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-                    <a href="/pages/login.html" class="btn btn-outline-primary btn-sm d-flex align-items-center">
-                        <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
-                    </a>
-                    <a href="/pages/cart.html" class="btn btn-primary btn-sm d-flex align-items-center">
-                        <i class="bi bi-cart3 me-1"></i> Giỏ hàng
-                    </a>
-                </div>
-            </div>
+        <!-- Login & Cart -->
+        <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
+          <a href="/pages/login.html" class="btn btn-outline-primary btn-sm d-flex align-items-center">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
+          </a>
+          <a href="/pages/cart.html" class="btn btn-primary btn-sm d-flex align-items-center">
+            <i class="bi bi-cart3 me-1"></i> Giỏ hàng
+          </a>
         </div>
-    </header>
-    <main>
-        <div class="container">
-            <h2 class="text-center text-primary mb-2"><i class="bi bi-box-seam"></i>Danh sách đơn hàng</h2>
-            <p class="text-center text-muted mb-4">Xem lại các đơn hàng mà bạn đã giao dịch </p>
-            <div class="row">
-                <div class="row2 col-8 g-4">
-                    <!-- Danh sách đơn hàng -->
-                    <div>
-                        <div class="card p-4">
-                            <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-box-seam"></i>Danh sách các đơn hàng
-                                mà bạn đã giao dịch</h5>
-                            <div class="filters row ">
-                                <select id="statusFilter" class=" mb-3 col-2 " aria-label="Lọc theo trạng thái">
-                                    <option value="all">Tất cả trạng thái</option>
-                                    <option value="processing">Đang xử lý</option>
-                                    <option value="shipping">Đang giao</option>
-                                    <option value="delivered">Đã giao</option>
-                                    <option value="canceled">Đã hủy</option>
-                                </select>
+      </div>
+    </div>
+  </header>
 
-                                <select id="sortBy" aria-label="Sắp xếp" class=" mb-3 col-3">
-                                    <option value="newest">Ngày: Mới nhất</option>
-                                    <option value="oldest">Ngày: Cũ nhất</option>
-                                    <option value="amount-desc">Tổng tiền: Cao → Thấp</option>
-                                    <option value="amount-asc">Tổng tiền: Thấp → Cao</option>
-                                </select>
-                                <input style="height: 35px; border-radius: 20px;" type="search"
-                                    class="col form-control " id="searchInput"
-                                    placeholder="Tìm kiếm mã đơn / địa chỉ / sản phẩm...">
-                                <a class="btn btn-white btn-outline-primary border -primary col-2"
-                                    style="max-height: 35px; padding-top: 5px; margin-top: 0px;"><i
-                                        class="bi bi-search"></i>tìm kiếm</a>
-                            </div>
-                            <table class="table table-hover">
-                                <tr class="table-light">
-                                    <th>Mã đơn</th>
-                                    <th>Ngày đặt</th>
-                                    <th>Tổng tiền</th>
-                                    <th>Trạng thái</th>
-                                    <th>Hành động</th>
-                                </tr>
-                                <tr class="item">
-                                    <th class="idOrder" style="color: #007bff;">DH-20251103-078</th>
-                                    <th>2025-11-03</th>
-                                    <th>2.210.000 ₫</th>
-                                    <th class="text-warning">Đang xử lý</th>
-                                    <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem
-                                            chi
-                                            tiết</a></th>
-                                </tr>
-                                <tr class="item">
-                                    <th class="idOrder" style="color: #007bff;">DH-20251103-079</th>
-                                    <th>2025-11-15</th>
-                                    <th>220.000 ₫</th>
-                                    <th>Đang giao</th>
-                                    <th> <a class="btn btn-primary bi" data-bs-toggle="modal"
-                                            data-bs-target="#modal">Xem
-                                            chi tiết</a></th>
-                                </tr>
-                                <tr class="item">
-                                    <th class="idOrder" style="color: #007bff;">DH-20251103-080</th>
-                                    <th>2025-11-30</th>
-                                    <th>1.000.000 ₫</th>
-                                    <th class="text-success">Đã giao</th>
-                                    <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem
-                                            chi
-                                            tiết</a></th>
-                                </tr>
-                                <tr class="item">
-                                    <th class="idOrder" style="color: #007bff;">DH-20251103-081</th>
-                                    <th>2025-12-15</th>
-                                    <th>220.000 ₫</th>
-                                    <th class="text-danger">Đã huỷ</th>
-                                    <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem
-                                            chi
-                                            tiết</a></th>
-                                </tr>
-                                <tr class="item">
-                                    <th class="idOrder" style="color: #007bff;">DH-20251103-080</th>
-                                    <th>2025-11-30</th>
-                                    <th>1.000.000 ₫</th>
-                                    <th class="text-success">Đã giao</th>
-                                    <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem
-                                            chi
-                                            tiết</a></th>
-                                </tr>
-                                <tr class="item">
-                                    <th class="idOrder" style="color: #007bff;">DH-20251103-079</th>
-                                    <th>2025-11-15</th>
-                                    <th>220.000 ₫</th>
-                                    <th>Đang giao</th>
-                                    <th> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Xem
-                                            chi
-                                            tiết</a></th>
-                                </tr>
-                            </table>
-                            <!-- Pagination (HTML-only) -->
-                <div class="d-flex justify-content-center mt-4 mb-2">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination pagination-sm">
-                            <li class="page-item disabled"><a class="page-link">«</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">»</a></li>
-                        </ul>
-                    </nav>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-box">
+      <h1 class="hero-title">Danh sách đơn hàng</h1>
+      <p class="hero-subtitle">Xem lại toàn bộ các đơn hàng bạn đã đặt tại TechX</p>
+    </div>
+  </section>
+
+  <!-- FILTER BAR -->
+  <section class="filter-bar">
+    <div class="filter-group">
+      <input type="text" id="searchInput" placeholder="🔍 Tìm mã đơn, tên sản phẩm...">
+
+      <select id="statusFilter">
+        <option value="">Trạng thái</option>
+        <option value="delivered">Đã giao</option>
+        <option value="shipping">Đang giao</option>
+        <option value="canceled">Đã hủy</option>
+      </select>
+
+      <input type="date" id="dateFilter">
+
+      <button id="filterBtn"><i class="bi bi-funnel"></i> Lọc</button>
+    </div>
+
+    <div class="filter-status" aria-live="polite">
+      <span id="resultCount">Hiển thị tất cả đơn hàng</span>
+    </div>
+  </section>
+  <!-- ORDER LIST -->
+  <section class="container mt-4" id="orderList">
+    <div class="row " style="gap:20px">
+      <!-- Example Order 1 -->
+      <div class="order-card col" data-status="delivered" data-code="TX987654">
+        <div class="order-header">
+          <div>
+            <div class="order-code">Mã đơn: TX987654</div>
+            <small class="text-muted">Ngày đặt: 14/10/2025 – 14:32</small>
+          </div>
+          <div class="order-status status-delivered">Đã giao</div>
+        </div>
+        <div class="row order-products mb-3" style="gap: 10px;">
+          <div class="row">
+            <div class="col-9">
+              <div class=" d-flex gap-3">
+                <img src="https://m.media-amazon.com/images/I/612JyzcWVLL.jpg" alt="">
+                <div>
+                  <h6 class="mb-1">ChatGPT Mini Device</h6>
+                  <p class="text-muted small">Số lượng: 1</p>
                 </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row2 col-4 g-4">
-                    <!-- Danh sách đơn hàng -->
-                    <div class="">
-                        <div class="row card p-4">
-                            <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-bar-chart"></i>Thông tin chung về các
-                                đơn hàng của bạn</h5>
-                            <hr>
-                            <h6 class="fw-bold mb-3">Thống kê trạng thái đơn hàng</h6>
-                            <ol class="list-unstyled text-muted">
-                                <li class="mb-2 text-success">Tổng đơn đã giao: 2</li>
-                                <li class="mb-2 text-warning">Tổng đơn đang xử lý: 1</li>
-                                <li class="mb-2">Tổng đơn đang giao: 2</li>
-                                <li class="mb-2 text-danger">Tổng đơn đã huỷ: 2</li>
-                            </ol>
-                            <hr>
-                            <h6 class="fw-bold mb-3">Thống kê khác</h6>
-                            <ol class="list-unstyled text-muted">
-                                <li class="mb-2 ">Tổng số tiền đã giao dịch: 3.540.000Đ</li>
-                                <li class="mb-2 ">Sản phẩm mua nhiều nhất: tivi đèn led</li>
-                                <li class="mb-2 ">Sản phẩm đã giao dịch có giá trị cao nhất: i-phone 21</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
+            <div class="col-3">
+              <div class="product-price">6.490.000 VND</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-9">
+              <div class=" d-flex gap-3">
+                <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="">
+                <div>
+                  <h6 class="mb-1">AI Desk Lamp</h6>
+                  <p class="text-muted small">Số lượng: 2</p>
+                </div>  
+              </div>              
+            </div>
+            <div class="product-price col-3">6.490.000 VND</div>
+          </div>
 
         </div>
-        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="orderDetailLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title fw-bold text-primary" id="orderDetailLabel">Chi tiết đơn hàng</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-                    </div>
 
-                    <div class="modal-body row" style="background: linear-gradient(135deg, #e8f0ff, #f6faff);">
-                        <div class="col-8">
-                            <!-- Thông tin chung -->
-                            <div class="row d-flex justify-content-between mb-0">
-                                <div class="summary-card border rounded p-3">
-                                    <h5 class="fw-bold mb-3 text-primary">Đơn hàng: 0223434555</h5>
-                                    <hr>
-                                    <ol class="list-unstyled text-muted">
-                                        <li class="mb-2">02/01/2022-23:51 | NV tư vấn: Nguyễn Văn A -
-                                            @nguyenvana@example.com</li>
-
-                                    </ol>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <!-- Khách hàng & Người nhận -->
-                                <div class="row g-2 mb-3">
-                                    <div class="col-md-6">
-                                        <div class="summary-card border rounded p-3">
-                                            <h5 class="fw-bold mb-3 text-primary">Khách hàng</h5>
-                                            <hr>
-                                            <p class="fw-bold mb-3"> Nguyễn Văn B</p>
-                                            <ol class="list-unstyled text-muted">
-                                                <li class="mb-2">0826452949</li>
-                                                <li class="mb-2">số 11, Phường Linh Trung, Thủ Đức, Tp.Hồ Chí Minh</li>
-
-                                            </ol>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="summary-card border rounded p-3">
-                                            <h5 class="fw-bold mb-3 text-primary">Người nhận</h5>
-                                            <hr>
-                                            <p class="fw-bold mb-3"> Nguyễn Văn B</p>
-                                            <ol class="list-unstyled text-muted">
-                                                <li class="mb-2">0826452949</li>
-                                                <li class="mb-2">số 11, Phường Linh Trung, Thủ Đức, Tp.Hồ Chí Minh</li>
-                                            </ol>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Danh sách sản phẩm -->
-                                <table class="table border rounded p-3 table-hover">
-                                    <tr class="">
-                                        <th>Tên sản phẩm</th>
-                                        <th>Số lượng</th>
-                                        <th>Đơn giá</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Hành động</th>
-                                    </tr>
-                                    <tr class="item">
-                                        <th>máy hút bụi mini</th>
-                                        <th>1</th>
-                                        <th>200.000Đ</th>
-                                        <th>200.000Đ</th>
-                                        <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
-                                                phẩm</a></th>
-                                    </tr>
-                                    <tr class="item">
-                                        <th>máy hút bụi mini</th>
-                                        <th>1</th>
-                                        <th>200.000Đ</th>
-                                        <th>200.000Đ</th>
-                                        <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
-                                                phẩm</a></th>
-                                    </tr>
-                                    <tr class="item">
-                                        <th>máy hút bụi mini</th>
-                                        <th>1</th>
-                                        <th>200.000Đ</th>
-                                        <th>200.000Đ</th>
-                                        <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
-                                                phẩm</a></th>
-                                    </tr>
-                                    <tr class="item">
-                                        <th>máy hút bụi mini</th>
-                                        <th>1</th>
-                                        <th>200.000Đ</th>
-                                        <th>200.000Đ</th>
-                                        <th><a href="product-detail.html" class="btn btn-outline-primary">xem sản
-                                                phẩm</a></th>
-                                    </tr>
-                                </table>
-                            </div>
-
-                        </div>
-                        <!-- Phương thức thanh toán -->
-                        <div class="col-4 mt-4">
-                            <div class="col">
-                                <div class="card">
-                                    <div class="border rounded p-3">
-                                        <h6 class="fw-bold mb-3 text-primary">PHƯƠNG THỨC THANH TOÁN</h6>
-                                        <div class="d-flex justify-content-between">
-                                            <span>Tiền mặt</span>
-                                            <span>10.000.000 đ</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>VnpayQR</span>
-                                            <span>6.000.000 đ</span>
-                                        </div>
-                                        <hr>
-                                        <div class="d-flex justify-content-between">
-                                            <span>Tạm tính</span>
-                                            <span>16.000.000 đ</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between text-danger">
-                                            <span>Khuyến mãi</span>
-                                            <span>-30.000 đ</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>Phí vận chuyển</span>
-                                            <span class="text-success">Miễn phí</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>Mã giảm giá <strong>VNSHOP123</strong></span>
-                                            <span class="text-danger">-10.000 đ</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>Thành tiền</span>
-                                            <span>15.600.000 đ</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>+1.500 điểm</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>Dùng điểm <strong>20.000 VNPOINT</strong></span>
-                                            <span class="text-danger">-20.000 đ</span>
-                                        </div>
-                                        <hr>
-                                        <div class="d-flex justify-content-between fw-bold fs-5">
-                                            <span>Cần thanh toán</span>
-                                            <span class="text-danger">1.540.000 đ</span>
-                                        </div>
-                                        <p class="text-end text-muted mb-0">(Đã bao gồm VAT - 6 sản phẩm)</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button class="btn btn-outline-secondary">Ghi chú</button>
-                        <button class="btn btn-outline-primary">Sửa đơn</button>
-                        <button class="btn btn-outline-danger">Hủy đơn</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đóng</button>
-                    </div>
-                </div>
-            </div>
+        <div class="order-footer">
+          <div class="order-total">Tổng cộng: 12.480.000đ</div>
+          <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal">Xem chi tiết</a>
         </div>
-    </main>
-    <!-- ================= Footer ================= -->
-    <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
-        <div class="container">
-            <div class="row gy-4">
-                <!-- Logo + Giới thiệu -->
-                <div class="col-md-4">
-                    <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
-                        <i class="bi bi-camera fs-3 text-primary me-2"></i>
-                        <span class="fw-bold fs-5 text-primary">TechX</span>
-                    </a>
-                    <p class="text-muted">
-                        Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
-                        Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
-                    </p>
-                </div>
+      </div>
 
-                <!-- Danh mục -->
-                <div class="col-md-2">
-                    <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
-                        <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
-                        <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
-                        <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
-                    </ul>
-                </div>
-
-                <!-- Hỗ trợ -->
-                <div class="col-md-2">
-                    <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-                        <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
-                        <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
-                        <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
-                    </ul>
-                </div>
-
-                <!-- Liên hệ -->
-                <div class="col-md-4">
-                    <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
-                    <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí
-                        Minh
-                    </p>
-                    <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
-                    <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
-                    <div class="mt-3">
-                        <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
-                        <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="mt-4 mb-3">
-            <div class="text-center small text-muted">
-                © 2025 <strong>TechX</strong>. All rights reserved.
-            </div>
+      <!-- Example Order 2 -->
+      <div class="order-card col" data-status="shipping" data-code="TX112233">
+        <div class="order-header">
+          <div>
+            <div class="order-code">Mã đơn: TX112233</div>
+            <small class="text-muted">Ngày đặt: 10/10/2025 – 09:10</small>
+          </div>
+          <div class="order-status status-shipping">Đang giao</div>
         </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <div class="order-products row mb-3">
+
+          <div class="col-9 d-flex gap-3">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqL1WZZrX-QgZG9wgywPYgdSo_DiIcwRfqLg&s">
+            <div>
+              <h6 class="mb-1">Rabbit R1</h6>
+              <p class="text-muted small">Số lượng: 1</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="product-price">6.490.000 VND</div>
+          </div>
+        </div>
+
+        <div class="order-footer" style="position: relative; top: 65px;">
+          <div class="order-total">Tổng cộng: 6.490.000đ</div>
+          <a href="#" class="btn btn-primary btn-sm">Xem chi tiết</a>
+        </div>
+      </div>
+    </div>
+<div class="row " style="gap:20px">
+      <!-- Example Order 1 -->
+      <div class="order-card col" data-status="delivered" data-code="TX987654">
+        <div class="order-header">
+          <div>
+            <div class="order-code">Mã đơn: TX987654</div>
+            <small class="text-muted">Ngày đặt: 14/10/2025 – 14:32</small>
+          </div>
+          <div class="order-status status-delivered">Đã giao</div>
+        </div>
+        <div class="row order-products mb-3" style="gap: 10px;">
+          <div class="row">
+            <div class="col-9">
+              <div class=" d-flex gap-3">
+                <img src="https://m.media-amazon.com/images/I/612JyzcWVLL.jpg" alt="">
+                <div>
+                  <h6 class="mb-1">ChatGPT Mini Device</h6>
+                  <p class="text-muted small">Số lượng: 1</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="product-price">6.490.000 VND</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-9">
+              <div class=" d-flex gap-3">
+                <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="">
+                <div>
+                  <h6 class="mb-1">AI Desk Lamp</h6>
+                  <p class="text-muted small">Số lượng: 2</p>
+                </div>  
+              </div>              
+            </div>
+            <div class="product-price col-3">6.490.000 VND</div>
+          </div>
+
+        </div>
+
+        <div class="order-footer">
+          <div class="order-total">Tổng cộng: 12.480.000đ</div>
+          <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal">Xem chi tiết</a>
+        </div>
+      </div>
+
+      <!-- Example Order 2 -->
+      <div class="order-card col" data-status="shipping" data-code="TX112233">
+        <div class="order-header">
+          <div>
+            <div class="order-code">Mã đơn: TX112233</div>
+            <small class="text-muted">Ngày đặt: 10/10/2025 – 09:10</small>
+          </div>
+          <div class="order-status status-shipping">Đang giao</div>
+        </div>
+        <div class="order-products row mb-3">
+
+          <div class="col-9 d-flex gap-3">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqL1WZZrX-QgZG9wgywPYgdSo_DiIcwRfqLg&s">
+            <div>
+              <h6 class="mb-1">Rabbit R1</h6>
+              <p class="text-muted small">Số lượng: 1</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="product-price">6.490.000 VND</div>
+          </div>
+        </div>
+
+        <div class="order-footer" style="position: relative; top: 65px;">
+          <div class="order-total">Tổng cộng: 6.490.000đ</div>
+          <a href="#" class="btn btn-primary btn-sm">Xem chi tiết</a>
+        </div>
+      </div>
+    </div>
+<div class="row " style="gap:20px">
+      <!-- Example Order 1 -->
+      <div class="order-card col" data-status="delivered" data-code="TX987654">
+        <div class="order-header">
+          <div>
+            <div class="order-code">Mã đơn: TX987654</div>
+            <small class="text-muted">Ngày đặt: 14/10/2025 – 14:32</small>
+          </div>
+          <div class="order-status status-delivered">Đã giao</div>
+        </div>
+        <div class="row order-products mb-3" style="gap: 10px;">
+          <div class="row">
+            <div class="col-9">
+              <div class=" d-flex gap-3">
+                <img src="https://m.media-amazon.com/images/I/612JyzcWVLL.jpg" alt="">
+                <div>
+                  <h6 class="mb-1">ChatGPT Mini Device</h6>
+                  <p class="text-muted small">Số lượng: 1</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="product-price">6.490.000 VND</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-9">
+              <div class=" d-flex gap-3">
+                <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="">
+                <div>
+                  <h6 class="mb-1">AI Desk Lamp</h6>
+                  <p class="text-muted small">Số lượng: 2</p>
+                </div>  
+              </div>              
+            </div>
+            <div class="product-price col-3">6.490.000 VND</div>
+          </div>
+
+        </div>
+
+        <div class="order-footer">
+          <div class="order-total">Tổng cộng: 12.480.000đ</div>
+          <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal">Xem chi tiết</a>
+        </div>
+      </div>
+
+      <!-- Example Order 2 -->
+      <div class="order-card col" data-status="shipping" data-code="TX112233">
+        <div class="order-header">
+          <div>
+            <div class="order-code">Mã đơn: TX112233</div>
+            <small class="text-muted">Ngày đặt: 10/10/2025 – 09:10</small>
+          </div>
+          <div class="order-status status-shipping">Đang giao</div>
+        </div>
+        <div class="order-products row mb-3">
+
+          <div class="col-9 d-flex gap-3">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqL1WZZrX-QgZG9wgywPYgdSo_DiIcwRfqLg&s">
+            <div>
+              <h6 class="mb-1">Rabbit R1</h6>
+              <p class="text-muted small">Số lượng: 1</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="product-price">6.490.000 VND</div>
+          </div>
+        </div>
+
+        <div class="order-footer" style="position: relative; top: 65px;">
+          <div class="order-total">Tổng cộng: 6.490.000đ</div>
+          <a href="#" class="btn btn-primary btn-sm">Xem chi tiết</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <div class="d-flex justify-content-center mt-4 mb-2">
+    <nav aria-label="Page navigation">
+      <ul class="pagination pagination-sm">
+        <li class="page-item disabled"><a class="page-link">«</a></li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">»</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- PROMO BANNER -->
+  <section class="promo-banner premium">
+    <div class="promo-content">
+      <h2>Ưu đãi siêu HOT 🔥</h2>
+      <p>Giảm ngay <strong>20%</strong> cho thiết bị AI Mini đầu tiên của bạn.<br>Chương trình đến hết
+        <b>30/11/2025</b>.
+      </p>
+      <button class="promo-btn ripple"><i class="bi bi-ticket"></i> Nhận ưu đãi</button>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <!-- HEADER -->
+      <div class="modal-header">
+        <h5 class="modal-title">Chi tiết đơn hàng</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body row g-4">
+
+        <!-- LEFT CONTENT -->
+        <div class="col-lg-8">
+
+          <!-- Order info -->
+          <div class="order-info-card mb-3">
+            <h5 class="fw-bold text-primary mb-2">Đơn hàng: TX987654</h5>
+            <p class="text-muted mb-1">Ngày đặt: 14/10/2025 – 14:32</p>
+            <p class="text-muted">Nhân viên tư vấn: Nguyễn Văn A – nguyenvana@example.com</p>
+          </div>
+
+          <!-- Receiver -->
+          <div class="receiver-card mb-3">
+            <h6 class="fw-bold text-primary mb-2">Người nhận</h6>
+            <p class="fw-bold mb-1">Nguyễn Văn B</p>
+            <p class="text-muted mb-1">📞 0826452949</p>
+            <p class="text-muted">📍 Số 11, Linh Trung, Thủ Đức, TP.HCM</p>
+          </div>
+
+          <!-- Product table -->
+          <table class="table table-product">
+            <thead>
+              <tr>
+                <th>Sản phẩm</th>
+                <th class="text-center">SL</th>
+                <th>Đơn giá</th>
+                <th>Tổng</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Máy hút bụi mini</td>
+                <td class="text-center">1</td>
+                <td>200.000đ</td>
+                <td>200.000đ</td>
+                <td><a href="product-detail.html" class="btn btn-outline-primary btn-sm">Xem</a></td>
+              </tr>
+
+              <tr>
+                <td>Máy hút bụi mini</td>
+                <td class="text-center">2</td>
+                <td>200.000đ</td>
+                <td>400.000đ</td>
+                <td><a href="product-detail.html" class="btn btn-outline-primary btn-sm">Xem</a></td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+
+        <!-- RIGHT SUMMARY -->
+        <div class="col-lg-4">
+
+          <div class="payment-summary-card">
+
+            <h6 class="fw-bold text-primary mb-3">Tổng kết đơn hàng</h6>
+
+            <div class="d-flex justify-content-between mb-1">
+              <span>Tổng tiền hàng</span>
+              <span>10.000.000 đ</span>
+            </div>
+
+            <div class="d-flex justify-content-between mb-1">
+              <span>Vận chuyển</span>
+              <span>Miễn phí</span>
+            </div>
+
+            <div class="d-flex justify-content-between mb-2 fw-semibold">
+              <span>Tổng cộng</span>
+              <span>10.000.000 đ</span>
+            </div>
+
+            <hr>
+
+            <h6 class="fw-bold text-primary mb-2">Phương thức thanh toán</h6>
+
+            <div class="d-flex justify-content-between">
+              <span>Tiền mặt</span>
+              <span>5.000.000 đ</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>Chuyển khoản</span>
+              <span>5.000.000 đ</span>
+            </div>
+
+            <hr>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="fw-bold fs-5">Cần thanh toán</span>
+              <span class="total">0 đ</span>
+            </div>
+            <p class="text-end text-muted mb-0 small">(Đã bao gồm VAT – 3 sản phẩm)</p>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary">Ghi chú</button>
+        <button class="btn btn-outline-danger">Hủy đơn</button>
+        <button class="btn btn-primary" data-bs-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <!-- ================= Footer ================= -->
+  <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
+    <div class="container">
+      <div class="row gy-4">
+        <!-- Logo + Giới thiệu -->
+        <div class="col-md-4">
+          <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
+            <i class="bi bi-camera fs-3 text-primary me-2"></i>
+            <span class="fw-bold fs-5 text-primary">TechX</span>
+          </a>
+          <p class="text-muted">
+            Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
+            Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
+          </p>
+        </div>
+
+        <!-- Danh mục -->
+        <div class="col-md-2">
+          <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
+          <ul class="list-unstyled">
+            <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
+            <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
+            <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
+            <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
+          </ul>
+        </div>
+
+        <!-- Hỗ trợ -->
+        <div class="col-md-2">
+          <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
+          <ul class="list-unstyled">
+            <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
+            <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
+            <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
+            <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
+          </ul>
+        </div>
+
+        <!-- Liên hệ -->
+        <div class="col-md-4">
+          <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
+          <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh
+          </p>
+          <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
+          <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
+          <div class="mt-3">
+            <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="mt-4 mb-3">
+      <div class="text-center small text-muted">
+        © 2025 <strong>TechX</strong>. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- js -->
+
+  <script>
+    const cards = [...document.querySelectorAll('.product-card')];
+    let visible = 12;
+    function updateVisible() {
+      cards.forEach((c, i) => c.style.display = i < visible ? 'flex' : 'none');
+    }
+    updateVisible();
+
+    document.getElementById('loadMoreBtn').addEventListener('click', () => {
+      visible += 4;
+      if (visible >= cards.length) document.getElementById('loadMoreBtn').style.display = 'none';
+      updateVisible();
+    });
+
+    document.getElementById('filterBtn').addEventListener('click', () => {
+      const min = +document.getElementById('minPrice').value || 0;
+      const max = +document.getElementById('maxPrice').value || Infinity;
+      const brand = document.getElementById('brandSelect').value;
+      cards.forEach(c => {
+        const price = +c.dataset.price;
+        const b = c.dataset.brand;
+        c.style.display = price >= min && price <= max && (!brand || b === brand) ? 'flex' : 'none';
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      cards.forEach(c => {
+        const name = c.querySelector('h3').textContent.toLowerCase();
+        c.style.display = name.includes(q) ? 'flex' : 'none';
+      });
+    });
+
+    document.getElementById('sortSelect').addEventListener('change', e => {
+      const grid = document.getElementById('productGrid');
+      const sorted = [...cards].sort((a, b) => {
+        const pa = +a.dataset.price, pb = +b.dataset.price;
+        return e.target.value === 'asc' ? pa - pb : pb - pa;
+      });
+      grid.innerHTML = '';
+      sorted.forEach(c => grid.appendChild(c));
+      updateVisible();
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
