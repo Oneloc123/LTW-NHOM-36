@@ -8,7 +8,7 @@
 .shop-page {
   /* font + base */
   font-family: 'Inter', sans-serif;
-  background-color: #f4f6f9;
+  background: linear-gradient(135deg, #dfe9ff 0%, #f5e1ff 40%, #ffe7f3 75%, #fff2e5 100%);
   color: #1b1d1f;
   overflow-x: hidden;
 
