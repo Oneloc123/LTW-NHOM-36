@@ -15,190 +15,498 @@
   <link rel="stylesheet" href="../assets/css/footer.css" />
 
   <style>
+            /* Reset CSS */
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray: #94a3b8;
+            --gray-light: #e2e8f0;
+        }
+
+        body {
+           background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
     body {
       background: #f4f6f9;
       font-family: "Segoe UI", sans-serif;
     }
+    
+            /* Main Content */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
 
-    .profile-card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
+        /* Sidebar */
+      .main-content  .sidebar {
+            width: 280px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            height: fit-content;
+        }
 
-    .profile-avatar {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-    }
+      .main-content  .user-info {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--gray-light);
+            margin-bottom: 20px;
+        }
 
-    .option-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
+      .main-content  .user-avatar-large {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 15px;
+            border: 4px solid var(--gray-light);
+            position: relative;
+            cursor: pointer;
+        }
 
-    .btn-primary {
-      border-radius: 10px;
-    }
+       .main-content .user-avatar-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    .btn-danger {
-      border-radius: 10px;
-    }
+       .main-content .avatar-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: 50%;
+        }
 
-    .profile-wrapper {
-      max-width: 900px;
-      margin: auto;
-      padding: 25px;
-    }
+       .main-content .user-avatar-large:hover .avatar-overlay {
+            opacity: 1;
+        }
 
-    .profile-card {
-      background: #fff;
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-      border: 1px solid #eee;
-    }
+       .main-content .user-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
 
-    .profile-title {
-      font-size: 22px;
-      font-weight: 700;
-      color: #0d6efd;
-      margin-bottom: 15px;
-    }
+       .main-content .user-role {
+            color: var(--secondary);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
 
-    .info-label {
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
+       .main-content .user-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
 
-    .info-box {
-      border: 1px solid #e2e6f0;
-      padding: 12px 14px;
-      border-radius: 10px;
-      background: #f8f9fc;
-    }
+      .main-content  .stat {
+            text-align: center;
+        }
 
-    .edit-btn {
-      border-radius: 10px;
-    }
+      .main-content  .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+        }
 
-    .profile-section {
-      margin-bottom: 30px;
-    }
+     .main-content   .stat-label {
+            font-size: 12px;
+            color: var(--secondary);
+        }
 
-    .avatar-box {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+      .main-content  .sidebar-menu {
+            list-style: none;
+        }
 
-    .avatar-box img {
-      width: 95px;
-      height: 95px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #dce7ff;
-    }
+      .main-content  .sidebar-menu li {
+            margin-bottom: 10px;
+        }
 
-    .change-avatar-btn {
-      padding: 6px 14px;
-      border-radius: 10px;
-    }
+      .main-content  .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
 
-    .security-box {
-      background: #fff;
-      border: 1px solid #eee;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-    }
+       .main-content .sidebar-menu a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
 
-    .security-box .item {
-      border-bottom: 1px solid #f1f1f1;
-      padding: 10px 0;
-    }
+      .main-content  .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: var(--primary);
+            color: white;
+        }
 
-    .security-box .item:last-child {
-      border-bottom: none;
-    }
+        /* Content Area */
+      .main-content  .content {
+            flex: 1;
+        }
 
-    .promo-banner {
-      margin-top: 40px !important;
-    }
-    .edit-wrapper {
-    max-width: 850px;
-    margin: auto;
-    padding: 25px;
-  }
+       .main-content .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
 
-  .edit-card {
-    background: #fff;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-    border: 1px solid #eee;
-  }
+      .main-content  .content-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
 
-  .edit-title {
-    font-size: 22px;
-    font-weight: 700;
-    color: #0d6efd;
-    margin-bottom: 20px;
-  }
+        .main-content .btn {
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+        }
 
-  .form-label {
-    font-weight: 600;
-    color: #333;
-  }
+      .main-content .btn i {
+            margin-right: 8px;
+        }
 
-  .form-control {
-    border-radius: 12px;
-    padding: 10px 14px;
-    border: 1px solid #d8def0;
-  }
+       .main-content .btn:hover {
+            background: var(--primary-dark);
+        }
 
-  .form-control:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
-  }
+      .main-content  .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
 
-  .btn-techx {
-    border-radius: 12px;
-    padding: 10px 22px;
-  }
+      .main-content  .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
 
-  .btn-cancel {
-    background: #f1f3f5;
-    border-radius: 12px;
-    padding: 10px 22px;
-  }
+        /* Profile Card */
+      .main-content  .profile-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
 
-  /* Avatar Upload */
-  .avatar-edit-box {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    margin-bottom: 30px;
-  }
+       .main-content .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gray-light);
+        }
 
-  .avatar-edit-box img {
-    width: 105px;
-    height: 105px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #dbe5ff;
-  }
+      .main-content  .card-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
 
-  .avatar-edit-box input {
-    display: none;
-  }
+      .main-content  .form-group {
+            margin-bottom: 20px;
+        }
 
-  .upload-btn {
-    padding: 8px 16px;
-    border-radius: 10px;
-  }
+      .main-content  .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+      .main-content  .form-row .form-group {
+            flex: 1;
+        }
+
+      .main-content  label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+     .main-content   .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray-light);
+            border-radius: 6px;
+            font-size: 15px;
+            transition: border 0.3s;
+        }
+
+      .main-content  .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Orders */
+      .main-content  .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+      .main-content  .orders-table th, .orders-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+      .main-content  .orders-table th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+      .main-content  .orders-table tr:hover {
+            background-color: #f8fafc;
+        }
+
+      .main-content  .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+      .main-content  .status-delivered {
+            background-color: #d1fae5;
+            color: var(--success);
+        }
+
+      .main-content  .status-pending {
+            background-color: #fef3c7;
+            color: var(--warning);
+        }
+
+      .main-content  .status-cancelled {
+            background-color: #fee2e2;
+            color: var(--danger);
+        }
+
+        /* Wishlist */
+      .main-content  .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+       .main-content .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+       .main-content .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+
+       .main-content .product-image {
+            height: 160px;
+            overflow: hidden;
+        }
+
+      .main-content  .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+      .main-content .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+       .main-content .product-info {
+            padding: 15px;
+        }
+
+      .main-content  .product-category {
+            font-size: 12px;
+            color: var(--secondary);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+      .main-content  .product-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+      .main-content  .product-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+      .main-content  .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+       .main-content .btn-sm {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--secondary);
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: var(--dark);
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .avatar-upload {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .avatar-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 15px;
+            border: 4px solid var(--gray-light);
+            position: relative;
+        }
+
+        .avatar-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+       .main-content .btn-secondary {
+            background: var(--secondary);
+        }
+
+       .main-content .btn-secondary:hover {
+            background: #475569;
+        }
+
+      .main-content  .btn-danger {
+            background: var(--danger);
+        }
+
+      .main-content  .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .modal-footer {
+            padding: 20px 25px;
+            border-top: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
   </style>
 </head>
 
@@ -267,173 +575,261 @@
     </div>
   </header>
 
-  <!-- MAIN -->
-  <main class="container py-4">
-    <!-- Hồ sơ -->
-    <div class="row g-4">
-      <!-- Thông tin người dùng -->
-      <div class="col-md-8">
-
-
-        <section class="profile-wrapper">
-
-          <!-- ẢNH ĐẠI DIỆN -->
-          <div class="profile-card profile-section">
-            <h3 class="profile-title">Ảnh đại diện</h3>
-
-            <div class="avatar-box">
-              <img src="https://i.pravatar.cc/150?img=12" alt="avatar">
-
-              <div>
-                <p class="text-muted small mb-2">Dung lượng tối đa: 2MB – JPG, PNG</p>
-                <button class="btn btn-outline-primary change-avatar-btn"><i class="bi bi-upload"></i> Thay đổi
-                  ảnh</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- THÔNG TIN CÁ NHÂN -->
-          <div class="profile-card profile-section">
-            <h3 class="profile-title">Thông tin cá nhân</h3>
-
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="info-label">Họ và tên</label>
-                <div class="info-box">Nguyễn Văn B</div>
-              </div>
-
-              <div class="col-md-6">
-                <label class="info-label">Email</label>
-                <div class="info-box">nguyenb@example.com</div>
-              </div>
-
-              <div class="col-md-6">
-                <label class="info-label">Số điện thoại</label>
-                <div class="info-box">0826 452 949</div>
-              </div>
-
-              <div class="col-md-6">
-                <label class="info-label">Ngày sinh</label>
-                <div class="info-box">14/04/1997</div>
-              </div>
-
-              <div class="col-12">
-                <label class="info-label">Địa chỉ</label>
-                <div class="info-box">
-                  Số 11, Phường Linh Trung, Thủ Đức, TP. Hồ Chí Minh
+   <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="user-info">
+                    <div class="user-avatar-large" id="avatarTrigger">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="User Avatar" id="currentAvatar">
+                        <div class="avatar-overlay">
+                            <i class="fas fa-camera text-white"></i>
+                        </div>
+                    </div>
+                    <div class="user-name">Nguyễn Văn A</div>
+                    <div class="user-role">Thành viên Bạc</div>
+                    <div class="user-stats">
+                        <div class="stat">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Đơn hàng</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">Đánh giá</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">2</div>
+                            <div class="stat-label">Năm</div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
+                    <li><a href="/pages/order-history.html"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
+                    <li><a href="/pages/wishList.html"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
+                    <li><a href="/pages/changPassword.html"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
+                    <li><a href="/pages/Home.html"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                </ul>
             </div>
 
-            <div class="text-end mt-3">
-              <a  class="btn btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#modal"><i class="bi bi-pencil"></i> Chỉnh sửa</a>
+            <!-- Content Area -->
+            <div class="content">
+                <div class="content-header">
+                    <h1 class="content-title">Thông tin cá nhân</h1>
+                    <button class="btn" id="updateProfileBtn"><i class="fas fa-edit"></i> Cập nhật thông tin</button>
+                </div>
+
+                <!-- Profile Information -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Thông tin cơ bản</h2>
+                    </div>
+                    <form id="profileForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">Họ</label>
+                                <input type="text" id="firstName" class="form-control" value="Nguyễn Văn" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Tên</label>
+                                <input type="text" id="lastName" class="form-control" value="A" readonly>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" class="form-control" value="nguyenvana@example.com" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Số điện thoại</label>
+                                <input type="text" id="phone" class="form-control" value="0909123456" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthday">Ngày sinh</label>
+                            <input type="date" id="birthday" class="form-control" value="1990-05-15" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Địa chỉ</label>
+                            <input type="text" id="address" class="form-control" value="123 Đường ABC, Quận 1, TP.HCM" readonly>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Đơn hàng gần đây</h2>
+                        <a href="/pages/order-history.html" class="btn btn-outline">Xem tất cả</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã đơn hàng</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#TS2023001</td>
+                                    <td>15/08/2023</td>
+                                    <td>iPhone 14 Pro Max</td>
+                                    <td>32.990.000₫</td>
+                                    <td><span class="status status-delivered">Đã giao</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#TS2023002</td>
+                                    <td>10/08/2023</td>
+                                    <td>MacBook Pro 14"</td>
+                                    <td>45.990.000₫</td>
+                                    <td><span class="status status-delivered">Đã giao</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#TS2023003</td>
+                                    <td>05/08/2023</td>
+                                    <td>AirPods Pro 2</td>
+                                    <td>7.990.000₫</td>
+                                    <td><span class="status status-pending">Đang xử lý</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#TS2023004</td>
+                                    <td>01/08/2023</td>
+                                    <td>Apple Watch Series 8</td>
+                                    <td>10.990.000₫</td>
+                                    <td><span class="status status-cancelled">Đã hủy</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Wishlist -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Sản phẩm yêu thích</h2>
+                        <a href="/pages/wishList.html" class="btn btn-outline">Xem tất cả</a>
+                    </div>
+                    <div class="wishlist-grid">
+                        <!-- Product 1 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1511385348-a52b4a160dc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Laptop">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Laptop</div>
+                                <div class="product-name">Dell XPS 13</div>
+                                <div class="product-price">25.990.000₫</div>
+                                <div class="product-actions">
+                                    <button class="btn btn-sm"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ</button>
+                                    <button class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 2 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Tablet">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Máy tính bảng</div>
+                                <div class="product-name">iPad Pro 12.9"</div>
+                                <div class="product-price">28.990.000₫</div>
+                                <div class="product-actions">
+                                    <button class="btn btn-sm"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ</button>
+                                    <button class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 3 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Headphones">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Tai nghe</div>
+                                <div class="product-name">Sony WH-1000XM4</div>
+                                <div class="product-price">7.990.000₫</div>
+                                <div class="product-actions">
+                                    <button class="btn btn-sm"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ</button>
+                                    <button class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <!-- BẢO MẬT -->
-          <div class="security-box profile-section">
-            <h3 class="profile-title mb-3">Bảo mật tài khoản</h3>
-
-            <div class="item d-flex justify-content-between align-items-center">
-              <div>
-                <strong>Mật khẩu</strong>
-                <p class="text-muted small mb-0">Lần thay đổi cuối: 12/02/2025</p>
-              </div>
-              <a href="/pages/changPassword.html" class="btn btn-outline-secondary btn-sm"><i class="bi bi-lock"></i> Đổi mật khẩu</a>
-            </div>
-
-            <div class="item d-flex justify-content-between align-items-center">
-              <div>
-                <strong>Xác thực 2 bước</strong>
-                <p class="text-muted small mb-0">Khuyến nghị bật để tăng bảo mật</p>
-              </div>
-              <button class="btn btn-outline-primary btn-sm"><i class="bi bi-shield-check"></i> Bật bảo mật</button>
-            </div>
-          </div>
-
-        </section>
-
-      </div>
-
-      <!-- Tùy chọn -->
-      <div class="col-md-4" style="margin-top: 50px;">
-        <div class="option-card">
-          <h5 class="fw-bold text-primary mb-3">Tùy chọn </h5>
-
-          <a href="/pages/wishList.html" class="btn btn-primary w-100 mb-2"><i class="bi bi-heart-fill" style="margin-right: 10px;"></i>Sản phẩm yêu thích</a>
-          <a href="../pages/order-history.html" class="btn btn-primary w-100"><i class="bi bi-clock-history"style="margin-right: 10px;" ></i>Danh sách đơn hàng</a>
-          <a href="../pages/notification.html" class="btn btn-primary w-100" style="margin-top:10px;"><i class="bi bi-bell" style="margin-right: 10px;" ></i>Danh sách thông báo</a>
-          <a href="../pages/viewed-product.html" class="btn btn-primary w-100" style="margin-top:10px;"><i class="bi bi-clock-history"style="margin-right: 10px;" ></i>Danh sách sản phẩm đã xem</a>
-          <a href="../index.html" class="btn btn-danger w-100 " style="margin-top: 8px;">Đăng xuất</a>
         </div>
-      </div>
-
     </div>
-  </main>
 
-  <!-- Modal -->
-  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="orderDetailLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable">
-      <section class="edit-wrapper">
-          <div class="edit-card">
-
-            <h3 class="edit-title">Thông tin cá nhân</h3>
-
-            <!-- ẢNH ĐẠI DIỆN -->
-            <div class="avatar-edit-box">
-              <img id="previewAvatar" src="https://i.pravatar.cc/150?img=12" alt="avatar">
-
-              <div>
-                <label for="avatarUpload" class="btn btn-outline-primary upload-btn">
-                  <i class="bi bi-upload"></i> Thay ảnh
-                </label>
-                <input type="file" id="avatarUpload" accept="image/*">
-                <p class="text-muted small mt-2 mb-0">Dung lượng tối đa 2MB – JPG, PNG</p>
-              </div>
+    <!-- Update Profile Modal -->
+    <div class="modal" id="updateProfileModal" style="margin-top: 50px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Cập nhật thông tin cá nhân</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
             </div>
-
-            <!-- FORM -->
-            <form>
-              <div class="row g-3">
-
-                <div class="col-md-6">
-                  <label class="form-label">Họ và tên</label>
-                  <input type="text" class="form-control" value="Nguyễn Văn B">
+            <div class="modal-body">
+                <div class="avatar-upload">
+                    <div class="avatar-preview">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Avatar Preview" id="avatarPreview">
+                    </div>
+                    <div class="avatar-actions">
+                        <button class="btn btn-sm"><i class="fas fa-upload"></i> Tải ảnh lên</button>
+                        <button class="btn btn-sm btn-secondary"><i class="fas fa-camera"></i> Chụp ảnh</button>
+                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Xóa ảnh</button>
+                    </div>
                 </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">Email</label>
-                  <input type="email" class="form-control" value="nguyenb@example.com">
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">Số điện thoại</label>
-                  <input type="text" class="form-control" value="0826452949">
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">Ngày sinh</label>
-                  <input type="date" class="form-control" value="1997-04-14">
-                </div>
-
-                <div class="col-12">
-                  <label class="form-label">Địa chỉ</label>
-                  <textarea class="form-control" rows="3">Số 11, Phường Linh Trung, Thủ Đức, TP.HCM</textarea>
-                </div>
-
-              </div>
-
-              <div class="text-end mt-4">
-                <a href="/pages/profile.html" class="btn btn-cancel me-2">Hủy</a>
-                <button type="submit" class="btn btn-primary btn-techx">
-                  <i class="bi bi-check-circle"></i> Lưu thay đổi
-                </button>
-              </div>
-            </form>
-          </div>
-        </section>
+                
+                <form id="updateProfileForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modalFirstName">Họ</label>
+                            <input type="text" id="modalFirstName" class="form-control" value="Nguyễn Văn">
+                        </div>
+                        <div class="form-group">
+                            <label for="modalLastName">Tên</label>
+                            <input type="text" id="modalLastName" class="form-control" value="A">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modalEmail">Email</label>
+                            <input type="email" id="modalEmail" class="form-control" value="nguyenvana@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="modalPhone">Số điện thoại</label>
+                            <input type="text" id="modalPhone" class="form-control" value="0909123456">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="modalBirthday">Ngày sinh</label>
+                        <input type="date" id="modalBirthday" class="form-control" value="1990-05-15">
+                    </div>
+                    <div class="form-group">
+                        <label for="modalAddress">Địa chỉ</label>
+                        <input type="text" id="modalAddress" class="form-control" value="123 Đường ABC, Quận 1, TP.HCM">
+                    </div>
+                    <div class="form-group">
+                        <label for="modalBio">Giới thiệu bản thân</label>
+                        <textarea id="modalBio" class="form-control" rows="3" placeholder="Giới thiệu ngắn về bản thân...">Tôi là một người đam mê công nghệ và thích khám phá những sản phẩm mới nhất trên thị trường.</textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelUpdate">Hủy bỏ</button>
+                <button class="btn" id="saveProfile">Lưu thay đổi</button>
+            </div>
+        </div>
     </div>
-  </div>
+
+
   <!-- FOOTER -->
   <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
     <div class="container">
@@ -488,6 +884,106 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+   <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal elements
+            const updateProfileBtn = document.getElementById('updateProfileBtn');
+            const updateProfileModal = document.getElementById('updateProfileModal');
+            const closeModal = document.getElementById('closeModal');
+            const cancelUpdate = document.getElementById('cancelUpdate');
+            const saveProfile = document.getElementById('saveProfile');
+            const avatarTrigger = document.getElementById('avatarTrigger');
+            
+            // Form elements
+            const profileForm = document.getElementById('profileForm');
+            const updateProfileForm = document.getElementById('updateProfileForm');
+            const formControls = profileForm.querySelectorAll('.form-control');
+            
+            // Open modal
+            updateProfileBtn.addEventListener('click', function() {
+                updateProfileModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // Copy current values to modal form
+                document.getElementById('modalFirstName').value = document.getElementById('firstName').value;
+                document.getElementById('modalLastName').value = document.getElementById('lastName').value;
+                document.getElementById('modalEmail').value = document.getElementById('email').value;
+                document.getElementById('modalPhone').value = document.getElementById('phone').value;
+                document.getElementById('modalBirthday').value = document.getElementById('birthday').value;
+                document.getElementById('modalAddress').value = document.getElementById('address').value;
+            });
+            
+            // Close modal
+            function closeModalFunc() {
+                updateProfileModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            closeModal.addEventListener('click', closeModalFunc);
+            cancelUpdate.addEventListener('click', closeModalFunc);
+            
+            // Close modal when clicking outside
+            updateProfileModal.addEventListener('click', function(e) {
+                if (e.target === updateProfileModal) {
+                    closeModalFunc();
+                }
+            });
+            
+            // Save profile changes
+            saveProfile.addEventListener('click', function() {
+                // Update main form with modal values
+                document.getElementById('firstName').value = document.getElementById('modalFirstName').value;
+                document.getElementById('lastName').value = document.getElementById('modalLastName').value;
+                document.getElementById('email').value = document.getElementById('modalEmail').value;
+                document.getElementById('phone').value = document.getElementById('modalPhone').value;
+                document.getElementById('birthday').value = document.getElementById('modalBirthday').value;
+                document.getElementById('address').value = document.getElementById('modalAddress').value;
+                
+                // Update user name in sidebar and header
+                const fullName = document.getElementById('modalFirstName').value + ' ' + document.getElementById('modalLastName').value;
+                document.querySelector('.user-name').textContent = fullName;
+                document.querySelector('.user-menu span').textContent = fullName;
+                
+                // Show success message
+                alert('Thông tin cá nhân đã được cập nhật thành công!');
+                
+                closeModalFunc();
+            });
+            
+            // Avatar upload trigger
+            avatarTrigger.addEventListener('click', function() {
+                updateProfileModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Add to cart functionality for wishlist items
+            const addToCartBtns = document.querySelectorAll('.product-actions .btn:first-child');
+            
+            addToCartBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productName = this.closest('.product-card').querySelector('.product-name').textContent;
+                    alert(`Đã thêm ${productName} vào giỏ hàng!`);
+                });
+            });
+            
+            // Remove from wishlist functionality
+            const removeFromWishlistBtns = document.querySelectorAll('.product-actions .btn-outline');
+            
+            removeFromWishlistBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('.product-name').textContent;
+                    
+                    if (confirm(`Bạn có chắc muốn xóa ${productName} khỏi danh sách yêu thích?`)) {
+                        productCard.style.opacity = '0';
+                        setTimeout(() => {
+                            productCard.remove();
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
