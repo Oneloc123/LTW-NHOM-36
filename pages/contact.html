@@ -57,22 +57,23 @@
                     <li class="nav-item"><a class="nav-link" href="../pages/blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link active" href="../pages/contact.html">Liên hệ</a></li>
                     <li class="nav-item"><a class="nav-link" href="../pages/order-history.html">Đơn hàng</a></li>
-                     <!-- Dropdown -->
+                    <!-- Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Tài khoản 
+                            Tài khoản
                         </a>
                         <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/pages/profile.html">Thông tin tài khoản</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../pages/wishList.html">Danh sách sản phẩm yêu thích</a></li>
+                            <li><a class="dropdown-item" href="../pages/wishList.html">Danh sách sản phẩm yêu thích</a>
+                            </li>
                             <li><a class="dropdown-item" href="../pages/notification.html">Xem thông báo</a></li>
                             <li><a class="dropdown-item" href="../pages/viewed-product.html">Sản phẩm đã xem</a>
                             </li>
-                           
+
                         </ul>
                     </li>
                 </ul>
@@ -90,48 +91,54 @@
         </div>
     </header>
 
-    <main class="container my-5">
+    <main class="contact-page container my-5">
         <h2 class="mb-4 text-center">Liên hệ với chúng tôi</h2>
         <div class="row g-5">
             <!-- Contact Form -->
             <div class="col-lg-6">
-                <div class="card shadow-sm p-4">
-                    <h5 class="mb-3">Gửi tin nhắn</h5>
-                    <form>
+                <div class="card contact-form">
+                    <h5>Gửi tin nhắn</h5>
+                    <form id="contactForm">
                         <div class="mb-3">
                             <label for="name" class="form-label">Họ và tên</label>
-                            <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên">
+                            <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Nhập email">
+                            <input type="email" class="form-control" id="email" placeholder="Nhập email" required>
                         </div>
                         <div class="mb-3">
                             <label for="subject" class="form-label">Chủ đề</label>
-                            <input type="text" class="form-control" id="subject" placeholder="Chủ đề liên hệ">
+                            <input type="text" class="form-control" id="subject" placeholder="Chủ đề liên hệ" required>
                         </div>
                         <div class="mb-3">
                             <label for="message" class="form-label">Nội dung</label>
-                            <textarea class="form-control" id="message" rows="5"
-                                placeholder="Viết nội dung ở đây"></textarea>
+                            <textarea class="form-control" id="message" rows="5" placeholder="Viết nội dung ở đây"
+                                required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Gửi</button>
+                        <button type="submit" class="btn btn-primary">Gửi tin nhắn</button>
                     </form>
                 </div>
             </div>
 
             <!-- Contact Info -->
             <div class="col-lg-6">
-                <div class="p-4 bg-light rounded-3 shadow-sm">
-                    <h5 class="mb-3">Thông tin liên hệ</h5>
-                    <p><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh</p>
-                    <p><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
-                    <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
-                    <h6 class="mt-4 mb-2">Mạng xã hội</h6>
-                    <a href="#" class="me-2"><i class="bi bi-facebook fs-4 text-primary"></i></a>
-                    <a href="#" class="me-2"><i class="bi bi-instagram fs-4 text-danger"></i></a>
-                    <a href="#" class="me-2"><i class="bi bi-youtube fs-4 text-danger"></i></a>
-                    <a href="#"><i class="bi bi-tiktok fs-4 text-dark"></i></a>
+                <div class="contact-info">
+                    <h5>Thông tin liên hệ</h5>
+                    <p><i class="bi bi-geo-alt-fill"></i>123 Nguyễn Huệ, Quận 1, TP. Hồ Chí Minh</p>
+                    <p><i class="bi bi-telephone-fill"></i>+84 987 654 321</p>
+                    <p><i class="bi bi-envelope-fill"></i>support@techx.vn</p>
+                    <p><i class="bi bi-clock-fill"></i>Thứ 2 - Thứ 6: 8:00 - 17:00</p>
+
+                    <div class="social-section">
+                        <h6>Theo dõi chúng tôi</h6>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="bi bi-youtube"></i></a>
+                            <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

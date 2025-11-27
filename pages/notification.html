@@ -312,32 +312,26 @@
             </div>
         </section>
 
-        <!-- FILTER BAR -->
-        <section class="filter-bar">
-            <div class="filter-group">
-                <select id="statusFilter">
-                    <option value="">Tất cả thông báo</option>
-                    <option value="delivered">Đã đọc</option>
-                    <option value="shipping">Chưa đọc</option>
-                </select>
-                <select id="statusFilter">
-                    <option value="">Bộ lọc khác</option>
-                    <option value="delivered">Đơn hàng</option>
-                    <option value="shipping">Khuyến mãi</option>
-                    <option value="shipping">Hệ thống</option>
-                    <option value="shipping">Cảnh báo</option>
-                    <option value="shipping">Đánh giá</option>
-                </select>
+    <!-- FILTER BAR -->
+    <section class="filter-bar">
+      <div class="filter-container">
+        <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm sản phẩm, thương hiệu...">
+        <select id="sortSelect">
+          <option value="">Sắp xếp</option>
+          <option value="asc">Giá tăng dần</option>
+          <option value="desc">Giá giảm dần</option>
+          <option value="new">Mới nhất</option>
+        </select>
 
-                <input type="date" id="dateFilter">
+        <div class="price-filter">
+          <input type="number" id="minPrice" placeholder="Giá từ">
+          <span>-</span>
+          <input type="number" id="maxPrice" placeholder="đến">
+        </div>
 
-                <button id="filterBtn"><i class="bi bi-funnel"></i> Lọc</button>
-            </div>
-
-            <div class="filter-status" aria-live="polite">
-                <span id="resultCount">Hiển thị tất cả thông báo</span>
-            </div>
-        </section>
+        <button id="filterBtn" class="filter-btn">Lọc</button>
+      </div>
+    </section>
         <!-- ORDER LIST -->
         <section class="container mt-4" id="orderList">
             <div class="row " style="gap:20px">
@@ -526,16 +520,7 @@
                 </ul>
             </nav>
         </div>
-        <!-- PROMO BANNER -->
-        <section class="promo-banner premium">
-            <div class="promo-content">
-                <h2>Ưu đãi siêu HOT 🔥</h2>
-                <p>Giảm ngay <strong>20%</strong> cho thiết bị AI Mini đầu tiên của bạn.<br>Chương trình đến hết
-                    <b>30/11/2025</b>.
-                </p>
-                <button class="promo-btn ripple"><i class="bi bi-ticket"></i> Nhận ưu đãi</button>
-            </div>
-        </section>
+
 
         <!-- Modal -->
         <div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">

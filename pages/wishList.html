@@ -194,35 +194,26 @@
             </div>
         </section>
 
-        <!-- FILTER BAR -->
-        <section class="filter-bar">
-            <div class="filter-group">
-                <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm sản phẩm, thương hiệu...">
-                <select id="sortSelect">
-                    <option value="">Sắp xếp</option>
-                    <option value="asc">Giá tăng dần</option>
-                    <option value="desc">Giá giảm dần</option>
-                    <option value="new">Mới nhất</option>
-                </select>
-                <select id="brandSelect">
-                    <option value="">Thương hiệu</option>
-                    <option value="Nebula">Nebula</option>
-                    <option value="Anker">Anker</option>
-                    <option value="MiniX">MiniX</option>
-                    <option value="AIcube">AIcube</option>
-                </select>
-                <div class="price-filter">
-                    <input type="number" id="minPrice" placeholder="Giá từ">
-                    <span>-</span>
-                    <input type="number" id="maxPrice" placeholder="đến">
-                    <button id="filterBtn"><i class="bi bi-funnel"></i> Lọc</button>
-                </div>
-            </div>
-            <div class="filter-status" aria-live="polite">
-                <span id="resultCount">Hiển thị tất cả sản phẩm</span>
-            </div>
-        </section>
+    <!-- FILTER BAR -->
+    <section class="filter-bar">
+      <div class="filter-container">
+        <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm sản phẩm, thương hiệu...">
+        <select id="sortSelect">
+          <option value="">Sắp xếp</option>
+          <option value="asc">Giá tăng dần</option>
+          <option value="desc">Giá giảm dần</option>
+          <option value="new">Mới nhất</option>
+        </select>
 
+        <div class="price-filter">
+          <input type="number" id="minPrice" placeholder="Giá từ">
+          <span>-</span>
+          <input type="number" id="maxPrice" placeholder="đến">
+        </div>
+
+        <button id="filterBtn" class="filter-btn">Lọc</button>
+      </div>
+    </section>
 
         <!-- PRODUCT GRID -->
         <section class="product-grid" id="productGrid">
@@ -484,16 +475,7 @@
 
 
 
-    <!-- PROMO BANNER -->
-    <section class="promo-banner premium">
-        <div class="promo-content">
-            <h2>Ưu đãi siêu HOT 🔥</h2>
-            <p>Giảm ngay <strong>20%</strong> cho thiết bị AI Mini đầu tiên của bạn.<br>Chương trình đến hết
-                <b>30/11/2025</b>.
-            </p>
-            <button class="promo-btn ripple"><i class="bi bi-ticket"></i> Nhận ưu đãi</button>
-        </div>
-    </section>
+
 
 
 
