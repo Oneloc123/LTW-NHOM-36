@@ -4,7 +4,9 @@
    - Biến CSS đặt trong .shop-page
    - Dùng cùng cấu trúc selectors như file gốc
 =========================================== */
-
+a{
+  text-decoration: none;
+}
 .shop-page {
   /* font + base */
   font-family: 'Inter', sans-serif;
@@ -518,6 +520,7 @@
   position: relative;
   overflow: hidden;
   transition: 0.35s;
+  text-decoration: none;
 }
 
 .shop-page .na-card img {
