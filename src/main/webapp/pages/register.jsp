@@ -1,3 +1,5 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="vi">
 
@@ -132,8 +134,8 @@
               </div>
               <a class="btn btn-primary w-100 py-2" href="../index.html">Đăng ký tài khoản</a>
                <div class="footer-links mt-3">
-                 <a href="../pages/login.html">Đăng nhập</a> |
-                 <a href="/pages/forgot-password.html">Quên mật khẩu ?</a>
+                 <a href="login.jsp">Đăng nhập</a> |
+                 <a href="/pages/forgot-password.jsp">Quên mật khẩu ?</a>
                </div>
             </form>
           </div>
@@ -186,7 +188,7 @@
           <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
           <ul class="list-unstyled">
             <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-            <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
+            <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
             <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
             <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
           </ul>

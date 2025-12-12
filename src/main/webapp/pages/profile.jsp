@@ -1,3 +1,5 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -545,9 +547,9 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../pages/wishList.html">Danh sách sản phẩm yêu thích</a></li>
-                            <li><a class="dropdown-item" href="../pages/notification.html">Xem thông báo</a></li>
-                            <li><a class="dropdown-item" href="../pages/viewed-product.html">Sản phẩm đã xem</a>
+                            <li><a class="dropdown-item" href="wishList.html">Danh sách sản phẩm yêu thích</a></li>
+                            <li><a class="dropdown-item" href="notification.html">Xem thông báo</a></li>
+                            <li><a class="dropdown-item" href="viewed-product.html">Sản phẩm đã xem</a>
                             </li>
                            
                         </ul>
@@ -555,7 +557,7 @@
         </ul>
 
         <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-          <a href="/pages/login.html" class="btn btn-outline-primary btn-sm">
+          <a href="/pages/login.jsp" class="btn btn-outline-primary btn-sm">
             <i class="bi bi-box-arrow-in-right me-1"></i>Đăng nhập
           </a>
           <a href="/pages/cart.html" class="btn btn-primary btn-sm">
@@ -578,7 +580,7 @@
                             <i class="fas fa-camera text-white"></i>
                         </div>
                     </div>
-                    <div class="user-name">Nguyễn Văn A</div>
+                    <div class="user-name">@name</div>
                     <div class="user-role">Thành viên Bạc</div>
                     <div class="user-stats">
                         <div class="stat">
@@ -599,7 +601,7 @@
                     <li><a href="#" class="active"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
                     <li><a href="/pages/order-history.html"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
                     <li><a href="/pages/wishList.html"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
-                    <li><a href="/pages/changPassword.html"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
+                    <li><a href="/pages/changPassword.jsp"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
                     <li><a href="/pages/Home.html"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                 </ul>
             </div>
@@ -620,21 +622,21 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">Họ</label>
-                                <input type="text" id="firstName" class="form-control" value="Nguyễn Văn" readonly>
+                                <input type="text" id="firstName" class="form-control" value="${user.getFullName()}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Tên</label>
-                                <input type="text" id="lastName" class="form-control" value="A" readonly>
+                                <input type="text" id="lastName" class="form-control" value="${user.getFullName()}" readonly>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" class="form-control" value="nguyenvana@example.com" readonly>
+                                <input type="email" id="email" class="form-control" value="${user.getEmail()}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Số điện thoại</label>
-                                <input type="text" id="phone" class="form-control" value="0909123456" readonly>
+                                <input type="text" id="phone" class="form-control" value="${user.getPhoneNumber()}" readonly>
                             </div>
                         </div>
                         <div class="form-group">
@@ -850,7 +852,7 @@
           <h6 class="fw-bold text-uppercase mb-3">Hỗ trợ</h6>
           <ul class="list-unstyled">
             <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-            <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
+            <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
             <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
             <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
           </ul>
