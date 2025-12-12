@@ -1,56 +1,111 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="vi">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quên mật khẩu</title>
-  <link rel="stylesheet" href="/assets/css/forgot-password.css">
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Login</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/header.css">
-  <link rel="stylesheet" href="/assets/css/footer.css">
+  <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+  <link rel='stylesheet' type='text/css' media='screen' href='login.css'>
+  
   <style>
     body {
       background: linear-gradient(135deg, #e8f0ff, #f6faff);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", sans-serif;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      width: 100%;
     }
 
-    main {
-      width: 1500px;
+    .login-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+      width: 480px;
+      padding: 2.5rem;
+      text-align: center;
     }
 
-    main .container {
-      margin-top: 50px;
-    }
-
-    .card {
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    }
-
-    .card2 {
-      margin-top: 20px;
+    .login-card h2 {
+      font-weight: 700;
+      color: #0d6efd;
+      margin-bottom: 1.5rem;
     }
 
     .form-control {
-      border-radius: 8px;
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
     }
 
     .btn-primary {
-      border-radius: 8px;
-      background-color: #007bff;
+      background-color: #0d6efd;
       border: none;
-      font-weight: 500;
+      border-radius: 10px;
+      padding: 0.8rem;
+      width: 100%;
+      font-weight: 600;
     }
 
-    .btn-primary:hover {
-      background-color: #0069d9;
+    .btn-outline-primary {
+      border-radius: 10px;
+      font-weight: 600;
     }
 
-     .footer-links {
+    .divider {
       display: flex;
-      justify-content: center ;
+      align-items: center;
+      text-align: center;
+      color: #888;
+      margin: 1.5rem 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #ddd;
+      margin: 0 10px;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 500;
+      border-radius: 10px;
+      width: 100%;
+      padding: 0.7rem;
+    }
+
+    .social-btn i {
+      font-size: 1.2rem;
+    }
+
+    .social-btn.facebook {
+      background-color: #1877f2;
+      color: white;
+      border: none;
+    }
+
+    .social-btn.google {
+      border: 1px solid #ccc;
+      background-color: white;
+      color: #444;
+    }
+
+    .footer-links {
       margin-top: 1rem;
       font-size: 0.9rem;
     }
@@ -58,23 +113,26 @@
     .footer-links a {
       color: #0d6efd;
       text-decoration: none;
-      margin-left: 5px;
-      margin-right: 5px;
     }
 
     .footer-links a:hover {
       text-decoration: underline;
     }
-    .summary-card {
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      padding: 20px;
+
+    .header-main {
+      width: 100%;
     }
 
-    h2 {
-      color: #007bff;
-      font-weight: 600;
+    .footer {
+      width: 100%;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 10px;
     }
   </style>
 </head>
@@ -87,55 +145,43 @@
       <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
         <i class="bi bi-camera fs-4 me-2"></i>
         <span>TechX</span>
-      </a>      
+      </a>
     </div>
   </header>
+
   <main>
-    <div class="container">
-      <h2 class="text-center mb-2">Quên Mật Khẩu</h2>
-      <p class="text-center text-muted mb-4">Nhập email của bạn để nhận liên kết đặt lại mật khẩu</p>
-      <div class="row g-4">
-        <!-- Form quên mật khẩu -->
-        <div class="col-md-7 ">
-          <div class="card p-4">
-             <h5 class="fw-bold mb-3">Quên mật khẩu TechX</h5>
-            <ul class="list-unstyled text-muted" style="margin-bottom: 5px;">
-              <li class="mb-2">lấy lại mật khẩu để tiếp tục tham gia cộng đồng những người mê đồ công nghệ độc lạ nhận thông báo ưu đãi & sản phẩm
-                hiếm.</li>
-            </ul>
-            <form>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Nhập địa chỉ email" required>
-              </div>
-              <div class="mb-3">
-                <label for="otp" class="form-label">Mã xác nhận (nếu có)</label>
-                <input type="text" class="form-control" id="otp" placeholder="Nhập mã xác nhận từ email">
-              </div>
-              <button type="submit" class="btn btn-primary w-100 py-2">Gửi liên kết đặt lại mật khẩu</button>
-              <button type="btn" class="btn btn-white text-primary border -primary w-100 py-2"><i
-                  class="bi bi-arrow-counterclockwise"></i>Nhập lại</button>
-              <div class="footer-links mt-3">
-          <a href="../pages/login.html">Đăng nhập</a> |
-          <a href="/pages/register.html">Tạo tài khoản mới</a>
+    <div class="login-card">
+      <h2>Đăng nhập TechX</h2>
+
+      <form action="/index.jsp" method="post">
+        <div class="mb-3 text-start">
+          <label for="username" class="form-label">Tài khoản</label>
+          <input type="text" class="form-control" id="username" placeholder="Nhập tài khoản">
         </div>
-            </form>
-          </div>
+        <div class="mb-3 text-start">
+          <label for="password" class="form-label">Mật khẩu</label>
+          <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu">
         </div>
 
-        <!-- Hướng dẫn -->
-        <div class="col-md-5">
-          <div class="summary-card card2" style="margin-top: 1px;">
-            <h5 class="fw-bold mb-3">Lưu ý bảo mật</h5>
-            <ol class="text-muted small">
-              <li class="mb-2">Không chia sẽ liên kết khôi phục cho người khác.</li>
-              <li class="mb-2">Mật khẩu mới nên có ít nhất 8 ký tự, gồm chữ, số và ký hiệu.</li>
-              <li class="mb-2">Liên hệ hỗ trợ nếu không nhận được email trong 5 phút.</li>
-            </ol>
-          </div>
+        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+
+        <div class="divider">hoặc</div>
+
+        <button type="button" class="social-btn facebook">
+          <i class="bi bi-facebook"></i> Đăng nhập với Facebook
+        </button>
+        <button type="button" class="social-btn google mt-2">
+          <i class="bi bi-google"></i> Đăng nhập với Google
+        </button>
+
+        <div class="footer-links mt-3">
+          <a href="/pages/forgot-password.jsp">Quên mật khẩu?</a> |
+          <a href="/pages/register.jsp">Tạo tài khoản mới</a>
         </div>
-      </div>
+      </form>
     </div>
+
+
   </main>
   <!-- ================= Footer ================= -->
   <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
@@ -169,7 +215,7 @@
           <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
           <ul class="list-unstyled">
             <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-            <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
+            <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
             <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
             <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
           </ul>
@@ -196,7 +242,8 @@
       </div>
     </div>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>

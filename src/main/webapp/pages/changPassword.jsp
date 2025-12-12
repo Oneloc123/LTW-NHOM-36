@@ -1,3 +1,5 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,13 +114,13 @@
               Tài khoản
             </a>
             <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/pages/profile.html">Thông tin tài khoản</a></li>
+              <li><a class="dropdown-item" href="/pages/profile.jsp">Thông tin tài khoản</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="../pages/wishList.html">Danh sách sản phẩm yêu thích</a></li>
-              <li><a class="dropdown-item" href="../pages/notification.html">Xem thông báo</a></li>
-              <li><a class="dropdown-item" href="../pages/viewed-product.html">Sản phẩm đã xem</a>
+              <li><a class="dropdown-item" href="wishList.html">Danh sách sản phẩm yêu thích</a></li>
+              <li><a class="dropdown-item" href="notification.html">Xem thông báo</a></li>
+              <li><a class="dropdown-item" href="viewed-product.html">Sản phẩm đã xem</a>
               </li>
 
             </ul>
@@ -127,7 +129,7 @@
 
         <!-- Login & Cart -->
         <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-          <a href="/pages/login.html" class="btn btn-outline-primary btn-sm d-flex align-items-center">
+          <a href="/pages/login.jsp" class="btn btn-outline-primary btn-sm d-flex align-items-center">
             <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
           </a>
           <a href="/pages/cart.html" class="btn btn-primary btn-sm d-flex align-items-center">
@@ -188,8 +190,8 @@
                             </div>
 
                             <div class="footer-links mt-3">
-                                <a href="../pages/forgot-password.html">Quên mật khẩu ?</a> |
-                                <a href="/pages/register.html">Tạo tài khoản mới</a>
+                                <a href="forgot-password.jsp">Quên mật khẩu ?</a> |
+                                <a href="/pages/register.jsp">Tạo tài khoản mới</a>
                             </div>
 
                         </form>
@@ -242,7 +244,7 @@
                     <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
                     <ul class="list-unstyled">
                         <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-                        <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
+                        <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
                         <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
                         <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
                     </ul>
