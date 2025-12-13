@@ -516,7 +516,7 @@
   <!-- HEADER -->
   <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
+      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.jsp">
         <i class="bi bi-camera fs-4 me-2"></i>
         TechX
       </a>
@@ -527,7 +527,7 @@
 
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav align-items-lg-center gap-lg-3">
-          <li class="nav-item"><a class="nav-link " href="/index.html">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link " href="/index.jsp">Trang chủ</a></li>
           <li class="nav-item"><a class="nav-link" href="/pages/shop.html">Cửa hàng</a></li>
 
                                   <li class="nav-item"><a class="nav-link" href="/pages/products.html">Sản phẩm</a></li>
@@ -557,7 +557,7 @@
         </ul>
 
         <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-          <a href="/pages/login.jsp" class="btn btn-outline-primary btn-sm">
+          <a href="/DoCongNghe_Nhom36_war/login" class="btn btn-outline-primary btn-sm">
             <i class="bi bi-box-arrow-in-right me-1"></i>Đăng nhập
           </a>
           <a href="/pages/cart.html" class="btn btn-primary btn-sm">
@@ -602,7 +602,7 @@
                     <li><a href="/pages/order-history.html"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
                     <li><a href="/pages/wishList.html"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
                     <li><a href="/pages/changPassword.jsp"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
-                    <li><a href="/pages/Home.html"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                    <li><a href="/DoCongNghe_Nhom36_war/loggout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                 </ul>
             </div>
 
@@ -829,7 +829,7 @@
       <div class="row gy-4">
 
         <div class="col-md-4">
-          <a href="/index.html" class="d-flex align-items-center text-decoration-none mb-3">
+          <a href="/index.jsp" class="d-flex align-items-center text-decoration-none mb-3">
             <i class="bi bi-camera fs-3 text-primary me-2"></i>
             <span class="fw-bold fs-5 text-primary">TechX</span>
           </a>

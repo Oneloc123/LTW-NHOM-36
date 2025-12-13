@@ -26,11 +26,8 @@ public class UserService {
     public boolean checkUserNameAndPassword(String username, String password)
     {
         User user = getUserByUserName(username);
-        if(user == null){
-            return false;
-        }else{
-
-        }
+        if(user == null)return false;
+        if(user.getPassword().equals(password)) return true;
         return false;
     }
 }
