@@ -11,10 +11,10 @@ public class User implements Serializable {
     private String phoneNumber;
     private String role;
     private boolean isActive;
-    private String creatAt;
+    private String createAt;
     private String imgURL;
     public User(int id, String username, String password, String email, String fullName,
-     String phoneNumber, String role, boolean isActive, String creatAt, String imgURL ) {
+     String phoneNumber, String role, boolean isActive, String createAt, String imgURL ) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -23,7 +23,7 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
         this.role = role;
         this.isActive =  isActive;
-        this.creatAt = creatAt;
+        this.createAt = createAt;
         this.imgURL = imgURL;
     }
     public User() {
@@ -93,12 +93,12 @@ public class User implements Serializable {
         isActive = active;
     }
 
-    public String getCreatAt() {
-        return creatAt;
+    public String getCreateAt() {
+        return createAt;
     }
 
-    public void setCreatAt(String creatAt) {
-        this.creatAt = creatAt;
+    public void setCreatAt(String createAt) {
+        this.createAt = createAt;
     }
 
     public String getImgURL() {

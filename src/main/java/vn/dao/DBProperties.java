@@ -23,7 +23,7 @@ public class DBProperties
         try {
             return Integer.parseInt(prop.get("db.port").toString());
         }catch (NumberFormatException e){
-            return 3306;
+            return 3307;
         }
     }
 
@@ -36,7 +36,7 @@ public class DBProperties
     }
 
     public static String dbname(){
-        return prop.get("db.dbname").toString();
+        return prop.get("db.name").toString();
     }
 
     public static String option(){
