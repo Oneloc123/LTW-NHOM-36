@@ -1,38 +1,44 @@
-<!DOCTYPE html>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!doctype html>
 <html lang="vi">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quên mật khẩu</title>
-  <link rel="stylesheet" href="/assets/css/forgot-password.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đăng ký</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/header.css">
-  <link rel="stylesheet" href="/assets/css/footer.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/register.css">
+  <link rel="stylesheet" href="../assets/css/header.css">
+  <link rel="stylesheet" href="../assets/css/footer.css">
+  <link rel='stylesheet' type='text/css' media='screen' href='login.css'>
   <style>
     body {
       background: linear-gradient(135deg, #e8f0ff, #f6faff);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
+    header .container {}
+
     main {
+      margin-top: 50px;
       width: 1500px;
     }
 
-    main .container {
-      margin-top: 50px;
-    }
-
+    /* main .container {
+        max-width:  960px;
+      } */
     .card {
+      background-color: white;
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     }
 
-    .card2 {
+    .card2{
       margin-top: 20px;
     }
-
     .form-control {
       border-radius: 8px;
     }
@@ -48,23 +54,6 @@
       background-color: #0069d9;
     }
 
-     .footer-links {
-      display: flex;
-      justify-content: center ;
-      margin-top: 1rem;
-      font-size: 0.9rem;
-    }
-
-    .footer-links a {
-      color: #0d6efd;
-      text-decoration: none;
-      margin-left: 5px;
-      margin-right: 5px;
-    }
-
-    .footer-links a:hover {
-      text-decoration: underline;
-    }
     .summary-card {
       background-color: #fff;
       border-radius: 10px;
@@ -76,6 +65,11 @@
       color: #007bff;
       font-weight: 600;
     }
+    .footer-links{
+      display: flex;
+      justify-content: center;
+      gap:10px;
+    }
   </style>
 </head>
 
@@ -84,66 +78,91 @@
   <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
     <div class="container">
       <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
+      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.jsp">
         <i class="bi bi-camera fs-4 me-2"></i>
         <span>TechX</span>
-      </a>      
+      </a>
     </div>
   </header>
+  
   <main>
     <div class="container">
-      <h2 class="text-center mb-2">Quên Mật Khẩu</h2>
-      <p class="text-center text-muted mb-4">Nhập email của bạn để nhận liên kết đặt lại mật khẩu</p>
+      <h2 class="text-center mb-2">Tạo Tài Khoản</h2>
+      <p class="text-center text-muted mb-4">Điền thông tin để đăng ký tài khoản mới</p>
       <div class="row g-4">
-        <!-- Form quên mật khẩu -->
-        <div class="col-md-7 ">
+        <!-- Form tạo tài khoản -->
+        <div class="col-md-8">
           <div class="card p-4">
-             <h5 class="fw-bold mb-3">Quên mật khẩu TechX</h5>
+            <h5 class="fw-bold mb-3">Tạo tài khoản TechX</h5>
             <ul class="list-unstyled text-muted" style="margin-bottom: 5px;">
-              <li class="mb-2">lấy lại mật khẩu để tiếp tục tham gia cộng đồng những người mê đồ công nghệ độc lạ nhận thông báo ưu đãi & sản phẩm
+              <li class="mb-2">Tham gia cộng đồng những người mê đồ công nghệ độc lạ nhận thông báo ưu đãi & sản phẩm
                 hiếm.</li>
             </ul>
+            <div class="divider"></div>
+
+            <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+              <button class="btn btn-primary" style="flex:1"><i class="bi bi-google" style="margin-right: 15px;"></i>Đăng ký bằng Google</button>
+              <button class="btn btn-primary" style="flex:1"><i class="bi bi-facebook "style="margin-right: 15px;"></i>Đăng ký bằng Facebook</button>
+            </div>
             <form>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Nhập địa chỉ email" required>
+              <div class="row">
+                <div class="mb-3 col">
+                  <label for="fullname" class="form-label">Họ và tên</label>
+                  <input type="text" class="form-control" id="fullname" placeholder="Nhập họ tên của bạn" required>
+                </div>
+                <div class="mb-3 col">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Nhập địa chỉ email" required>
+                </div>
               </div>
               <div class="mb-3">
-                <label for="otp" class="form-label">Mã xác nhận (nếu có)</label>
-                <input type="text" class="form-control" id="otp" placeholder="Nhập mã xác nhận từ email">
+                <label for="phone" class="form-label">Số điện thoại</label>
+                <input type="tel" class="form-control" id="phone" placeholder="Nhập số điện thoại" required>
               </div>
-              <button type="submit" class="btn btn-primary w-100 py-2">Gửi liên kết đặt lại mật khẩu</button>
-              <button type="btn" class="btn btn-white text-primary border -primary w-100 py-2"><i
-                  class="bi bi-arrow-counterclockwise"></i>Nhập lại</button>
-              <div class="footer-links mt-3">
-          <a href="../pages/login.html">Đăng nhập</a> |
-          <a href="/pages/register.html">Tạo tài khoản mới</a>
-        </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Mật khẩu</label>
+                <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu" required>
+              </div>
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Nhập lại mật khẩu"
+                  required>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="agree">
+                <label class="form-check-label" for="agree">Tôi đồng ý với <a href="#">điều khoản sử dụng</a></label>
+              </div>
+              <a class="btn btn-primary w-100 py-2" href="../index.jsp">Đăng ký tài khoản</a>
+               <div class="footer-links mt-3">
+                 <a href="login.jsp">Đăng nhập</a> |
+                 <a href="/pages/forgot-password.jsp">Quên mật khẩu ?</a>
+               </div>
             </form>
           </div>
         </div>
 
-        <!-- Hướng dẫn -->
-        <div class="col-md-5">
-          <div class="summary-card card2" style="margin-top: 1px;">
+        <!-- Tóm tắt lợi ích hoặc hướng dẫn -->
+        <div class="col-md-4" style="margin-top: 4px;">
+          <div class="summary-card card2">
             <h5 class="fw-bold mb-3">Lưu ý bảo mật</h5>
             <ol class="text-muted small">
-              <li class="mb-2">Không chia sẽ liên kết khôi phục cho người khác.</li>
-              <li class="mb-2">Mật khẩu mới nên có ít nhất 8 ký tự, gồm chữ, số và ký hiệu.</li>
-              <li class="mb-2">Liên hệ hỗ trợ nếu không nhận được email trong 5 phút.</li>
+              <li class="mb-2">Không chia sẽ mật khẩu cho người lạ.</li>
+              <li class="mb-2">Mật khẩu nên có ít nhất 8 ký tự, gồm chữ, số và ký hiệu.</li>
+              <li class="mb-2">Liên hệ hỗ trợ nếu có bất ký sai sót nào.</li>
             </ol>
           </div>
         </div>
       </div>
     </div>
   </main>
+
   <!-- ================= Footer ================= -->
   <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
     <div class="container">
       <div class="row gy-4">
         <!-- Logo + Giới thiệu -->
         <div class="col-md-4">
-          <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
+          <a href="/index.jsp" class="d-flex align-items-center mb-3 text-decoration-none">
             <i class="bi bi-camera fs-3 text-primary me-2"></i>
             <span class="fw-bold fs-5 text-primary">TechX</span>
           </a>
@@ -169,7 +188,7 @@
           <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
           <ul class="list-unstyled">
             <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-            <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
+            <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
             <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
             <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
           </ul>
@@ -196,7 +215,8 @@
       </div>
     </div>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>

@@ -5,17 +5,17 @@ import org.jdbi.v3.core.Jdbi;
 
 import java.sql.SQLException;
 
-public class BaseDao {
+public abstract class BaseDao {
     private static Jdbi jdbi;
 
     protected Jdbi get(){
         if(jdbi==null){
-            makeConect();
+            makeConnect();
         }
         return jdbi;
     }
 
-    private static void makeConect() {
+    private void makeConnect() {
         MysqlDataSource src = new MysqlDataSource();
         String url = "jdbc:mysql://" + DBProperties.host() + ":" + DBProperties.port() + "/" + DBProperties.dbname()+ "?" + DBProperties.option();
         src.setURL(url);
@@ -34,8 +34,4 @@ public class BaseDao {
         jdbi = Jdbi.create(src);
     }
 
-    public void main(String[] args) {
-        BaseDao baseDao = new BaseDao();
-        baseDao.get();
-    }
 }

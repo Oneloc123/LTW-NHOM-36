@@ -1,3 +1,5 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 
@@ -140,7 +142,7 @@
   <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
     <div class="container">
       <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
+      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.jsp">
         <i class="bi bi-camera fs-4 me-2"></i>
         <span>TechX</span>
       </a>
@@ -151,14 +153,14 @@
     <div class="login-card">
       <h2>Đăng nhập TechX</h2>
 
-      <form>
+      <form action="/DoCongNghe_Nhom36_war/login" method="post">
         <div class="mb-3 text-start">
           <label for="username" class="form-label">Tài khoản</label>
-          <input type="text" class="form-control" id="username" placeholder="Nhập tài khoản">
+          <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tài khoản">
         </div>
         <div class="mb-3 text-start">
           <label for="password" class="form-label">Mật khẩu</label>
-          <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
         </div>
 
         <button type="submit" class="btn btn-primary">Đăng nhập</button>
@@ -173,8 +175,8 @@
         </button>
 
         <div class="footer-links mt-3">
-          <a href="/pages/forgot-password.html">Quên mật khẩu?</a> |
-          <a href="/pages/register.html">Tạo tài khoản mới</a>
+          <a href="/forgot-passwordServlet.jsp">Quên mật khẩu?</a> |
+          <a href="/registerServlet.jsp">Tạo tài khoản mới</a>
         </div>
       </form>
     </div>
@@ -187,7 +189,7 @@
       <div class="row gy-4">
         <!-- Logo + Giới thiệu -->
         <div class="col-md-4">
-          <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
+          <a href="/index.jsp" class="d-flex align-items-center mb-3 text-decoration-none">
             <i class="bi bi-camera fs-3 text-primary me-2"></i>
             <span class="fw-bold fs-5 text-primary">TechX</span>
           </a>
@@ -213,7 +215,7 @@
           <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
           <ul class="list-unstyled">
             <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-            <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
+            <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
             <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
             <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
           </ul>

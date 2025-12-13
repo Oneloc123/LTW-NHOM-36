@@ -1,3 +1,5 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,7 +85,7 @@
   <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
     <div class="container">
       <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
+      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.jsp">
         <i class="bi bi-camera fs-4 me-2"></i>
         <span>TechX</span>
       </a>
@@ -97,7 +99,7 @@
       <!-- Nav links -->
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav align-items-lg-center gap-lg-3">
-          <li class="nav-item"><a class="nav-link  " href="/index.html">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link  " href="/index.jsp">Trang chủ</a></li>
           <li class="nav-item"><a class="nav-link " href="/pages/shop.html">Cửa hàng</a></li>
                         <li class="nav-item"><a class="nav-link" href="/pages/products.html">Sản phẩm</a></li>
 
@@ -112,13 +114,13 @@
               Tài khoản
             </a>
             <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/pages/profile.html">Thông tin tài khoản</a></li>
+              <li><a class="dropdown-item" href="/pages/profile.jsp">Thông tin tài khoản</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="../pages/wishList.html">Danh sách sản phẩm yêu thích</a></li>
-              <li><a class="dropdown-item" href="../pages/notification.html">Xem thông báo</a></li>
-              <li><a class="dropdown-item" href="../pages/viewed-product.html">Sản phẩm đã xem</a>
+              <li><a class="dropdown-item" href="wishList.html">Danh sách sản phẩm yêu thích</a></li>
+              <li><a class="dropdown-item" href="notification.html">Xem thông báo</a></li>
+              <li><a class="dropdown-item" href="viewed-product.html">Sản phẩm đã xem</a>
               </li>
 
             </ul>
@@ -127,7 +129,7 @@
 
         <!-- Login & Cart -->
         <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-          <a href="/pages/login.html" class="btn btn-outline-primary btn-sm d-flex align-items-center">
+          <a href="/pages/login.jsp" class="btn btn-outline-primary btn-sm d-flex align-items-center">
             <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
           </a>
           <a href="/pages/cart.html" class="btn btn-primary btn-sm d-flex align-items-center">
@@ -169,7 +171,7 @@
                                 </div>
                             </div>
 
-                            <button type="btn" style="margin-bottom: 30px;"
+                            <button type="button" style="margin-bottom: 30px;"
                                 class="btn btn btn-white btn-outline-primary  border -primary w-100 py-2">Gửi
                                 liên kết đến email để đặt lại
                                 mật khẩu</button>
@@ -179,7 +181,7 @@
                                 <div class="row">
                                     <input type="text" class="col1 form-control col  " id="otp" style="width: 600px;"
                                         placeholder="Nhập mã xác nhận từ email">
-                                    <button type="btn"
+                                    <button type="button"
                                         class="col2 btn col btn-white btn-outline-primary border -primary "><i
                                             class="bi bi-arrow-clockwise"></i></i>Gửi lại</button>
                                 </div>
@@ -188,8 +190,8 @@
                             </div>
 
                             <div class="footer-links mt-3">
-                                <a href="../pages/forgot-password.html">Quên mật khẩu ?</a> |
-                                <a href="/pages/register.html">Tạo tài khoản mới</a>
+                                <a href="forgot-password.jsp">Quên mật khẩu ?</a> |
+                                <a href="/pages/register.jsp">Tạo tài khoản mới</a>
                             </div>
 
                         </form>
@@ -216,7 +218,7 @@
             <div class="row gy-4">
                 <!-- Logo + Giới thiệu -->
                 <div class="col-md-4">
-                    <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
+                    <a href="/index.jsp" class="d-flex align-items-center mb-3 text-decoration-none">
                         <i class="bi bi-camera fs-3 text-primary me-2"></i>
                         <span class="fw-bold fs-5 text-primary">TechX</span>
                     </a>
@@ -242,7 +244,7 @@
                     <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
                     <ul class="list-unstyled">
                         <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-                        <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
+                        <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
                         <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
                         <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
                     </ul>
