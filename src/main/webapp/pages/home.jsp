@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -80,45 +82,27 @@
         <!-- =======================BANNER SLIDESHOW======================== -->
         <section class="banner-container">
 
+            <c:forEach var="banner" items="${list}">
             <div class="banner-slide ">
                 <div class="banner-img"></div>
                 <div class="banner-text">
-                    <h2>Gumdam Red Lighting TechX</h2>
+                    <h2>${banner.title}</h2>
                     <a href="../pages/shop.html" class="btn_unline">Mua ngay</a>
                 </div>
             </div>
 
-            <div class="banner-slide ">
-                <div class="banner-img"></div>
-                <div class="banner-text">
-                    <h2>Fly Car TechX</h2>
-                    <a href="../pages/shop.html" class="btn_unline">Khám phá</a>
-                </div>
-            </div>
+            </c:forEach>
+            <c:forEach var="b" items="${list}">
+                <style>
+                    .home-page .banner-slide:nth-child(${b.id}) .banner-img {
+                        background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+                        url("${b.imageURL}");
+                    }
 
-            <div class="banner-slide ">
-                <div class="banner-img"></div>
-                <div class="banner-text">
-                    <h2>Cyber Dog TechX</h2>
-                    <a href="../pages/shop.html" class="btn_unline">Xem thêm</a>
-                </div>
-            </div>
+                </style>
+            </c:forEach>
 
-            <style>
-                .home-page .banner-slide:nth-child(1) .banner-img {
-                    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-                    url("https://i.redd.it/9skpdpurchu41.jpg");
-                }
-                .home-page .banner-slide:nth-child(2) .banner-img {
-                    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-                    url("https://welovecar.vn/wp-content/uploads/2020/11/wlc-aircar.jpg");
-                }
 
-                .home-page .banner-slide:nth-child(3) .banner-img {
-                    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-                    url("https://media.vov.vn/sites/default/files/styles/large/public/2023-08/1_66.jpg");
-                }
-            </style>
 
             <div class="banner-dots" id="dots"></div>
         </section>

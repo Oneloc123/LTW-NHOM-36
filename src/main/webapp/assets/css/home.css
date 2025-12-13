@@ -160,20 +160,9 @@
 }
 
 /* Banner images */
-.home-page .banner-slide:nth-child(1) .banner-img {
-  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                    url("https://i.redd.it/9skpdpurchu41.jpg");
-}
 
-.home-page .banner-slide:nth-child(2) .banner-img {
-  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                    url("https://welovecar.vn/wp-content/uploads/2020/11/wlc-aircar.jpg");
-}
 
-.home-page .banner-slide:nth-child(3) .banner-img {
-  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                    url("https://media.vov.vn/sites/default/files/styles/large/public/2023-08/1_66.jpg");
-}
+
 
 /* Dots navigation */
 .home-page .banner-dots {
