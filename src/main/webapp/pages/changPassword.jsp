@@ -85,7 +85,7 @@
   <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
     <div class="container">
       <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
+      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.jsp">
         <i class="bi bi-camera fs-4 me-2"></i>
         <span>TechX</span>
       </a>
@@ -99,7 +99,7 @@
       <!-- Nav links -->
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav align-items-lg-center gap-lg-3">
-          <li class="nav-item"><a class="nav-link  " href="/index.html">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link  " href="/index.jsp">Trang chủ</a></li>
           <li class="nav-item"><a class="nav-link " href="/pages/shop.html">Cửa hàng</a></li>
                         <li class="nav-item"><a class="nav-link" href="/pages/products.html">Sản phẩm</a></li>
 
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
 
-                            <button type="btn" style="margin-bottom: 30px;"
+                            <button type="button" style="margin-bottom: 30px;"
                                 class="btn btn btn-white btn-outline-primary  border -primary w-100 py-2">Gửi
                                 liên kết đến email để đặt lại
                                 mật khẩu</button>
@@ -181,7 +181,7 @@
                                 <div class="row">
                                     <input type="text" class="col1 form-control col  " id="otp" style="width: 600px;"
                                         placeholder="Nhập mã xác nhận từ email">
-                                    <button type="btn"
+                                    <button type="button"
                                         class="col2 btn col btn-white btn-outline-primary border -primary "><i
                                             class="bi bi-arrow-clockwise"></i></i>Gửi lại</button>
                                 </div>
@@ -218,7 +218,7 @@
             <div class="row gy-4">
                 <!-- Logo + Giới thiệu -->
                 <div class="col-md-4">
-                    <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
+                    <a href="/index.jsp" class="d-flex align-items-center mb-3 text-decoration-none">
                         <i class="bi bi-camera fs-3 text-primary me-2"></i>
                         <span class="fw-bold fs-5 text-primary">TechX</span>
                     </a>
