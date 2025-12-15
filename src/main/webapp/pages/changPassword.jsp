@@ -189,10 +189,7 @@
                                     khẩu</button>
                             </div>
 
-                            <div class="footer-links mt-3">
-                                <a href="forgot-password.jsp">Quên mật khẩu ?</a> |
-                                <a href="/pages/register.jsp">Tạo tài khoản mới</a>
-                            </div>
+
 
                         </form>
                     </div>

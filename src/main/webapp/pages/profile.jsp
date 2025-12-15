@@ -580,28 +580,27 @@
                             <i class="fas fa-camera text-white"></i>
                         </div>
                     </div>
-                    <div class="user-name">@name</div>
-                    <div class="user-role">Thành viên Bạc</div>
-                    <div class="user-stats">
-                        <div class="stat">
-                            <div class="stat-value">12</div>
-                            <div class="stat-label">Đơn hàng</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">8</div>
-                            <div class="stat-label">Đánh giá</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">2</div>
-                            <div class="stat-label">Năm</div>
-                        </div>
-                    </div>
+                    <div class="user-name">${user.getFullName()}</div>
+<%--                    <div class="user-stats">--%>
+<%--                        <div class="stat">--%>
+<%--                            <div class="stat-value">12</div>--%>
+<%--                            <div class="stat-label">Đơn hàng</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="stat">--%>
+<%--                            <div class="stat-value">8</div>--%>
+<%--                            <div class="stat-label">Đánh giá</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="stat">--%>
+<%--                            <div class="stat-value">2</div>--%>
+<%--                            <div class="stat-label">Năm</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </div>
                 <ul class="sidebar-menu">
                     <li><a href="#" class="active"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
-                    <li><a href="/pages/order-history.html"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
-                    <li><a href="/pages/wishList.html"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
-                    <li><a href="/pages/changPassword.jsp"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
+                    <li><a href="/DoCongNghe_Nhom36_war/order-history.html"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
+                    <li><a href="/DoCongNghe_Nhom36_war/wishList.html"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
+                    <li><a href="/DoCongNghe_Nhom36_war/changePassword"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
                     <li><a href="/DoCongNghe_Nhom36_war/loggout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                 </ul>
             </div>
@@ -638,10 +637,6 @@
                                 <label for="phone">Số điện thoại</label>
                                 <input type="text" id="phone" class="form-control" value="${user.getPhoneNumber()}" readonly>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="birthday">Ngày sinh</label>
-                            <input type="date" id="birthday" class="form-control" value="1990-05-15" readonly>
                         </div>
                         <div class="form-group">
                             <label for="address">Địa chỉ</label>
@@ -802,16 +797,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="modalBirthday">Ngày sinh</label>
-                        <input type="date" id="modalBirthday" class="form-control" value="1990-05-15">
-                    </div>
-                    <div class="form-group">
                         <label for="modalAddress">Địa chỉ</label>
                         <input type="text" id="modalAddress" class="form-control" value="123 Đường ABC, Quận 1, TP.HCM">
-                    </div>
-                    <div class="form-group">
-                        <label for="modalBio">Giới thiệu bản thân</label>
-                        <textarea id="modalBio" class="form-control" rows="3" placeholder="Giới thiệu ngắn về bản thân...">Tôi là một người đam mê công nghệ và thích khám phá những sản phẩm mới nhất trên thị trường.</textarea>
                     </div>
                 </form>
             </div>
