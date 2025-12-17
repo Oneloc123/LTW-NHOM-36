@@ -9,9 +9,9 @@
     <title>TechX - Khám phá công nghệ độc lạ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/footer.css">
-    <link rel="stylesheet" href="../assets/css/home.css">
-    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
+    <link rel="stylesheet" href="/assets/css/home.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
 
 </head>
 
@@ -42,7 +42,7 @@
                         <li class="nav-item"><a class="nav-link" href="/pages/products.html">Sản phẩm</a></li>
                         <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
                         <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
-                        <li class="nav-item"><a class="nav-link " href="/pages/order-history.html">Đơn hàng</a></li>
+                        <li class="nav-item"><a class="nav-link " href="/pages/order-history.jsp">Đơn hàng</a></li>
                         <!-- Dropdown -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -259,7 +259,7 @@
                     <ul class="list-unstyled">
                         <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
                         <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
-                        <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
+                        <li><a href="/pages/order-history.jsp" class="footer-link">Theo dõi đơn hàng</a></li>
                         <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
                     </ul>
                 </div>

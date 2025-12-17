@@ -104,38 +104,42 @@
               <button class="btn btn-primary" style="flex:1"><i class="bi bi-google" style="margin-right: 15px;"></i>Đăng ký bằng Google</button>
               <button class="btn btn-primary" style="flex:1"><i class="bi bi-facebook "style="margin-right: 15px;"></i>Đăng ký bằng Facebook</button>
             </div>
-            <form>
+            <form action="/DoCongNghe_Nhom36_war//register" method="post">
               <div class="row">
                 <div class="mb-3 col">
                   <label for="fullname" class="form-label">Họ và tên</label>
-                  <input type="text" class="form-control" id="fullname" placeholder="Nhập họ tên của bạn" required>
+                  <input type="text" class="form-control" name="fullName" id="fullname" placeholder="Nhập họ tên của bạn" required>
                 </div>
                 <div class="mb-3 col">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="Nhập địa chỉ email" required>
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Nhập địa chỉ email" required>
                 </div>
               </div>
               <div class="mb-3">
                 <label for="phone" class="form-label">Số điện thoại</label>
-                <input type="tel" class="form-control" id="phone" placeholder="Nhập số điện thoại" required>
+                <input type="tel" class="form-control" name="phone" id="phone" placeholder="Nhập số điện thoại" required>
               </div>
+                <div class="mb-3 col">
+                    <label for="fullname" class="form-label">Tên đăng nhập</label>
+                    <input type="text" class="form-control" name="userName" id="fullname" placeholder="Nhập tên đăng nhập của bạn" required>
+                </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Mật khẩu</label>
-                <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu" required>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Nhập mật khẩu" required>
               </div>
               <div class="mb-3">
                 <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Nhập lại mật khẩu"
+                <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="Nhập lại mật khẩu"
                   required>
               </div>
               <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="agree">
                 <label class="form-check-label" for="agree">Tôi đồng ý với <a href="#">điều khoản sử dụng</a></label>
               </div>
-              <a class="btn btn-primary w-100 py-2" href="../index.jsp">Đăng ký tài khoản</a>
+              <button type="submit" class="btn btn-primary w-100 py-2" >Đăng ký tài khoản</button>
                <div class="footer-links mt-3">
-                 <a href="login.jsp">Đăng nhập</a> |
-                 <a href="/pages/forgot-password.jsp">Quên mật khẩu ?</a>
+                 <a href="/DoCongNghe_Nhom36_war/login">Đăng nhập</a> |
+                 <a href="/DoCongNghe_Nhom36_war/forgot-password">Quên mật khẩu ?</a>
                </div>
             </form>
           </div>
@@ -189,7 +193,7 @@
           <ul class="list-unstyled">
             <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
             <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
-            <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
+            <li><a href="/pages/order-history.jsp" class="footer-link">Theo dõi đơn hàng</a></li>
             <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
           </ul>
         </div>

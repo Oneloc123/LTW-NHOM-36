@@ -175,8 +175,8 @@
         </button>
 
         <div class="footer-links mt-3">
-          <a href="/forgot-passwordServlet.jsp">Quên mật khẩu?</a> |
-          <a href="/registerServlet.jsp">Tạo tài khoản mới</a>
+          <a href="/DoCongNghe_Nhom36_war/forgot-password">Quên mật khẩu?</a> |
+          <a href="/DoCongNghe_Nhom36_war/register">Tạo tài khoản mới</a>
         </div>
       </form>
     </div>
@@ -216,7 +216,7 @@
           <ul class="list-unstyled">
             <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
             <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
-            <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
+            <li><a href="/pages/order-history.jsp" class="footer-link">Theo dõi đơn hàng</a></li>
             <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
           </ul>
         </div>

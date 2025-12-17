@@ -30,4 +30,28 @@ public class UserService {
         if(user.getPassword().equals(password)) return true;
         return false;
     }
+    public boolean checkPassword(String username, String password)
+    {
+        return userDao.checkLogin(username, password);
+    }
+    public User getUserById(int id)
+    {
+        return userDao.getUserById(id);
+    }
+    public void updateUser(User user)
+    {
+        userDao.updateProfile(user);
+    }
+    public List<User> getListUser()
+    {
+        return userDao.getList();
+    }
+    public void registerUser(User user)
+    {
+        userDao.insertUser(user);
+    }
+    public void updatePassword(int id, String newPass)
+    {
+        userDao.updatePassword(id, newPass);
+    }
 }
