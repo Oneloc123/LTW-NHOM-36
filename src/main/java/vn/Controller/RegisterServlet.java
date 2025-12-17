@@ -7,6 +7,7 @@ import vn.model.User;
 import vn.services.UserService;
 
 import java.io.IOException;
+import java.util.Date;
 
 @WebServlet(name = "RegisterServlet", value = "/register")
 public class RegisterServlet extends HttpServlet {
@@ -23,6 +24,25 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String fullname = request.getParameter("fullName");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String username = request.getParameter("userName");
+        String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirmPassword");
+        if(password.equals(confirmPassword)){
+            UserService us = new UserService();
+            User u = new User();
+            u.setFullName(fullname);
+            u.setEmail(email);
+            u.setPassword(password);
+            u.setUsername(username);
+            u.setPhoneNumber(phone);
+            u.setActive(true);
+            u.setImgURL("/images/default.jpg");
+            u.setRole("USER");
+            u.setCreatAt("0/0/0");
+            us.registerUser(u);
+        }
     }
 }

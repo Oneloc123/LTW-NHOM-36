@@ -535,7 +535,7 @@
 
           <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
           <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
-          <li class="nav-item"><a class="nav-link" href="/pages/order-history.html">Đơn hàng</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pages/order-history.jsp">Đơn hàng</a></li>
            <!-- Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
@@ -581,20 +581,6 @@
                         </div>
                     </div>
                     <div class="user-name">${user.getFullName()}</div>
-<%--                    <div class="user-stats">--%>
-<%--                        <div class="stat">--%>
-<%--                            <div class="stat-value">12</div>--%>
-<%--                            <div class="stat-label">Đơn hàng</div>--%>
-<%--                        </div>--%>
-<%--                        <div class="stat">--%>
-<%--                            <div class="stat-value">8</div>--%>
-<%--                            <div class="stat-label">Đánh giá</div>--%>
-<%--                        </div>--%>
-<%--                        <div class="stat">--%>
-<%--                            <div class="stat-value">2</div>--%>
-<%--                            <div class="stat-label">Năm</div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
                 </div>
                 <ul class="sidebar-menu">
                     <li><a href="#" class="active"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
@@ -649,7 +635,7 @@
                 <div class="profile-card">
                     <div class="card-header">
                         <h2 class="card-title">Đơn hàng gần đây</h2>
-                        <a href="/pages/order-history.html" class="btn btn-outline">Xem tất cả</a>
+                        <a href="/pages/order-history.jsp" class="btn btn-outline">Xem tất cả</a>
                     </div>
                     <div class="table-responsive">
                         <table class="orders-table">
@@ -775,36 +761,36 @@
                     </div>
                 </div>
                 
-                <form id="updateProfileForm">
+                <form id="updateProfileForm" action="/DoCongNghe_Nhom36_war/Profile" method="post">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="modalFirstName">Họ</label>
-                            <input type="text" id="modalFirstName" class="form-control" value="Nguyễn Văn">
+                            <input type="text" id="modalFirstName" class="form-control" name="modalFirstName" >
                         </div>
                         <div class="form-group">
                             <label for="modalLastName">Tên</label>
-                            <input type="text" id="modalLastName" class="form-control" value="A">
+                            <input type="text" id="modalLastName" class="form-control" name="modalLastName" >
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="modalEmail">Email</label>
-                            <input type="email" id="modalEmail" class="form-control" value="nguyenvana@example.com">
+                            <input type="email" id="modalEmail" class="form-control" name="modalEmail" >
                         </div>
                         <div class="form-group">
                             <label for="modalPhone">Số điện thoại</label>
-                            <input type="text" id="modalPhone" class="form-control" value="0909123456">
+                            <input type="text" id="modalPhone" class="form-control" name="modalPhone">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="modalAddress">Địa chỉ</label>
-                        <input type="text" id="modalAddress" class="form-control" value="123 Đường ABC, Quận 1, TP.HCM">
+                        <input type="text" id="modalAddress" class="form-control" name="modalAddress">
                     </div>
+                    <button class="btn btn-primary" type="submit" id="saveProfile" name="action" value="save">Lưu thay đổi</button>
+                    <button class="btn btn-danger" type="submit" id="cancelUpdate" name="action" value="deny">Hủy bỏ</button>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline" id="cancelUpdate">Hủy bỏ</button>
-                <button class="btn" id="saveProfile">Lưu thay đổi</button>
             </div>
         </div>
     </div>
@@ -840,7 +826,7 @@
           <ul class="list-unstyled">
             <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
             <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
-            <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
+            <li><a href="/pages/order-history.jsp" class="footer-link">Theo dõi đơn hàng</a></li>
             <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
           </ul>
         </div>
@@ -873,17 +859,17 @@
             const cancelUpdate = document.getElementById('cancelUpdate');
             const saveProfile = document.getElementById('saveProfile');
             const avatarTrigger = document.getElementById('avatarTrigger');
-            
+
             // Form elements
             const profileForm = document.getElementById('profileForm');
             const updateProfileForm = document.getElementById('updateProfileForm');
             const formControls = profileForm.querySelectorAll('.form-control');
-            
+
             // Open modal
             updateProfileBtn.addEventListener('click', function() {
                 updateProfileModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                
+
                 // Copy current values to modal form
                 document.getElementById('modalFirstName').value = document.getElementById('firstName').value;
                 document.getElementById('modalLastName').value = document.getElementById('lastName').value;
@@ -892,68 +878,68 @@
                 document.getElementById('modalBirthday').value = document.getElementById('birthday').value;
                 document.getElementById('modalAddress').value = document.getElementById('address').value;
             });
-            
+
             // Close modal
             function closeModalFunc() {
                 updateProfileModal.classList.remove('active');
                 document.body.style.overflow = 'auto';
             }
-            
+
             closeModal.addEventListener('click', closeModalFunc);
             cancelUpdate.addEventListener('click', closeModalFunc);
-            
+
             // Close modal when clicking outside
             updateProfileModal.addEventListener('click', function(e) {
                 if (e.target === updateProfileModal) {
                     closeModalFunc();
                 }
             });
-            
-            // Save profile changes
-            saveProfile.addEventListener('click', function() {
-                // Update main form with modal values
-                document.getElementById('firstName').value = document.getElementById('modalFirstName').value;
-                document.getElementById('lastName').value = document.getElementById('modalLastName').value;
-                document.getElementById('email').value = document.getElementById('modalEmail').value;
-                document.getElementById('phone').value = document.getElementById('modalPhone').value;
-                document.getElementById('birthday').value = document.getElementById('modalBirthday').value;
-                document.getElementById('address').value = document.getElementById('modalAddress').value;
-                
-                // Update user name in sidebar and header
-                const fullName = document.getElementById('modalFirstName').value + ' ' + document.getElementById('modalLastName').value;
-                document.querySelector('.user-name').textContent = fullName;
-                document.querySelector('.user-menu span').textContent = fullName;
-                
-                // Show success message
-                alert('Thông tin cá nhân đã được cập nhật thành công!');
-                
-                closeModalFunc();
+
+            // // Save profile changes
+            // saveProfile.addEventListener('click', function() {
+            //     // // Update main form with modal values
+            //     // document.getElementById('firstName').value = document.getElementById('modalFirstName').value;
+            //     // document.getElementById('lastName').value = document.getElementById('modalLastName').value;
+            //     // document.getElementById('email').value = document.getElementById('modalEmail').value;
+            //     // document.getElementById('phone').value = document.getElementById('modalPhone').value;
+            //     // document.getElementById('birthday').value = document.getElementById('modalBirthday').value;
+            //     // document.getElementById('address').value = document.getElementById('modalAddress').value;
+            //     //
+            //     // // Update user name in sidebar and header
+            //     // const fullName = document.getElementById('modalFirstName').value + ' ' + document.getElementById('modalLastName').value;
+            //     // document.querySelector('.user-name').textContent = fullName;
+            //     // document.querySelector('.user-menu span').textContent = fullName;
+            //     //
+            //     // // Show success message
+            //     // alert('Thông tin cá nhân đã được cập nhật thành công!');
+            //     //
+            //     closeModalFunc();
             });
-            
+
             // Avatar upload trigger
             avatarTrigger.addEventListener('click', function() {
                 updateProfileModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
-            
+
             // Add to cart functionality for wishlist items
             const addToCartBtns = document.querySelectorAll('.product-actions .btn:first-child');
-            
+
             addToCartBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
                     const productName = this.closest('.product-card').querySelector('.product-name').textContent;
                     alert(`Đã thêm ${productName} vào giỏ hàng!`);
                 });
             });
-            
+
             // Remove from wishlist functionality
             const removeFromWishlistBtns = document.querySelectorAll('.product-actions .btn-outline');
-            
+
             removeFromWishlistBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
                     const productCard = this.closest('.product-card');
                     const productName = productCard.querySelector('.product-name').textContent;
-                    
+
                     if (confirm(`Bạn có chắc muốn xóa ${productName} khỏi danh sách yêu thích?`)) {
                         productCard.style.opacity = '0';
                         setTimeout(() => {
@@ -962,8 +948,7 @@
                     }
                 });
             });
-        });
-    </script>
+   </script>
 </body>
 
 </html>

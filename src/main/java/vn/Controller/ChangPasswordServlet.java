@@ -27,6 +27,14 @@ public class ChangPasswordServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UserService us =new UserService();
+        User u = us.getUserByUserName(request.getParameter("username"));
+        String oldPass = request.getParameter("oldPass");
+        String newPass = request.getParameter("newPass");
+        if(oldPass.equals(newPass)){
+            us.updatePassword(u.getId(),oldPass);
+        }else {
 
+        }
     }
 }
