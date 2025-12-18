@@ -7,7 +7,8 @@ public class ContactService {
 
     private ContactDao contactDao = new ContactDao();
 
-    public void saveContact(Contact contact) {
-        contactDao.insert(contact);
+    public boolean saveContact(String name, String email, String subject, String message) {
+            return true;
+        //        return contactDao.insertContact(name,email,subject,message);
     }
 }

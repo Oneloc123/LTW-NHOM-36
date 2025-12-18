@@ -535,7 +535,7 @@
 
           <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
           <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
-          <li class="nav-item"><a class="nav-link" href="/pages/order-history.html">Đơn hàng</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pages/order-history.jsp">Đơn hàng</a></li>
            <!-- Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
@@ -599,7 +599,7 @@
                 </div>
                 <ul class="sidebar-menu">
                     <li><a href="#" class="active"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
-                    <li><a href="/pages/order-history.html"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
+                    <li><a href="/pages/order-history.jsp"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
                     <li><a href="/pages/wishList.html"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
                     <li><a href="/pages/changPassword.jsp"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
                     <li><a href="/DoCongNghe_Nhom36_war/loggout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
@@ -654,7 +654,7 @@
                 <div class="profile-card">
                     <div class="card-header">
                         <h2 class="card-title">Đơn hàng gần đây</h2>
-                        <a href="/pages/order-history.html" class="btn btn-outline">Xem tất cả</a>
+                        <a href="/pages/order-history.jsp" class="btn btn-outline">Xem tất cả</a>
                     </div>
                     <div class="table-responsive">
                         <table class="orders-table">
@@ -853,7 +853,7 @@
           <ul class="list-unstyled">
             <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
             <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
-            <li><a href="/pages/order-history.html" class="footer-link">Theo dõi đơn hàng</a></li>
+            <li><a href="/pages/order-history.jsp" class="footer-link">Theo dõi đơn hàng</a></li>
             <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
           </ul>
         </div>
