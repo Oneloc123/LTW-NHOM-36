@@ -580,13 +580,28 @@
                             <i class="fas fa-camera text-white"></i>
                         </div>
                     </div>
-                    <div class="user-name">${user.getFullName()}</div>
+                    <div class="user-name">@name</div>
+                    <div class="user-role">Thành viên Bạc</div>
+                    <div class="user-stats">
+                        <div class="stat">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Đơn hàng</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">Đánh giá</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">2</div>
+                            <div class="stat-label">Năm</div>
+                        </div>
+                    </div>
                 </div>
                 <ul class="sidebar-menu">
                     <li><a href="#" class="active"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
-                    <li><a href="/DoCongNghe_Nhom36_war/order-history.html"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
-                    <li><a href="/DoCongNghe_Nhom36_war/wishList.html"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
-                    <li><a href="/DoCongNghe_Nhom36_war/changePassword"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
+                    <li><a href="/pages/order-history.jsp"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
+                    <li><a href="/pages/wishList.html"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
+                    <li><a href="/pages/changPassword.jsp"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
                     <li><a href="/DoCongNghe_Nhom36_war/loggout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                 </ul>
             </div>
@@ -623,6 +638,10 @@
                                 <label for="phone">Số điện thoại</label>
                                 <input type="text" id="phone" class="form-control" value="${user.getPhoneNumber()}" readonly>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthday">Ngày sinh</label>
+                            <input type="date" id="birthday" class="form-control" value="1990-05-15" readonly>
                         </div>
                         <div class="form-group">
                             <label for="address">Địa chỉ</label>
@@ -761,36 +780,44 @@
                     </div>
                 </div>
                 
-                <form id="updateProfileForm" action="/DoCongNghe_Nhom36_war/Profile" method="post">
+                <form id="updateProfileForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="modalFirstName">Họ</label>
-                            <input type="text" id="modalFirstName" class="form-control" name="modalFirstName" >
+                            <input type="text" id="modalFirstName" class="form-control" value="Nguyễn Văn">
                         </div>
                         <div class="form-group">
                             <label for="modalLastName">Tên</label>
-                            <input type="text" id="modalLastName" class="form-control" name="modalLastName" >
+                            <input type="text" id="modalLastName" class="form-control" value="A">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="modalEmail">Email</label>
-                            <input type="email" id="modalEmail" class="form-control" name="modalEmail" >
+                            <input type="email" id="modalEmail" class="form-control" value="nguyenvana@example.com">
                         </div>
                         <div class="form-group">
                             <label for="modalPhone">Số điện thoại</label>
-                            <input type="text" id="modalPhone" class="form-control" name="modalPhone">
+                            <input type="text" id="modalPhone" class="form-control" value="0909123456">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="modalAddress">Địa chỉ</label>
-                        <input type="text" id="modalAddress" class="form-control" name="modalAddress">
+                        <label for="modalBirthday">Ngày sinh</label>
+                        <input type="date" id="modalBirthday" class="form-control" value="1990-05-15">
                     </div>
-                    <button class="btn btn-primary" type="submit" id="saveProfile" name="action" value="save">Lưu thay đổi</button>
-                    <button class="btn btn-danger" type="submit" id="cancelUpdate" name="action" value="deny">Hủy bỏ</button>
+                    <div class="form-group">
+                        <label for="modalAddress">Địa chỉ</label>
+                        <input type="text" id="modalAddress" class="form-control" value="123 Đường ABC, Quận 1, TP.HCM">
+                    </div>
+                    <div class="form-group">
+                        <label for="modalBio">Giới thiệu bản thân</label>
+                        <textarea id="modalBio" class="form-control" rows="3" placeholder="Giới thiệu ngắn về bản thân...">Tôi là một người đam mê công nghệ và thích khám phá những sản phẩm mới nhất trên thị trường.</textarea>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelUpdate">Hủy bỏ</button>
+                <button class="btn" id="saveProfile">Lưu thay đổi</button>
             </div>
         </div>
     </div>
@@ -859,17 +886,17 @@
             const cancelUpdate = document.getElementById('cancelUpdate');
             const saveProfile = document.getElementById('saveProfile');
             const avatarTrigger = document.getElementById('avatarTrigger');
-
+            
             // Form elements
             const profileForm = document.getElementById('profileForm');
             const updateProfileForm = document.getElementById('updateProfileForm');
             const formControls = profileForm.querySelectorAll('.form-control');
-
+            
             // Open modal
             updateProfileBtn.addEventListener('click', function() {
                 updateProfileModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
-
+                
                 // Copy current values to modal form
                 document.getElementById('modalFirstName').value = document.getElementById('firstName').value;
                 document.getElementById('modalLastName').value = document.getElementById('lastName').value;
@@ -878,68 +905,68 @@
                 document.getElementById('modalBirthday').value = document.getElementById('birthday').value;
                 document.getElementById('modalAddress').value = document.getElementById('address').value;
             });
-
+            
             // Close modal
             function closeModalFunc() {
                 updateProfileModal.classList.remove('active');
                 document.body.style.overflow = 'auto';
             }
-
+            
             closeModal.addEventListener('click', closeModalFunc);
             cancelUpdate.addEventListener('click', closeModalFunc);
-
+            
             // Close modal when clicking outside
             updateProfileModal.addEventListener('click', function(e) {
                 if (e.target === updateProfileModal) {
                     closeModalFunc();
                 }
             });
-
-            // // Save profile changes
-            // saveProfile.addEventListener('click', function() {
-            //     // // Update main form with modal values
-            //     // document.getElementById('firstName').value = document.getElementById('modalFirstName').value;
-            //     // document.getElementById('lastName').value = document.getElementById('modalLastName').value;
-            //     // document.getElementById('email').value = document.getElementById('modalEmail').value;
-            //     // document.getElementById('phone').value = document.getElementById('modalPhone').value;
-            //     // document.getElementById('birthday').value = document.getElementById('modalBirthday').value;
-            //     // document.getElementById('address').value = document.getElementById('modalAddress').value;
-            //     //
-            //     // // Update user name in sidebar and header
-            //     // const fullName = document.getElementById('modalFirstName').value + ' ' + document.getElementById('modalLastName').value;
-            //     // document.querySelector('.user-name').textContent = fullName;
-            //     // document.querySelector('.user-menu span').textContent = fullName;
-            //     //
-            //     // // Show success message
-            //     // alert('Thông tin cá nhân đã được cập nhật thành công!');
-            //     //
-            //     closeModalFunc();
+            
+            // Save profile changes
+            saveProfile.addEventListener('click', function() {
+                // Update main form with modal values
+                document.getElementById('firstName').value = document.getElementById('modalFirstName').value;
+                document.getElementById('lastName').value = document.getElementById('modalLastName').value;
+                document.getElementById('email').value = document.getElementById('modalEmail').value;
+                document.getElementById('phone').value = document.getElementById('modalPhone').value;
+                document.getElementById('birthday').value = document.getElementById('modalBirthday').value;
+                document.getElementById('address').value = document.getElementById('modalAddress').value;
+                
+                // Update user name in sidebar and header
+                const fullName = document.getElementById('modalFirstName').value + ' ' + document.getElementById('modalLastName').value;
+                document.querySelector('.user-name').textContent = fullName;
+                document.querySelector('.user-menu span').textContent = fullName;
+                
+                // Show success message
+                alert('Thông tin cá nhân đã được cập nhật thành công!');
+                
+                closeModalFunc();
             });
-
+            
             // Avatar upload trigger
             avatarTrigger.addEventListener('click', function() {
                 updateProfileModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
-
+            
             // Add to cart functionality for wishlist items
             const addToCartBtns = document.querySelectorAll('.product-actions .btn:first-child');
-
+            
             addToCartBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
                     const productName = this.closest('.product-card').querySelector('.product-name').textContent;
                     alert(`Đã thêm ${productName} vào giỏ hàng!`);
                 });
             });
-
+            
             // Remove from wishlist functionality
             const removeFromWishlistBtns = document.querySelectorAll('.product-actions .btn-outline');
-
+            
             removeFromWishlistBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
                     const productCard = this.closest('.product-card');
                     const productName = productCard.querySelector('.product-name').textContent;
-
+                    
                     if (confirm(`Bạn có chắc muốn xóa ${productName} khỏi danh sách yêu thích?`)) {
                         productCard.style.opacity = '0';
                         setTimeout(() => {
@@ -948,7 +975,8 @@
                     }
                 });
             });
-   </script>
+        });
+    </script>
 </body>
 
 </html>
