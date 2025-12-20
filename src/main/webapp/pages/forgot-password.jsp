@@ -118,8 +118,8 @@
               <button type="button" class="btn btn-white text-primary border -primary w-100 py-2"><i
                   class="bi bi-arrow-counterclockwise"></i>Nhập lại</button>
               <div class="footer-links mt-3">
-          <a href="login.jsp">Đăng nhập</a> |
-          <a href="/pages/register.jsp">Tạo tài khoản mới</a>
+          <a href="/DoCongNghe_Nhom36_war/login">Đăng nhập</a> |
+          <a href="/DoCongNghe_Nhom36_war//register">Tạo tài khoản mới</a>
         </div>
             </form>
           </div>

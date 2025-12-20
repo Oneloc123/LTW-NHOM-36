@@ -157,41 +157,36 @@
                     <div class="card p-4">
                         <h5 class="fw-bold mb-3">Đổi mật khẩu TechX</h5>
                         <hr>
-                        <form>
-                            <div class="row" style="margin-bottom: -10px;">
+                        <form action="/DoCongNghe_Nhom36_war/changePassword" method="post">
+                            <div class="row" style="margin-bottom: -10px;" >
                                 <div class="mb-5 col-6">
                                     <label for="password" class="form-label">Mật khẩu cũ</label>
-                                    <input type="password" class="form1 form-control" id="oldPassword" style="width: 300px;"
+                                    <input type="password" class="form1 form-control" id="oldPassword" name="oldPass" style="width: 300px;"
                                         placeholder="Nhập mật khẩu cũ" required>
                                 </div>
                                 <div class="mb-5 col-6">
                                     <label for="password" class="form-label">Mật khẩu mới</label>
-                                    <input type="password" class="form1 form-control" id="newPassword" style="width: 300px;"
+                                    <input type="password" class="form1 form-control" id="newPassword" name="newPass" style="width: 300px;"
                                         placeholder="Nhập mật khẩu mới" required>
                                 </div>
                             </div>
 
-                            <button type="button" style="margin-bottom: 30px;"
-                                class="btn btn btn-white btn-outline-primary  border -primary w-100 py-2">Gửi
-                                liên kết đến email để đặt lại
-                                mật khẩu</button>
-                            <hr>
+<%--                            <button type="button" style="margin-bottom: 30px;"--%>
+<%--                                class="btn btn btn-white btn-outline-primary  border -primary w-100 py-2">Gửi--%>
+<%--                                liên kết đến email để đặt lại--%>
+<%--                                mật khẩu</button>--%>
+<%--                            <hr>--%>
                             <div class="mb-3">
-                                <label for="otp" class="form-label" >Mã xác nhận từ email</label>
-                                <div class="row">
-                                    <input type="text" class="col1 form-control col  " id="otp" style="width: 600px;"
-                                        placeholder="Nhập mã xác nhận từ email">
-                                    <button type="button"
-                                        class="col2 btn col btn-white btn-outline-primary border -primary "><i
-                                            class="bi bi-arrow-clockwise"></i></i>Gửi lại</button>
-                                </div>
+<%--                                <label for="otp" class="form-label" >Mã xác nhận từ email</label>--%>
+<%--                                <div class="row">--%>
+<%--                                    <input type="text" class="col1 form-control col  " id="otp" style="width: 600px;"--%>
+<%--                                        placeholder="Nhập mã xác nhận từ email">--%>
+<%--                                    <button type="button"--%>
+<%--                                        class="col2 btn col btn-white btn-outline-primary border -primary "><i--%>
+<%--                                            class="bi bi-arrow-clockwise"></i></i>Gửi lại</button>--%>
+<%--                                </div>--%>
                                 <button type="submit" class="btn1 btn btn-primary w-100 py-2">xác nhận đổi mật
                                     khẩu</button>
-                            </div>
-
-                            <div class="footer-links mt-3">
-                                <a href="forgot-password.jsp">Quên mật khẩu ?</a> |
-                                <a href="/pages/register.jsp">Tạo tài khoản mới</a>
                             </div>
 
                         </form>

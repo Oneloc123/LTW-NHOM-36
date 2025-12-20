@@ -37,6 +37,28 @@ public class UserDao extends BaseDao {
     public List<User> getListUser() {
         return new ArrayList<>(data.values());
     }
+    public List<User> getList() {
+        return get().withHandle(h ->
+                h.createQuery(
+                                "SELECT id, username, password, email, fullName, phoneNumber, role, isActive, createAt, imgURL " +
+                                        "FROM users"
+                        )
+                        .mapToBean(User.class)
+                        .list()
+        );
+    }
+    public User getUserById(int id) {
+        return get().withHandle(h ->
+                h.createQuery(
+                                "SELECT id, username, password, email, fullName, phoneNumber, role, isActive, createAt, imgURL " +
+                                        "FROM users WHERE id = :id"
+                        )
+                        .bind("id", id)
+                        .mapToBean(User.class)
+                        .findOne()
+                        .orElse(null)
+        );
+    }
     public User getUser(int id) {
         return data.get(id);
     }
@@ -54,7 +76,53 @@ public class UserDao extends BaseDao {
             batch.execute();
         });
     }
-
+    public void updateProfile(User user) {
+        get().useHandle(h -> {
+            h.createUpdate(
+                            "UPDATE users SET " +
+                                    "email = :email, " +
+                                    "fullName = :fullName, " +
+                                    "phoneNumber = :phoneNumber, " +
+                                    "imgURL = :imgURL " +
+                                    "WHERE id = :id"
+                    )
+                    .bindBean(user)
+                    .execute();
+        });
+    }
+    public void updatePassword(int id, String password) {
+        get().useHandle(h -> {
+            h.createUpdate(
+                            "UPDATE users SET password = :password WHERE id = :id"
+                    )
+                    .bind("id", id)
+                    .bind("password", password)
+                    .execute();
+        });
+    }
+    public boolean checkLogin(String username, String password) {
+        return get().withHandle(h ->
+                h.createQuery(
+                                "SELECT COUNT(*) FROM users " +
+                                        "WHERE username = :username AND password = :password"
+                        )
+                        .bind("username", username)
+                        .bind("password", password)
+                        .mapTo(Integer.class)
+                        .one() > 0
+        );
+    }
+    public void insertUser(User user) {
+        get().useHandle(h -> {
+            h.createUpdate(
+                            "INSERT INTO users " +
+                                    "(username, password, email, fullName, phoneNumber, role, isActive, createAt, imgURL) " +
+                                    "VALUES (:username, :password, :email, :fullName, :phoneNumber, :role, :active, :createAt, :imgURL)"
+                    )
+                    .bindBean(user)
+                    .execute();
+        });
+    }
     static void main(String[] args) {
         UserDao dao=new UserDao();
         List<User> users = dao.getListUser();
