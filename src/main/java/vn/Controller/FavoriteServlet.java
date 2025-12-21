@@ -1,4 +1,4 @@
-package vn.Controller;
+package vn.controller;
 
 public class FavoriteServlet {
 }
