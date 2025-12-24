@@ -13,8 +13,8 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
       <link rel="stylesheet" href="../assets/css/footer.css">
-      <link rel="stylesheet" href="../assets/css/products.css">
       <link rel="stylesheet" href="../assets/css/header.css">
+        <link rel="stylesheet" href="../assets/css/products.css">
     </head>
 
     <body>
@@ -122,52 +122,58 @@
 
         <!-- PRODUCT GRID -->
           <section class="product-grid" id="productGrid">
+              <c:forEach var="p" items="${list}">
+                  <div class="product-card">
 
+                      <img src="${p.getImg()}" alt="${p.getName()}">
 
-                <c:forEach var="p" items="${list}">
-              <div class="product-card">
+                      <h3>${p.getName()}</h3>
 
-                  <img src="${p.getImg()}"
-                       alt="Robot Elilik">
+                      <div class="product-rating">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-o"></i>
+                          <span>4.5 (12)</span>
+                      </div>
 
-                  <h3>${p.getName()}</h3>
+                      <div class="product-price">${p.getPrice()}</div>
 
-                  <div class="product-rating">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-o"></i>
-                      <span>4.5 (12)</span>
+                      <p class="product-discount">
+                          Giá gốc <span class="product-old-price">7.139.000 VND</span>
+                      </p>
+
+                      <div class="card-footer">
+
+                          <!-- Nút mua (xem chi tiết) -->
+                          <button
+                                  onclick="window.location.href='product?id=${p.getId()}'"
+                                  class="buy-btn">
+                              Chi tiết
+                          </button>
+
+                          <!-- Nút thêm vào giỏ hàng -->
+                          <button
+                                  class="add-cart-btn"
+                                 >
+                              <i class="fa fa-shopping-cart"></i>
+
+                          </button>
+
+                          <!-- Nút yêu thích -->
+                          <button
+                                  class="wishlist-btn"
+                                  >
+                              <i class="fa fa-heart-o"></i>
+                          </button>
+
+                      </div>
+
                   </div>
-
-                  <p style="font-size:14px; color:#444;">Hồng</p>
-
-                  <div class="color-options">
-                      <div class="color-circle active" style="background:#ccc;"></div>
-                      <div class="color-circle" style="background:#222;"></div>
-                  </div>
-
-                  <div class="product-price">${p.getPrice()}</div>
-
-                  <p class="product-discount">
-                      Giá gốc
-                      <span class="product-old-price">7.139.000 VND</span>
-                  </p>
-
-                  <div class="card-footer">
-                      <button
-                              onclick="window.location.href='product?id=${p.getId()}'"
-                              class="buy-btn">
-                          Mua
-                      </button>
-                  </div>
-
-              </div>
-                </c:forEach>
-
-
+              </c:forEach>
           </section>
+
 
 
           <!-- Pagination -->

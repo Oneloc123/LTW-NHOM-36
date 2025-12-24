@@ -1,4 +1,4 @@
-package vn.Controller;
+package vn.controller;
 
 import com.mysql.cj.Session;
 import jakarta.servlet.*;
