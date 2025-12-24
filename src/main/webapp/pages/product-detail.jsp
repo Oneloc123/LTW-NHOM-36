@@ -449,7 +449,7 @@
         const qty = document.getElementById('qtyInput').value;
         showToast('✅ Mua ngay: ' + qty + ' sản phẩm — chuyển tới thanh toán (demo)');
         // demo: redirect to cart / checkout page (static)
-        setTimeout(() => { window.location.href = '/pages/cart.html'; }, 900);
+        setTimeout(() => { window.location.href = 'cart.jsp'; }, 900);
       });
     })();
 
