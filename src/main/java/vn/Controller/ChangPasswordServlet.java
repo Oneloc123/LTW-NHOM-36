@@ -14,10 +14,10 @@ public class ChangPasswordServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserService us =new UserService();
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("username") == null) {
+        if (session == null || session.getAttribute("id") == null) {
             response.sendRedirect(request.getContextPath() + "/login");
         }else{
-            User u = us.getUserByUserName(session.getAttribute("username").toString());
+            User u = us.getUserById(Integer.parseInt(session.getAttribute("id").toString()));
             if(u!=null){
                 request.setAttribute("user",u);
             }

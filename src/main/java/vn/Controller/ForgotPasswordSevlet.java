@@ -13,7 +13,7 @@ public class ForgotPasswordSevlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserService us =new UserService();
         HttpSession session = request.getSession(false);
-        if (session != null && session.getAttribute("username") != null) {
+        if (session != null && session.getAttribute("id") != null) {
             response.sendRedirect(request.getContextPath() + "/login");
         }else{
             request.getRequestDispatcher("/pages/forgot-password.jsp").forward(request,response);

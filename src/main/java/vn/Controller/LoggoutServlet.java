@@ -11,10 +11,10 @@ public class LoggoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("username") == null) {
+        if (session == null || session.getAttribute("id") == null) {
             response.sendRedirect("/login");
         } else {
-            session.removeAttribute("username");
+            session.removeAttribute("id");
             request.getRequestDispatcher("/pages/login.jsp").forward(request,response);
         }
     }

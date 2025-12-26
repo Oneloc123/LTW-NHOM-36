@@ -11,18 +11,25 @@ public class UserService {
 
     public User getUserByUserName(String userName)
     {
-        List<User> users = userDao.getListUser();
-        for(User u:users){
-            if(u.getUsername().equals(userName)){
-                return u;
-            }
-        }
-        return null;
+        User u = userDao.getUserByUserName(userName);
+        if(u!=null)
+            return u;
+        else
+            return null;
     }
     public List<User> getAllUsers()
     {
-        return userDao.getListUser();
+        return userDao.getList();
     }
+
+    public static void main(String[] args) {
+        UserService userService = new UserService();
+        List<User> users = userService.getAllUsers();
+        for (User user : users) {
+            System.out.println(user.toString());
+        }
+    }
+
     public boolean checkUserNameAndPassword(String username, String password)
     {
         User user = getUserByUserName(username);

@@ -3,6 +3,7 @@ package vn.Controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.model.User;
 import vn.services.UserService;
 
 import java.io.IOException;
@@ -30,8 +31,10 @@ public class LoginServlet extends HttpServlet {
         }
         boolean check = userService.checkUserNameAndPassword(username, password);
         if(check){
+            UserService userService = new UserService();
+            User user = userService.getUserByUserName(username);
             HttpSession session = request.getSession();
-            session.setAttribute("username", username);
+            session.setAttribute("id", user.getId());
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }else{
             request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
