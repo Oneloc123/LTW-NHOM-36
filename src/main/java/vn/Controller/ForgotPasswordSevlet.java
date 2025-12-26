@@ -1,4 +1,4 @@
-package vn.Controller;
+package vn.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
