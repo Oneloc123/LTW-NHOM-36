@@ -1,4 +1,4 @@
-package vn.controller;
+package vn.Controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -7,7 +7,6 @@ import vn.model.User;
 import vn.services.UserService;
 
 import java.io.IOException;
-import java.util.Date;
 
 @WebServlet(name = "RegisterServlet", value = "/register")
 public class RegisterServlet extends HttpServlet {
