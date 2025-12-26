@@ -1,9 +1,8 @@
-package vn.controller;
+package vn.Controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.model.User;
 import vn.services.UserService;
 
 import java.io.IOException;
