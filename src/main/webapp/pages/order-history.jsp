@@ -177,7 +177,7 @@
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="../pages/wishList.html">Danh sách sản phẩm yêu thích</a></li>
+              <li><a class="dropdown-item" href="wishList.html">Danh sách sản phẩm yêu thích</a></li>
               <li><a class="dropdown-item" href="../pages/notification.html">Xem thông báo</a></li>
               <li><a class="dropdown-item" href="../pages/viewed-product.html">Sản phẩm đã xem</a>
               </li>

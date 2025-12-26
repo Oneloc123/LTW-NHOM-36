@@ -516,7 +516,7 @@
   <!-- HEADER -->
   <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.jsp">
+      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/DoCongNghe_Nhom36_war/home">
         <i class="bi bi-camera fs-4 me-2"></i>
         TechX
       </a>
@@ -527,8 +527,8 @@
 
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav align-items-lg-center gap-lg-3">
-          <li class="nav-item"><a class="nav-link " href="/index.jsp">Trang chủ</a></li>
-          <li class="nav-item"><a class="nav-link" href="/pages/shop.html">Cửa hàng</a></li>
+          <li class="nav-item"><a class="nav-link " href="/DoCongNghe_Nhom36_war/home">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link" href="/DoCongNghe_Nhom36_war/shop">Cửa hàng</a></li>
 
                                   <li class="nav-item"><a class="nav-link" href="/pages/products.html">Sản phẩm</a></li>
 
@@ -543,11 +543,11 @@
                             Tài khoản 
                         </a>
                         <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/pages/profile.html">Thông tin tài khoản</a></li>
+                            <li><a class="dropdown-item" href="/DoCongNghe_Nhom36_war//Profile">Thông tin tài khoản</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="wishList.html">Danh sách sản phẩm yêu thích</a></li>
+                            <li><a class="dropdown-item" href="/DoCongNghe_Nhom36_war//Wishlist">Danh sách sản phẩm yêu thích</a></li>
                             <li><a class="dropdown-item" href="notification.html">Xem thông báo</a></li>
                             <li><a class="dropdown-item" href="viewed-product.html">Sản phẩm đã xem</a>
                             </li>
@@ -607,11 +607,11 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">Họ</label>
-                                <input type="text" id="firstName" class="form-control" value="${user.getFullName()}" readonly>
+                                <input type="text" id="firstName" class="form-control" value="${user.getFirstName()}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Tên</label>
-                                <input type="text" id="lastName" class="form-control" value="${user.getFullName()}" readonly>
+                                <input type="text" id="lastName" class="form-control" value="${user.getLastName()}" readonly>
                             </div>
                         </div>
                         <div class="form-row">
