@@ -15,7 +15,7 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserService us =new UserService();
         HttpSession session = request.getSession(false);
-        if (session != null && session.getAttribute("username") != null) {
+        if (session != null && session.getAttribute("id") != null) {
             response.sendRedirect(request.getContextPath() + "/home");
         }else{
             request.getRequestDispatcher("/pages/register.jsp").forward(request,response);
@@ -24,7 +24,8 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String fullname = request.getParameter("fullName");
+        String firstname = request.getParameter("firstName");
+        String lastname = request.getParameter("lastName");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String username = request.getParameter("userName");
@@ -33,7 +34,8 @@ public class RegisterServlet extends HttpServlet {
         if(password.equals(confirmPassword)){
             UserService us = new UserService();
             User u = new User();
-            u.setFullName(fullname);
+            u.setFirstName(firstname);
+            u.setLastName(lastname);
             u.setEmail(email);
             u.setPassword(password);
             u.setUsername(username);

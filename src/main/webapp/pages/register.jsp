@@ -78,7 +78,7 @@
   <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
     <div class="container">
       <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.jsp">
+      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/DoCongNghe_Nhom36_war/home">
         <i class="bi bi-camera fs-4 me-2"></i>
         <span>TechX</span>
       </a>
@@ -91,7 +91,7 @@
       <p class="text-center text-muted mb-4">Điền thông tin để đăng ký tài khoản mới</p>
       <div class="row g-4">
         <!-- Form tạo tài khoản -->
-        <div class="col-md-8">
+        <div class="card-center" style="margin-left: 18%; width: 60%;">
           <div class="card p-4">
             <h5 class="fw-bold mb-3">Tạo tài khoản TechX</h5>
             <ul class="list-unstyled text-muted" style="margin-bottom: 5px;">
@@ -142,18 +142,6 @@
                  <a href="/DoCongNghe_Nhom36_war/forgot-password">Quên mật khẩu ?</a>
                </div>
             </form>
-          </div>
-        </div>
-
-        <!-- Tóm tắt lợi ích hoặc hướng dẫn -->
-        <div class="col-md-4" style="margin-top: 4px;">
-          <div class="summary-card card2">
-            <h5 class="fw-bold mb-3">Lưu ý bảo mật</h5>
-            <ol class="text-muted small">
-              <li class="mb-2">Không chia sẽ mật khẩu cho người lạ.</li>
-              <li class="mb-2">Mật khẩu nên có ít nhất 8 ký tự, gồm chữ, số và ký hiệu.</li>
-              <li class="mb-2">Liên hệ hỗ trợ nếu có bất ký sai sót nào.</li>
-            </ol>
           </div>
         </div>
       </div>
