@@ -560,7 +560,7 @@
           <a href="/DoCongNghe_Nhom36_war/login" class="btn btn-outline-primary btn-sm">
             <i class="bi bi-box-arrow-in-right me-1"></i>Đăng nhập
           </a>
-          <a href="/pages/cart.html" class="btn btn-primary btn-sm">
+          <a href="/pages/cart.jsp" class="btn btn-primary btn-sm">
             <i class="bi bi-cart3 me-1"></i>Giỏ hàng
           </a>
         </div>

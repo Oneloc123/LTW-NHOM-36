@@ -70,7 +70,7 @@
                 <a href="/pages/login.html" class="btn btn-outline-primary btn-sm d-flex align-items-center">
                   <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
                 </a>
-                <a href="/pages/cart.html" class="btn btn-primary btn-sm d-flex align-items-center">
+                <a href="/pages/cart.jsp" class="btn btn-primary btn-sm d-flex align-items-center">
                   <i class="bi bi-cart3 me-1"></i> Giỏ hàng
                 </a>
               </div>

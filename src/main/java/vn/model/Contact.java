@@ -1,5 +1,6 @@
 package vn.model;
 
+
 public class Contact {
     private String name;
     private String email;
@@ -15,3 +16,4 @@ public class Contact {
     public String getEmail() { return email; }
     public String getMessage() { return message; }
 }
+
