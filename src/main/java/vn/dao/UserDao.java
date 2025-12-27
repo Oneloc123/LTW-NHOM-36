@@ -3,7 +3,6 @@ package vn.dao;
 import org.jdbi.v3.core.statement.PreparedBatch;
 import vn.model.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +33,8 @@ public class UserDao extends BaseDao {
                 true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
 
     }
-    public List<User> getListUser() {
-        return new ArrayList<>(data.values());
-    }
+
+    // OK
     public List<User> getList() {
         return get().withHandle(h ->
                 h.createQuery(
@@ -47,10 +45,11 @@ public class UserDao extends BaseDao {
                         .list()
         );
     }
+    // OK
     public User getUserById(int id) {
         return get().withHandle(h ->
                 h.createQuery(
-                                "SELECT id, username, password, email, fullName, phoneNumber, role, isActive, createAt, imgURL " +
+                                "SELECT id, username, password, email, firstName, lastName, phoneNumber, role, isActive, createAt, imgURL " +
                                         "FROM users WHERE id = :id"
                         )
                         .bind("id", id)
@@ -59,9 +58,8 @@ public class UserDao extends BaseDao {
                         .orElse(null)
         );
     }
-    public User getUser(int id) {
-        return data.get(id);
-    }
+
+    //OK
     public void insert(List<User> users){
         get().useHandle(h -> {
             PreparedBatch batch = h.prepareBatch(
@@ -76,6 +74,7 @@ public class UserDao extends BaseDao {
             batch.execute();
         });
     }
+    // OK
     public void updateProfile(User user) {
         get().useHandle(h -> {
             h.createUpdate(
@@ -83,14 +82,15 @@ public class UserDao extends BaseDao {
                                     "email = :email, " +
                                     "firstName = :firstName, " +
                                     "lastName = :lastName, " +
-                                    "phoneNumber = :phoneNumber, " +
-                                    "imgURL = :imgURL " +
+                                    "phoneNumber = :phoneNumber " +
                                     "WHERE id = :id"
                     )
                     .bindBean(user)
                     .execute();
         });
     }
+
+    // OK
     public void updatePassword(int id, String password) {
         get().useHandle(h -> {
             h.createUpdate(
@@ -101,6 +101,8 @@ public class UserDao extends BaseDao {
                     .execute();
         });
     }
+
+    // OK
     public boolean checkLogin(String username, String password) {
         return get().withHandle(h ->
                 h.createQuery(
@@ -113,6 +115,8 @@ public class UserDao extends BaseDao {
                         .one() > 0
         );
     }
+
+    // OK
     public void insertUser(User user) {
         get().useHandle(h -> {
             h.createUpdate(
@@ -125,22 +129,18 @@ public class UserDao extends BaseDao {
         });
     }
 
-    public static void main(String[] args) {
-        UserDao dao=new UserDao();
-        List<User> users = dao.getListUser();
-        dao.insert(users);
-    }
-
-    public User getUserByUserName(String userName) {
+    //OK
+    public User getUserByUserName(String username) {
         return get().withHandle(h ->
                 h.createQuery(
-                                "SELECT id, username, password, email, fullName, phoneNumber, role, isActive, createAt, imgURL " +
-                                        "FROM users WHERE username = :userName"
+                                "SELECT id, username, password, email, firstName, lastName, phoneNumber, role, isActive, createAt, imgURL " +
+                                        "FROM users WHERE username = :username"
                         )
-                        .bind("username", userName)
+                        .bind("username", username)
                         .mapToBean(User.class)
                         .findOne()
                         .orElse(null)
         );
     }
+
 }

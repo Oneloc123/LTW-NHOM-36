@@ -10,11 +10,10 @@ import java.io.IOException;
 
 @WebServlet(name = "login", value = "/login")
 public class LoginServlet extends HttpServlet {
-    UserService userService = new UserService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("username") == null) {
+        if (session == null || session.getAttribute("id") == null) {
             request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
             return;
         }else{
@@ -29,9 +28,9 @@ public class LoginServlet extends HttpServlet {
         if(username == null || password == null){
             request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
         }
+        UserService userService = new UserService();
         boolean check = userService.checkUserNameAndPassword(username, password);
         if(check){
-            UserService userService = new UserService();
             User user = userService.getUserByUserName(username);
             HttpSession session = request.getSession();
             session.setAttribute("id", user.getId());

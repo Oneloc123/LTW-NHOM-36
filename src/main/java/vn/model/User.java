@@ -107,7 +107,7 @@ public class User implements Serializable {
         return createAt;
     }
 
-    public void setCreatAt(String createAt) {
+    public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
 

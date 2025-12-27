@@ -17,22 +17,16 @@ public class UserService {
         else
             return null;
     }
+    // OK
     public List<User> getAllUsers()
     {
         return userDao.getList();
     }
 
-    public static void main(String[] args) {
-        UserService userService = new UserService();
-        List<User> users = userService.getAllUsers();
-        for (User user : users) {
-            System.out.println(user.toString());
-        }
-    }
 
     public boolean checkUserNameAndPassword(String username, String password)
     {
-        User user = getUserByUserName(username);
+        User user = userDao.getUserByUserName(username);
         if(user == null)return false;
         if(user.getPassword().equals(password)) return true;
         return false;   
