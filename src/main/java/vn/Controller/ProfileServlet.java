@@ -1,4 +1,4 @@
-package vn.controller;
+package vn.Controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -42,7 +42,6 @@ public class ProfileServlet extends HttpServlet {
             String nameLastModal = request.getParameter("modalLastName");
             String emailModal = request.getParameter("modalEmail");
             String phoneModal = request.getParameter("modalPhone");
-            String addressModal = request.getParameter("modalAddress");
             // kiểm tra các thông tin
 
             // thực hiện update User

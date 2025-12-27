@@ -580,7 +580,7 @@
                             <i class="fas fa-camera text-white"></i>
                         </div>
                     </div>
-                    <div class="user-name">@name</div>
+                    <div class="user-name">"${user.getLastName()}"</div>
                     <div class="user-role">Thành viên Bạc</div>
                     <div class="user-stats">
                         <div class="stat">
@@ -601,7 +601,7 @@
                     <li><a href="#" class="active"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
                     <li><a href="/pages/order-history.jsp"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
                     <li><a href="/pages/wishList.html"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
-                    <li><a href="/pages/changPassword.jsp"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
+                    <li><a href="/DoCongNghe_Nhom36_war//changePassword"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
                     <li><a href="/DoCongNghe_Nhom36_war/loggout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                 </ul>
             </div>

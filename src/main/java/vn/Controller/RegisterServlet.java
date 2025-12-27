@@ -1,4 +1,4 @@
-package vn.controller;
+package vn.Controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -7,6 +7,7 @@ import vn.model.User;
 import vn.services.UserService;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
 
 @WebServlet(name = "RegisterServlet", value = "/register")
@@ -43,7 +44,7 @@ public class RegisterServlet extends HttpServlet {
             u.setActive(true);
             u.setImgURL("/images/default.jpg");
             u.setRole("USER");
-            u.setCreatAt("0/0/0");
+            u.setCreateAt(LocalDate.now().toString());
             us.registerUser(u);
         }
     }

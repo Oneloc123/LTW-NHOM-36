@@ -1,4 +1,4 @@
-package vn.controller;
+package vn.Controller;
 
 import vn.dao.ContactDao;
 

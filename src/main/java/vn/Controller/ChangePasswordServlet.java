@@ -1,4 +1,4 @@
-package vn.controller;
+package vn.Controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -9,7 +9,7 @@ import vn.services.UserService;
 import java.io.IOException;
 
 @WebServlet(name = "ChangPasswordServlet", value = "/changePassword")
-public class ChangPasswordServlet extends HttpServlet {
+public class ChangePasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserService us =new UserService();
@@ -21,7 +21,7 @@ public class ChangPasswordServlet extends HttpServlet {
             if(u!=null){
                 request.setAttribute("user",u);
             }
-            request.getRequestDispatcher("/pages/changPassword.jsp").forward(request,response);
+            request.getRequestDispatcher("/pages/changePassword.jsp").forward(request,response);
         }
     }
 
@@ -32,7 +32,8 @@ public class ChangPasswordServlet extends HttpServlet {
         String oldPass = request.getParameter("oldPass");
         String newPass = request.getParameter("newPass");
         if(oldPass.equals(newPass)){
-            us.updatePassword(u.getId(),oldPass);
+            us.updatePassword(u.getId(),newPass);
+            request.getRequestDispatcher("/pages/profile.jsp").forward(request,response);
         }else {
 
         }
