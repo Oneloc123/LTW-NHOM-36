@@ -18,7 +18,11 @@ public class ContactServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("pages/contact.jsp");
+        // Gán hàm kiểm tra đang ở trang nào thì nó lỗi ở dòng dưới, với lại dòng dưới không thay đường dẫn trang
+        //response.sendRedirect("pages/contact.jsp");
+        request.setAttribute("currentPage", "contact");
+        request.getRequestDispatcher("/pages/contact.jsp").forward(request, response);
+
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)

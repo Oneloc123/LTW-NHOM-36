@@ -10,7 +10,7 @@ import vn.services.UserService;
 
 import java.io.IOException;
 
-@WebServlet(name = "ProfileServlet", value = "/Profile")
+@WebServlet(name = "ProfileServlet", value = "/profile")
 public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,6 +31,7 @@ public class ProfileServlet extends HttpServlet {
 //            if(ad!=null){
 //                request.setAttribute("address",ad);
 //            }
+            request.setAttribute("currentPage", "profile");
             request.getRequestDispatcher("/pages/profile.jsp").forward(request,response);
         }
     }

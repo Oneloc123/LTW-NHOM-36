@@ -514,59 +514,7 @@
 
 <body>
   <!-- HEADER -->
-  <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.jsp">
-        <i class="bi bi-camera fs-4 me-2"></i>
-        TechX
-      </a>
-
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <i class="bi bi-list fs-2 text-primary"></i>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav align-items-lg-center gap-lg-3">
-          <li class="nav-item"><a class="nav-link " href="/index.jsp">Trang chủ</a></li>
-          <li class="nav-item"><a class="nav-link" href="/pages/shop.html">Cửa hàng</a></li>
-
-                                  <li class="nav-item"><a class="nav-link" href="/pages/products.html">Sản phẩm</a></li>
-
-
-          <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
-          <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
-          <li class="nav-item"><a class="nav-link" href="/pages/order-history.jsp">Đơn hàng</a></li>
-           <!-- Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Tài khoản 
-                        </a>
-                        <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/pages/profile.html">Thông tin tài khoản</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="wishList.html">Danh sách sản phẩm yêu thích</a></li>
-                            <li><a class="dropdown-item" href="notification.html">Xem thông báo</a></li>
-                            <li><a class="dropdown-item" href="viewed-product.html">Sản phẩm đã xem</a>
-                            </li>
-                           
-                        </ul>
-                    </li>
-        </ul>
-
-        <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-          <a href="/DoCongNghe_Nhom36_war/login" class="btn btn-outline-primary btn-sm">
-            <i class="bi bi-box-arrow-in-right me-1"></i>Đăng nhập
-          </a>
-          <a href="/pages/cart.html" class="btn btn-primary btn-sm">
-            <i class="bi bi-cart3 me-1"></i>Giỏ hàng
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
+  <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
    <!-- Main Content -->
     <div class="container">
@@ -599,10 +547,10 @@
                 </div>
                 <ul class="sidebar-menu">
                     <li><a href="#" class="active"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
-                    <li><a href="/pages/order-history.jsp"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
-                    <li><a href="/pages/wishList.html"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
-                    <li><a href="/pages/changPassword.jsp"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
-                    <li><a href="/DoCongNghe_Nhom36_war/loggout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                    <li><a href="${pageContext.request.contextPath}/orders"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
+                    <li><a href="${pageContext.request.contextPath}/wishList.html"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
+                    <li><a href="${pageContext.request.contextPath}/changPassword.jsp"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
+                    <li><a href="${pageContext.request.contextPath}/loggout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                 </ul>
             </div>
 
@@ -705,7 +653,7 @@
                 <div class="profile-card">
                     <div class="card-header">
                         <h2 class="card-title">Sản phẩm yêu thích</h2>
-                        <a href="/pages/wishList.html" class="btn btn-outline">Xem tất cả</a>
+                        <a href="${pageContext.request.contextPath}/wishList.html" class="btn btn-outline">Xem tất cả</a>
                     </div>
                     <div class="wishlist-grid">
                         <!-- Product 1 -->

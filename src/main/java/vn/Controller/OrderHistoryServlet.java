@@ -1,4 +1,4 @@
-package vn.Controller;
+package vn.controller;
 
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 import jakarta.servlet.*;
@@ -12,7 +12,7 @@ import vn.services.UserService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "OrderHistoryServlet", value = "/Order-History")
+@WebServlet(name = "OrderHistoryServlet", value = "/orders")
 public class OrderHistoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,6 +27,7 @@ public class OrderHistoryServlet extends HttpServlet {
             OrderService os = new OrderService();
             List<Order> list = os.getListOrderById(uid);
             request.setAttribute("list", list);
+            request.setAttribute("currentPage", "orders");
             request.getRequestDispatcher("/pages/order-history.jsp").forward(request, response);
         }
     }
