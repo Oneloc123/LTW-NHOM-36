@@ -29,19 +29,18 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if(action.equals("save")){
+        if("save".equals(action)){
             // tạo service
             UserService us =new UserService();
             // truy vấn user
             HttpSession session = request.getSession(false);
-            int id = Integer.parseInt(request.getParameter("id"));
+            int id = Integer.parseInt(session.getAttribute("id").toString());
             User u = us.getUserById(id);
             // lấy thông tin gửi từ client
             String nameFirstModal = request.getParameter("modalFirstName");
             String nameLastModal = request.getParameter("modalLastName");
             String emailModal = request.getParameter("modalEmail");
             String phoneModal = request.getParameter("modalPhone");
-            String addressModal = request.getParameter("modalAddress");
             // kiểm tra các thông tin
 
             // thực hiện update User
@@ -51,6 +50,9 @@ public class ProfileServlet extends HttpServlet {
             u.setPhoneNumber(phoneModal);
             //
             us.updateUser(u);
+            request.removeAttribute("user");
+            request.setAttribute("user",u);
+            request.getRequestDispatcher("/pages/profile.jsp").forward(request,response);
         }
         if(action.equals("deny")){
 
