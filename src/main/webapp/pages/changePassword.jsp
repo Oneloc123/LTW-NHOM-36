@@ -15,12 +15,10 @@
     <style>
         body {
              background-color: #f4f6f9;
-
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         main .container {
-
             margin-top: 50px;
         }
 
@@ -139,9 +137,6 @@
       </div>
     </div>
   </header>
-
-
-
     <main>
         <div class="container">
             <!-- HERO -->

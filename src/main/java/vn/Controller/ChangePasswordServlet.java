@@ -27,15 +27,16 @@ public class ChangePasswordServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        int id  = Integer.parseInt(session.getAttribute("id").toString());
         UserService us =new UserService();
-        User u = us.getUserByUserName(request.getParameter("username"));
-        String oldPass = request.getParameter("oldPass");
-        String newPass = request.getParameter("newPass");
-        if(oldPass.equals(newPass)){
-            us.updatePassword(u.getId(),newPass);
-            request.getRequestDispatcher("/pages/profile.jsp").forward(request,response);
-        }else {
-
+        User u = us.getUserById(id);
+        String oldPassword = request.getParameter("oldPass");
+        String newPassword = request.getParameter("newPass");
+        if(oldPassword.equals(u.getPassword())){
+            UserService usr = new UserService();
+            usr.updatePassword(id,newPassword);
+            response.sendRedirect("/DoCongNghe_Nhom36_war/Profile");
         }
     }
 }
