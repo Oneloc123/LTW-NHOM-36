@@ -388,77 +388,6 @@
             font-size: 14px;
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: modalFadeIn 0.3s ease;
-        }
-
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 25px;
-            border-bottom: 1px solid var(--gray-light);
-        }
-
-        .modal-title {
-            font-size: 20px;
-            font-weight: 600;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--secondary);
-            transition: color 0.3s;
-        }
-
-        .modal-close:hover {
-            color: var(--dark);
-        }
-
-        .modal-body {
-            padding: 25px;
-        }
-
         .avatar-upload {
             text-align: center;
             margin-bottom: 25px;
@@ -502,13 +431,43 @@
             background: #dc2626;
         }
 
-        .modal-footer {
-            padding: 20px 25px;
-            border-top: 1px solid var(--gray-light);
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
+
+            .profile-img-container {
+                position: relative;
+                width: 150px;
+                height: 150px;
+                margin: 0 auto 20px;
+            }
+            .profile-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+                border: 3px solid #007bff;
+            }
+            .change-img-btn {
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .modal-header {
+                background-color: #007bff;
+                color: white;
+            }
+            .btn-custom {
+                min-width: 120px;
+            }
+            .form-actions {
+                border-top: 1px solid #dee2e6;
+                padding-top: 20px;
+                margin-top: 20px;
+            }
   </style>
 </head>
 
@@ -653,7 +612,7 @@
                 <div class="profile-card">
                     <div class="card-header">
                         <h2 class="card-title">Sản phẩm yêu thích</h2>
-                        <a href="${pageContext.request.contextPath}/wishList.html" class="btn btn-outline">Xem tất cả</a>
+                        <a href="/pages/wishList.html" class="btn btn-outline">Xem tất cả</a>
                     </div>
                     <div class="wishlist-grid">
                         <!-- Product 1 -->

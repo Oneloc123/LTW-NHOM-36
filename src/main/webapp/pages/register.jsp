@@ -83,7 +83,7 @@
       <p class="text-center text-muted mb-4">Điền thông tin để đăng ký tài khoản mới</p>
       <div class="row g-4">
         <!-- Form tạo tài khoản -->
-        <div class="col-md-8">
+        <div class="card-center" style="margin-left: 18%; width: 60%;">
           <div class="card p-4">
             <h5 class="fw-bold mb-3">Tạo tài khoản TechX</h5>
             <ul class="list-unstyled text-muted" style="margin-bottom: 5px;">
@@ -99,13 +99,17 @@
             <form action="/DoCongNghe_Nhom36_war//register" method="post">
               <div class="row">
                 <div class="mb-3 col">
-                  <label for="fullname" class="form-label">Họ và tên</label>
-                  <input type="text" class="form-control" name="fullName" id="fullname" placeholder="Nhập họ tên của bạn" required>
+                  <label for="firstname" class="form-label">Họ </label>
+                  <input type="text" class="form-control" name="firstName" id="firstname" placeholder="Nhập họ của bạn" required>
                 </div>
                 <div class="mb-3 col">
-                  <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Nhập địa chỉ email" required>
+                  <label for="lastname" class="form-label">Tên và tên đệm</label>
+                  <input type="text" class="form-control" name="lastName" id="lastname" placeholder="Nhập Tên và tên đệm" required>
                 </div>
+              </div>
+              <div class="mb-3 ">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Nhập địa chỉ email" required>
               </div>
               <div class="mb-3">
                 <label for="phone" class="form-label">Số điện thoại</label>
@@ -134,18 +138,6 @@
                  <a href="/DoCongNghe_Nhom36_war/forgot-password">Quên mật khẩu ?</a>
                </div>
             </form>
-          </div>
-        </div>
-
-        <!-- Tóm tắt lợi ích hoặc hướng dẫn -->
-        <div class="col-md-4" style="margin-top: 4px;">
-          <div class="summary-card card2">
-            <h5 class="fw-bold mb-3">Lưu ý bảo mật</h5>
-            <ol class="text-muted small">
-              <li class="mb-2">Không chia sẽ mật khẩu cho người lạ.</li>
-              <li class="mb-2">Mật khẩu nên có ít nhất 8 ký tự, gồm chữ, số và ký hiệu.</li>
-              <li class="mb-2">Liên hệ hỗ trợ nếu có bất ký sai sót nào.</li>
-            </ol>
           </div>
         </div>
       </div>

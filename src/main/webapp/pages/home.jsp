@@ -17,6 +17,7 @@
 
 <body>
 
+
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <!-- MAIN CONTENT  -->
@@ -134,7 +135,7 @@
         <div class="container">
             <h2 class="section-title">Ưu đãi độc quyền</h2>
 
-            <div class="deal-grid">
+                <div class="deal-grid">
 
                 <a class="deal-card" href="../pages/shop.html">
                     <img src="https://img.topbank.vn/crop/620x324/2017/10/12/BAVjA8Ix/0-8f1f.jpg" alt="">

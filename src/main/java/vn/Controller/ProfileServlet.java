@@ -3,7 +3,6 @@ package vn.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.model.Address;
 import vn.model.User;
 import vn.services.AddressService;
 import vn.services.UserService;
@@ -15,22 +14,14 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserService us =new UserService();
-        AddressService as =new AddressService();
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("username") == null) {
             response.sendRedirect(request.getContextPath() + "/login");
         }else{
-            User u = us.getUserByUserName(session.getAttribute("username").toString());
-//            Address ad = as.getAddressById(u.getId());
-//            if(ad==null){
-//
-//            }
-            if(u!=null){
-                request.setAttribute("user",u);
-            }
-//            if(ad!=null){
-//                request.setAttribute("address",ad);
-//            }
+            // lấy thông tin User
+            User u = us.getUserById(Integer.parseInt(session.getAttribute("id").toString()));
+            request.setAttribute("user",u);
+            // chuyển hướng
             request.setAttribute("currentPage", "profile");
             request.getRequestDispatcher("/pages/profile.jsp").forward(request,response);
         }
@@ -39,22 +30,30 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if(action.equals("save")){
+        if("save".equals(action)){
+            // tạo service
             UserService us =new UserService();
-            AddressService as = new AddressService();
+            // truy vấn user
             HttpSession session = request.getSession(false);
-            String name = session.getAttribute("username").toString();
-            User u = us.getUserByUserName(request.getParameter("username"));
+            int id = Integer.parseInt(session.getAttribute("id").toString());
+            User u = us.getUserById(id);
+            // lấy thông tin gửi từ client
             String nameFirstModal = request.getParameter("modalFirstName");
             String nameLastModal = request.getParameter("modalLastName");
             String emailModal = request.getParameter("modalEmail");
             String phoneModal = request.getParameter("modalPhone");
-            String addressModal = request.getParameter("modalAddress");
-            u.setFullName(nameFirstModal+" "+nameLastModal);
+            // kiểm tra các thông tin
+
+            // thực hiện update User
+            u.setFirstName(nameFirstModal);
+            u.setLastName(nameLastModal) ;
             u.setEmail(emailModal);
             u.setPhoneNumber(phoneModal);
+            //
             us.updateUser(u);
-            as.updateAdress(u.getId(),addressModal);
+            request.removeAttribute("user");
+            request.setAttribute("user",u);
+            request.getRequestDispatcher("/pages/profile.jsp").forward(request,response);
         }
         if(action.equals("deny")){
 

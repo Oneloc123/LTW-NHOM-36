@@ -3,7 +3,6 @@ package vn.dao;
 import org.jdbi.v3.core.statement.PreparedBatch;
 import vn.model.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,46 +10,46 @@ import java.util.Map;
 public class UserDao extends BaseDao {
     static Map<Integer,User> data=new HashMap<Integer,User>();
     static {
-        data.put(1,new User(1,"username1","1","email1.com",
-                "user1","001","client",
+        data.put(1,new User(1,"username1","1","email1.com","Lê",
+                " Huy","001","client",
                 true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
-        data.put(2,new User(2,"username2","1","email2.com",
-                "user2","002","client",
+        data.put(2,new User(2,"username2","2","email2.com","Lê",
+                " Hoàn","002","client",
                 true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
-        data.put(3,new User(3,"username3","1","email3.com",
-                "user3","003","client",
+        data.put(3,new User(3,"username3","3","email3.com","Nguyễn",
+                " Ánh","003","client",
                 true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
-        data.put(4,new User(4,"username4","1","email1.com",
-                "user1","001","client",
+        data.put(4,new User(4,"username4","4","email1.com","Nguyễn",
+                " Huệ","004","client",
                 true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
-        data.put(5,new User(5,"username5","1","email1.com",
-                "user1","001","client",
+        data.put(5,new User(5,"username5","5","email1.com","Nguyễn",
+                " Lữ","005","client",
                 true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
-        data.put(6,new User(6,"username6","1","email1.com",
-                "user1","001","client",
+        data.put(6,new User(6,"username6","6","email1.com","Trần",
+                " Trọng","006","client",
                 true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
-        data.put(7,new User(7,"username7","1","email1.com",
-                "user1","001","client",
+        data.put(7,new User(7,"username7","7","email1.com","Trịnh",
+                " Cang","007","client",
                 true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
 
     }
-    public List<User> getListUser() {
-        return new ArrayList<>(data.values());
-    }
+
+    // OK
     public List<User> getList() {
         return get().withHandle(h ->
                 h.createQuery(
-                                "SELECT id, username, password, email, fullName, phoneNumber, role, isActive, createAt, imgURL " +
+                                "SELECT id, username, password, email, firstName, lastName, phoneNumber, role, isActive, createAt, imgURL " +
                                         "FROM users"
                         )
                         .mapToBean(User.class)
                         .list()
         );
     }
+    // OK
     public User getUserById(int id) {
         return get().withHandle(h ->
                 h.createQuery(
-                                "SELECT id, username, password, email, fullName, phoneNumber, role, isActive, createAt, imgURL " +
+                                "SELECT id, username, password, email, firstName, lastName, phoneNumber, role, isActive, createAt, imgURL " +
                                         "FROM users WHERE id = :id"
                         )
                         .bind("id", id)
@@ -59,15 +58,14 @@ public class UserDao extends BaseDao {
                         .orElse(null)
         );
     }
-    public User getUser(int id) {
-        return data.get(id);
-    }
+
+    //OK
     public void insert(List<User> users){
         get().useHandle(h -> {
             PreparedBatch batch = h.prepareBatch(
                     "INSERT INTO users " +
-                            "(id, username, password, email, fullName, phoneNumber, role, isActive, createAt, imgURL) " +
-                            "VALUES (:id, :username, :password, :email, :fullName, :phoneNumber, :role, :active, :createAt, :imgURL)"
+                            "(id, username, password, email, firstName, lastName, phoneNumber, role, isActive, createAt, imgURL) " +
+                            "VALUES (:id, :username, :password, :email, :firstName, :lastName, :phoneNumber, :role, :active, :createAt, :imgURL)"
             );
 
             users.forEach( u -> {
@@ -76,20 +74,23 @@ public class UserDao extends BaseDao {
             batch.execute();
         });
     }
+    // OK
     public void updateProfile(User user) {
         get().useHandle(h -> {
             h.createUpdate(
                             "UPDATE users SET " +
                                     "email = :email, " +
-                                    "fullName = :fullName, " +
-                                    "phoneNumber = :phoneNumber, " +
-                                    "imgURL = :imgURL " +
+                                    "firstName = :firstName, " +
+                                    "lastName = :lastName, " +
+                                    "phoneNumber = :phoneNumber " +
                                     "WHERE id = :id"
                     )
                     .bindBean(user)
                     .execute();
         });
     }
+
+    // OK
     public void updatePassword(int id, String password) {
         get().useHandle(h -> {
             h.createUpdate(
@@ -100,6 +101,8 @@ public class UserDao extends BaseDao {
                     .execute();
         });
     }
+
+    // OK
     public boolean checkLogin(String username, String password) {
         return get().withHandle(h ->
                 h.createQuery(
@@ -112,20 +115,32 @@ public class UserDao extends BaseDao {
                         .one() > 0
         );
     }
+
+    // OK
     public void insertUser(User user) {
         get().useHandle(h -> {
             h.createUpdate(
                             "INSERT INTO users " +
-                                    "(username, password, email, fullName, phoneNumber, role, isActive, createAt, imgURL) " +
-                                    "VALUES (:username, :password, :email, :fullName, :phoneNumber, :role, :active, :createAt, :imgURL)"
+                                    "(username, password, email, firstName, lastName, phoneNumber, role, isActive, createAt, imgURL) " +
+                                    "VALUES (:username, :password, :email, :firstName, :lastName, :phoneNumber, :role, :active, :createAt, :imgURL)"
                     )
                     .bindBean(user)
                     .execute();
         });
     }
-    static void main(String[] args) {
-        UserDao dao=new UserDao();
-        List<User> users = dao.getListUser();
-        dao.insert(users);
+
+    //OK
+    public User getUserByUserName(String username) {
+        return get().withHandle(h ->
+                h.createQuery(
+                                "SELECT id, username, password, email, firstName, lastName, phoneNumber, role, isActive, createAt, imgURL " +
+                                        "FROM users WHERE username = :username"
+                        )
+                        .bind("username", username)
+                        .mapToBean(User.class)
+                        .findOne()
+                        .orElse(null)
+        );
     }
+
 }

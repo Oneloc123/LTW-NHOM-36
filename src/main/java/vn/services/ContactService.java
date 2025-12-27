@@ -1,14 +1,13 @@
 package vn.services;
 
 import vn.dao.ContactDao;
-import vn.model.Contact;
 
 public class ContactService {
 
-    private ContactDao contactDao = new ContactDao();
+    private final ContactDao contactDao = new ContactDao();
 
-    public boolean saveContact(String name, String email, String subject, String message) {
-            return true;
-        //        return contactDao.insertContact(name,email,subject,message);
+    public boolean saveContact(String name, String email, String message) {
+        // demo: gọi dao luôn
+        return contactDao.insertContact(name, email, message);
     }
 }

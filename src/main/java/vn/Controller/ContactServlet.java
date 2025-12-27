@@ -1,12 +1,8 @@
 package vn.controller;
 
-import vn.dao.ContactDao;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 import vn.services.ContactService;
 
 import java.io.IOException;
@@ -14,7 +10,7 @@ import java.io.IOException;
 @WebServlet("/contact")
 public class ContactServlet extends HttpServlet {
 
-    private final ContactDao contactDao = new ContactDao();
+    private final ContactService contactService = new ContactService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,26 +20,24 @@ public class ContactServlet extends HttpServlet {
         request.getRequestDispatcher("/pages/contact.jsp").forward(request, response);
 
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        ContactService cs  = new ContactService();
-
         String name = req.getParameter("name");
         String email = req.getParameter("email");
-        String subject = req.getParameter("subject");
         String message = req.getParameter("message");
 
-        System.out.println("name: " + name);
-        boolean success = cs.saveContact(name,email,subject,message);
-
-
+        boolean success = contactService.saveContact(name, email, message);
 
         if (success) {
-            resp.sendRedirect("pages/contact.jsp");
+            req.setAttribute("success", "Gửi liên hệ thành công!");
         } else {
-            resp.sendRedirect("pages/contact.jsp");
+            req.setAttribute("error", "Gửi liên hệ thất bại!");
         }
+
+        req.getRequestDispatcher("/pages/contact.jsp")
+                .forward(req, resp);
     }
 }

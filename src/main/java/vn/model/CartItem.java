@@ -1,21 +1,41 @@
 package vn.model;
 
-public class CartItem {
+import java.io.Serializable;
+
+public class CartItem implements Serializable {
+
+    private int productId;
     private String name;
+    private String image;
+    private int price;
     private int quantity;
-    private double price;
 
-    public CartItem(String name, int quantity, double price) {
+    public CartItem() {}
+
+    public CartItem(int productId, String name, String image, int price, int quantity) {
+        this.productId = productId;
         this.name = name;
-        this.quantity = quantity;
+        this.image = image;
         this.price = price;
+        this.quantity = quantity;
     }
 
-    public double getTotal() {
-        return quantity * price;
-    }
+    public int getProductId() { return productId; }
+    public void setProductId(int productId) { this.productId = productId; }
 
     public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
+
+    public int getPrice() { return price; }
+    public void setPrice(int price) { this.price = price; }
+
     public int getQuantity() { return quantity; }
-    public double getPrice() { return price; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+
+    public int getTotal() {
+        return price * quantity;
+    }
 }
