@@ -24,8 +24,8 @@ public class OrderHistoryServlet extends HttpServlet {
             User u = userService.getUserByUserName(session.getAttribute("username").toString());
             int uid = u.getId();
             OrderService os = new OrderService();
-            List<Order> list = os.getListOrderById(uid);
-            request.setAttribute("list", list);
+            //List<Order> list = os.getListOrderById(uid);
+           // request.setAttribute("list", list);
             request.setAttribute("currentPage", "orders");
             request.getRequestDispatcher("/pages/order-history.jsp").forward(request, response);
         }

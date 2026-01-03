@@ -156,3 +156,128 @@
     justify-content: space-between;
     margin-top: 20px;
 }
+.login-page {
+    background: linear-gradient(135deg, #e8f0ff, #f6faff);
+    font-family: "Segoe UI", sans-serif;
+    color: #333;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* ===== Login Card ===== */
+.login-page .login-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+    width: 480px;
+    padding: 2.5rem;
+    text-align: center;
+}
+
+.login-page .login-card h2 {
+    font-weight: 700;
+    color: #0d6efd;
+    margin-bottom: 1.5rem;
+}
+
+/* ===== Form ===== */
+.login-page .form-control {
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+}
+
+/* ===== Buttons ===== */
+.login-page .btn-primary {
+    background-color: #0d6efd;
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem;
+    width: 100%;
+    font-weight: 600;
+}
+
+.login-page .btn-outline-primary {
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* ===== Divider ===== */
+.login-page .divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #888;
+    margin: 1.5rem 0;
+}
+
+.login-page .divider::before,
+.login-page .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #ddd;
+    margin: 0 10px;
+}
+
+/* ===== Social Buttons ===== */
+.login-page .social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    border-radius: 10px;
+    width: 100%;
+    padding: 0.7rem;
+}
+
+.login-page .social-btn i {
+    font-size: 1.2rem;
+}
+
+.login-page .social-btn.facebook {
+    background-color: #1877f2;
+    color: #fff;
+    border: none;
+}
+
+.login-page .social-btn.google {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #444;
+}
+
+/* ===== Footer links ===== */
+.login-page .footer-links {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.login-page .footer-links a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.login-page .footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Layout ===== */
+.login-page .header-main,
+.login-page .footer {
+    width: 100%;
+}
+
+.login-page main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 10px;
+}

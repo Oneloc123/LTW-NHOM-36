@@ -6,39 +6,97 @@ import java.io.Serializable;
 public class Product implements Serializable {
     private int id;
     private String name;
-    private String img;
+    private int categoryID;
+    private String shortDescription;
+    private String fullDescription;
     private int price;
+    private boolean isFeatured;
+    private String createAt;
+    private String updateAt;
 
-    public Product(int id, String name, String img, int price) {
+    public Product(int id, String name, int categoryID, String shortDescription, String fullDescription, int price, boolean isFeatured, String createAt, String updateAt) {
         this.id = id;
         this.name = name;
-        this.img = img;
+        this.categoryID = categoryID;
+        this.shortDescription = shortDescription;
+        this.fullDescription = fullDescription;
         this.price = price;
+        this.isFeatured = isFeatured;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
     }
-   public  Product() {
-    }
+
+    public Product() {}
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
-    public String getImg() {
-        return img;
+
+    public int getCategoryID() {
+        return categoryID;
     }
-    public void setImg(String img) {
-        this.img = img;
+
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
     }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getFullDescription() {
+        return fullDescription;
+    }
+
+    public void setFullDescription(String fullDescription) {
+        this.fullDescription = fullDescription;
+    }
+
     public int getPrice() {
         return price;
     }
+
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public boolean isFeatured() {
+        return isFeatured;
+    }
+
+    public void setFeatured(boolean featured) {
+        isFeatured = featured;
+    }
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
+
+    public String getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(String updateAt) {
+        this.updateAt = updateAt;
     }
 }

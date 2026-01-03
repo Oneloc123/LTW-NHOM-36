@@ -9,7 +9,9 @@ public class BannerSevice {
     BannerDao bdao = new BannerDao();
 
     public List<Banner> getBanner() {
-        return bdao.banners;
+        return bdao.getList();
 
     }
+
+
 }

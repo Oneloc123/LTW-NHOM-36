@@ -17,7 +17,7 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
             return;
         }else{
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher("/home").forward(request, response);
         }
     }
 
@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
             User user = userService.getUserByUserName(username);
             HttpSession session = request.getSession();
             session.setAttribute("id", user.getId());
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher("/pages/home.jsp").forward(request, response);
         }else{
             request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
         }
