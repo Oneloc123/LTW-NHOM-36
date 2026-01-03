@@ -1,4 +1,4 @@
-package vn.Controller;
+package vn.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,6 +20,8 @@ public class HomeController extends HttpServlet
         BannerSevice  bs = new BannerSevice();
         List<Banner> list = bs.getBanner();
         request.setAttribute("list", list);
+        request.setAttribute("currentPage", "home");
         request.getRequestDispatcher("/pages/home.jsp").forward(request, response);
+
     }
 }

@@ -138,29 +138,23 @@
 </head>
 
 <body>
-  <!-- ================= Header ================= -->
-  <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
-    <div class="container">
-      <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.jsp">
-        <i class="bi bi-camera fs-4 me-2"></i>
-        <span>TechX</span>
-      </a>
-    </div>
-  </header>
+<!-- ================= Header ================= -->
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<div class="login-page">
+    <main>
+        <div class="login-card">
+            <h2>Đăng nhập TechX</h2>
 
-  <main>
-    <div class="login-card">
-      <h2>Đăng nhập TechX</h2>
-      <form action="/DoCongNghe_Nhom36_war/login" method="post">
-        <div class="mb-3 text-start">
-          <label for="username" class="form-label">Tài khoản</label>
-          <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tài khoản">
-        </div>
-        <div class="mb-3 text-start">
-          <label for="password" class="form-label">Mật khẩu</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
-        </div>
+            <form action="${pageContext.request.contextPath}/login" method="post">
+                <div class="mb-3 text-start">
+                    <label for="username" class="form-label">Tài khoản</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tài khoản">
+                </div>
+                <div class="mb-3 text-start">
+                    <label for="password" class="form-label">Mật khẩu</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                           placeholder="Nhập mật khẩu">
+                </div>
 
         <button type="submit" class="btn btn-primary">Đăng nhập</button>
 

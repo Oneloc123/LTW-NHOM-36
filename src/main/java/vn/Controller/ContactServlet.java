@@ -1,4 +1,4 @@
-package vn.Controller;
+package vn.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,11 +13,12 @@ public class ContactServlet extends HttpServlet {
     private final ContactService contactService = new ContactService();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Gán hàm kiểm tra đang ở trang nào thì nó lỗi ở dòng dưới, với lại dòng dưới không thay đường dẫn trang
+        //response.sendRedirect("pages/contact.jsp");
+        request.setAttribute("currentPage", "contact");
+        request.getRequestDispatcher("/pages/contact.jsp").forward(request, response);
 
-        request.getRequestDispatcher("/pages/contact.jsp")
-                .forward(request, response);
     }
 
     @Override

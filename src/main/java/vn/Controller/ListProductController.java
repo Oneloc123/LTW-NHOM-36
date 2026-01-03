@@ -1,4 +1,4 @@
-package vn.Controller;
+package vn.controller;
 
 import java.io.*;
 import java.util.List;
@@ -16,6 +16,7 @@ public class ListProductController extends HttpServlet {
         ProductSevice ps = new ProductSevice();
         List<Product> list = ps.getListProduct();
         request.setAttribute("list", list);
+        request.setAttribute("currentPage", "products");
 
         request.getRequestDispatcher("/pages/products.jsp").forward(request,response);
 

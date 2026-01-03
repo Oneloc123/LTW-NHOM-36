@@ -19,45 +19,7 @@
 <body>
 
 <!-- ================= HEADER ================= -->
-<header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
-    <div class="container">
-        <a class="navbar-brand d-flex align-items-center fw-bold text-primary"
-           href="${pageContext.request.contextPath}/index.jsp">
-            <i class="bi bi-camera fs-4 me-2"></i>
-            <span>TechX</span>
-        </a>
-
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
-            <i class="bi bi-list fs-2 text-primary"></i>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav align-items-lg-center gap-lg-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/home">Trang chủ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="${pageContext.request.contextPath}/contact">Liên hệ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/orders">Đơn hàng</a>
-                </li>
-            </ul>
-
-            <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-                <a href="${pageContext.request.contextPath}/login"
-                   class="btn btn-outline-primary btn-sm">
-                    <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
-                </a>
-                <a href="${pageContext.request.contextPath}/cart"
-                   class="btn btn-primary btn-sm">
-                    <i class="bi bi-cart3 me-1"></i> Giỏ hàng
-                </a>
-            </div>
-        </div>
-    </div>
-</header>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <!-- ================= MAIN ================= -->
 <main class="contact-page container my-5">

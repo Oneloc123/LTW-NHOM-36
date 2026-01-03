@@ -473,59 +473,7 @@
 
 <body>
   <!-- HEADER -->
-  <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/DoCongNghe_Nhom36_war/home">
-        <i class="bi bi-camera fs-4 me-2"></i>
-        TechX
-      </a>
-
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <i class="bi bi-list fs-2 text-primary"></i>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav align-items-lg-center gap-lg-3">
-          <li class="nav-item"><a class="nav-link " href="/DoCongNghe_Nhom36_war/home">Trang chủ</a></li>
-          <li class="nav-item"><a class="nav-link" href="/DoCongNghe_Nhom36_war/shop">Cửa hàng</a></li>
-
-                                  <li class="nav-item"><a class="nav-link" href="/pages/products.html">Sản phẩm</a></li>
-
-
-          <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
-          <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
-          <li class="nav-item"><a class="nav-link" href="/pages/order-history.jsp">Đơn hàng</a></li>
-           <!-- Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Tài khoản 
-                        </a>
-                        <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/DoCongNghe_Nhom36_war//Profile">Thông tin tài khoản</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="/DoCongNghe_Nhom36_war//Wishlist">Danh sách sản phẩm yêu thích</a></li>
-                            <li><a class="dropdown-item" href="notification.html">Xem thông báo</a></li>
-                            <li><a class="dropdown-item" href="viewed-product.html">Sản phẩm đã xem</a>
-                            </li>
-                           
-                        </ul>
-                    </li>
-        </ul>
-
-        <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-          <a href="/DoCongNghe_Nhom36_war/login" class="btn btn-outline-primary btn-sm">
-            <i class="bi bi-box-arrow-in-right me-1"></i>Đăng nhập
-          </a>
-          <a href="/pages/cart.jsp" class="btn btn-primary btn-sm">
-            <i class="bi bi-cart3 me-1"></i>Giỏ hàng
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
+  <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
    <!-- Main Content -->
     <div class="container">
@@ -539,7 +487,7 @@
                             <i class="fas fa-camera text-white"></i>
                         </div>
                     </div>
-                    <div class="user-name">${user.getLastName()}</div>
+                    <div class="user-name">@name</div>
                     <div class="user-role">Thành viên Bạc</div>
                     <div class="user-stats">
                         <div class="stat">
@@ -558,10 +506,10 @@
                 </div>
                 <ul class="sidebar-menu">
                     <li><a href="#" class="active"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
-                    <li><a href="/DoCongNghe_Nhom36_war/Order-History"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
-                    <li><a href="/DoCongNghe_Nhom36_war/favorites"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
-                    <li><a href="/DoCongNghe_Nhom36_war/changePassword"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
-                    <li><a href="/DoCongNghe_Nhom36_war/loggout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                    <li><a href="${pageContext.request.contextPath}/orders"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
+                    <li><a href="${pageContext.request.contextPath}/wishList.html"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
+                    <li><a href="${pageContext.request.contextPath}/changPassword.jsp"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
+                    <li><a href="${pageContext.request.contextPath}/loggout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                 </ul>
             </div>
 
@@ -569,7 +517,7 @@
             <div class="content">
                 <div class="content-header">
                     <h1 class="content-title">Thông tin cá nhân</h1>
-                    <button class="btn" id="updateProfileBtn" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fas fa-edit"></i> Cập nhật thông tin</button>
+                    <button class="btn" id="updateProfileBtn"><i class="fas fa-edit"></i> Cập nhật thông tin</button>
                 </div>
 
                 <!-- Profile Information -->
@@ -581,11 +529,11 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">Họ</label>
-                                <input type="text" id="firstName" class="form-control" value="${user.getFirstName()}" readonly>
+                                <input type="text" id="firstName" class="form-control" value="${user.getFullName()}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Tên</label>
-                                <input type="text" id="lastName" class="form-control" value="${user.getLastName()}" readonly>
+                                <input type="text" id="lastName" class="form-control" value="${user.getFullName()}" readonly>
                             </div>
                         </div>
                         <div class="form-row">
@@ -599,8 +547,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="birthday">Ngày tạo</label>
-                            <input type="date" id="birthday" class="form-control" value="${user.getPhoneNumber()}" readonly>
+                            <label for="birthday">Ngày sinh</label>
+                            <input type="date" id="birthday" class="form-control" value="1990-05-15" readonly>
                         </div>
                         <div class="form-group">
                             <label for="address">Địa chỉ</label>
@@ -719,144 +667,70 @@
             </div>
         </div>
     </div>
-<%--  modal  --%>
-  <!-- Modal - Bootstrap tự động xử lý đóng/mở -->
-  <div class="modal fade" id="profileModal" tabindex="-1"
-       aria-labelledby="profileModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-              <!-- Modal Header -->
-              <div class="modal-header">
-                  <h5 class="modal-title" id="profileModalLabel">
-                      <i class="fas fa-user-cog me-2"></i>Chỉnh Sửa Thông Tin Cá Nhân
-                  </h5>
-                  <!-- Nút đóng - Bootstrap tự động xử lý -->
-                  <button type="button" class="btn-close btn-close-white"
-                          data-bs-dismiss="modal"
-                          aria-label="Đóng"></button>
-              </div>
 
-              <!-- Form chính -->
-              <form id="profileForm" action="/DoCongNghe_Nhom36_war/Profile" method="post">
-                  <div class="modal-body">
-                      <!-- Phần ảnh đại diện -->
-                      <div class="text-center mb-4">
-                          <div class="profile-img-container">
-                              <img src="https://via.placeholder.com/150"
-                                   alt="Ảnh đại diện"
-                                   class="profile-img"
-                                   id="profileImage">
-                              <!-- Nút thay đổi ảnh -->
-                              <button type="button"
-                                      class="btn btn-warning change-img-btn"
-                                      onclick="toggleImageForm()"
-                                      title="Thay đổi ảnh">
-                                  <i class="fas fa-camera"></i>
-                              </button>
-                          </div>
+    <!-- Update Profile Modal -->
+    <div class="modal" id="updateProfileModal" style="margin-top: 50px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Cập nhật thông tin cá nhân</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="avatar-upload">
+                    <div class="avatar-preview">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Avatar Preview" id="avatarPreview">
+                    </div>
+                    <div class="avatar-actions">
+                        <button class="btn btn-sm"><i class="fas fa-upload"></i> Tải ảnh lên</button>
+                        <button class="btn btn-sm btn-secondary"><i class="fas fa-camera"></i> Chụp ảnh</button>
+                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Xóa ảnh</button>
+                    </div>
+                </div>
+                
+                <form id="updateProfileForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modalFirstName">Họ</label>
+                            <input type="text" id="modalFirstName" class="form-control" value="Nguyễn Văn">
+                        </div>
+                        <div class="form-group">
+                            <label for="modalLastName">Tên</label>
+                            <input type="text" id="modalLastName" class="form-control" value="A">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modalEmail">Email</label>
+                            <input type="email" id="modalEmail" class="form-control" value="nguyenvana@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="modalPhone">Số điện thoại</label>
+                            <input type="text" id="modalPhone" class="form-control" value="0909123456">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="modalBirthday">Ngày sinh</label>
+                        <input type="date" id="modalBirthday" class="form-control" value="1990-05-15">
+                    </div>
+                    <div class="form-group">
+                        <label for="modalAddress">Địa chỉ</label>
+                        <input type="text" id="modalAddress" class="form-control" value="123 Đường ABC, Quận 1, TP.HCM">
+                    </div>
+                    <div class="form-group">
+                        <label for="modalBio">Giới thiệu bản thân</label>
+                        <textarea id="modalBio" class="form-control" rows="3" placeholder="Giới thiệu ngắn về bản thân...">Tôi là một người đam mê công nghệ và thích khám phá những sản phẩm mới nhất trên thị trường.</textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelUpdate">Hủy bỏ</button>
+                <button class="btn" id="saveProfile">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
 
-                          <!-- Form upload ảnh (ẩn ban đầu) -->
-                          <div id="imageForm" class="mt-3" style="display: none;">
-                              <div class="input-group">
-                                  <input type="file"
-                                         class="form-control"
-                                         id="imageUpload"
-                                         accept="image/*">
-                                  <button class="btn btn-success"
-                                          type="button"
-                                          onclick="uploadImage()">
-                                      <i class="fas fa-upload me-1"></i>Tải lên
-                                  </button>
-                              </div>
-                              <small class="text-muted">Chấp nhận: JPG, PNG, GIF. Tối đa 2MB</small>
-                          </div>
-                      </div>
 
-                      <!-- Form thông tin cá nhân -->
-                      <div class="row">
-                          <div class="col-md-6 mb-3">
-                              <label for="firstName" class="form-label">
-                                  <i class="fas fa-user me-1"></i>Họ *
-                              </label>
-                              <input type="text"
-                                     class="form-control"
-                                     id="firstName"
-                                     name="modalFirstName"
-                                     placeholder="Nhập họ của bạn"
-                                     required>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                              <label for="lastName" class="form-label">
-                                  <i class="fas fa-user me-1"></i>Tên *
-                              </label>
-                              <input type="text"
-                                     class="form-control"
-                                     id="lastName"
-                                     name="modalLastName"
-                                     placeholder="Nhập tên của bạn"
-                                     required>
-                          </div>
-                      </div>
-
-                      <div class="mb-3">
-                          <label for="email" class="form-label">
-                              <i class="fas fa-envelope me-1"></i>Email *
-                          </label>
-                          <input type="email"
-                                 class="form-control"
-                                 id="email"
-                                 name="modalEmail"
-                                 placeholder="example@gmail.com"
-                                 required>
-                      </div>
-
-                      <div class="mb-3">
-                          <label for="phone" class="form-label">
-                              <i class="fas fa-phone me-1"></i>Số điện thoại *
-                          </label>
-                          <input type="tel"
-                                 class="form-control"
-                                 id="phone"
-                                 name="modalPhone"
-                                 placeholder=""
-                                 required>
-                      </div>
-
-                      <div class="mb-4">
-                          <label for="address" class="form-label">
-                              <i class="fas fa-home me-1"></i>Địa chỉ *
-                          </label>
-                          <textarea class="form-control"
-                                    id="address"
-                                    rows="3"
-                                    placeholder="Nhập địa chỉ đầy đủ"
-                                    required></textarea>
-                      </div>
-
-                      <!-- Nút bấm trong form -->
-                      <div class="form-actions">
-                          <div class="d-flex justify-content-end gap-2">
-                              <!-- Nút Huỷ - Bootstrap tự động đóng modal -->
-                              <button type="button"
-                                      class="btn btn-secondary btn-custom"
-                                      data-bs-dismiss="modal">
-                                  <i class="fas fa-times me-1"></i>Huỷ
-                              </button>
-
-                              <!-- Nút Lưu - Gọi hàm xử lý -->
-                              <button type="submit" name="action" value="save"
-                                      class="btn btn-primary btn-custom"
-<%--                                      onclick="saveProfile()">--%>
-                                  <i class="fas fa-save me-1"></i>Lưu Thông Tin
-                              </button>
-                          </div>
-                      </div>
-                  </div>
-              </form>
-          </div>
-      </div>
-  </div>
-
+  <!-- FOOTER -->
   <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
     <div class="container">
       <div class="row gy-4">
@@ -910,84 +784,105 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Bootstrap 5 JS Bundle với Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
    <script>
-       // // Hiển thị/ẩn form upload ảnh
-       // function toggleImageForm() {
-       //     const imageForm = document.getElementById('imageForm');
-       //     imageForm.style.display = imageForm.style.display === 'none' ? 'block' : 'none';
-       // }
-
-       // // Upload và hiển thị ảnh mới
-       // function uploadImage() {
-       //     const fileInput = document.getElementById('imageUpload');
-       //     if (fileInput.files && fileInput.files[0]) {
-       //         // Kiểm tra kích thước
-       //         if (fileInput.files[0].size > 2 * 1024 * 1024) {
-       //             alert('Kích thước ảnh không được vượt quá 2MB!');
-       //             return;
-       //         }
-       //
-       //         const reader = new FileReader();
-       //         reader.onload = function(e) {
-       //             document.getElementById('profileImage').src = e.target.result;
-       //             document.getElementById('imageForm').style.display = 'none';
-       //             alert('Ảnh đã được cập nhật thành công!');
-       //             fileInput.value = ''; // Reset input file
-       //         };
-       //         reader.readAsDataURL(fileInput.files[0]);
-       //     } else {
-       //         alert('Vui lòng chọn một tệp ảnh!');
-       //     }
-       // }
-
-       // Xử lý lưu thông tin
-       // function saveProfile() {
-       //     // Lấy giá trị từ form
-       //     const firstName = document.getElementById('firstName').value.trim();
-       //     const lastName = document.getElementById('lastName').value.trim();
-       //     const email = document.getElementById('email').value.trim();
-       //     const phone = document.getElementById('phone').value.trim();
-       //     const address = document.getElementById('address').value.trim();
-
-           // Validation cơ bản
-           // if (!firstName || !lastName || !email || !phone || !address) {
-           //     alert('Vui lòng điền đầy đủ tất cả các trường thông tin có dấu *!');
-           //     return;
-           // }
-
-           // Kiểm tra email
-           // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-           // if (!emailRegex.test(email)) {
-           //     alert('Vui lòng nhập địa chỉ email hợp lệ!');
-           //     return;
-           // }
-
-           // Hiển thị thông tin (trong thực tế sẽ gửi AJAX đến server)
-           <%--alert(`Thông tin đã được lưu thành công!\n\n` +--%>
-           <%--    `Họ: ${firstName}\n` +--%>
-           <%--    `Tên: ${lastName}\n` +--%>
-           <%--    `Email: ${email}\n` +--%>
-           <%--    `SĐT: ${phone}\n` +--%>
-           <%--    `Địa chỉ: ${address}`);--%>
-
-           // Ở đây bạn có thể thêm AJAX call để gửi dữ liệu đến server
-           // $.ajax({
-           //     url: 'saveProfile.jsp',
-           //     type: 'POST',
-           //     data: {
-           //         firstName: firstName,
-           //         lastName: lastName,
-           //         email: email,
-           //         phone: phone,
-           //         address: address
-           //     },
-           //     success: function(response) {
-           //         // Xử lý response
-           //     }
-           // });
-       // }
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal elements
+            const updateProfileBtn = document.getElementById('updateProfileBtn');
+            const updateProfileModal = document.getElementById('updateProfileModal');
+            const closeModal = document.getElementById('closeModal');
+            const cancelUpdate = document.getElementById('cancelUpdate');
+            const saveProfile = document.getElementById('saveProfile');
+            const avatarTrigger = document.getElementById('avatarTrigger');
+            
+            // Form elements
+            const profileForm = document.getElementById('profileForm');
+            const updateProfileForm = document.getElementById('updateProfileForm');
+            const formControls = profileForm.querySelectorAll('.form-control');
+            
+            // Open modal
+            updateProfileBtn.addEventListener('click', function() {
+                updateProfileModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // Copy current values to modal form
+                document.getElementById('modalFirstName').value = document.getElementById('firstName').value;
+                document.getElementById('modalLastName').value = document.getElementById('lastName').value;
+                document.getElementById('modalEmail').value = document.getElementById('email').value;
+                document.getElementById('modalPhone').value = document.getElementById('phone').value;
+                document.getElementById('modalBirthday').value = document.getElementById('birthday').value;
+                document.getElementById('modalAddress').value = document.getElementById('address').value;
+            });
+            
+            // Close modal
+            function closeModalFunc() {
+                updateProfileModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            closeModal.addEventListener('click', closeModalFunc);
+            cancelUpdate.addEventListener('click', closeModalFunc);
+            
+            // Close modal when clicking outside
+            updateProfileModal.addEventListener('click', function(e) {
+                if (e.target === updateProfileModal) {
+                    closeModalFunc();
+                }
+            });
+            
+            // Save profile changes
+            saveProfile.addEventListener('click', function() {
+                // Update main form with modal values
+                document.getElementById('firstName').value = document.getElementById('modalFirstName').value;
+                document.getElementById('lastName').value = document.getElementById('modalLastName').value;
+                document.getElementById('email').value = document.getElementById('modalEmail').value;
+                document.getElementById('phone').value = document.getElementById('modalPhone').value;
+                document.getElementById('birthday').value = document.getElementById('modalBirthday').value;
+                document.getElementById('address').value = document.getElementById('modalAddress').value;
+                
+                // Update user name in sidebar and header
+                const fullName = document.getElementById('modalFirstName').value + ' ' + document.getElementById('modalLastName').value;
+                document.querySelector('.user-name').textContent = fullName;
+                document.querySelector('.user-menu span').textContent = fullName;
+                
+                // Show success message
+                alert('Thông tin cá nhân đã được cập nhật thành công!');
+                
+                closeModalFunc();
+            });
+            
+            // Avatar upload trigger
+            avatarTrigger.addEventListener('click', function() {
+                updateProfileModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Add to cart functionality for wishlist items
+            const addToCartBtns = document.querySelectorAll('.product-actions .btn:first-child');
+            
+            addToCartBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productName = this.closest('.product-card').querySelector('.product-name').textContent;
+                    alert(`Đã thêm ${productName} vào giỏ hàng!`);
+                });
+            });
+            
+            // Remove from wishlist functionality
+            const removeFromWishlistBtns = document.querySelectorAll('.product-actions .btn-outline');
+            
+            removeFromWishlistBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('.product-name').textContent;
+                    
+                    if (confirm(`Bạn có chắc muốn xóa ${productName} khỏi danh sách yêu thích?`)) {
+                        productCard.style.opacity = '0';
+                        setTimeout(() => {
+                            productCard.remove();
+                        }, 300);
+                    }
+                });
+            });
+        });
     </script>
 </body>
 

@@ -15,10 +15,12 @@
     <style>
         body {
              background-color: #f4f6f9;
+
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         main .container {
+
             margin-top: 50px;
         }
 
@@ -80,63 +82,10 @@
 
 <body>
   <!-- ================= Header ================= -->
-  <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
-    <div class="container">
-      <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.jsp">
-        <i class="bi bi-camera fs-4 me-2"></i>
-        <span>TechX</span>
-      </a>
-
-      <!-- Toggle (mobile) -->
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="bi bi-list fs-2 text-primary"></i>
-      </button>
-
-      <!-- Nav links -->
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav align-items-lg-center gap-lg-3">
-          <li class="nav-item"><a class="nav-link  " href="/index.jsp">Trang chủ</a></li>
-          <li class="nav-item"><a class="nav-link " href="/pages/shop.html">Cửa hàng</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/pages/products.html">Sản phẩm</a></li>
+  <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
-          <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
-          <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
-          <li class="nav-item"><a class="nav-link " href="/pages/order-history.jsp">Đơn hàng</a></li>
-          <!-- Dropdown -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Tài khoản
-            </a>
-            <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/pages/profile.jsp">Thông tin tài khoản</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="wishList.html">Danh sách sản phẩm yêu thích</a></li>
-              <li><a class="dropdown-item" href="notification.html">Xem thông báo</a></li>
-              <li><a class="dropdown-item" href="viewed-product.html">Sản phẩm đã xem</a>
-              </li>
 
-            </ul>
-          </li>
-        </ul>
-
-        <!-- Login & Cart -->
-        <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-          <a href="/pages/login.jsp" class="btn btn-outline-primary btn-sm d-flex align-items-center">
-            <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
-          </a>
-          <a href="/pages/cart.jsp" class="btn btn-primary btn-sm d-flex align-items-center">
-            <i class="bi bi-cart3 me-1"></i> Giỏ hàng
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
     <main>
         <div class="container">
             <!-- HERO -->

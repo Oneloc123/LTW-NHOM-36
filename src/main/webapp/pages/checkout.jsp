@@ -22,47 +22,7 @@
 <body class="bg-light">
 
     <!-- ================= Header ================= -->
-    <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
-        <div class="container">
-            <!-- Logo -->
-            <a class="navbar-brand d-flex align-items-center fw-bold" href="/index.jsp">
-                <i class="bi bi-camera fs-4 me-2"></i>
-                <span>TechX</span>
-            </a>
-
-            <!-- Toggle (mobile) -->
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="bi bi-list fs-2 text-primary"></i>
-            </button>
-
-        <!-- Nav links -->
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav align-items-lg-center gap-lg-3">
-                <li class="nav-item"><a class="nav-link " href="/home">Trang chủ</a></li>
-                <li class="nav-item"><a class="nav-link" href="../pages/shop.html">Cửa hàng</a></li>
-
-                        <li class="nav-item"><a class="nav-link" href="/pages/products.html">Sản phẩm</a></li>
-
-
-                <li class="nav-item"><a class="nav-link" href="../pages/blog.html">Blog</a></li>
-                <li class="nav-item"><a class="nav-link" href="../pages/contact.html">Liên hệ</a></li>
-                <li class="nav-item"><a class="nav-link" href="order-history.jsp">Đơn hàng</a></li>
-                <li class="nav-item"><a class="nav-link" href="profile.jsp">Tài khoản</a></li>
-            </ul>
-
-            <!-- Login & Cart -->
-            <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-                <a href="login.jsp" class="btn btn-outline-primary btn-sm d-flex align-items-center">
-                    <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
-                </a>
-                <a href="cart.jsp" class="btn btn-primary btn-sm d-flex align-items-center">
-                    <i class="bi bi-cart3 me-1"></i> Giỏ hàng
-                </a>
-            </div>
-        </div>
-    </div>
-</header>
+    <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
 <div class="container checkout-container">

@@ -28,6 +28,7 @@
 /* ================= HEADER LỚP CHA ================= */
 .header-scope {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    width: 100%;
 }
 
 /* ================= Header Styles ================= */
