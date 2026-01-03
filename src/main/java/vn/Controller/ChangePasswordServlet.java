@@ -36,7 +36,7 @@ public class ChangePasswordServlet extends HttpServlet {
         if(oldPassword.equals(u.getPassword())){
             UserService usr = new UserService();
             usr.updatePassword(id,newPassword);
-            response.sendRedirect("/DoCongNghe_Nhom36_war/Profile");
+            response.sendRedirect("/Profile");
         }
     }
 }

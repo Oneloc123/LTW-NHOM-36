@@ -1,4 +1,4 @@
-package vn.controller.shop;
+package vn.Controller.shop;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

@@ -1,4 +1,4 @@
-package vn.controller;
+package vn.Controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -22,7 +22,6 @@ public class ProfileServlet extends HttpServlet {
             User u = us.getUserById(Integer.parseInt(session.getAttribute("id").toString()));
             request.setAttribute("user",u);
             // chuyển hướng
-            request.setAttribute("currentPage", "profile");
             request.getRequestDispatcher("/pages/profile.jsp").forward(request,response);
         }
     }

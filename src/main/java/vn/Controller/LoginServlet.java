@@ -1,4 +1,4 @@
-package vn.controller;
+package vn.Controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -15,7 +15,6 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("id") == null) {
             request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
-            return;
         }else{
             request.getRequestDispatcher("/home").forward(request, response);
         }

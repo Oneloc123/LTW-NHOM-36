@@ -1,4 +1,4 @@
-package vn.controller;
+package vn.Controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -16,7 +16,7 @@ public class OrderHistoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("username") == null) {
+        if (session == null || session.getAttribute("id") == null) {
             request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
 
         }else{
