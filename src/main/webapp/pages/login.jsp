@@ -12,155 +12,29 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/footer.css">
     <link rel="stylesheet" href="../assets/css/header.css">
-  <link rel='stylesheet' type='text/css' media='screen' href='login.css'>
+  <link rel='stylesheet' type='text/css' media='screen' href="../assets/css/login.css">
   
-  <style>
-    body {
-      background: linear-gradient(135deg, #e8f0ff, #f6faff);
-      font-family: "Segoe UI", sans-serif;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      width: 100%;
-    }
 
-    .login-card {
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
-      width: 480px;
-      padding: 2.5rem;
-      text-align: center;
-    }
-
-    .login-card h2 {
-      font-weight: 700;
-      color: #0d6efd;
-      margin-bottom: 1.5rem;
-    }
-
-    .form-control {
-      border-radius: 10px;
-      padding: 0.8rem 1rem;
-    }
-
-    .btn-primary {
-      background-color: #0d6efd;
-      border: none;
-      border-radius: 10px;
-      padding: 0.8rem;
-      width: 100%;
-      font-weight: 600;
-    }
-
-    .btn-outline-primary {
-      border-radius: 10px;
-      font-weight: 600;
-    }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      text-align: center;
-      color: #888;
-      margin: 1.5rem 0;
-    }
-
-    .divider::before,
-    .divider::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: #ddd;
-      margin: 0 10px;
-    }
-
-    .social-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-weight: 500;
-      border-radius: 10px;
-      width: 100%;
-      padding: 0.7rem;
-    }
-
-    .social-btn i {
-      font-size: 1.2rem;
-    }
-
-    .social-btn.facebook {
-      background-color: #1877f2;
-      color: white;
-      border: none;
-    }
-
-    .social-btn.google {
-      border: 1px solid #ccc;
-      background-color: white;
-      color: #444;
-    }
-
-    .footer-links {
-      margin-top: 1rem;
-      font-size: 0.9rem;
-    }
-
-    .footer-links a {
-      color: #0d6efd;
-      text-decoration: none;
-    }
-
-    .footer-links a:hover {
-      text-decoration: underline;
-    }
-
-    .header-main {
-      width: 100%;
-    }
-
-    .footer {
-      width: 100%;
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 40px 10px;
-    }
-  </style>
 </head>
 
 <body>
-  <!-- ================= Header ================= -->
-  <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
-    <div class="container">
-      <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.jsp">
-        <i class="bi bi-camera fs-4 me-2"></i>
-        <span>TechX</span>
-      </a>
-    </div>
-  </header>
+<!-- ================= Header ================= -->
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<div class="login-page">
+    <main>
+        <div class="login-card">
+            <h2>Đăng nhập TechX</h2>
 
-  <main>
-    <div class="login-card">
-      <h2>Đăng nhập TechX</h2>
-      <form action="/DoCongNghe_Nhom36_war/login" method="post">
-        <div class="mb-3 text-start">
-          <label for="username" class="form-label">Tài khoản</label>
-          <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tài khoản">
-        </div>
-        <div class="mb-3 text-start">
-          <label for="password" class="form-label">Mật khẩu</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
-        </div>
+            <form action="${pageContext.request.contextPath}/login" method="post">
+                <div class="mb-3 text-start">
+                    <label for="username" class="form-label">Tài khoản</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tài khoản">
+                </div>
+                <div class="mb-3 text-start">
+                    <label for="password" class="form-label">Mật khẩu</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                           placeholder="Nhập mật khẩu">
+                </div>
 
         <button type="submit" class="btn btn-primary">Đăng nhập</button>
 
@@ -175,7 +49,7 @@
 
         <div class="footer-links mt-3">
           <a href="/DoCongNghe_Nhom36_war/forgot-password">Quên mật khẩu?</a> |
-          <a href="/DoCongNghe_Nhom36_war/register">Tạo tài khoản mới</a>
+          <a href="../register">Tạo tài khoản mới</a>
         </div>
       </form>
     </div>

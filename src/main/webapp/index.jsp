@@ -15,366 +15,162 @@
 
 </head>
 
-<body >
-  <!-- ================= Header ================= -->
-  <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
+<body>
+
+
+
+
+
+
+<!-- ================= Footer ================= -->
+<footer class="footer bg-light text-dark pt-5 pb-4  border-top">
     <div class="container">
-      <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.html">
-        <i class="bi bi-camera fs-4 me-2"></i>
-        <span>TechX</span>
-      </a>
+        <div class="row gy-4">
+            <!-- Logo + Giới thiệu -->
+            <div class="col-md-4">
+                <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
+                    <i class="bi bi-camera fs-3 text-primary me-2"></i>
+                    <span class="fw-bold fs-5 text-primary">TechX</span>
+                </a>
+                <p class="text-muted">
+                    Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
+                    Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
+                </p>
+            </div>
 
-      <!-- Toggle (mobile) -->
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="bi bi-list fs-2 text-primary"></i>
-      </button>
+            <!-- Danh mục -->
+            <div class="col-md-2">
+                <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
+                <ul class="list-unstyled">
+                    <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
+                    <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
+                    <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
+                    <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
+                </ul>
+            </div>
 
-      <!-- Nav links -->
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav align-items-lg-center gap-lg-3">
-          <li class="nav-item"><a class="nav-link active " href="/index.html">Trang chủ</a></li>
-          <li class="nav-item"><a class="nav-link " href="/pages/shop.html">Cửa hàng</a></li>
+            <!-- Hỗ trợ -->
+            <div class="col-md-2">
+                <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
+                <ul class="list-unstyled">
+                    <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
+                    <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
+                    <li><a href="/pages/order-history.jsp" class="footer-link">Theo dõi đơn hàng</a></li>
+                    <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
+                </ul>
+            </div>
 
-                                  <li class="nav-item"><a class="nav-link" href="/pages/products.html">Sản phẩm</a></li>
-
-
-          <li class="nav-item"><a class="nav-link" href="/pages/blog.html">Blog</a></li>
-          <li class="nav-item"><a class="nav-link" href="/pages/contact.html">Liên hệ</a></li>
-          <li class="nav-item"><a class="nav-link " href="/pages/order-history.jsp">Đơn hàng</a></li>
-          <!-- Dropdown -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Tài khoản
-            </a>
-            <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/pages/profile.jsp">Thông tin tài khoản</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="../pages/wishList.html">Danh sách sản phẩm yêu thích</a></li>
-              <li><a class="dropdown-item" href="../pages/notification.html">Xem thông báo</a></li>
-              <li><a class="dropdown-item" href="../pages/viewed-product.html">Sản phẩm đã xem</a>
-              </li>
-
-            </ul>
-          </li>
-        </ul>
-
-        <!-- Login & Cart -->
-        <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-          <a href="/DoCongNghe_Nhom36_war/login" class="btn btn-outline-primary btn-sm d-flex align-items-center">
-            <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
-          </a>
-          <a href="/pages/cart.jsp" class="btn btn-primary btn-sm d-flex align-items-center">
-            <i class="bi bi-cart3 me-1"></i> Giỏ hàng
-          </a>
+            <!-- Liên hệ -->
+            <div class="col-md-4">
+                <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
+                <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh
+                </p>
+                <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
+                <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
+                <div class="mt-3">
+                    <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
+                </div>
+            </div>
         </div>
-      </div>
+
+        >>>>>>> Anh_UpdateShopV1
+        <hr class="mt-4 mb-3">
+        <div class="text-center small text-muted">
+            © 2025 <strong>TechX</strong>. All rights reserved.
+        </div>
     </div>
-  </header>
+</footer>
 
-
-
-    <!-- MAIN CONTENT  -->
-    <main class="home-page">
-        <!-- =======================BANNER SLIDESHOW======================== -->
-        <section class="banner-container">
-
-            <div class="banner-slide ">
-                <div class="banner-img"></div>
-                <div class="banner-text">
-                    <h2>Gumdam Red Lighting TechX</h2>
-                    <a href="../pages/shop.html" class="btn_unline">Mua ngay</a>
-                </div>
-            </div>
-
-            <div class="banner-slide ">
-                <div class="banner-img"></div>
-                <div class="banner-text">
-                    <h2>Fly Car TechX</h2>
-                    <a href="../pages/shop.html" class="btn_unline">Khám phá</a>
-                </div>
-            </div>
-
-            <div class="banner-slide ">
-                <div class="banner-img"></div>
-                <div class="banner-text">
-                    <h2>Cyber Dog TechX</h2>
-                    <a href="../pages/shop.html" class="btn_unline">Xem thêm</a>
-                </div>
-            </div>
-
-            <div class="banner-dots" id="dots"></div>
-        </section>
-
-        <!-- ======= PREMIUM BANNER 1 ======= -->
-        <section class="premium-banner banner-1">
-            <div class="premium-left">
-                <h2>Thiết Kế Độc Lạ</h2>
-                <p>Thỏa mãn khao khát bất tận</p>
-
-                <div class="premium-buttons">
-                    <a href="../pages/shop.html" class="btn-ghost-dark btn_unline">Tìm hiểu thêm</a>
-                    <a href="../pages/shop.html" class="btn-outline-dark">Xem tất cả</a>
-                </div>
-            </div>
-
-            <img class="premium-media banner-media-1"
-                src="https://mtcomputer.vn/wp-content/uploads/2024/06/26749-vo-case-cooler-master-shark-x-white-1.jpg"
-                alt="">
-        </section>
-
-        <!-- ======= PREMIUM BANNER 2 ======= -->
-        <section class="premium-banner banner-2">
-            <div class="premium-left">
-                <h2>Công nghệ Mini</h2>
-                <p>Nhỏ gọn – Tiện lợi – Mạnh mẽ vượt trội</p>
-
-                <div class="premium-buttons">
-                    <a href="../pages/shop.html" class="btn-ghost-dark btn_unline">Khám phá ngay</a>
-                    <a href="../pages/shop.html" class="btn-outline-dark">Xem tất cả</a>
-                </div>
-            </div>
-            <img class="premium-media banner-media-2"
-                src="https://file.hstatic.net/200000348419/file/kinh-apple-vision-pro_a0a8a4f64b974f00936cc93017f6b495.png"
-                alt="">
-        </section>
-
-        <!-- ======= PREMIUM BANNER 3 ======= -->
-        <section class="premium-banner banner-3">
-            <div class="premium-left">
-                <h2>Thiết bị AI</h2>
-                <p>Đưa trải nghiệm công nghệ lên một tầm cao mới</p>
-
-                <div class="premium-buttons">
-                    <a href="../pages/shop.html" class="btn-ghost-dark btn_unline">Xem chi tiết</a>
-                    <a href="../pages/shop.html" class="btn-outline-dark">Mua ngay</a>
-                </div>
-            </div>
-
-            <img class="premium-media banner-media-3"
-                src="https://insights.greyb.com/wp-content/uploads/2024/05/Xiaomi-Cyber-dog.png"
-                alt="">
-        </section>
-
-        <!-- =======================DANH MỤC NỔI BẬT======================== -->
-        <section class="category">
-
-            <div class="category-list">
-                <a href="../pages/shop.html" class="category-card">
-                    <img class="cat-img"
-                        src="https://owlgaming.vn/wp-content/uploads/2024/10/loa-bluetooth-gravastar-mars-pro-black.jpg"
-                        alt="">
-                    <p>Phụ Kiện Công Nghệ Sáng Tạo</p>
-                </a>
-
-                <a href="../pages/shop.html" class="category-card">
-                    <img class="cat-img" src="https://m.media-amazon.com/images/I/61Wjxlf61pL._AC_SL1200_.jpg">
-                    <p>Decor Công Nghệ</p>
-                </a>
-
-                <a href="../pages/shop.html" class="category-card">
-                    <img class="cat-img"
-                        src="https://m.media-amazon.com/images/I/51DBd7O6GEL.jpg_BO30,255,255,255_UF900,850_SR1910,1000,0,C_QL100_.jpg">
-                    <p>Thiết Bị Thông Minh</p>
-                </a>
-
-                <a href="../pages/shop.html" class="category-card">
-                    <img class="cat-img"
-                        src="https://product.hstatic.net/200000547251/product/b9-d_9979d37925a34bdba91802da528f995a_master.jpg">
-                    <p>Công nghệ Lifestyle</p>
-                </a>
-            </div>
-        </section>
-
-
-        <!-- ================= DEALS ================= -->
-        <section class="deals section-padding">
-            <div class="container">
-                <h2 class="section-title">Ưu đãi độc quyền</h2>
-
-                <div class="deal-grid">
-
-                    <a class="deal-card" href="../pages/shop.html">
-                        <img src="https://img.topbank.vn/crop/620x324/2017/10/12/BAVjA8Ix/0-8f1f.jpg" alt="">
-                        <div class="deal-info">
-                            <h3>Ưu đãi trả góp 0%</h3>
-                        </div>
-                    </a>
-
-                    <a href="../pages/shop.html" class="deal-card">
-                        <img src="https://bizweb.dktcdn.net/100/517/390/collections/sale-2.png?v=1751516458907" alt="">
-                        <div class="deal-info">
-                            <h3>Flash sales lên đến 50%</h3>
-                        </div>
-                    </a>
-
-                    <a href="../pages/shop.html" class="deal-card">
-                        <img src="https://blog.abit.vn/wp-content/uploads/2020/11/free-shippig-la-gi-1-e1606374150159.jpg"
-                            alt="">
-                        <div class="deal-info">
-                            <h3>Freeship mọi đơn hàng</h3>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-    <!-- END main -->
-
-
-
-    <!-- ================= Footer ================= -->
-    <footer class="footer bg-light text-dark pt-5 pb-4  border-top">
-        <div class="container">
-            <div class="row gy-4">
-                <!-- Logo + Giới thiệu -->
-                <div class="col-md-4">
-                    <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
-                        <i class="bi bi-camera fs-3 text-primary me-2"></i>
-                        <span class="fw-bold fs-5 text-primary">TechX</span>
-                    </a>
-                    <p class="text-muted">
-                        Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
-                        Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
-                    </p>
-                </div>
-
-                <!-- Danh mục -->
-                <div class="col-md-2">
-                    <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
-                        <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
-                        <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
-                        <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
-                    </ul>
-                </div>
-
-                <!-- Hỗ trợ -->
-                <div class="col-md-2">
-                    <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-                        <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
-                        <li><a href="/pages/order-history.jsp" class="footer-link">Theo dõi đơn hàng</a></li>
-                        <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
-                    </ul>
-                </div>
-
-                <!-- Liên hệ -->
-                <div class="col-md-4">
-                    <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
-                    <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh
-                    </p>
-                    <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
-                    <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
-                    <div class="mt-3">
-                        <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
-                        <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            >>>>>>> Anh_UpdateShopV1
-            <hr class="mt-4 mb-3">
-            <div class="text-center small text-muted">
-                © 2025 <strong>TechX</strong>. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- =======================
-      JS SLIDESHOW
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- =======================
+  JS SLIDESHOW
 ======================== -->
-    <script>
-        let slideIndex = 0;
+<script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let slides = document.getElementsByClassName("banner-slide");
+        let dotsContainer = document.getElementById("dots");
+
+        dotsContainer.innerHTML = "";
+
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].classList.remove("active"); // ẩn mượt bằng opacity
+
+            let dot = document.createElement("span");
+            dot.classList.add("dot");
+            dot.onclick = function () {
+                currentSlide(i);
+            };
+            dotsContainer.appendChild(dot);
+        }
+
+        slideIndex++;
+        if (slideIndex > slides.length) slideIndex = 1;
+
+        slides[slideIndex - 1].classList.add("active");   // hiện mượt
+        dotsContainer.children[slideIndex - 1].classList.add("active");
+
+        setTimeout(showSlides, 3000); // 4s chuyển
+    }
+
+    function currentSlide(n) {
+        slideIndex = n + 1; // vì slideIndex là 1-based
         showSlides();
+    }
 
-        function showSlides() {
-            let slides = document.getElementsByClassName("banner-slide");
-            let dotsContainer = document.getElementById("dots");
+</script>
+<script>
+    // Thêm hiệu ứng khi cuộn
+    window.addEventListener('scroll', function () {
+        const header = document.querySelector('.header-main');
+        const scrollTop = document.getElementById('scrollTop');
 
-            dotsContainer.innerHTML = "";
-
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].classList.remove("active"); // ẩn mượt bằng opacity
-
-                let dot = document.createElement("span");
-                dot.classList.add("dot");
-                dot.onclick = function () { currentSlide(i); };
-                dotsContainer.appendChild(dot);
-            }
-
-            slideIndex++;
-            if (slideIndex > slides.length) slideIndex = 1;
-
-            slides[slideIndex - 1].classList.add("active");   // hiện mượt
-            dotsContainer.children[slideIndex - 1].classList.add("active");
-
-            setTimeout(showSlides, 3000); // 4s chuyển
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
         }
 
-        function currentSlide(n) {
-            slideIndex = n + 1; // vì slideIndex là 1-based
-            showSlides();
+        // Hiển thị nút scroll to top
+        if (window.scrollY > 300) {
+            scrollTop.classList.add('show');
+        } else {
+            scrollTop.classList.remove('show');
         }
+    });
 
-    </script>
-    <script>
-        // Thêm hiệu ứng khi cuộn
-        window.addEventListener('scroll', function () {
-            const header = document.querySelector('.header-main');
-            const scrollTop = document.getElementById('scrollTop');
+    // Scroll to top functionality
+    document.getElementById('scrollTop').addEventListener('click', function () {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-
-            // Hiển thị nút scroll to top
-            if (window.scrollY > 300) {
-                scrollTop.classList.add('show');
-            } else {
-                scrollTop.classList.remove('show');
-            }
+    // Thêm hiệu ứng cho dropdown khi hover
+    document.querySelectorAll('.dropdown').forEach(function (dropdown) {
+        dropdown.addEventListener('mouseenter', function () {
+            const dropdownMenu = this.querySelector('.dropdown-menu');
+            dropdownMenu.classList.add('show');
         });
 
-        // Scroll to top functionality
-        document.getElementById('scrollTop').addEventListener('click', function () {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+        dropdown.addEventListener('mouseleave', function () {
+            const dropdownMenu = this.querySelector('.dropdown-menu');
+            // Delay hiding to allow moving cursor to dropdown
+            setTimeout(function () {
+                if (!dropdown.matches(':hover')) {
+                    dropdownMenu.classList.remove('show');
+                }
+            }, 300);
         });
-
-        // Thêm hiệu ứng cho dropdown khi hover
-        document.querySelectorAll('.dropdown').forEach(function (dropdown) {
-            dropdown.addEventListener('mouseenter', function () {
-                const dropdownMenu = this.querySelector('.dropdown-menu');
-                dropdownMenu.classList.add('show');
-            });
-
-            dropdown.addEventListener('mouseleave', function () {
-                const dropdownMenu = this.querySelector('.dropdown-menu');
-                // Delay hiding to allow moving cursor to dropdown
-                setTimeout(function () {
-                    if (!dropdown.matches(':hover')) {
-                        dropdownMenu.classList.remove('show');
-                    }
-                }, 300);
-            });
-        });
-    </script>
+    });
+</script>
 
 </body>
 

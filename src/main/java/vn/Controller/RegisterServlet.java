@@ -1,4 +1,4 @@
-package vn.Controller;
+package vn.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -46,7 +46,7 @@ public class RegisterServlet extends HttpServlet {
             u.setRole("USER");
             u.setCreateAt(LocalDate.now().toString());
             us.registerUser(u);
-            response.sendRedirect("/DoCongNghe_Nhom36_war/login");
+            response.sendRedirect("../login");
         }
     }
 }

@@ -11,12 +11,12 @@ import vn.services.UserService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "OrderHistoryServlet", value = "/Order-History")
+@WebServlet(name = "OrderHistoryServlet", value = "/orders")
 public class OrderHistoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("username") == null) {
+        if (session == null || session.getAttribute("id") == null) {
             request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
 
         }else{
@@ -24,8 +24,9 @@ public class OrderHistoryServlet extends HttpServlet {
             User u = userService.getUserByUserName(session.getAttribute("username").toString());
             int uid = u.getId();
             OrderService os = new OrderService();
-            List<Order> list = os.getListOrderById(uid);
-            request.setAttribute("list", list);
+            //List<Order> list = os.getListOrderById(uid);
+           // request.setAttribute("list", list);
+            request.setAttribute("currentPage", "orders");
             request.getRequestDispatcher("/pages/order-history.jsp").forward(request, response);
         }
     }

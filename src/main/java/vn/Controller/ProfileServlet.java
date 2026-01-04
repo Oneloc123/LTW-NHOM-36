@@ -9,7 +9,7 @@ import vn.services.UserService;
 
 import java.io.IOException;
 
-@WebServlet(name = "ProfileServlet", value = "/Profile")
+@WebServlet(name = "ProfileServlet", value = "/profile")
 public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

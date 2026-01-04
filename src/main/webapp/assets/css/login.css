@@ -1,151 +1,283 @@
-/* Reset mặc định */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Arial, sans-serif;
+/* ================= LOGIN PAGE ================= */
+.login-page {
+    min-height: 100vh;
+    background: #f6f8fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
-body {
-  background: #f6f8fa;
-  min-height: 100vh;
+/* Reset trong phạm vi login */
+.login-page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* Bố cục tổng */
-main {
-  display: flex;
+.login-page main {
+    display: flex;
     flex-direction: column;
-  align-content: center;
     justify-content: center;
-  gap: 20px;
-  width: 600px;
+    gap: 20px;
+    width: 600px;
     margin: auto;
 }
 
-/* Hộp tiêu đề */
-.boxTitleRegisterPage {
-  display: flex;  
-  background: white;
-  padding: 25px 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  gap: 36px;
+/* ===== Hộp tiêu đề ===== */
+.login-page .boxTitleRegisterPage {
+    display: flex;
+    gap: 36px;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.titleRegister {
-  font-size: 22px;
-  color: #333;
-  margin-bottom: 15px;
+.login-page .titleRegister {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 15px;
 }
 
-/* Thanh điều hướng phụ */
-.subNavigate {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+/* ===== Thanh điều hướng phụ ===== */
+.login-page .subNavigate {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
-.subNavigareItem a {
-  text-decoration: none;
-  color: #007bff;
-  font-weight: 500;
-  transition: color 0.3s;
+.login-page .subNavigareItem a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    transition: color 0.3s;
 }
 
-.subNavigareItem a:hover {
-  color: #0056b3;
+.login-page .subNavigareItem a:hover {
+    color: #0056b3;
 }
 
-/* Hộp form đăng ký */
-.boxForm {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+/* ===== Hộp form ===== */
+.login-page .boxForm {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.titleBoxFrom {
-  font-size: 20px;
-  color: #222;
-  margin-bottom: 5px;
+.login-page .titleBoxFrom {
+    font-size: 20px;
+    color: #222;
+    margin-bottom: 5px;
 }
 
-.detailTitle {
-  color: #666;
-  margin-bottom: 20px;
-  font-size: 14px;
+.login-page .detailTitle {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
 }
 
-/* Dòng đã có tài khoản */
-.haveAnAccountDiv {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f1f3f5;
-  padding: 15px 15px;
-  border-radius: 6px;
-  margin-bottom: 20px;
+/* ===== Đã có tài khoản ===== */
+.login-page .haveAnAccountDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f1f3f5;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
 }
 
-.haveAnAccount {
-  color: #555;
-  font-size: 14px;
-  margin: 0;
+.login-page .haveAnAccount {
+    font-size: 14px;
+    color: #555;
 }
 
-.LoginATag {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: 600;
+.login-page .LoginATag {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
 }
 
-.LoginATag:hover {
-  text-decoration: underline;
+.login-page .LoginATag:hover {
+    text-decoration: underline;
 }
 
-/* Form nhập liệu */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+/* ===== Form ===== */
+.login-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-label {
-  font-size: 14px;
-  color: #333;
+.login-page label {
+    font-size: 14px;
+    color: #333;
 }
 
-input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  outline: none;
-  transition: border-color 0.3s;
+.login-page input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s;
 }
 
-input:focus {
-  border-color: #007bff;
+.login-page input:focus {
+    border-color: #007bff;
 }
-.Accept{
+
+/* ===== Điều khoản ===== */
+.login-page .divAccept {
+    margin-top: 15px;
+}
+
+.login-page .Accept {
+    display: inline-block;
     background-color: #f1f3f5;
     color: #008cfc;
     padding: 10px;
-    margin-top: 0px;
     font-size: 15px;
+    border: 1px solid #d6d6d6;
+    border-radius: 5px;
     text-decoration: none;
-    border-color: #d6d6d6;
-    border-radius: 5px;   
 }
-.divAccept{
-        margin-top: 15px;
 
-}
-.Accept:hover{
+.login-page .Accept:hover {
     text-decoration: underline;
 }
-.button{
-    display: flex;  
-    gap:264px
+
+/* ===== Button ===== */
+.login-page .button {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.login-page {
+    background: linear-gradient(135deg, #e8f0ff, #f6faff);
+    font-family: "Segoe UI", sans-serif;
+    color: #333;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* ===== Login Card ===== */
+.login-page .login-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+    width: 480px;
+    padding: 2.5rem;
+    text-align: center;
+}
+
+.login-page .login-card h2 {
+    font-weight: 700;
+    color: #0d6efd;
+    margin-bottom: 1.5rem;
+}
+
+/* ===== Form ===== */
+.login-page .form-control {
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+}
+
+/* ===== Buttons ===== */
+.login-page .btn-primary {
+    background-color: #0d6efd;
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem;
+    width: 100%;
+    font-weight: 600;
+}
+
+.login-page .btn-outline-primary {
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* ===== Divider ===== */
+.login-page .divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #888;
+    margin: 1.5rem 0;
+}
+
+.login-page .divider::before,
+.login-page .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #ddd;
+    margin: 0 10px;
+}
+
+/* ===== Social Buttons ===== */
+.login-page .social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    border-radius: 10px;
+    width: 100%;
+    padding: 0.7rem;
+}
+
+.login-page .social-btn i {
+    font-size: 1.2rem;
+}
+
+.login-page .social-btn.facebook {
+    background-color: #1877f2;
+    color: #fff;
+    border: none;
+}
+
+.login-page .social-btn.google {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #444;
+}
+
+/* ===== Footer links ===== */
+.login-page .footer-links {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.login-page .footer-links a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.login-page .footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Layout ===== */
+.login-page .header-main,
+.login-page .footer {
+    width: 100%;
+}
+
+.login-page main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 10px;
 }

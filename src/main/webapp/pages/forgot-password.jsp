@@ -83,15 +83,7 @@
 
 <body>
   <!-- ================= Header ================= -->
-  <header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
-    <div class="container">
-      <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.jsp">
-        <i class="bi bi-camera fs-4 me-2"></i>
-        <span>TechX</span>
-      </a>      
-    </div>
-  </header>
+  <%@ include file="/WEB-INF/views/common/header.jsp" %>
   <main>
     <div class="container">
       <h2 class="text-center mb-2">Quên Mật Khẩu</h2>
