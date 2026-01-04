@@ -17,9 +17,38 @@ public class Order {
         this.total = total;
     }
 
-    public int getId() { return id; }
-    public int getUserId() { return userId; }
-    public String getOrderStatus() { return orderStatus; }
-    public String getCreateAt() { return createAt; }
-    public double getTotal() { return total; }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public String getCreateAt() {
+        return createAt;
+    }
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+    public void setTotal(double total) {
+        this.total = total;
+    }
 }
