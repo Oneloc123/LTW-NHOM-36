@@ -2,37 +2,77 @@ package vn.Controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import vn.model.CartItem;
 import vn.services.CheckoutService;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/checkout")
 public class CheckoutServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        req.getRequestDispatcher("pages/checkout.jsp").forward(req, resp);
+        HttpSession session = request.getSession(false);
+
+        // Nếu chưa đăng nhập → về login
+        if (session == null || session.getAttribute("cart") == null) {
+            response.sendRedirect(request.getContextPath() + "/pages/login.jsp");
+            return;
+        }
+
+        // Lấy cart từ session
+        List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
+
+        CheckoutService service = new CheckoutService();
+        double total = service.calculateTotal(session);
+
+        // Đẩy dữ liệu sang JSP
+        request.setAttribute("cart", cart);
+        request.setAttribute("total", total);
+
+        request.getRequestDispatcher("/pages/checkout.jsp")
+                .forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String fullName = req.getParameter("fullName");
-        String phone = req.getParameter("phone");
-        String address = req.getParameter("address");
-        String paymentMethod = req.getParameter("paymentMethod");
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            response.sendRedirect(request.getContextPath() + "/pages/login.jsp");
+            return;
+        }
 
+        // Lấy thông tin form
+        String fullName = request.getParameter("fullName");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String paymentMethod = request.getParameter("paymentMethod");
+        String note = request.getParameter("note");
+
+        // DEMO: chưa insert DB
         CheckoutService service = new CheckoutService();
-        boolean success = service.processCheckout();
+        boolean success = service.checkoutDemo(session);
 
         if (success) {
-            resp.sendRedirect("pages/checkout-success.jsp");
+            // Clear cart sau khi thanh toán
+            session.removeAttribute("cart");
+
+            response.sendRedirect(
+                    request.getContextPath() + "/pages/checkout-success.jsp"
+            );
         } else {
-            resp.sendRedirect("pages/checkout.jsp");
+            request.setAttribute("error", "Thanh toán thất bại, vui lòng thử lại");
+            request.getRequestDispatcher("/pages/checkout.jsp")
+                    .forward(request, response);
         }
     }
 }

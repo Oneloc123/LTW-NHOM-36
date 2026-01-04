@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -21,158 +22,132 @@
 
 <body class="bg-light">
 
-    <!-- ================= Header ================= -->
-    <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<!-- ================= Header ================= -->
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<form action="${pageContext.request.contextPath}/checkout" method="post">
+    <div class="container checkout-container mt-4">
+        <div class="row g-4">
 
+            <!-- LEFT -->
+            <div class="col-lg-8">
 
-<div class="container checkout-container">
-    <div class="row g-4">
-        <!-- LEFT COLUMN -->
-        <div class="col-lg-8">
+                <!-- THÔNG TIN NGƯỜI NHẬN -->
+                <div class="checkout-box mb-4">
+                    <h5 class="section-title">
+                        <i class="bi bi-person-circle me-2"></i>Thông tin người nhận
+                    </h5>
 
-            <!-- THÔNG TIN NGƯỜI NHẬN -->
-            <div class="checkout-box mb-4">
-                <h4 class="section-title"><i class="bi bi-person-circle me-2"></i>Thông tin người nhận</h4>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Họ và tên</label>
+                            <input name="fullName" class="form-control"
+                                   value="${sessionScope.user.fullName}" required>
+                        </div>
 
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label class="form-label">Họ và tên</label>
-                        <input type="text" class="form-control" placeholder="Nguyễn Văn A">
+                        <div class="col-md-6">
+                            <label class="form-label">Số điện thoại</label>
+                            <input name="phone" class="form-control"
+                                   value="${sessionScope.user.phone}" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="form-label">Địa chỉ</label>
+                            <input name="address" class="form-control"
+                                   value="${sessionScope.user.address}" required>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Số điện thoại</label>
-                        <input type="text" class="form-control" placeholder="0123 456 789">
-                    </div>
+                </div>
 
-                    <div class="col-md-12">
-                        <label class="form-label">Địa chỉ</label>
-                        <input type="text" class="form-control" placeholder="Số nhà, đường, phường/xã, quận/huyện">
-                    </div>
+                <!-- GIAO HÀNG -->
+                <div class="checkout-box mb-4">
+                    <h5 class="section-title">
+                        <i class="bi bi-truck me-2"></i>Phương thức giao hàng
+                    </h5>
+                    <select name="shippingMethod" class="form-select">
+                        <option value="STANDARD">Giao tiêu chuẩn (Miễn phí)</option>
+                        <option value="FAST">Giao nhanh (+30.000đ)</option>
+                    </select>
+                </div>
 
-                    <div class="col-md-6">
-                        <label class="form-label">Tỉnh/Thành</label>
-                        <select class="form-select">
-                            <option>TP. Hồ Chí Minh</option>
-                            <option>Hà Nội</option>
-                            <option>Đà Nẵng</option>
-                        </select>
-                    </div>
+                <!-- THANH TOÁN -->
+                <div class="checkout-box mb-4">
+                    <h5 class="section-title">
+                        <i class="bi bi-credit-card me-2"></i>Hình thức thanh toán
+                    </h5>
+                    <select name="paymentMethod" class="form-select">
+                        <option value="COD">Thanh toán khi nhận hàng (COD)</option>
+                        <option value="BANK">Chuyển khoản ngân hàng</option>
+                        <option value="EWALLET">Ví điện tử</option>
+                    </select>
+                </div>
 
-                    <div class="col-md-6">
-                        <label class="form-label">Quận/Huyện</label>
-                        <select class="form-select">
-                            <option>Quận 1</option>
-                            <option>Quận 7</option>
-                            <option>Thủ Đức</option>
-                        </select>
-                    </div>
+                <!-- GHI CHÚ -->
+                <div class="checkout-box mb-4">
+                    <h5 class="section-title">
+                        <i class="bi bi-pencil-square me-2"></i>Ghi chú
+                    </h5>
+                    <textarea name="note" class="form-control" rows="3"></textarea>
                 </div>
             </div>
 
-            <!-- PHƯƠNG THỨC NHẬN HÀNG -->
-            <div class="checkout-box mb-4">
-                <h4 class="section-title"><i class="bi bi-truck me-2"></i>Phương thức giao hàng</h4>
-                <select class="form-select">
-                    <option>Giao tiêu chuẩn (Miễn phí)</option>
-                    <option>Giao nhanh trong 2h (+30.000đ)</option>
-                    <option>Nhận tại cửa hàng</option>
-                </select>
+            <!-- RIGHT -->
+            <div class="col-lg-4">
+                <div class="summary-box">
+                    <h5 class="section-title">
+                        <i class="bi bi-receipt me-2"></i>Đơn hàng
+                    </h5>
+
+                    <c:if test="${empty sessionScope.cart}">
+                        <p class="text-muted">Giỏ hàng trống</p>
+                    </c:if>
+
+                    <c:forEach items="${sessionScope.cart}" var="item">
+                        <div class="product-item d-flex justify-content-between mb-2">
+                            <div class="d-flex gap-2">
+                                <img src="${item.image}" width="50">
+                                <div>
+                                    <div class="fw-semibold">${item.name}</div>
+                                    <small>x${item.quantity}</small>
+                                </div>
+                            </div>
+                            <div class="fw-bold text-danger">
+                                <fmt:formatNumber value="${item.total}" type="currency" currencySymbol="₫"/>
+                            </div>
+                        </div>
+                    </c:forEach>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+                        <span>Tạm tính</span>
+                        <span class="fw-bold">
+                        <fmt:formatNumber value="${total}" type="currency" currencySymbol="₫"/>
+                    </span>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <span>Phí vận chuyển</span>
+                        <span class="text-success">Miễn phí</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between fs-5 fw-bold">
+                        <span>Tổng cộng</span>
+                        <span class="text-danger">
+                        <fmt:formatNumber value="${total}" type="currency" currencySymbol="₫"/>
+                    </span>
+                    </div>
+
+                    <button type="submit" class="btn btn-danger w-100 mt-3">
+                        <i class="bi bi-shield-check me-2"></i>Thanh toán
+                    </button>
+                </div>
             </div>
 
-            <!-- HÌNH THỨC THANH TOÁN -->
-            <div class="checkout-box mb-4">
-                <h4 class="section-title"><i class="bi bi-credit-card me-2"></i>Hình thức thanh toán</h4>
-                <select class="form-select">
-                    <option>Thanh toán khi nhận hàng (COD)</option>
-                    <option>Chuyển khoản ngân hàng</option>
-                    <option>Ví điện tử (Momo / ZaloPay)</option>
-                    <option>Thẻ tín dụng / Ghi nợ</option>
-                </select>
-            </div>
-
-            <!-- GHI CHÚ -->
-            <div class="checkout-box mb-4">
-                <h4 class="section-title"><i class="bi bi-pencil-square me-2"></i>Ghi chú đơn hàng</h4>
-                <textarea class="form-control" rows="3" placeholder="VD: Giao buổi sáng, gọi trước khi đến..."></textarea>
-            </div>
         </div>
-
-        <!-- RIGHT COLUMN: ORDER SUMMARY -->
-        <div class="col-lg-4">
-            <div class="summary-box">
-                <h4 class="section-title"><i class="bi bi-receipt me-2"></i>Tổng kết đơn hàng</h4>
-
-                <!-- SP 1 -->
-                <div class="product-item">
-                    <div class="d-flex align-items-center gap-3">
-                        <img src="../assets/img/Cart/4urpc.png" alt="">
-                        <div>
-                            <div class="fw-semibold">Sạc 4URPC</div>
-                            <div class="text-muted small">x1</div>
-                        </div>
-                    </div>
-                    <div class="fw-bold highlight">999.000đ</div>
-                </div>
-
-                <!-- SP 2 -->
-                <div class="product-item">
-                    <div class="d-flex align-items-center gap-3">
-                        <img src="../assets/img/Cart/ChargeStick.png" alt="">
-                        <div>
-                            <div class="fw-semibold">ChargeStick</div>
-                            <div class="text-muted small">x1</div>
-                        </div>
-                    </div>
-                    <div class="fw-bold highlight">1.290.000đ</div>
-                </div>
-
-                <!-- SP 3 -->
-                <div class="product-item">
-                    <div class="d-flex align-items-center gap-3">
-                        <img src="../assets/img/Cart/dônmo.png" alt="">
-                        <div>
-                            <div class="fw-semibold">AquaCam</div>
-                            <div class="text-muted small">x1</div>
-                        </div>
-                    </div>
-                    <div class="fw-bold highlight">3.990.000đ</div>
-                </div>
-
-                <!-- SP 4 -->
-                <div class="product-item">
-                    <div class="d-flex align-items-center gap-3">
-                        <img src="../assets/img/Cart/nimo.png" alt="">
-                        <div>
-                            <div class="fw-semibold">Robot Nimo</div>
-                            <div class="text-muted small">x1</div>
-                        </div>
-                    </div>
-                    <div class="fw-bold highlight">8.590.000đ</div>
-                </div>
-
-                <!-- TOTAL -->
-                <div class="d-flex justify-content-between mt-3">
-                    <span class="fw-semibold">Tạm tính:</span>
-                    <span class="highlight">14.869.000đ</span>
-                </div>
-                <div class="d-flex justify-content-between mt-2">
-                    <span class="fw-semibold">Phí vận chuyển:</span>
-                    <span class="text-success fw-bold">Miễn phí</span>
-                </div>
-
-                <hr>
-
-                <div class="d-flex justify-content-between fs-5 fw-bold mb-3">
-                    <span>Tổng cộng:</span>
-                    <span class="highlight">14.869.000đ</span>
-                </div>
-
-                <button class="btn-checkout"><i class="bi bi-shield-check me-2"></i>Thanh toán ngay</button>
-            </div>
-        </div>
-
     </div>
-</div>
+</form>
 <!-- ================= Footer ================= -->
 <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
     <div class="container">
