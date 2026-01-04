@@ -1,14 +1,19 @@
 package vn.dao;
 
 import vn.model.Order;
-
 import java.util.List;
 
-public class OrderDao extends BaseDao{
+public class OrderDao extends BaseDao {
+
     public List<Order> getListByUserId(int userId) {
         return get().withHandle(h ->
                 h.createQuery(
-                                "SELECT id, user_id, address_id, order_status, created_at " +
+                                "SELECT " +
+                                        "id, " +
+                                        "user_id AS userId, " +
+                                        "order_status AS orderStatus, " +
+                                        "created_at AS createAt, " +
+                                        "total " +
                                         "FROM orders " +
                                         "WHERE user_id = :userId " +
                                         "ORDER BY created_at DESC"
@@ -19,12 +24,12 @@ public class OrderDao extends BaseDao{
         );
     }
 
+    // test nhanh
     public static void main(String[] args) {
-        OrderDao orderDao = new OrderDao();
-        List<Order> orders = orderDao.getListByUserId(1);
-        for (Order order : orders) {
-            System.out.println(order.getOrderStatus());
+        OrderDao dao = new OrderDao();
+        List<Order> list = dao.getListByUserId(1);
+        for (Order o : list) {
+            System.out.println(o.getId() + " | " + o.getOrderStatus());
         }
     }
-
 }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -171,53 +172,48 @@
     </section>
     <!-- ORDER LIST -->
     <section class="container mt-4" id="orderList">
-      <c:forEach var="c" items="${list}">
-        <!-- Example Order 1 -->
-        <div class="order-card col" data-status="delivered" data-code="TX987654">
+      <c:forEach var="o" items="${list}">
+        <div class="order-card col"
+             data-status="${o.orderStatus}"
+             data-code="TX${o.id}">
+
           <div class="order-header">
             <div>
-              <div class="order-code">${c.getid()}</div>
-              <small class="text-muted">Ngày đặt: 14/10/2025 – 14:32</small>
-            </div>
-            <div class="order-status status-delivered">Đã giao</div>
-          </div>
-          <div class="row order-products mb-3" style="gap: 10px;">
-            <div class="row">
-              <div class="col-9">
-                <div class=" d-flex gap-3">
-                  <img src="https://m.media-amazon.com/images/I/612JyzcWVLL.jpg" alt="">
-                  <div>
-                    <h6 class="mb-1">ChatGPT Mini Device</h6>
-                    <p class="text-muted small">Số lượng: 1</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="product-price">6.490.000 VND</div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-9">
-                <div class=" d-flex gap-3">
-                  <img src="https://m.media-amazon.com/images/I/61nWhgSSCoL._AC_UF894,1000_QL80_.jpg" alt="">
-                  <div>
-                    <h6 class="mb-1">AI Desk Lamp</h6>
-                    <p class="text-muted small">Số lượng: 2</p>
-                  </div>
-                </div>
-              </div>
-              <div class="product-price col-3">6.490.000 VND</div>
+              <div class="order-code">Mã đơn: TX${o.id}</div>
+              <small class="text-muted">
+                Ngày đặt: ${o.createAt}
+              </small>
             </div>
 
+            <c:choose>
+              <c:when test="${o.orderStatus == 'DELIVERED'}">
+                <div class="order-status status-delivered">Đã giao</div>
+              </c:when>
+              <c:when test="${o.orderStatus == 'SHIPPING'}">
+                <div class="order-status status-shipping">Đang giao</div>
+              </c:when>
+              <c:otherwise>
+                <div class="order-status status-canceled">Đã hủy</div>
+              </c:otherwise>
+            </c:choose>
           </div>
 
+          <!-- TỔNG TIỀN -->
           <div class="order-footer">
-            <div class="order-total">Tổng cộng: 12.480.000đ</div>
-            <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal">Xem chi tiết</a>
-          </div>
-        </div>
+            <div class="order-total">
+              Tổng cộng:
+              <fmt:formatNumber value="${o.total}" type="number" /> đ
+            </div>
 
+            <a class="btn btn-primary btn-sm"
+               href="${pageContext.request.contextPath}/orders/detail?id=${o.id}">
+              Xem chi tiết
+            </a>
+          </div>
+
+        </div>
       </c:forEach>
+
 
     </section>
 
