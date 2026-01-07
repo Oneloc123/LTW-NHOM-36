@@ -17,6 +17,11 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserService us =new UserService();
         HttpSession session = request.getSession(false);
+
+        if(request.getAttribute("message") != null){
+            request.removeAttribute("message");
+        }
+
         if (session != null && session.getAttribute("id") != null) {
             response.sendRedirect(request.getContextPath() + "/home");
         }else{
@@ -34,11 +39,27 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
 
-        if(password.equals(confirmPassword)){
-            UserService us = new UserService();
-            if(us.getUserByUserName(username) != null){
-                response.sendRedirect("../login");
-            }
+        // Kiểm tra mật khẩu khớp
+        if(!password.equals(confirmPassword)){
+            request.setAttribute("error", "Mật khẩu xác nhận không khớp");
+            request.getRequestDispatcher("/pages/register.jsp").forward(request, response);
+            return;
+        }
+
+        // Kiểm tra username/email đã tồn tại
+        UserService us = new UserService();
+        if(us.getUserByUserName(username) != null){
+            request.setAttribute("error", "Tên đăng nhập đã tồn tại");
+            request.getRequestDispatcher("/pages/register.jsp").forward(request, response);
+            return;
+        }
+
+        if(us.getUserByEmail(email) != null){
+            request.setAttribute("error", "Email đã được sử dụng");
+            request.getRequestDispatcher("/pages/register.jsp").forward(request, response);
+            return;
+        }
+
             User u = new User();
             u.setFullName(fullname);
             u.setAddress(address);
@@ -50,8 +71,16 @@ public class RegisterServlet extends HttpServlet {
             u.setImgURL("/images/default.jpg");
             u.setRole("USER");
             u.setCreateAt(LocalDate.now().toString());
-            us.registerUser(u);
-            response.sendRedirect("../login");
-        }
+
+            // Đăng ký user
+            boolean success = us.registerUser(u);
+            if(success){
+            // Chuyển hướng đến trang đăng nhập với thông báo thành công
+            response.sendRedirect(request.getContextPath() + "/login?registered=true");
+            } else {
+            request.setAttribute("error", "Đăng ký thất bại. Vui lòng thử lại!");
+            request.getRequestDispatcher("/pages/register.jsp").forward(request, response);
+            }
+
     }
 }

@@ -61,6 +61,9 @@
                     </li>
 
                     <!-- Dropdown -->
+                    <%
+                        if (session.getAttribute("id") != null) {
+                    %>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle ${currentPage == 'profile' ? 'active' : ''}"
                            href="#"
@@ -114,6 +117,11 @@
                             </li>
                         </ul>
                     </li>
+                    <%
+                        }
+                    %>
+
+
                 </ul>
 
                 <!-- Login & Cart -->

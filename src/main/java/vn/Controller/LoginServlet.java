@@ -13,6 +13,9 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
+        if(request.getAttribute("message") != null){
+            request.removeAttribute("message");
+        }
         if (session == null || session.getAttribute("id") == null) {
             request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
         }else{
@@ -35,6 +38,8 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("id", user.getId());
             request.getRequestDispatcher("/pages/home.jsp").forward(request, response);
         }else{
+            String message = "Tên đăng nhập hoặc mật khẩu không đúng";
+            request.setAttribute("message", message);
             request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
         }
     }

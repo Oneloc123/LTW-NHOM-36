@@ -26,6 +26,18 @@
             <h2>Đăng nhập TechX</h2>
 
             <form action="${pageContext.request.contextPath}/login" method="post">
+                <%
+                    if (request.getAttribute("message") != null) {
+                %>
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <div>
+                        ${message}
+                    </div>
+                </div>
+                <%
+                    }
+                %>
                 <div class="mb-3 text-start">
                     <label for="username" class="form-label">Tài khoản</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tài khoản">
@@ -116,7 +128,7 @@
     </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+</div>
 </body>
 
 </html>
