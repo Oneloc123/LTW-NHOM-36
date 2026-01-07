@@ -58,7 +58,8 @@ public class UserDao extends BaseDao {
                                         "email = :email, " +
                                         "fullName = :fullName, " +
                                         "address = :address, " +
-                                        "phoneNumber = :phoneNumber " +
+                                        "phoneNumber = :phoneNumber, " +
+                                        "password = :password " +
                                         "WHERE id = :id"
                         )
                         .bindBean(user)
