@@ -1,217 +1,139 @@
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChangPassword</title>
+    <title>Đổi mật khẩu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/header.css">
-    <link rel="stylesheet" href="../assets/css/footer.css">
-
-    <style>
-        body {
-             background-color: #f4f6f9;
-
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        main .container {
-
-            margin-top: 50px;
-        }
-
-        .summary-card {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            padding: 20px;
-        }
-
-        .card2 {
-            margin-top: 20px;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn {
-            margin: 5px;
-        }
-
-        input {
-            
-        }
-
-        .form1 {
-            width: 100px;
-        }
-
-        .btn1 {
-            margin-top: 15px;
-        }
-
-        .col1 {
-            max-width: 640px;
-            border-radius: 30px;
-            max-height: 50px;
-        }
-
-        .col2 {
-            max-width: 180px;
-            height: 50px;
-            margin-top: -1px;
-        }
-
-        .bi {
-            margin-right: 10px;
-        }
-
-        .form1 {
-            border-radius: 20px;
-            width: 242px;
-        }
-    </style>
 </head>
 
-<body>
-  <!-- ================= Header ================= -->
-  <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<body class="bg-light">
 
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
 
-    <main>
-        <div class="container">
-            <!-- HERO -->
-            <section class="hero">
-                <div class="hero-box">
-                    <h1 class="hero-title" style="font-size: 2.6rem;font-weight: 700;color: #004a99; margin-bottom: 50px;">Đổi mật khẩu TechX</h1>
-                    <p class="hero-subtitle"></p>
-                </div>
-            </section>
-            <div class="row g-4">
-                <!-- Form đổi mật khẩu -->
-                <div class="col-md-8 ">
-                    <div class="card p-4">
-                        <h5 class="fw-bold mb-3">Đổi mật khẩu TechX</h5>
-                        <hr>
-                        <form action="../changePassword" method="post">
-                            <div class="row" style="margin-bottom: -10px;" >
-                                <div class="mb-5 col-6">
-                                    <label for="password" class="form-label">Mật khẩu cũ</label>
-                                    <input type="password" class="form1 form-control" id="oldPassword" name="oldPass" style="width: 300px;"
-                                        placeholder="Nhập mật khẩu cũ" required>
-                                </div>
-                                <div class="mb-5 col-6">
-                                    <label for="password" class="form-label">Mật khẩu mới</label>
-                                    <input type="password" class="form1 form-control" id="newPassword" name="newPass" style="width: 300px;"
-                                        placeholder="Nhập mật khẩu mới" required>
-                                </div>
-                            </div>
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body p-4">
 
-<%--                            <button type="button" style="margin-bottom: 30px;"--%>
-<%--                                class="btn btn btn-white btn-outline-primary  border -primary w-100 py-2">Gửi--%>
-<%--                                liên kết đến email để đặt lại--%>
-<%--                                mật khẩu</button>--%>
-<%--                            <hr>--%>
-                            <div class="mb-3">
-<%--                                <label for="otp" class="form-label" >Mã xác nhận từ email</label>--%>
-<%--                                <div class="row">--%>
-<%--                                    <input type="text" class="col1 form-control col  " id="otp" style="width: 600px;"--%>
-<%--                                        placeholder="Nhập mã xác nhận từ email">--%>
-<%--                                    <button type="button"--%>
-<%--                                        class="col2 btn col btn-white btn-outline-primary border -primary "><i--%>
-<%--                                            class="bi bi-arrow-clockwise"></i></i>Gửi lại</button>--%>
-<%--                                </div>--%>
-                                <button type="submit" class="btn1 btn btn-primary w-100 py-2">xác nhận đổi mật
-                                    khẩu</button>
-                            </div>
+                    <h3 class="fw-bold text-primary mb-3 text-center">
+                        <i class="bi bi-shield-lock"></i> Đổi mật khẩu
+                    </h3>
 
-                        </form>
-                    </div>
-                </div>
+                    <!-- ALERT -->
+                    <c:if test="${not empty error}">
+                        <div class="alert alert-danger">${error}</div>
+                    </c:if>
 
-                <!-- Tóm tắt lợi ích hoặc hướng dẫn -->
-                <div class="col-md-4" style="margin-top: 3px;">
-                    <div class="summary-card card2">
-                        <h5 class="fw-bold mb-3">Lưu ý bảo mật</h5>
-                        <ol class="text-muted small">
-                            <li class="mb-2">Không chia sẽ mật khẩu cho người lạ.</li>
-                            <li class="mb-2">Mật khẩu nên có ít nhất 8 ký tự, gồm chữ, số và ký hiệu.</li>
-                            <li class="mb-2">Liên hệ hỗ trợ nếu có bất ký sai sót nào.</li>
-                        </ol>
-                    </div>
+                    <c:if test="${not empty success}">
+                        <div class="alert alert-success">${success}</div>
+                    </c:if>
+
+                    <form action="${pageContext.request.contextPath}/changePassword" method="post">
+
+                        <!-- OLD PASSWORD -->
+                        <div class="mb-3">
+                            <label class="form-label">Mật khẩu cũ</label>
+                            <input type="password" name="oldPass"
+                                   class="form-control"
+                                   placeholder="Nhập mật khẩu cũ" required>
+                        </div>
+
+                        <!-- NEW PASSWORD -->
+                        <div class="mb-3">
+                            <label class="form-label">Mật khẩu mới</label>
+                            <input type="password" name="newPass"
+                                   class="form-control"
+                                   placeholder="Ít nhất 8 ký tự" required>
+                        </div>
+
+                        <!-- SEND OTP -->
+                        <div class="mb-3">
+                            <button type="submit"
+                                    formaction="${pageContext.request.contextPath}/send-otp"
+                                    class="btn btn-outline-primary w-100">
+                                <i class="bi bi-envelope"></i> Gửi mã xác thực qua email
+                            </button>
+                        </div>
+
+                        <!-- OTP -->
+                        <div class="mb-3">
+                            <label class="form-label">Mã xác thực (OTP)</label>
+                            <input type="text" name="otp"
+                                   class="form-control"
+                                   placeholder="Nhập mã từ email" required>
+                        </div>
+
+                        <button class="btn btn-primary w-100 py-2">
+                            <i class="bi bi-check-circle"></i> Xác nhận đổi mật khẩu
+                        </button>
+
+                    </form>
                 </div>
             </div>
+
         </div>
-    </main>
-    <!-- ================= Footer ================= -->
-    <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
-        <div class="container">
-            <div class="row gy-4">
-                <!-- Logo + Giới thiệu -->
-                <div class="col-md-4">
-                    <a href="/index.jsp" class="d-flex align-items-center mb-3 text-decoration-none">
-                        <i class="bi bi-camera fs-3 text-primary me-2"></i>
-                        <span class="fw-bold fs-5 text-primary">TechX</span>
-                    </a>
-                    <p class="text-muted">
-                        Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
-                        Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
-                    </p>
-                </div>
+    </div>
+</main>
 
-                <!-- Danh mục -->
-                <div class="col-md-2">
-                    <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
-                        <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
-                        <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
-                        <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
-                    </ul>
-                </div>
+<footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
+    <div class="container">
+        <div class="row gy-4">
 
-                <!-- Hỗ trợ -->
-                <div class="col-md-2">
-                    <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-                        <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
-                        <li><a href="/pages/order-history.jsp" class="footer-link">Theo dõi đơn hàng</a></li>
-                        <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
-                    </ul>
-                </div>
-
-                <!-- Liên hệ -->
-                <div class="col-md-4">
-                    <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
-                    <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí
-                        Minh
-                    </p>
-                    <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
-                    <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
-                    <div class="mt-3">
-                        <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
-                        <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
-                    </div>
-                </div>
+            <div class="col-md-4">
+                <a href="/index.jsp" class="d-flex align-items-center text-decoration-none mb-3">
+                    <i class="bi bi-camera fs-3 text-primary me-2"></i>
+                    <span class="fw-bold fs-5 text-primary">TechX</span>
+                </a>
+                <p class="text-muted">
+                    Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
+                </p>
             </div>
 
-            <hr class="mt-4 mb-3">
-            <div class="text-center small text-muted">
-                © 2025 <strong>TechX</strong>. All rights reserved.
+            <div class="col-md-2">
+                <h6 class="fw-bold text-uppercase mb-3">Danh mục</h6>
+                <ul class="list-unstyled">
+                    <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
+                    <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
+                    <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
+                    <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
+                </ul>
             </div>
+
+            <div class="col-md-2">
+                <h6 class="fw-bold text-uppercase mb-3">Hỗ trợ</h6>
+                <ul class="list-unstyled">
+                    <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
+                    <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
+                    <li><a href="/pages/order-history.jsp" class="footer-link">Theo dõi đơn hàng</a></li>
+                    <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-4">
+                <h6 class="fw-bold text-uppercase mb-3">Liên hệ</h6>
+                <p><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP.HCM</p>
+                <p><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
+                <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
+            </div>
+
         </div>
-    </footer>
-</body>
+
+        <hr />
+
+        <div class="text-center small text-muted">
+            © 2025 <strong>TechX</strong>. All rights reserved.
+        </div>
+    </div>
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
