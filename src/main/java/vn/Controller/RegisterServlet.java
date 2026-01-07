@@ -1,8 +1,9 @@
-package vn.controller;
+package vn.Controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.model.Password;
 import vn.model.User;
 import vn.services.UserService;
 
@@ -25,20 +26,24 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String firstname = request.getParameter("firstName");
-        String lastname = request.getParameter("lastName");
+        String fullname = request.getParameter("fullName");
+        String address = request.getParameter("address");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String username = request.getParameter("userName");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
+
         if(password.equals(confirmPassword)){
             UserService us = new UserService();
+            if(us.getUserByUserName(username) != null){
+                response.sendRedirect("../login");
+            }
             User u = new User();
-            u.setFirstName(firstname);
-            u.setLastName(lastname);
+            u.setFullName(fullname);
+            u.setAddress(address);
             u.setEmail(email);
-            u.setPassword(password);
+            u.setPassword(Password.hashPassword(password));
             u.setUsername(username);
             u.setPhoneNumber(phone);
             u.setActive(true);

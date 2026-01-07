@@ -8,37 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 public class UserDao extends BaseDao {
-    static Map<Integer,User> data=new HashMap<Integer,User>();
-    static {
-        data.put(1,new User(1,"username1","1","email1.com","Lê",
-                " Huy","001","client",
-                true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
-        data.put(2,new User(2,"username2","2","email2.com","Lê",
-                " Hoàn","002","client",
-                true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
-        data.put(3,new User(3,"username3","3","email3.com","Nguyễn",
-                " Ánh","003","client",
-                true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
-        data.put(4,new User(4,"username4","4","email1.com","Nguyễn",
-                " Huệ","004","client",
-                true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
-        data.put(5,new User(5,"username5","5","email1.com","Nguyễn",
-                " Lữ","005","client",
-                true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
-        data.put(6,new User(6,"username6","6","email1.com","Trần",
-                " Trọng","006","client",
-                true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
-        data.put(7,new User(7,"username7","7","email1.com","Trịnh",
-                " Cang","007","client",
-                true,"1/1/2020","src/main/webapp/assets/img/User/imgUser1.png"));
-
-    }
-
     // OK
     public List<User> getList() {
         return get().withHandle(h ->
                 h.createQuery(
-                                "SELECT id, username, password, email, firstName, lastName, phoneNumber, role, isActive, createAt, imgURL " +
+                                "SELECT id, username, password, email, fullName, address, phoneNumber, role, isActive, createAt, imgURL " +
                                         "FROM users"
                         )
                         .mapToBean(User.class)
@@ -49,7 +23,7 @@ public class UserDao extends BaseDao {
     public User getUserById(int id) {
         return get().withHandle(h ->
                 h.createQuery(
-                                "SELECT id, username, password, email, firstName, lastName, phoneNumber, role, isActive, createAt, imgURL " +
+                                "SELECT id, username, password, email, fullName, address, phoneNumber, role, isActive, createAt, imgURL " +
                                         "FROM users WHERE id = :id"
                         )
                         .bind("id", id)
@@ -59,47 +33,50 @@ public class UserDao extends BaseDao {
         );
     }
 
+
     //OK
-    public void insert(List<User> users){
+    public void insert(List<User> users) {
         get().useHandle(h -> {
             PreparedBatch batch = h.prepareBatch(
                     "INSERT INTO users " +
-                            "(id, username, password, email, firstName, lastName, phoneNumber, role, isActive, createAt, imgURL) " +
-                            "VALUES (:id, :username, :password, :email, :firstName, :lastName, :phoneNumber, :role, :active, :createAt, :imgURL)"
+                            "(username, password, email, fullName, address, phoneNumber, role, isActive, createAt, imgURL) " +
+                            "VALUES (:username, :password, :email, :fullName, :address, :phoneNumber, :role, :active, :createAt, :imgURL)"
             );
 
-            users.forEach( u -> {
+            for (User u : users) {
                 batch.bindBean(u).add();
-            });
+            }
             batch.execute();
         });
     }
+
     // OK
     public void updateProfile(User user) {
-        get().useHandle(h -> {
-            h.createUpdate(
-                            "UPDATE users SET " +
-                                    "email = :email, " +
-                                    "firstName = :firstName, " +
-                                    "lastName = :lastName, " +
-                                    "phoneNumber = :phoneNumber " +
-                                    "WHERE id = :id"
-                    )
-                    .bindBean(user)
-                    .execute();
-        });
+        get().useHandle(h ->
+                h.createUpdate(
+                                "UPDATE users SET " +
+                                        "email = :email, " +
+                                        "fullName = :fullName, " +
+                                        "address = :address, " +
+                                        "phoneNumber = :phoneNumber " +
+                                        "WHERE id = :id"
+                        )
+                        .bindBean(user)
+                        .execute()
+        );
     }
+
 
     // OK
     public void updatePassword(int id, String password) {
-        get().useHandle(h -> {
-            h.createUpdate(
-                            "UPDATE users SET password = :password WHERE id = :id"
-                    )
-                    .bind("id", id)
-                    .bind("password", password)
-                    .execute();
-        });
+        get().useHandle(h ->
+                h.createUpdate(
+                                "UPDATE users SET password = :password WHERE id = :id"
+                        )
+                        .bind("id", id)
+                        .bind("password", password)
+                        .execute()
+        );
     }
 
     // OK
@@ -107,7 +84,9 @@ public class UserDao extends BaseDao {
         return get().withHandle(h ->
                 h.createQuery(
                                 "SELECT COUNT(*) FROM users " +
-                                        "WHERE username = :username AND password = :password"
+                                        "WHERE username = :username " +
+                                        "AND password = :password " +
+                                        "AND isActive = 1"
                         )
                         .bind("username", username)
                         .bind("password", password)
@@ -118,22 +97,22 @@ public class UserDao extends BaseDao {
 
     // OK
     public void insertUser(User user) {
-        get().useHandle(h -> {
-            h.createUpdate(
-                            "INSERT INTO users " +
-                                    "(username, password, email, firstName, lastName, phoneNumber, role, isActive, createAt, imgURL) " +
-                                    "VALUES (:username, :password, :email, :firstName, :lastName, :phoneNumber, :role, :active, :createAt, :imgURL)"
-                    )
-                    .bindBean(user)
-                    .execute();
-        });
+        get().useHandle(h ->
+                h.createUpdate(
+                                "INSERT INTO users " +
+                                        "(username, password, email, fullName, address, phoneNumber, role, isActive, createAt, imgURL) " +
+                                        "VALUES (:username, :password, :email, :fullName, :address, :phoneNumber, :role, :active, :createAt, :imgURL)"
+                        )
+                        .bindBean(user)
+                        .execute()
+        );
     }
 
     //OK
     public User getUserByUserName(String username) {
         return get().withHandle(h ->
                 h.createQuery(
-                                "SELECT id, username, password, email, firstName, lastName, phoneNumber, role, isActive, createAt, imgURL " +
+                                "SELECT id, username, password, email, fullName, address, phoneNumber, role, isActive, createAt, imgURL " +
                                         "FROM users WHERE username = :username"
                         )
                         .bind("username", username)
@@ -142,5 +121,6 @@ public class UserDao extends BaseDao {
                         .orElse(null)
         );
     }
+
 
 }
