@@ -3,11 +3,13 @@ import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
+import java.io.InputStream;
 import java.util.Properties;
 
 public class EmailUtil {
-    private static final String EMAIL = "Oneloc123@gmail.com";
-    private static final String APP_PASSWORD = "tqdmbuofmzklxlar";
+    private static final String EMAIL = EmailConfig.getEmail();
+    private static final String APP_PASSWORD = EmailConfig.getAppPassword();
+
     public static void send(String to, String subject, String content) {
         Properties props = new Properties();
 
