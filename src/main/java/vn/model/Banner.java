@@ -16,7 +16,6 @@ public class Banner {
     public Date updateAt;
 
 
-
     public Banner(int id, String title, String imageURL, String linkURL, String altText, Date startDate, Date endDate, int sortOrder, int status, Date createAt, Date updateAt) {
         this.id = id;
         this.title = title;

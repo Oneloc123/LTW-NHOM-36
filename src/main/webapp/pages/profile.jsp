@@ -485,7 +485,7 @@
                         <i class="fas fa-camera text-white"></i>
                     </div>
                 </div>
-                <div class="user-name">${user.getLastName()}</div>
+                <div class="user-name">${user.getFullName()}</div>
                 <div class="user-role">Thành viên Bạc</div>
                 <div class="user-stats">
                     <div class="stat">
@@ -526,12 +526,8 @@
                 <form id="profileForm">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="firstName">Họ</label>
-                            <input type="text" id="firstName" class="form-control" value="${user.getFirstName()}" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Tên</label>
-                            <input type="text" id="lastName" class="form-control" value="${user.getLastName()}" readonly>
+                            <label for="firstName">Họ và tên</label>
+                            <input type="text" id="firstName" class="form-control" value="${user.getFullName()}" readonly>
                         </div>
                     </div>
                     <div class="form-row">
@@ -550,7 +546,7 @@
                     </div>
                     <div class="form-group">
                         <label for="address">Địa chỉ</label>
-                        <input type="text" id="address" class="form-control" value="123 Đường ABC, Quận 1, TP.HCM" readonly>
+                        <input type="text" id="address" class="form-control" value="${user.getAddress()}" readonly>
                     </div>
                 </form>
             </div>
@@ -719,29 +715,18 @@
                     </div>
 
                     <!-- Form thông tin cá nhân -->
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
+                    <div class="mb-4">
+
                             <label for="firstName" class="form-label">
-                                <i class="fas fa-user me-1"></i>Họ *
+                                <i class="fas fa-user me-1"></i>Họ và tên
                             </label>
                             <input type="text"
                                    class="form-control"
                                    id="firstName"
-                                   name="modalFirstName"
-                                   placeholder="Nhập họ của bạn"
+                                   name="modalFullName"
+                                   placeholder="Nhập họ và tên của bạn"
                                    required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="lastName" class="form-label">
-                                <i class="fas fa-user me-1"></i>Tên *
-                            </label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="lastName"
-                                   name="modalLastName"
-                                   placeholder="Nhập tên của bạn"
-                                   required>
-                        </div>
+
                     </div>
 
                     <div class="mb-3">
@@ -773,6 +758,7 @@
                             <i class="fas fa-home me-1"></i>Địa chỉ *
                         </label>
                         <textarea class="form-control"
+                                  name="modalAddress"
                                   id="address"
                                   rows="3"
                                   placeholder="Nhập địa chỉ đầy đủ"

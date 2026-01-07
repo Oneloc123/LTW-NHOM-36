@@ -6,22 +6,22 @@ public class User implements Serializable {
     private int id;
     private String username;
     private String password;
+    private String address;
     private String email;
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String phoneNumber;
     private String role;
     private boolean isActive;
     private String createAt;
     private String imgURL;
-    public User(int id, String username, String password, String email, String firstNameName,String lastName,
+    public User(int id, String username, String password, String email, String fullName,String address,
      String phoneNumber, String role, boolean isActive, String createAt, String imgURL ) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.firstName = firstNameName;
-        this.lastName = lastName;
+        this.fullName = fullName;
+        this.address = address;
         this.phoneNumber = phoneNumber;
         this.role = role;
         this.isActive =  isActive;
@@ -63,20 +63,20 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPhoneNumber() {

@@ -4,7 +4,6 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.model.User;
-import vn.services.AddressService;
 import vn.services.UserService;
 
 import java.io.IOException;
@@ -37,15 +36,15 @@ public class ProfileServlet extends HttpServlet {
             int id = Integer.parseInt(session.getAttribute("id").toString());
             User u = us.getUserById(id);
             // lấy thông tin gửi từ client
-            String nameFirstModal = request.getParameter("modalFirstName");
-            String nameLastModal = request.getParameter("modalLastName");
+            String nameFullModal = request.getParameter("modalFullName");
+            String addressModal = request.getParameter("modalAddress");
             String emailModal = request.getParameter("modalEmail");
             String phoneModal = request.getParameter("modalPhone");
             // kiểm tra các thông tin
 
             // thực hiện update User
-            u.setFirstName(nameFirstModal);
-            u.setLastName(nameLastModal) ;
+            u.setFullName(nameFullModal);
+            u.setAddress(addressModal); ;
             u.setEmail(emailModal);
             u.setPhoneNumber(phoneModal);
             //

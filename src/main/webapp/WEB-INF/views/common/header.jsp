@@ -1,5 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<style>
+    /* Không cho chữ menu xuống dòng */
+    .navbar-nav .nav-link {
+        white-space: nowrap;
+    }
+</style>
 <!-- ================= Header ================= -->
 <div class="header-scope">
     <header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
@@ -57,10 +62,12 @@
 
                     <!-- Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link ${currentPage == 'profile' ? 'active' : ''}"
-                        dropdown-toggle" href="#"
-                           id="navbarDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle ${currentPage == 'profile' ? 'active' : ''}"
+                           href="#"
+                           id="navbarDropdown"
+                           role="button"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false">
                             Tài khoản
                         </a>
 
@@ -96,16 +103,32 @@
                                     Sản phẩm đã xem
                                 </a>
                             </li>
+
+                            <li><hr class="dropdown-divider"></li>
+
+                            <li>
+                                <a class="dropdown-item"
+                                   href="${pageContext.request.contextPath}/loggout">
+                                    đăng xuất
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
 
                 <!-- Login & Cart -->
                 <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
+
+                    <%
+                        if (session.getAttribute("id") == null) {
+                    %>
                     <a href="${pageContext.request.contextPath}/login"
                        class="btn btn-outline-primary btn-sm d-flex align-items-center">
                         <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
                     </a>
+                    <%
+                        }
+                    %>
 
                     <a href="${pageContext.request.contextPath}/cart"
                        class="btn btn-primary btn-sm d-flex align-items-center">

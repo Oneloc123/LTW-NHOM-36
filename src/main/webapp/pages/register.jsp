@@ -108,17 +108,15 @@
                         </button>
                     </div>
                     <form action="../register" method="post">
-                        <div class="row">
-                            <div class="mb-3 col">
-                                <label for="firstname" class="form-label">Họ </label>
-                                <input type="text" class="form-control" name="firstName" id="firstname"
-                                       placeholder="Nhập họ của bạn" required>
-                            </div>
-                            <div class="mb-3 col">
-                                <label for="lastname" class="form-label">Tên và tên đệm</label>
-                                <input type="text" class="form-control" name="lastName" id="lastname"
-                                       placeholder="Nhập Tên và tên đệm" required>
-                            </div>
+                        <div class="mb-3 ">
+                                <label for="firstname" class="form-label">Họ và tên </label>
+                                <input type="text" class="form-control" name="fullName" id="fullname"
+                                       placeholder="Nhập họ và tên của bạn" required>
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="address" class="form-label">Địa chỉ</label>
+                            <input type="text" class="form-control" name="address" id="address"
+                                   placeholder="Nhập địa chỉ" required>
                         </div>
                         <div class="mb-3 ">
                             <label for="email" class="form-label">Email</label>

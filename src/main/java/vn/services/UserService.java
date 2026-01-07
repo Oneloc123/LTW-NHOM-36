@@ -1,6 +1,7 @@
 package vn.services;
 
 import vn.dao.UserDao;
+import vn.model.Password;
 import vn.model.User;
 
 import java.util.ArrayList;
@@ -28,8 +29,7 @@ public class UserService {
     {
         User user = userDao.getUserByUserName(username);
         if(user == null)return false;
-        if(user.getPassword().equals(password)) return true;
-        return false;   
+        return Password.checkPassword(password, user.getPassword());
     }
     public boolean checkPassword(String username, String password)
     {

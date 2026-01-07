@@ -101,7 +101,7 @@
                     <div class="card p-4">
                         <h5 class="fw-bold mb-3">Đổi mật khẩu TechX</h5>
                         <hr>
-                        <form action="/DoCongNghe_Nhom36_war/changePassword" method="post">
+                        <form action="../changePassword" method="post">
                             <div class="row" style="margin-bottom: -10px;" >
                                 <div class="mb-5 col-6">
                                     <label for="password" class="form-label">Mật khẩu cũ</label>
