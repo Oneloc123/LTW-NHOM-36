@@ -47,12 +47,16 @@ public class UserService {
     {
         return userDao.getList();
     }
-    public void registerUser(User user)
+    public boolean registerUser(User user)
     {
-        userDao.insertUser(user);
+        return userDao.insertUser(user);
     }
     public void updatePassword(int id, String newPass)
     {
         userDao.updatePassword(id, newPass);
+    }
+    public User getUserByEmail(String email)
+    {
+        return userDao.getUserByUserName(email);
     }
 }

@@ -107,54 +107,69 @@
                             Facebook
                         </button>
                     </div>
-                    <form action="../register" method="post">
-                        <div class="mb-3 ">
-                                <label for="firstname" class="form-label">Họ và tên </label>
-                                <input type="text" class="form-control" name="fullName" id="fullname"
-                                       placeholder="Nhập họ và tên của bạn" required>
+                    <form action="../register" method="post" id="registerForm" novalidate>
+                        <%
+                            if (request.getAttribute("error")!=null) {
+                        %>
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            <div>
+                                ${error}
+                            </div>
                         </div>
-                        <div class="mb-3 ">
-                            <label for="address" class="form-label">Địa chỉ</label>
-                            <input type="text" class="form-control" name="address" id="address"
-                                   placeholder="Nhập địa chỉ" required>
-                        </div>
-                        <div class="mb-3 ">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" id="email"
-                                   placeholder="Nhập địa chỉ email" required>
-                        </div>
+                        <%
+                            }
+                        %>
                         <div class="mb-3">
-                            <label for="phone" class="form-label">Số điện thoại</label>
-                            <input type="tel" class="form-control" name="phone" id="phone"
-                                   placeholder="Nhập số điện thoại" required>
+                            <label class="form-label">Họ và tên</label>
+                            <input type="text" class="form-control" name="fullName" id="fullName">
+                            <div class="invalid-feedback"></div>
                         </div>
-                        <div class="mb-3 col">
-                            <label for="fullname" class="form-label">Tên đăng nhập</label>
-                            <input type="text" class="form-control" name="userName" id="fullname"
-                                   placeholder="Nhập tên đăng nhập của bạn" required>
-                        </div>
+
                         <div class="mb-3">
-                            <label for="password" class="form-label">Mật khẩu</label>
-                            <input type="password" name="password" class="form-control" id="password"
-                                   placeholder="Nhập mật khẩu" required>
+                            <label class="form-label">Địa chỉ</label>
+                            <input type="text" class="form-control" name="address" id="address">
+                            <div class="invalid-feedback"></div>
                         </div>
+
                         <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
-                            <input type="password" name="confirmPassword" class="form-control" id="confirmPassword"
-                                   placeholder="Nhập lại mật khẩu"
-                                   required>
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" id="email">
+                            <div class="invalid-feedback"></div>
                         </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Số điện thoại</label>
+                            <input type="tel" class="form-control" name="phone" id="phone">
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Tên đăng nhập</label>
+                            <input type="text" class="form-control" name="userName" id="username">
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" name="password" id="password">
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Xác nhận mật khẩu</label>
+                            <input type="password" class="form-control" name="confirmPassword" id="confirmPassword">
+                            <div class="invalid-feedback"></div>
+                        </div>
+
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="agree">
-                            <label class="form-check-label" for="agree">Tôi đồng ý với <a href="#">điều khoản sử
-                                dụng</a></label>
+                            <label class="form-check-label">Tôi đồng ý điều khoản</label>
+                            <div class="invalid-feedback d-block"></div>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 py-2">Đăng ký tài khoản</button>
-                        <div class="footer-links mt-3">
-                            <a href="../login">Đăng nhập</a> |
-                            <a href="../forgot-password">Quên mật khẩu ?</a>
-                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Đăng ký tài khoản</button>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -222,6 +237,82 @@
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/main.js"></script>
-</body>
+<script>
+    const form = document.getElementById("registerForm");
 
+    function setError(input, message) {
+        input.classList.add("is-invalid");
+        input.nextElementSibling.innerText = message;
+    }
+
+    function clearError(input) {
+        input.classList.remove("is-invalid");
+        input.nextElementSibling.innerText = "";
+    }
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        let valid = true;
+
+        const fullName = document.getElementById("fullName");
+        const address = document.getElementById("address");
+        const email = document.getElementById("email");
+        const phone = document.getElementById("phone");
+        const username = document.getElementById("username");
+        const password = document.getElementById("password");
+        const confirmPassword = document.getElementById("confirmPassword");
+        const agree = document.getElementById("agree");
+
+        // reset lỗi
+        [fullName, address, email, phone, username, password, confirmPassword]
+            .forEach(clearError);
+        agree.nextElementSibling.nextElementSibling.innerText = "";
+
+        if (fullName.value.trim().length < 3) {
+            setError(fullName, "Họ và tên phải ít nhất 3 ký tự");
+            valid = false;
+        }
+
+        if (address.value.trim() === "") {
+            setError(address, "Địa chỉ không được để trống");
+            valid = false;
+        }
+
+        if (!/^\S+@\S+\.\S+$/.test(email.value)) {
+            setError(email, "Email không hợp lệ");
+            valid = false;
+        }
+
+        if (!/^0\d{9}$/.test(phone.value)) {
+            setError(phone, "Số điện thoại phải 10 số và bắt đầu bằng 0");
+            valid = false;
+        }
+
+        if (username.value.trim().length < 5) {
+            setError(username, "Tên đăng nhập phải ít nhất 5 ký tự");
+            valid = false;
+        }
+
+        if (password.value.length < 6) {
+            setError(password, "Mật khẩu phải ít nhất 6 ký tự");
+            valid = false;
+        }
+
+        if (password.value !== confirmPassword.value) {
+            setError(confirmPassword, "Mật khẩu xác nhận không khớp");
+            valid = false;
+        }
+
+        if (!agree.checked) {
+            agree.nextElementSibling.nextElementSibling.innerText =
+                "Bạn phải đồng ý điều khoản sử dụng";
+            valid = false;
+        }
+
+        if (valid) {
+            form.submit();
+        }
+    });
+</script>
+</body>
 </html>

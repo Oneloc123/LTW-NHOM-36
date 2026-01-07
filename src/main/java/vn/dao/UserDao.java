@@ -96,16 +96,22 @@ public class UserDao extends BaseDao {
     }
 
     // OK
-    public void insertUser(User user) {
-        get().useHandle(h ->
-                h.createUpdate(
-                                "INSERT INTO users " +
-                                        "(username, password, email, fullName, address, phoneNumber, role, isActive, createAt, imgURL) " +
-                                        "VALUES (:username, :password, :email, :fullName, :address, :phoneNumber, :role, :active, :createAt, :imgURL)"
-                        )
-                        .bindBean(user)
-                        .execute()
-        );
+    public boolean insertUser(User user) {
+        try {
+            get().useHandle(h ->
+                    h.createUpdate(
+                                    "INSERT INTO users " +
+                                            "(username, password, email, fullName, address, phoneNumber, role, isActive, createAt, imgURL) " +
+                                            "VALUES (:username, :password, :email, :fullName, :address, :phoneNumber, :role, :active, :createAt, :imgURL)"
+                            )
+                            .bindBean(user)
+                            .execute()
+            );
+            return true; // Thành công
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // Thất bại
+        }
     }
 
     //OK
@@ -116,6 +122,18 @@ public class UserDao extends BaseDao {
                                         "FROM users WHERE username = :username"
                         )
                         .bind("username", username)
+                        .mapToBean(User.class)
+                        .findOne()
+                        .orElse(null)
+        );
+    }
+    public User getUserByMail(String email) {
+        return get().withHandle(h ->
+                h.createQuery(
+                                "SELECT id, username, password, email, fullName, address, phoneNumber, role, isActive, createAt, imgURL " +
+                                        "FROM users WHERE email = :email"
+                        )
+                        .bind("email", email)
                         .mapToBean(User.class)
                         .findOne()
                         .orElse(null)
