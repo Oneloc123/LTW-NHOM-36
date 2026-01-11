@@ -42,7 +42,7 @@
         <div class="gallery">
           <!-- MAIN IMAGE -->
           <figure class="main-image" id="mainImageWrap" aria-label="Ảnh sản phẩm chính">
-            <img id="mainImage" src="${p.getImg()}"
+            <img id="mainImage" src="${p.img}"
               alt="Tai nghe TechX AirBeat - màu đen">
             <div class="zoom-hint"><i class="bi bi-arrows-fullscreen"></i> Phóng to</div>
           </figure>
@@ -76,7 +76,7 @@
 
         <!-- META -->
         <div class="meta" style="margin-top:16px">
-          <h1 id="productTitle" class="product-title">${p.getName()}</h1>
+          <h1 id="productTitle" class="product-title">${p.name}</h1>
           <span class="sku">Mã: <strong>TX-AB001</strong></span>
 
           <div class="rating-row">
@@ -85,7 +85,7 @@
           </div>
 
           <div class="price-row">
-            <div class="current-price" id="price">${p.getPrice()}</div>
+            <div class="current-price" id="price">${p.price}</div>
             <div class="old-price">1.099.000₫</div>
             <div class="badge-sale">-18%</div>
           </div>

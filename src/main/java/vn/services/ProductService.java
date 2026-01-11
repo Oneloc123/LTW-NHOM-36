@@ -5,7 +5,7 @@ import vn.model.Product;
 
 import java.util.List;
 
-public class ProductSevice {
+public class ProductService {
     ProductDao pdao = new ProductDao();
 
     public List<Product> getListProduct() {

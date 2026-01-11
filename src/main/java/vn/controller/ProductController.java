@@ -1,10 +1,10 @@
-package vn.Controller;
+package vn.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.model.Product;
-import vn.services.ProductSevice;
+import vn.services.ProductService;
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ public class ProductController extends HttpServlet {
         int id = Integer.parseInt(idParam);
 
 
-        ProductSevice ps  = new ProductSevice();
+        ProductService ps  = new ProductService();
         Product p = ps.getProductById(id);
 
         if (p == null) {
