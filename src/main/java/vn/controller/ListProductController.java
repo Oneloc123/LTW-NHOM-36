@@ -7,13 +7,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.model.Product;
-import vn.services.ProductSevice;
+import vn.services.ProductService;
 
 @WebServlet("/products")
 public class ListProductController extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        ProductSevice ps = new ProductSevice();
+        ProductService ps = new ProductService();
         List<Product> list = ps.getListProduct();
         request.setAttribute("list", list);
         request.setAttribute("currentPage", "products");
