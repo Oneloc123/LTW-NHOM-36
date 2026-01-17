@@ -1,4 +1,4 @@
-package vn.controller;
+package vn.Controller;
 
 import vn.model.CartItem;
 import vn.model.Order;

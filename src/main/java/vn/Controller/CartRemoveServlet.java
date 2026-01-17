@@ -1,4 +1,4 @@
-package vn.controller;
+package vn.Controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -7,8 +7,8 @@ import vn.dao.CartDao;
 
 import java.io.IOException;
 
-@WebServlet("/cart")
-public class CartServlet extends HttpServlet {
+@WebServlet("/cart-remove")
+public class CartRemoveServlet extends HttpServlet {
 
     private final CartDao cartDao = new CartDao();
 
@@ -16,11 +16,9 @@ public class CartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
+        int id = Integer.parseInt(request.getParameter("id"));
+        cartDao.remove(id);
 
-        session.setAttribute("cart", cartDao.getCart());
-
-        request.getRequestDispatcher("/pages/cart.jsp")
-                .forward(request, response);
+        response.sendRedirect("cart");
     }
 }
