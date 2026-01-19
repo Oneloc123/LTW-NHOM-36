@@ -20,7 +20,6 @@ public class ListProductController extends HttpServlet {
 
         request.getRequestDispatcher("/pages/products.jsp").forward(request,response);
 
-
     }
 
     public void destroy() {

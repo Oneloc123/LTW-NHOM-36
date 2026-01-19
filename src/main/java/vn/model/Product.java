@@ -1,6 +1,8 @@
 package vn.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 // Dùng javabean yêu cầu phải implement Serializable
 public class Product implements Serializable {
@@ -13,8 +15,10 @@ public class Product implements Serializable {
     private boolean isFeatured;
     private String createAt;
     private String updateAt;
+    private List<String> images = new ArrayList<>();
 
-    public Product(int id, String name, int categoryID, String shortDescription, String fullDescription, int price, boolean isFeatured, String createAt, String updateAt) {
+
+    public Product(int id, String name, int categoryID, String shortDescription, String fullDescription, int price, boolean isFeatured, String createAt, String updateAt, List<String> images) {
         this.id = id;
         this.name = name;
         this.categoryID = categoryID;
@@ -24,6 +28,21 @@ public class Product implements Serializable {
         this.isFeatured = isFeatured;
         this.createAt = createAt;
         this.updateAt = updateAt;
+        this.images = images;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public String getImagesTop() {
+        if(images == null || images.isEmpty()) return null;
+        return images.get(0);
+    }
+
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 
     public Product() {}

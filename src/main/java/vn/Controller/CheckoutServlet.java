@@ -1,5 +1,6 @@
 package vn.Controller;
 
+
 import vn.model.CartItem;
 import vn.model.Order;
 import vn.model.OrderItem;
@@ -11,10 +12,12 @@ import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
 import java.util.List;
 
 @WebServlet("/checkout")
 public class CheckoutServlet extends HttpServlet {
+
 
     private final OrderService orderService = new OrderService();
 
@@ -74,5 +77,6 @@ public class CheckoutServlet extends HttpServlet {
 
         // Redirect thành công
         response.sendRedirect("order-success.jsp?orderId=" + orderId);
+
     }
 }
