@@ -39,7 +39,7 @@
             <div class="card contact-form p-4">
                 <h5>Gửi tin nhắn</h5>
 
-                <form action="/DoCongNghe_Nhom36_war/contact" method="post">
+                <form action="../contact" method="post">
                     <div class="mb-3">
                         <label class="form-label">Họ và tên</label>
                         <input type="text" class="form-control" name="name" required>

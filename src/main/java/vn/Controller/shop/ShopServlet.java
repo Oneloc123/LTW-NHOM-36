@@ -5,7 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import vn.dao.ProductDao;
+
 import vn.model.Product;
 import vn.services.ProductService;
 
@@ -24,6 +26,7 @@ public class ShopServlet extends HttpServlet {
         request.setAttribute("currentPage", "shop");
         request.getRequestDispatcher("/pages/shop.jsp").forward(request,response);
     }
+
 
 
 

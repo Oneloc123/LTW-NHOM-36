@@ -19,6 +19,7 @@ public class ListProductController extends HttpServlet {
         request.setAttribute("currentPage", "products");
 
         request.getRequestDispatcher("/pages/products.jsp").forward(request,response);
+
     }
 
     public void destroy() {
