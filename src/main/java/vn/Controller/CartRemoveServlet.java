@@ -1,24 +1,20 @@
 package vn.Controller;
 
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import vn.dao.CartDao;
 
 import java.io.IOException;
-
 @WebServlet("/cart-remove")
 public class CartRemoveServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int userId = (int) req.getSession().getAttribute("userId");
+        int productId = Integer.parseInt(req.getParameter("productId"));
 
-    private final CartDao cartDao = new CartDao();
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        int id = Integer.parseInt(request.getParameter("id"));
-        cartDao.remove(id);
-
-        response.sendRedirect("cart");
+        new CartDao().removeItem(userId, productId);
+        resp.sendRedirect("cart");
     }
 }
+
