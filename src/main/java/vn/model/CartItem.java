@@ -10,7 +10,8 @@ public class CartItem implements Serializable {
     private double price;   // ✅ int → double
     private int quantity;
 
-    public CartItem() {}
+    public CartItem() {
+    }
 
     public CartItem(int productId, String name, String image, double price, int quantity) {
         this.productId = productId;

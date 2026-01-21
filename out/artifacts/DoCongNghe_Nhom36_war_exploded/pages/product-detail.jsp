@@ -254,13 +254,39 @@
           <div style="margin-top:8px; font-size:13px; color:var(--muted)"><span id="stockCount">50</span> sản phẩm có
             sẵn</div>
         </div>
-
         <div>
-          <button id="buyNow" class="btn-buy" aria-label="Mua ngay"><i class="bi bi-bag-check me-1"></i> Mua
-            ngay</button>
-          <button id="addCart" class="btn-cart" style="margin-top:8px"><i class="bi bi-cart-plus me-1"></i> Thêm vào
-            giỏ</button>
+          <button id="buyNow" class="btn-buy" aria-label="Mua ngay">
+            <i class="bi bi-bag-check me-1"></i> Mua ngay
+          </button>
+
+          <!-- FORM ADD TO CART (CHỈ THÊM, KHÔNG ẢNH HƯỞNG GIAO DIỆN) -->
+          <form id="addCartForm"
+                action="${pageContext.request.contextPath}/cart"
+                method="post"
+                style="margin-top:8px">
+
+            <input type="hidden" name="action" value="add">
+            <input type="hidden" name="productId" value="${p.id}">
+            <input type="hidden" name="quantity" id="cartQty">
+
+            <button type="submit" id="addCart" class="btn-cart">
+              <i class="bi bi-cart-plus me-1"></i> Thêm vào giỏ
+            </button>
+          </form><form id="addCartForm"
+                       action="${pageContext.request.contextPath}/add-to-cart"
+                       method="post"
+                       style="margin-top:8px">
+
+          <input type="hidden" name="productId" value="${p.id}">
+          <input type="hidden" name="quantity" id="cartQty">
+
+          <button type="submit" class="btn-cart">
+            <i class="bi bi-cart-plus me-1"></i> Thêm vào giỏ
+          </button>
+        </form>
+
         </div>
+
 
         <div style="margin-top:6px; font-size:13px; color:var(--muted)">
           <i class="bi bi-shield-check me-1"></i> 12 tháng bảo hành • Hỗ trợ 24/7
@@ -427,10 +453,11 @@
     })();
 
     // ---------- Add to cart & toast ----------
+    // ---------- Add to cart & toast (REAL BACKEND) ----------
     (function () {
       const toast = document.getElementById('toast');
       const toastText = document.getElementById('toastText');
-      const addCart = document.getElementById('addCart');
+      const addCartForm = document.getElementById('addCartForm');
       const buyNow = document.getElementById('buyNow');
 
       function showToast(msg) {
@@ -439,19 +466,30 @@
         setTimeout(() => toast.classList.remove('show'), 2200);
       }
 
-      addCart.addEventListener('click', () => {
+      // ADD TO CART → GỌI SERVLET
+      addCartForm.addEventListener('submit', function (e) {
+        e.preventDefault(); // KHÔNG reload trang
+
         const qty = document.getElementById('qtyInput').value;
-        // simulate add: in real app you'd call API or update localStorage
-        showToast('🛒 Đã thêm ' + qty + ' sản phẩm vào giỏ');
+        document.getElementById('cartQty').value = qty;
+
+        fetch(addCartForm.action, {
+          method: 'POST',
+          body: new FormData(addCartForm)
+        }).then(() => {
+          showToast('🛒 Đã thêm ' + qty + ' sản phẩm vào giỏ');
+        });
       });
 
       buyNow.addEventListener('click', () => {
         const qty = document.getElementById('qtyInput').value;
-        showToast('✅ Mua ngay: ' + qty + ' sản phẩm — chuyển tới thanh toán (demo)');
-        // demo: redirect to cart / checkout page (static)
-        setTimeout(() => { window.location.href = 'cart.jsp'; }, 900);
+        showToast('✅ Mua ngay: ' + qty + ' sản phẩm');
+        setTimeout(() => {
+          window.location.href = '${pageContext.request.contextPath}/cart';
+        }, 900);
       });
     })();
+
 
     // ---------- Tabs logic ----------
     (function () {

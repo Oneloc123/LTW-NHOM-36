@@ -18,4 +18,3 @@ public class CartUpdateServlet extends HttpServlet {
         resp.sendRedirect("cart");
     }
 }
-

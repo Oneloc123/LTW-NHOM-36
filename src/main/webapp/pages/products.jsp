@@ -96,12 +96,13 @@
                           </button>
 
                           <!-- Nút thêm vào giỏ hàng -->
-                          <button
-                                  class="add-cart-btn"
-                                 >
-                              <i class="fa fa-shopping-cart"></i>
 
-                          </button>
+                          <a href="/add-to-cart?productId=${p.id}" class="btn btn-primary">
+                              Thêm vào giỏ
+                          <a/>
+
+
+
 
                           <!-- Nút yêu thích -->
                           <button
