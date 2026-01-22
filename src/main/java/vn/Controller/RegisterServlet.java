@@ -9,7 +9,6 @@ import vn.services.UserService;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
 
 @WebServlet(name = "RegisterServlet", value = "/register")
 public class RegisterServlet extends HttpServlet {
