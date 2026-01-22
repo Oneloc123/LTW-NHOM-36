@@ -1,23 +1,33 @@
 package vn.model;
 
-public class OrderItem {
+import java.io.Serializable;
+
+public class OrderItem implements Serializable {
+
     private int id;
     private int orderId;
     private int productId;
+    private String productName;
+    private long price;
     private int quantity;
 
-    public OrderItem() {}
+    public OrderItem() {
+    }
 
-    public OrderItem(int id, int orderId, int productId, int quantity) {
+    public OrderItem(int id, int orderId, int productId,
+                     String productName, long price, int quantity) {
         this.id = id;
         this.orderId = orderId;
         this.productId = productId;
+        this.productName = productName;
+        this.price = price;
         this.quantity = quantity;
     }
 
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -25,6 +35,7 @@ public class OrderItem {
     public int getOrderId() {
         return orderId;
     }
+
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
@@ -32,13 +43,31 @@ public class OrderItem {
     public int getProductId() {
         return productId;
     }
+
     public void setProductId(int productId) {
         this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
     }
 
     public int getQuantity() {
         return quantity;
     }
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }

@@ -1,0 +1,141 @@
+
+    body {
+        background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
+
+    }
+
+    main h2 {
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+
+    .contact-card {
+        border-radius: 16px;
+        padding: 32px;
+        background: #ffffff;
+        border: none;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    /* HEADER GIỎ HÀNG */
+
+    .cart-header {
+        text-align: center;
+        margin: 20px 0 40px;
+        color: #052772;
+        text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        /* Input hiện đại */
+    }
+
+    .contact-card .form-control {
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: 1px solid #d7d7d7;
+        transition: all 0.25s ease;
+    }
+
+    /* ITEM */
+
+    .cart-item {
+        background: #fff;
+        padding: 15px;
+        border-radius: 15px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .contact-card .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.15);
+    }
+
+    .product-img {
+        width: 90px;
+        height: 90px;
+        object-fit: contain;
+        /* Nút gửi */
+    }
+
+    .contact-card .btn-primary {
+        padding: 10px 24px;
+        border-radius: 12px;
+        background: #f7f7f7;
+        padding: 5px;
+        font-weight: 600;
+    }
+
+    /* SUMMARY BOX */
+
+    .summary-box {
+        background: white;
+        padding: 25px;
+        border-radius: 18px;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+        /* ----- Khung thông tin ----- */
+    }
+
+    .contact-info-box {
+        background: #f8f9fa;
+        padding: 32px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .highlight {
+        color: #d62828;
+        font-weight: bold;
+    }
+
+    .contact-info-box p {
+        font-size: 15px;
+    }
+
+    /* BUTTON CHECKOUT */
+
+    .btn-checkout {
+        width: 100%;
+        padding: 12px;
+        background: #1a73e8;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    /* Icon lớn hơn – hiện đại */
+
+    .contact-info-box i {
+        font-size: 20px;
+    }
+
+    /* Social icons */
+
+    .contact-info-box a i {
+        transition: 0.2s ease;
+    }
+
+    .btn-checkout:hover {
+        background: #1558b0;
+    }
+
+    .contact-info-box a:hover i {
+        transform: scale(1.15);
+    }
+
+    /* Toast */
+
+    .toast-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        /* Responsive spacing */
+    }
+
+    @media (max-width: 768px) {
+    }
+
+    .contact-card, .contact-info-box {
+        padding: 24px;
+    }
