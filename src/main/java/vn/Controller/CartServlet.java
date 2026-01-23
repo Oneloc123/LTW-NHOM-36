@@ -36,6 +36,7 @@ public class CartServlet extends HttpServlet {
 
         List<CartItem> cartItems = cartDao.getCartByUserId(userId);
         request.setAttribute("cartItems", cartItems);
+
         request.getRequestDispatcher("/pages/cart.jsp").forward(request, response);
 
     }

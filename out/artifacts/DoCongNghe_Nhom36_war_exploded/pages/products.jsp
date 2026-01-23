@@ -89,9 +89,10 @@
 
                           <!-- Nút thêm vào giỏ hàng -->
 
-                          <a href="/add-to-cart?productId=${p.id}" class="btn btn-primary">
-                              Thêm vào giỏ
-                          <a/>
+                <form action="${pageContext.request.contextPath}/add-to-cart" method="post">
+                    <input type="hidden" name="productId" value="${p.id}">
+                    <button type="submit">Thêm vào giỏ hàng</button>
+                </form>
 
 
 

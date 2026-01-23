@@ -219,30 +219,11 @@
           </button>
 
           <!-- FORM ADD TO CART (CHỈ THÊM, KHÔNG ẢNH HƯỞNG GIAO DIỆN) -->
-          <form id="addCartForm"
-                action="${pageContext.request.contextPath}/cart"
-                method="post"
-                style="margin-top:8px">
-
-            <input type="hidden" name="action" value="add">
+          <form action="${pageContext.request.contextPath}/add-to-cart" method="post">
             <input type="hidden" name="productId" value="${p.id}">
-            <input type="hidden" name="quantity" id="cartQty">
+            <button type="submit">Thêm vào giỏ hàng</button>
+          </form>
 
-            <button type="submit" id="addCart" class="btn-cart">
-              <i class="bi bi-cart-plus me-1"></i> Thêm vào giỏ
-            </button>
-          </form><form id="addCartForm"
-                       action="${pageContext.request.contextPath}/add-to-cart"
-                       method="post"
-                       style="margin-top:8px">
-
-          <input type="hidden" name="productId" value="${p.id}">
-          <input type="hidden" name="quantity" id="cartQty">
-
-          <button type="submit" class="btn-cart">
-            <i class="bi bi-cart-plus me-1"></i> Thêm vào giỏ
-          </button>
-        </form>
 
         </div>
 

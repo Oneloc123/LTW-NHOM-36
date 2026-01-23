@@ -69,36 +69,47 @@ public class CartDao {
         String updateSql =
                 "UPDATE cart SET quantity = quantity + 1 WHERE user_id=? AND product_id=?";
 
-        String insertSql = """
-            INSERT INTO cart(user_id, product_id, quantity, price)
-            SELECT ?, p.id, 1, p.price
-            FROM product p
-            WHERE p.id = ?
-        """;
+        String insertSql =
+                "INSERT INTO cart(user_id, product_id, quantity, price) VALUES (?, ?, 1, ?)";
 
         try (Connection conn = getConnection()) {
 
+            // 1. CHECK
             PreparedStatement checkPs = conn.prepareStatement(checkSql);
             checkPs.setInt(1, userId);
             checkPs.setInt(2, productId);
             ResultSet rs = checkPs.executeQuery();
 
             if (rs.next()) {
+                // 2. UPDATE
                 PreparedStatement updatePs = conn.prepareStatement(updateSql);
                 updatePs.setInt(1, userId);
                 updatePs.setInt(2, productId);
                 updatePs.executeUpdate();
             } else {
+                // 3. GET PRICE
+                double price = 0;
+                PreparedStatement psPrice =
+                        conn.prepareStatement("SELECT price FROM product WHERE id=?");
+                psPrice.setInt(1, productId);
+                ResultSet rsPrice = psPrice.executeQuery();
+                if (rsPrice.next()) {
+                    price = rsPrice.getDouble("price");
+                }
+
+                // 4. INSERT
                 PreparedStatement insertPs = conn.prepareStatement(insertSql);
                 insertPs.setInt(1, userId);
                 insertPs.setInt(2, productId);
+                insertPs.setDouble(3, price);
                 insertPs.executeUpdate();
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // 🔥 NẾU FAIL → XEM LOG
         }
     }
+
 
     // ================== UPDATE QUANTITY ==================
     public void updateQuantity(int userId, int productId, int quantity) {
