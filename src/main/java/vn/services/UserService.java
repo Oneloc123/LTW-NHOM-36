@@ -59,4 +59,24 @@ public class UserService {
     {
         return userDao.getUserByUserName(email);
     }
+
+    public List<User> searchByName(String keyword) {
+        return userDao.getUserByKeyword(keyword);
+    }
+
+    public List<User> filterUsers(String keyword, String role, String status) {
+        return  userDao.filterUsers(keyword,role,status);
+    }
+
+    public void deleteUserById(int id) {
+        userDao.deleteUserById(id);
+    }
+
+    public List<User> filterUsers(String keyword, String role) {
+        return userDao.filterUsers(keyword,role);
+    }
+
+    public List<User> filterUsers(String keyword) {
+        return userDao.filterUsers(keyword);
+    }
 }
