@@ -1000,21 +1000,21 @@
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .products-page .filter-container input,
   .products-page .filter-container select,
   .products-page .filter-container .price-filter {
     width: 100%;
   }
-  
+
   .products-page .price-filter {
     justify-content: space-between;
   }
-  
+
   .products-page .price-filter input {
     width: 45%;
   }
-  
+
   .products-page .tabs-container {
     justify-content: flex-start;
     overflow-x: auto;

@@ -1,36 +1,66 @@
 package vn.Controller;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.*;
 import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
 import vn.dao.CartDao;
-
 import java.io.IOException;
+import java.io.PrintWriter;
 
-@WebServlet(name = "add-to-cart", value = "/add-to-cart")
+@WebServlet(name = "AddToCartServlet", value = "/add-to-cart")
 public class AddToCartServlet extends HttpServlet {
+    private CartDao cartDao;
+
+    @Override
+    public void init() throws ServletException {
+        cartDao = new CartDao();
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession(false);
-        String referer = request.getHeader("Referer");
-        session.setAttribute("redirectAfterLogin", referer);
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
 
-        // CHƯA ĐĂNG NHẬP → ĐÁ LOGIN
+        HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("id") == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
+            out.print("{\"success\": false, \"message\": \"Vui lòng đăng nhập\"}");
+            out.flush();
             return;
         }
 
-        int userId = (int) session.getAttribute("id");
-        int productId = Integer.parseInt(request.getParameter("productId"));
+        try {
+            int userId = (int) session.getAttribute("id");
+            int productId = Integer.parseInt(request.getParameter("productId"));
 
-        CartDao cartDao = new CartDao();
-        cartDao.addToCart(userId, productId);
+            // THÊM VÀO GIỎ HÀNG - KHÔNG CẦN BIẾN SUCCESS
+            cartDao.addToCart(userId, productId);
 
-      // QUAY LẠI TRANG TRƯỚC
-      response.sendRedirect(request.getHeader("Referer"));
+            // Tính toán lại giỏ hàng
+            int cartCount = cartDao.getCartItemCount(userId);
+            double cartTotal = cartDao.getCartTotal(userId);
+
+            // Cập nhật session
+            session.setAttribute("cartCount", cartCount);
+
+            out.print("{\"success\": true, \"message\": \"Đã thêm vào giỏ hàng\", " +
+                    "\"cartCount\": " + cartCount + ", " +
+                    "\"cartTotal\": " + cartTotal + "}");
+
+        } catch (NumberFormatException e) {
+            out.print("{\"success\": false, \"message\": \"Dữ liệu không hợp lệ\"}");
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.print("{\"success\": false, \"message\": \"Có lỗi xảy ra\"}");
+        }
+
+        out.flush();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.sendRedirect(request.getContextPath() + "/");
     }
 }

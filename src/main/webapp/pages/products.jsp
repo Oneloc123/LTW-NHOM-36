@@ -122,43 +122,63 @@
         </nav>
     </div>
 
+    <!-- cart-drawer.jsp -->
+    <div class="cart-drawer">
+        <div class="cart-header">
+            <h3>Giỏ hàng của bạn <span class="badge">${cartSize}</span></h3>
+        </div>
 
-    <!-- CART DRAWER SIMULATION (checkbox hack) -->
-    <div class="site-cart">
-        <input type="checkbox" id="cart-toggle" hidden>
-        <label for="cart-toggle" class="cart-overlay"></label>
+        <div class="cart-body">
+            <c:choose>
+                <c:when test="${empty cart}">
+                    <p class="empty-cart">Giỏ hàng trống</p>
+                </c:when>
+                <c:otherwise>
+                    <ul class="cart-items">
+                        <c:forEach var="item" items="${cart}">
+                            <li class="cart-item">
+                                <img src="${item.value.product.imagesTop}"
+                                     alt="${item.value.product.name}">
+                                <div class="cart-info">
+                                    <strong>${item.value.product.name}</strong>
+                                    <div class="cart-price">
+                                    <span>${item.value.quantity} x
+                                    <fmt:formatNumber value="${item.value.product.price}"
+                                                      type="currency" currencyCode="VND"/>
+                                    </span>
+                                    </div>
+                                    <div class="cart-quantity">
+                                        <form action="update-cart" method="post" class="quantity-form">
+                                            <input type="hidden" name="productId"
+                                                   value="${item.value.product.id}">
+                                            <button type="submit" name="action" value="decrease">-</button>
+                                            <span>${item.value.quantity}</span>
+                                            <button type="submit" name="action" value="increase">+</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="cart-actions">
+                                    <a href="remove-from-cart?productId=${item.value.product.id}"
+                                       class="remove-btn">Xóa</a>
+                                </div>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                    <div class="cart-total">
+                        <span>Tổng tiền:</span>
+                        <strong>
+                            <fmt:formatNumber value="${cartTotal}"
+                                              type="currency" currencyCode="VND"/>
+                        </strong>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </div>
 
-        <label for="cart-toggle" class="cart-floating" aria-hidden="false" title="Mở giỏ hàng">
-            <span class="cart-count">0</span>
-            🛒
-        </label>
-        <aside class="cart-drawer" aria-label="Giỏ hàng">
-            <div class="cart-header">
-                <h3>Giỏ hàng của bạn</h3>
-                <label for="cart-toggle" class="cart-close" aria-label="Đóng giỏ">✕</label>
-            </div>
-            <div class="cart-body">
-                <p class="muted">Giỏ hàng demo (tĩnh). Links "Thêm vào giỏ" trong trang sẽ dẫn tới đây nhưng không
-                    update số lượng do không dùng JS.</p>
-                <ul class="cart-items">
-                    <li class="cart-item">
-                        <img src="https://via.placeholder.com/80x80.png?text=Item" alt="">
-                        <div class="cart-info">
-                            <strong>Galaxy Mini 1</strong>
-                            <span class="muted">1 x 6.490.000₫</span>
-                        </div>
-                        <div class="cart-actions"><a href="#" class="link-more">Xóa</a></div>
-                    </li>
-                </ul>
-            </div>
-            <div class="cart-footer">
-                <div class="cart-total"><span>Tổng</span><strong>6.490.000₫</strong></div>
-                <div class="cart-cta">
-                    <a class="btn btn-ghost" href="#">Tiếp tục mua</a>
-                    <a class="btn btn-primary" href="#">Thanh toán</a>
-                </div>
-            </div>
-        </aside>
+        <div class="cart-footer">
+            <a href="cart.jsp" class="btn btn-view-cart">Xem giỏ hàng</a>
+            <a href="checkout.jsp" class="btn btn-checkout">Thanh toán</a>
+        </div>
     </div>
 </main>
 

@@ -1,480 +1,766 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Chi tiết sản phẩm | TechX</title>
-
-  <!-- Icons & Bootstrap (keeps your site consistent) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${p.name} - TechX</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/header.css">
   <link rel="stylesheet" href="../assets/css/footer.css">
-  <!-- AOS (animate on scroll) -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-
-  <!-- Main CSS (the enhanced stylesheet above) -->
-  <link rel="stylesheet" href="/assets/css/product-detail.css">
-
-  <meta name="description"
-    content="Chi tiết sản phẩm TechX - Tai nghe Bluetooth TechX AirBeat, công nghệ AI, thiết kế nhỏ gọn." />
+  <link rel="stylesheet" href="../assets/css/header.css">
+  <link rel="stylesheet" href="../assets/css/product-detail.css">
+  <style>
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .product-main {
+      flex: 1;
+      min-width: 300px;
+    }
+    .product-sidebar {
+      width: 350px;
+    }
+    .main-image {
+      width: 100%;
+      height: 400px;
+      object-fit: contain;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      background: #f8f9fa;
+      margin-bottom: 15px;
+    }
+    .thumbnail-container {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+    .thumbnail {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .thumbnail:hover, .thumbnail.active {
+      border-color: #007bff;
+    }
+    .product-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .product-price {
+      font-size: 28px;
+      color: #dc3545;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+    .product-old-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 18px;
+      margin-right: 10px;
+    }
+    .product-discount {
+      background: #dc3545;
+      color: white;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .quantity-btn {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #ddd;
+      background: #f8f9fa;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .quantity-input {
+      width: 70px;
+      height: 40px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      margin: 25px 0;
+    }
+    .btn-buy-now, .btn-add-cart {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-buy-now {
+      background: linear-gradient(135deg, #ff6b6b, #ff4757);
+      color: white;
+    }
+    .btn-add-cart {
+      background: #007bff;
+      color: white;
+    }
+    .btn-buy-now:hover {
+      background: linear-gradient(135deg, #ff4757, #ff3838);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+    }
+    .btn-add-cart:hover {
+      background: #0056b3;
+      transform: translateY(-2px);
+    }
+    .product-meta {
+      margin: 20px 0;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 10px;
+    }
+    .meta-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .meta-item:last-child {
+      border-bottom: none;
+    }
+    .product-tabs {
+      margin-top: 40px;
+    }
+    .tab-buttons {
+      display: flex;
+      border-bottom: 2px solid #eee;
+      margin-bottom: 20px;
+    }
+    .tab-button {
+      padding: 15px 30px;
+      background: none;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      color: #666;
+      cursor: pointer;
+      position: relative;
+    }
+    .tab-button.active {
+      color: #007bff;
+    }
+    .tab-button.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #007bff;
+    }
+    .tab-content {
+      padding: 20px;
+      line-height: 1.8;
+    }
+    .stock-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .in-stock {
+      background: #d4edda;
+      color: #155724;
+    }
+    .out-of-stock {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    .wishlist-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 40px;
+      height: 40px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      color: #dc3545;
+      z-index: 10;
+    }
+    .wishlist-btn:hover {
+      background: #ffe6e6;
+    }
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #28a745;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 1000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .toast.error {
+      background: #dc3545;
+    }
+    @media (max-width: 768px) {
+      .product-container {
+        flex-direction: column;
+      }
+      .product-sidebar {
+        width: 100%;
+      }
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
-
 <body>
+<!-- Header -->
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-  <!-- Header (kept minimal, you can reuse your site header) -->
+<main class="container py-4">
+  <!-- Breadcrumb -->
+  <nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/home">Trang chủ</a></li>
+      <li class="breadcrumb-item"><a href="/products">Sản phẩm</a></li>
+      <li class="breadcrumb-item active" aria-current="page">${p.name}</li>
+    </ol>
+  </nav>
 
-  <!-- ================= Header ================= -->
+  <!-- Product Container -->
+  <div class="product-container">
+    <!-- Left Column - Product Images -->
+    <div class="product-main">
+      <!-- Wishlist Button -->
+      <button class="wishlist-btn" id="wishlistBtn">
+        <i class="bi bi-heart"></i>
+      </button>
 
-  <main class="container product-detail-page" style="padding-top:18px">
-    <!-- Breadcrumbs -->
+      <!-- Main Image -->
+      <div class="main-image-container">
+        <img id="mainImage" src="${p.imagesTop}" alt="${p.name}" class="main-image">
+      </div>
 
+      <!-- Thumbnails -->
+      <div class="thumbnail-container">
+        <c:forEach var="img" items="${p.images}" varStatus="status">
+          <img src="${img}"
+               alt="Thumbnail ${status.index + 1}"
+               class="thumbnail ${status.index == 0 ? 'active' : ''}"
+               onclick="changeMainImage('${img}')">
+        </c:forEach>
+      </div>
 
-    <!-- Product grid: left detailed content, right side panel -->
-    <section class="product-container" aria-labelledby="productTitle">
+      <!-- Product Details -->
+      <div class="product-details">
+        <h1 class="product-title">${p.name}</h1>
 
-      <!-- LEFT: product visual + meta -->
-      <div class="product-card" data-aos="fade-up">
-
-        <div class="gallery">
-          <!-- MAIN IMAGE -->
-            <figure class="main-image" id="mainImageWrap" aria-label="Ảnh sản phẩm chính">
-                <img id="mainImage" src="${p.imagesTop}" alt="${p.name}">
-                <div class="zoom-hint"><i class="bi bi-arrows-fullscreen"></i> Phóng to</div>
-            </figure>
-
-
-            <!-- THUMBNAILS -->
-            <div class="thumbs" id="thumbsList" role="list">
-                <c:forEach var="img" items="${p.images}" varStatus="st">
-
-                    <button class="thumb ${st.index == 0 ? 'active' : ''}"
-                            data-src="${img}"
-                            aria-label="Ảnh ${st.index + 1}">
-                        <img src="${img}" alt="thumbnail ${st.index + 1}" />
-                    </button>
-
-                </c:forEach>
-            </div>
-
+        <!-- Rating -->
+        <div class="rating mb-3">
+                    <span class="text-warning">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-half"></i>
+                    </span>
+          <span class="text-muted ms-2">4.5 (125 đánh giá)</span>
         </div>
 
-        <!-- META -->
-        <div class="meta" style="margin-top:16px">
-          <h1 id="productTitle" class="product-title">${p.name}</h1>
-
-
-          <div class="rating-row">
-            <div class="stars" aria-hidden="true">★★★★☆</div>
-            <div class="review-count">(125 đánh giá)</div>
+        <!-- Price -->
+        <div class="d-flex align-items-center mb-3">
+          <div class="product-price">
+            <fmt:formatNumber value="${p.price}" type="currency"/>
           </div>
-
-          <div class="price-row">
-            <div class="current-price" id="price">${p.price}</div>
-            <div class="old-price">1.099.000₫</div>
-            <div class="badge-sale">-18%</div>
-          </div>
-
-          <p class="product-desc">${p.fullDescription}</p>
-
-
-
-        </div> <!-- /.meta -->
-
-        <!-- TABS + details + related -->
-        <div class="product-detail-section" style="margin-top:18px" data-aos="fade-up" data-aos-delay="160">
-          <div class="tabs">
-            <div class="tab-controls" role="tablist" aria-label="Nội dung sản phẩm">
-              <button class="active" data-tab="details" role="tab">Chi tiết</button>
-              <button data-tab="specs" role="tab">Thông số</button>
-              <button data-tab="reviews" role="tab">Đánh giá</button>
+          <c:if test="${p.discount > 0}">
+            <div class="product-old-price ms-3">
+              <fmt:formatNumber value="${p.price * 100 / (100 - p.discount)}" type="currency"/>
             </div>
-
-            <div class="tab-content" id="tabContent">
-              <div id="details" class="tab-panel" data-panel>
-
-
-              </div>
-
-              <div id="specs" class="tab-panel" data-panel style="display:none">
-                <table style="width:100%; border-collapse:collapse; font-size:14px">
-                  <tr>
-                    <td style="padding:8px; color:var(--muted)">Driver</td>
-                    <td style="padding:8px">10 mm dynamic</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:8px; color:var(--muted)">Bluetooth</td>
-                    <td style="padding:8px">5.3</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:8px; color:var(--muted)">Trọng lượng</td>
-                    <td style="padding:8px">45g</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:8px; color:var(--muted)">Chuẩn chống nước</td>
-                    <td style="padding:8px">IPX4</td>
-                  </tr>
-                </table>
-              </div>
-
-              <div id="reviews" class="tab-panel" data-panel style="display:none">
-                <div class="reviews">
-                  <div class="review">
-                    <div class="meta">
-                      <div class="name">Hùng</div>
-                      <div class="date">2 tuần trước</div>
-                    </div>
-                    <div class="text">Âm bass ấm, đeo êm, ANC tạm ổn với tầm giá. Giao hàng nhanh.</div>
-                  </div>
-                  <div class="review">
-                    <div class="meta">
-                      <div class="name">Thanh</div>
-                      <div class="date">1 tháng trước</div>
-                    </div>
-                    <div class="text">Pin bền thật, dùng cả ngày vẫn ổn. Recommend.</div>
-                  </div>
-                  <div style="text-align:center; margin-top:10px"><button id="writeReviewBtn" class="capacity-btn">Viết
-                      đánh giá</button></div>
-                </div>
-              </div>
+            <div class="product-discount ms-2">
+              -${p.discount}%
             </div>
-          </div>
-
-          <!-- RIGHT: reviews quick + related -->
-          <aside class="reviews" aria-label="Đánh giá nhanh">
-            <h4 style="margin-top:4px; margin-bottom:8px">Đánh giá trung bình</h4>
-            <div style="display:flex; align-items:center; gap:12px">
-              <div style="font-size:36px; font-weight:800; color:#07122a">4.5</div>
-              <div>
-                <div class="stars">★★★★☆</div>
-                <div class="kv">125 đánh giá • 4 câu hỏi đã trả lời</div>
-              </div>
-            </div>
-
-            <hr style="margin:12px 0">
-            <h5 style="margin-bottom:10px">Sản phẩm tương tự</h5>
-            <div class="related-grid" id="relatedGrid">
-              <!-- static related cards -->
-              <div class="related-card">
-                <img src="/assets/img/rel-1.jpg" alt="related 1">
-                <h4>Humane AI Pin</h4>
-                <div class="price">6.490.000₫</div>
-              </div>
-              <div class="related-card">
-                <img src="/assets/img/rel-2.jpg" alt="related 2">
-                <h4>AI Smart Glasses</h4>
-                <div class="price">3.290.000₫</div>
-              </div>
-              <div class="related-card">
-                <img src="/assets/img/rel-3.jpg" alt="related 3">
-                <h4>Mini Projector</h4>
-                <div class="price">4.990.000₫</div>
-              </div>
-            </div>
-          </aside>
-        </div> <!-- /.product-detail-section -->
-
-
-      </div> <!-- /.product-card -->
-
-      <!-- RIGHT: side panel (sticky) -->
-      <aside class="side-panel" data-aos="fade-left" aria-label="Thanh mua hàng">
-        <div>
-          <div style="display:flex; justify-content:space-between; align-items:center">
-            <div style="font-size:13px; color:var(--muted)">Tình trạng</div>
-            <div class="in-stock" id="stockLabel">Còn hàng</div>
-          </div>
-
-          <div style="margin-top:8px">
-            <div style="font-size:13px; color:var(--muted)">Vận chuyển</div>
-            <div style="font-weight:700; margin-top:4px">Giao hàng toàn quốc — 2–4 ngày</div>
-          </div>
+          </c:if>
         </div>
 
-        <div>
-          <div class="kv">Giá</div>
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-top:6px">
-            <div class="current-price" id="sidePrice">899.000₫</div>
-            <div class="old-price">1.099.000₫</div>
-          </div>
+        <!-- Short Description -->
+        <div class="mb-4">
+          <p>${p.shortDescription}</p>
         </div>
+      </div>
+    </div>
 
-        <div>
-          <div class="kv">Số lượng</div>
-          <div class="qty" style="margin-top:6px">
-            <button id="decr" class="qty-btn" aria-label="Giảm">−</button>
-            <input id="qtyInput" type="number" min="1" value="1" aria-label="Số lượng sản phẩm" />
-            <button id="incr" class="qty-btn" aria-label="Tăng">+</button>
+    <!-- Right Column - Product Info & Actions -->
+    <div class="product-sidebar">
+      <div class="card">
+        <div class="card-body">
+          <!-- Stock Status -->
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <span class="text-muted">Tình trạng:</span>
+            <c:choose>
+              <c:when test="${p.stock > 0}">
+                                <span class="stock-status in-stock">
+                                    <i class="bi bi-check-circle"></i>
+                                    Còn ${p.stock} sản phẩm
+                                </span>
+              </c:when>
+              <c:otherwise>
+                                <span class="stock-status out-of-stock">
+                                    <i class="bi bi-x-circle"></i>
+                                    Hết hàng
+                                </span>
+              </c:otherwise>
+            </c:choose>
           </div>
-          <div style="margin-top:8px; font-size:13px; color:var(--muted)"><span id="stockCount">50</span> sản phẩm có
-            sẵn</div>
+
+          <!-- Shipping -->
+          <div class="mb-4">
+            <div class="text-muted mb-2">Vận chuyển:</div>
+            <div class="d-flex align-items-center">
+              <i class="bi bi-truck text-success me-2"></i>
+              <span>Giao hàng toàn quốc • 2-4 ngày</span>
+            </div>
+          </div>
+
+          <!-- Quantity -->
+          <div class="mb-4">
+            <div class="text-muted mb-2">Số lượng:</div>
+            <div class="quantity-control">
+              <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+              <input type="number"
+                     id="quantityInput"
+                     class="quantity-input"
+                     value="1"
+                     min="1"
+                     max="${p.stock}"
+                     onchange="validateQuantity()">
+              <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+            </div>
+            <div class="text-muted mt-2">
+              <c:if test="${p.stock > 0}">
+                Tối đa ${p.stock} sản phẩm
+              </c:if>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-buttons">
+            <!-- Buy Now Button -->
+            <c:choose>
+              <c:when test="${p.stock > 0}">
+                <form action="${pageContext.request.contextPath}/checkout"
+                      method="post"
+                      id="buyNowForm">
+                  <input type="hidden" name="productId" value="${p.id}">
+                  <input type="hidden" name="quantity" value="1" id="buyNowQuantity">
+                  <button type="submit" class="btn-buy-now">
+                    <i class="bi bi-bag-check"></i>
+                    Mua ngay
+                  </button>
+                </form>
+              </c:when>
+              <c:otherwise>
+                <button class="btn-buy-now" disabled style="opacity: 0.6;">
+                  <i class="bi bi-bag-x"></i>
+                  Hết hàng
+                </button>
+              </c:otherwise>
+            </c:choose>
+
+            <!-- Add to Cart Button -->
+            <c:choose>
+              <c:when test="${p.stock > 0}">
+                <form action="${pageContext.request.contextPath}/add-to-cart"
+                      method="post"
+                      id="addToCartForm">
+                  <input type="hidden" name="productId" value="${p.id}">
+                  <input type="hidden" name="quantity" value="1" id="cartQuantity">
+                  <input type="hidden" name="redirect" value="product-detail?id=${p.id}">
+                  <button type="submit" class="btn-add-cart">
+                    <i class="bi bi-cart-plus"></i>
+                    Thêm giỏ hàng
+                  </button>
+                </form>
+              </c:when>
+              <c:otherwise>
+                <button class="btn-add-cart" disabled style="opacity: 0.6;">
+                  <i class="bi bi-cart-x"></i>
+                  Hết hàng
+                </button>
+              </c:otherwise>
+            </c:choose>
+          </div>
+
+          <!-- Product Meta -->
+          <div class="product-meta">
+            <div class="meta-item">
+              <span class="text-muted">SKU:</span>
+              <span>${p.sku}</span>
+            </div>
+            <div class="meta-item">
+              <span class="text-muted">Thương hiệu:</span>
+              <span>${p.brand}</span>
+            </div>
+            <div class="meta-item">
+              <span class="text-muted">Danh mục:</span>
+              <span>${p.category}</span>
+            </div>
+            <div class="meta-item">
+              <span class="text-muted">Bảo hành:</span>
+              <span>12 tháng</span>
+            </div>
+          </div>
+
+          <!-- Additional Info -->
+          <div class="text-center mt-3">
+            <small class="text-muted">
+              <i class="bi bi-shield-check me-1"></i>
+              Sản phẩm chính hãng • Đổi trả trong 30 ngày
+            </small>
+          </div>
         </div>
-        <div>
-          <button id="buyNow" class="btn-buy" aria-label="Mua ngay">
-            <i class="bi bi-bag-check me-1"></i> Mua ngay
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Tabs -->
+  <div class="product-tabs">
+    <div class="tab-buttons">
+      <button class="tab-button active" onclick="showTab('description')">Mô tả</button>
+      <button class="tab-button" onclick="showTab('specs')">Thông số</button>
+      <button class="tab-button" onclick="showTab('reviews')">Đánh giá</button>
+    </div>
+
+    <div class="tab-content">
+      <!-- Description Tab -->
+      <div id="description" class="tab-pane active">
+        ${p.fullDescription}
+      </div>
+
+      <!-- Specifications Tab -->
+      <div id="specs" class="tab-pane" style="display: none;">
+        <table class="table table-bordered">
+          <tbody>
+          <tr>
+            <td style="width: 30%;" class="text-muted">Kích thước</td>
+            <td>${p.dimensions}</td>
+          </tr>
+          <tr>
+            <td class="text-muted">Trọng lượng</td>
+            <td>${p.weight} g</td>
+          </tr>
+          <tr>
+            <td class="text-muted">Màu sắc</td>
+            <td>${p.color}</td>
+          </tr>
+          <tr>
+            <td class="text-muted">Chất liệu</td>
+            <td>${p.material}</td>
+          </tr>
+          <tr>
+            <td class="text-muted">Xuất xứ</td>
+            <td>${p.origin}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Reviews Tab -->
+      <div id="reviews" class="tab-pane" style="display: none;">
+        <!-- Reviews will be loaded here -->
+        <div class="text-center py-4">
+          <p class="text-muted">Chưa có đánh giá nào.</p>
+          <button class="btn btn-outline-primary" onclick="openReviewModal()">
+            <i class="bi bi-pencil"></i> Viết đánh giá
           </button>
-
-          <!-- FORM ADD TO CART (CHỈ THÊM, KHÔNG ẢNH HƯỞNG GIAO DIỆN) -->
-          <form action="${pageContext.request.contextPath}/add-to-cart" method="post">
-            <input type="hidden" name="productId" value="${p.id}">
-            <button type="submit">Thêm vào giỏ hàng</button>
-          </form>
-
-
-        </div>
-
-
-        <div style="margin-top:6px; font-size:13px; color:var(--muted)">
-          <i class="bi bi-shield-check me-1"></i> 12 tháng bảo hành • Hỗ trợ 24/7
-        </div>
-      </aside>
-
-    </section>
-
-    <!-- Toast for feedback -->
-    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">
-      <i class="bi bi-check-circle-fill" style="font-size:20px"></i>
-      <div id="toastText" style="font-weight:700">Đã thêm vào giỏ hàng</div>
-    </div>
-
-  </main>
-
-  <!-- Footer (kept simple) -->
-  <!-- ================= Footer ================= -->
-  <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
-    <div class="container">
-      <div class="row gy-4">
-        <!-- Logo + Giới thiệu -->
-        <div class="col-md-4">
-          <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
-            <i class="bi bi-camera fs-3 text-primary me-2"></i>
-            <span class="fw-bold fs-5 text-primary">TechX</span>
-          </a>
-          <p class="text-muted">
-            Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
-            Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
-          </p>
-        </div>
-
-        <!-- Danh mục -->
-        <div class="col-md-2">
-          <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
-          <ul class="list-unstyled">
-            <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
-            <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
-            <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
-            <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
-          </ul>
-        </div>
-
-        <!-- Hỗ trợ -->
-        <div class="col-md-2">
-          <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
-          <ul class="list-unstyled">
-            <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-            <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
-            <li><a href="/pages/order-history.jsp" class="footer-link">Theo dõi đơn hàng</a></li>
-            <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
-          </ul>
-        </div>
-
-        <!-- Liên hệ -->
-        <div class="col-md-4">
-          <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
-          <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh</p>
-          <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
-          <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
-          <div class="mt-3">
-            <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
-            <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
-          </div>
         </div>
       </div>
-
-      <hr class="mt-4 mb-3">
-      <div class="text-center small text-muted">
-        © 2025 <strong>TechX</strong>. All rights reserved.
-      </div>
     </div>
-  </footer>
+  </div>
 
-  <!-- AOS + small inline JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({ once: true, duration: 700 });
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <i class="bi bi-check-circle" id="toastIcon"></i>
+    <span id="toastMessage"></span>
+  </div>
+</main>
 
-    // ---------- Gallery logic ----------
-    (function () {
-      const main = document.getElementById('mainImage');
-      const thumbs = Array.from(document.querySelectorAll('.thumb'));
-      thumbs.forEach(t => {
-        t.addEventListener('click', () => {
-          thumbs.forEach(x => x.classList.remove('active'));
-          t.classList.add('active');
-          const src = t.dataset.src;
-          // fade out-in
-          main.style.filter = 'brightness(.85) blur(0.5px)';
-          setTimeout(() => {
-            main.src = src;
-            main.alt = 'Ảnh sản phẩm';
-            main.style.filter = 'none';
-          }, 160);
-        });
-      });
+<!-- Footer -->
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
-      // simple keyboard left/right for thumbs
-      let current = 0;
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-          if (e.key === 'ArrowRight') current = Math.min(current + 1, thumbs.length - 1);
-          else current = Math.max(current - 1, 0);
-          thumbs[current].click();
-        }
-      });
-    })();
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Product Image Gallery
+  function changeMainImage(src) {
+    document.getElementById('mainImage').src = src;
 
-    // ---------- Color & capacity UI ----------
-    (function () {
-      document.querySelectorAll('.color-swatch').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.color-swatch').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          // small visual: change main image to correspond color if available
-          const color = btn.dataset.color;
-          const main = document.getElementById('mainImage');
-          if (color === 'white') main.src = '/assets/img/product-sample-2.jpg';
-          else if (color === 'rose') main.src = '/assets/img/product-sample-3.jpg';
-          else main.src = '/assets/img/product-sample.jpg';
-        });
-      });
-
-      document.querySelectorAll('.capacity-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.capacity-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          // change price for 'pro' variant
-          const sidePrice = document.getElementById('sidePrice');
-          const price = document.getElementById('price');
-          if (btn.dataset.cap === 'pro') {
-            sidePrice.textContent = '1.199.000₫';
-            price.textContent = '1.199.000₫';
-            document.querySelector('.badge-sale').textContent = '-8%';
-          } else {
-            sidePrice.textContent = '899.000₫';
-            price.textContent = '899.000₫';
-            document.querySelector('.badge-sale').textContent = '-18%';
-          }
-        });
-      });
-    })();
-
-    // ---------- Quantity control & stock ----------
-    (function () {
-      const decr = document.getElementById('decr');
-      const incr = document.getElementById('incr');
-      const input = document.getElementById('qtyInput');
-      const stockCount = document.getElementById('stockCount');
-      let stock = parseInt(stockCount.textContent) || 50;
-
-      function setQty(v) {
-        v = Math.max(1, Math.min(stock, Number(v) || 1));
-        input.value = v;
+    // Update active thumbnail
+    document.querySelectorAll('.thumbnail').forEach(thumb => {
+      thumb.classList.remove('active');
+      if (thumb.src.includes(src)) {
+        thumb.classList.add('active');
       }
-      decr.addEventListener('click', () => setQty(Number(input.value) - 1));
-      incr.addEventListener('click', () => setQty(Number(input.value) + 1));
-      input.addEventListener('change', () => setQty(input.value));
-    })();
+    });
+  }
 
-    // ---------- Add to cart & toast ----------
-    // ---------- Add to cart & toast (REAL BACKEND) ----------
-    (function () {
-      const toast = document.getElementById('toast');
-      const toastText = document.getElementById('toastText');
-      const addCartForm = document.getElementById('addCartForm');
-      const buyNow = document.getElementById('buyNow');
+  // Quantity Control
+  let quantity = 1;
+  const maxStock = ${p.stock};
 
-      function showToast(msg) {
-        toastText.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2200);
+  function validateQuantity() {
+    const input = document.getElementById('quantityInput');
+    let value = parseInt(input.value) || 1;
+
+    if (value < 1) value = 1;
+    if (value > maxStock) value = maxStock;
+
+    input.value = value;
+    quantity = value;
+
+    // Update hidden inputs
+    document.getElementById('cartQuantity').value = value;
+    document.getElementById('buyNowQuantity').value = value;
+  }
+
+  function decreaseQuantity() {
+    if (quantity > 1) {
+      quantity--;
+      document.getElementById('quantityInput').value = quantity;
+      validateQuantity();
+    }
+  }
+
+  function increaseQuantity() {
+    if (quantity < maxStock) {
+      quantity++;
+      document.getElementById('quantityInput').value = quantity;
+      validateQuantity();
+    }
+  }
+
+  // Tab Switching
+  function showTab(tabId) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-pane').forEach(tab => {
+      tab.style.display = 'none';
+    });
+
+    // Remove active class from all buttons
+    document.querySelectorAll('.tab-button').forEach(btn => {
+      btn.classList.remove('active');
+    });
+
+    // Show selected tab
+    document.getElementById(tabId).style.display = 'block';
+    event.target.classList.add('active');
+  }
+
+  // Add to Cart with AJAX
+  document.getElementById('addToCartForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Check if user is logged in
+    <c:if test="${empty sessionScope.id}">
+    window.location.href = '${pageContext.request.contextPath}/login?redirect=' +
+            encodeURIComponent(window.location.href);
+    return;
+    </c:if>
+
+    const formData = new FormData(this);
+
+    // Show loading state
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Đang thêm...';
+    submitBtn.disabled = true;
+
+    fetch(this.action, {
+      method: 'POST',
+      body: formData
+    })
+            .then(response => {
+              if (response.redirected) {
+                window.location.href = response.url;
+                return;
+              }
+              return response.json();
+            })
+            .then(data => {
+              if (data && data.success) {
+                showToast('Đã thêm ' + quantity + ' sản phẩm vào giỏ hàng!', 'success');
+
+                // Update cart count in header
+                updateCartCount(data.cartCount);
+              } else {
+                showToast('Có lỗi xảy ra!', 'error');
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              showToast('Có lỗi kết nối!', 'error');
+            })
+            .finally(() => {
+              // Restore button state
+              submitBtn.innerHTML = originalText;
+              submitBtn.disabled = false;
+            });
+  });
+
+  // Wishlist Button
+  document.getElementById('wishlistBtn').addEventListener('click', function() {
+    <c:if test="${empty sessionScope.id}">
+    window.location.href = '${pageContext.request.contextPath}/login?redirect=' +
+            encodeURIComponent(window.location.href);
+    return;
+    </c:if>
+
+    const btn = this;
+    const icon = btn.querySelector('i');
+    const isActive = icon.classList.contains('bi-heart-fill');
+
+    fetch('${pageContext.request.contextPath}/wishlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: 'productId=${p.id}&action=' + (isActive ? 'remove' : 'add')
+    })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                if (isActive) {
+                  icon.classList.remove('bi-heart-fill');
+                  icon.classList.add('bi-heart');
+                  showToast('Đã xóa khỏi danh sách yêu thích', 'success');
+                } else {
+                  icon.classList.remove('bi-heart');
+                  icon.classList.add('bi-heart-fill');
+                  showToast('Đã thêm vào danh sách yêu thích', 'success');
+                }
+              } else {
+                showToast(data.message || 'Có lỗi xảy ra!', 'error');
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              showToast('Có lỗi kết nối!', 'error');
+            });
+  });
+
+  // Toast Notification
+  function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    const toastIcon = document.getElementById('toastIcon');
+    const toastMessage = document.getElementById('toastMessage');
+
+    toastMessage.textContent = message;
+
+    if (type === 'success') {
+      toast.style.background = '#28a745';
+      toastIcon.className = 'bi bi-check-circle';
+    } else {
+      toast.style.background = '#dc3545';
+      toastIcon.className = 'bi bi-exclamation-circle';
+    }
+
+    toast.classList.add('show');
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+
+  function updateCartCount(count) {
+    // Update cart badge in header
+    const cartBadge = document.querySelector('.badge.bg-danger');
+    if (cartBadge) {
+      cartBadge.textContent = count;
+      cartBadge.style.display = count > 0 ? 'inline-block' : 'none';
+    }
+
+    // If no badge exists, create one
+    const cartBtn = document.querySelector('a[href="/cart"]');
+    if (cartBtn && count > 0) {
+      let badge = cartBtn.querySelector('.badge');
+      if (!badge) {
+        badge = document.createElement('span');
+        badge.className = 'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger';
+        cartBtn.appendChild(badge);
       }
+      badge.textContent = count;
+    }
+  }
 
-      // ADD TO CART → GỌI SERVLET
-      addCartForm.addEventListener('submit', function (e) {
-        e.preventDefault(); // KHÔNG reload trang
+  // Initialize
+  document.addEventListener('DOMContentLoaded', function() {
+    validateQuantity(); // Set initial values
 
-        const qty = document.getElementById('qtyInput').value;
-        document.getElementById('cartQty').value = qty;
+    // Check if product is in wishlist
+    <c:if test="${not empty sessionScope.id}">
+    fetch('${pageContext.request.contextPath}/wishlist/check?productId=${p.id}')
+            .then(response => response.json())
+            .then(data => {
+              if (data.inWishlist) {
+                const icon = document.querySelector('#wishlistBtn i');
+                icon.classList.remove('bi-heart');
+                icon.classList.add('bi-heart-fill');
+              }
+            });
+    </c:if>
+  });
 
-        fetch(addCartForm.action, {
-          method: 'POST',
-          body: new FormData(addCartForm)
-        }).then(() => {
-          showToast('🛒 Đã thêm ' + qty + ' sản phẩm vào giỏ');
-        });
-      });
-
-      buyNow.addEventListener('click', () => {
-        const qty = document.getElementById('qtyInput').value;
-        showToast('✅ Mua ngay: ' + qty + ' sản phẩm');
-        setTimeout(() => {
-          window.location.href = '${pageContext.request.contextPath}/cart';
-        }, 900);
-      });
-    })();
-
-
-    // ---------- Tabs logic ----------
-    (function () {
-      const tabButtons = document.querySelectorAll('.tab-controls button');
-      const panels = document.querySelectorAll('[data-panel]');
-      tabButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          tabButtons.forEach(b => b.classList.remove('active'));
-          panels.forEach(p => p.style.display = 'none');
-          btn.classList.add('active');
-          const panel = document.getElementById(btn.dataset.tab);
-          if (panel) panel.style.display = 'block';
-          // scroll into view on small devices
-          if (window.innerWidth < 800) panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
-      });
-    })();
-
-    // ---------- Write review demo ----------
-    (function () {
-      const writeBtn = document.getElementById('writeReviewBtn');
-      writeBtn.addEventListener('click', () => {
-        const name = prompt('Tên của bạn');
-        const text = prompt('Đánh giá (tối đa 300 ký tự)');
-        if (name && text) {
-          alert('Cảm ơn ' + name + '! (Demo: đánh giá sẽ được ghi lại trên server thực tế)');
-        }
-      });
-    })();
-
-    // Accessibility: thumbs keyboard focus
-    (function () {
-      const thumbs = document.querySelectorAll('.thumb');
-      thumbs.forEach((t, i) => {
-        t.tabIndex = 0;
-        t.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') t.click();
-          if (e.key === 'ArrowRight') thumbs[Math.min(i + 1, thumbs.length - 1)].focus();
-          if (e.key === 'ArrowLeft') thumbs[Math.max(i - 1, 0)].focus();
-        });
-      });
-    })();
-
-  </script>
-
+  function openReviewModal() {
+    alert('Chức năng đánh giá sẽ được phát triển sau!');
+  }
+</script>
 </body>
-
 </html>

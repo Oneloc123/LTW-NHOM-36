@@ -16,9 +16,10 @@ public class Product implements Serializable {
     private String createAt;
     private String updateAt;
     private List<String> images = new ArrayList<>();
+    private int stock; // THÊM DÒNG NÀY
 
-
-    public Product(int id, String name, int categoryID, String shortDescription, String fullDescription, int price, boolean isFeatured, String createAt, String updateAt, List<String> images) {
+    // Constructor có stock
+    public Product(int id, String name, int categoryID, String shortDescription, String fullDescription, int price, boolean isFeatured, String createAt, String updateAt, List<String> images, int stock) {
         this.id = id;
         this.name = name;
         this.categoryID = categoryID;
@@ -29,6 +30,19 @@ public class Product implements Serializable {
         this.createAt = createAt;
         this.updateAt = updateAt;
         this.images = images;
+        this.stock = stock; // THÊM DÒNG NÀY
+    }
+
+    // Constructor không tham số
+    public Product() {}
+
+    // Getter và Setter cho stock
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public List<String> getImages() {
@@ -40,12 +54,9 @@ public class Product implements Serializable {
         return images.get(0);
     }
 
-
     public void setImages(List<String> images) {
         this.images = images;
     }
-
-    public Product() {}
 
     public int getId() {
         return id;
