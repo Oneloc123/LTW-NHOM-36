@@ -71,17 +71,21 @@
         </div>
     </div>
 </header>
+
+<!-- ===== CONTENT ===== -->
 <div class="container mt-4">
+
     <div class="cart-header mb-4">
         <h2><i class="bi bi-cart4 me-2"></i>Giỏ hàng của bạn</h2>
         <p class="text-muted">Kiểm tra sản phẩm trước khi thanh toán</p>
     </div>
 
     <div class="row g-4">
+
         <!-- LEFT -->
         <div class="col-lg-8">
 
-            <c:if test="${empty sessionScope.cart}">
+            <c:if test="${empty cartItems}">
                 <div class="alert alert-info">
                     Giỏ hàng của bạn đang trống.
                 </div>
@@ -89,7 +93,7 @@
 
             <c:set var="subtotal" value="0"/>
 
-            <c:forEach var="item" items="${sessionScope.cart}">
+            <c:forEach var="item" items="${cartItems}">
                 <div class="cart-item d-flex justify-content-between align-items-center mb-3">
 
                     <div class="d-flex align-items-center">
@@ -104,13 +108,21 @@
                     </div>
 
                     <div class="d-flex align-items-center">
-                        <input type="number"
-                               class="form-control text-center"
-                               value="${item.quantity}"
-                               min="1"
-                               style="width:70px">
 
-                        <a href="cart-remove?id=${item.productId}"
+                        <!-- update quantity -->
+                        <form action="cart-update" method="post">
+                            <input type="hidden" name="productId" value="${item.productId}">
+                            <input type="number"
+                                   name="quantity"
+                                   value="${item.quantity}"
+                                   min="1"
+                                   class="form-control text-center"
+                                   style="width:70px"
+                                   onchange="this.form.submit()">
+                        </form>
+
+                        <!-- remove -->
+                        <a href="cart-remove?productId=${item.productId}"
                            class="btn btn-outline-danger ms-2">
                             <i class="bi bi-trash"></i>
                         </a>
@@ -141,189 +153,16 @@
                     <strong class="text-danger">${subtotal}₫</strong>
                 </div>
 
-                <a href="checkout.jsp" class="btn btn-primary w-100">
-                    Thanh toán ngay
-                </a>
+                <c:if test="${not empty cartItems}">
+                    <a href="checkout.jsp" class="btn btn-primary w-100">
+                        Thanh toán ngay
+                    </a>
+                </c:if>
             </div>
         </div>
+
     </div>
 </div>
-
-<%--<div class="container">--%>
-<%--    <div class="cart-header">--%>
-<%--        <h1><i class="bi bi-cart4 me-2"></i>Giỏ Hàng Của Bạn</h1>--%>
-<%--        <p>Kiểm tra và hoàn tất thông tin đơn hàng của bạn</p>--%>
-<%--    </div>--%>
-
-<%--    <div class="row g-4">--%>
-<%--        <!-- LEFT -->--%>
-<%--        <div class="col-lg-8">--%>
-<%--            <div class="cart-item d-flex align-items-center justify-content-between">--%>
-<%--                <div class="d-flex align-items-center">--%>
-
-
-<%--                    <img src="../assets/img/Cart/4urpc.png" height="706" width="883"--%>
-<%--                         class="product-img me-3" alt="sp1"/>--%>
-<%--                    <div>--%>
-<%--                        <h6 class="product-name mb-1">4URPC sạc không dây</h6>--%>
-<%--                        <p class="product-variant text-muted small mb-1">Màu: Bản cao cấp | Đen | SKU: 12466</p>--%>
-<%--                        <span class="product-price" data-price="999000">999.000₫</span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-
-<%--                <div class="d-flex align-items-center">--%>
-<%--                    <div class="quantity-control input-group me-3">--%>
-<%--                        <button class="btn btn-outline-secondary minus">-</button>--%>
-<%--                        <input type="number" class="form-control text-center quantity" value="1" min="1">--%>
-<%--                        <button class="btn btn-outline-secondary plus">+</button>--%>
-<%--                    </div>--%>
-<%--                    <button class="btn btn-outline-danger delete-btn"><i class="bi bi-trash"></i></button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--            <div class="cart-item d-flex align-items-center justify-content-between">--%>
-<%--                <div class="d-flex align-items-center">--%>
-
-<%--                    <img src="../assets/img/Cart/ChargeStick.png" height="600" width="813"--%>
-<%--                         class="product-img me-3" alt="sp2">--%>
-
-<%--                    <div>--%>
-<%--                        <h6 class="product-name mb-1">ChargeStick</h6>--%>
-<%--                        <p class="product-variant text-muted small mb-1"> Sạc không dây | Đen | SKU: 12346</p>--%>
-<%--                        <span class="product-price" data-price="1290000">1.290.000₫</span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-
-
-<%--                <div class="d-flex align-items-center">--%>
-<%--                    <div class="quantity-control input-group me-3">--%>
-<%--                        <button class="btn btn-outline-secondary minus">-</button>--%>
-<%--                        <input type="number" class="form-control text-center quantity" value="1" min="1">--%>
-<%--                        <button class="btn btn-outline-secondary plus">+</button>--%>
-<%--                    </div>--%>
-<%--                    <button class="btn btn-outline-danger delete-btn"><i class="bi bi-trash"></i></button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <!--            //sp3-->--%>
-<%--            <div class="cart-item d-flex align-items-center justify-content-between">--%>
-<%--                <div class="d-flex align-items-center">--%>
-
-<%--                    <img src="../assets/img/Cart/dônmo.png" height="460" width="615" class="product-img me-3" alt="sp3">--%>
-
-<%--                    <div>--%>
-<%--                        <h6 class="product-name mb-1">Donomo AquaCam-Cammera thông minh</h6>--%>
-<%--                        <p class="product-variant text-muted small mb-1">Camera thông minh| Đen | SKU: 12347</p>--%>
-<%--                        <span class="product-price" data-price="2990000">3.990.000₫</span>--%>
-<%--                    </div>--%>
-
-<%--                </div>--%>
-
-<%--                <div class="d-flex align-items-center">--%>
-<%--                    <div class="quantity-control input-group me-3">--%>
-<%--                        <button class="btn btn-outline-secondary minus">-</button>--%>
-<%--                        <input type="number" class="form-control text-center quantity" value="1" min="1">--%>
-<%--                        <button class="btn btn-outline-secondary plus">+</button>--%>
-<%--                    </div>--%>
-<%--                    <button class="btn btn-outline-danger delete-btn"><i class="bi bi-trash"></i></button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--            <!--            sp4-->--%>
-<%--            <div class="cart-item d-flex align-items-center justify-content-between">--%>
-<%--                <div class="d-flex align-items-center">--%>
-
-<%--                    <img src="../assets/img/Cart/nimo.png" height="656" width="862" class="product-img me-3" alt="sp4">--%>
-<%--                    <div>--%>
-<%--                        <h6 class="product-name mb-1">Nimo – Bạn đồng hành thông minh</h6>--%>
-<%--                        <p class="product-variant text-muted small mb-1">Robot AI | Trắng | SKU: 13345</p>--%>
-<%--                        <span class="product-price" data-price="8590000">8.590.000₫</span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-
-<%--                <div class="d-flex align-items-center">--%>
-<%--                    <div class="quantity-control input-group me-3">--%>
-<%--                        <button class="btn btn-outline-secondary minus">-</button>--%>
-<%--                        <input type="number" class="form-control text-center quantity" value="1" min="1">--%>
-<%--                        <button class="btn btn-outline-secondary plus">+</button>--%>
-<%--                    </div>--%>
-<%--                    <button class="btn btn-outline-danger delete-btn"><i class="bi bi-trash"></i></button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--        </div>--%>
-
-<%--        <div class="col-lg-4">--%>
-<%--            <div class="summary-box">--%>
-<%--                <h5>Tổng kết đơn hàng</h5>--%>
-<%--                <div class="d-flex justify-content-between mb-2">--%>
-<%--                    <span>Tạm tính:</span>--%>
-<%--                    <strong id="subtotal">${subtotal}₫</strong>--%>
-<%--                </div>--%>
-<%--                <div class="d-flex justify-content-between mb-2">--%>
-<%--                    <span>Phí vận chuyển:</span>--%>
-<%--                    <span>Miễn phí</span>--%>
-<%--                </div>--%>
-<%--                <div class="d-flex justify-content-between border-top pt-2 mb-3">--%>
-<%--                    <strong>Tổng cộng:</strong>--%>
-<%--                    <strong id="total">${subtotal}₫</strong>--%>
-<%--                </div>--%>
-
-
-<%--                <div class="mb-3">--%>
-<%--                    <label class="form-label">Ghi chú đơn hàng</label>--%>
-<%--                    <textarea class="form-control mt-3" rows="2"--%>
-<%--                              placeholder="Ghi chú cho đơn hàng (VD: Giao buổi sáng)..."></textarea>--%>
-<%--                </div>--%>
-<%--                <div class="mb-3">--%>
-<%--                    <label class="form-label">Phương thức giao hàng</label>--%>
-<%--                    <select class="form-select">--%>
-<%--                        <option>Giao tiêu chuẩn (Miễn phí)</option>--%>
-<%--                        <option>Giao nhanh 2h (+30.000đ)</option>--%>
-<%--                        <option>Nhận tại cửa hàng</option>--%>
-<%--                    </select>--%>
-<%--                </div>--%>
-
-<%--                <div class="mb-3">--%>
-<%--                    <label class="form-label">Hình thức thanh toán</label>--%>
-<%--                    <select class="form-select">--%>
-<%--                        <option>Thanh toán khi nhận hàng (COD)</option>--%>
-<%--                        <option>Chuyển khoản ngân hàng</option>--%>
-<%--                        <option>Ví Momo / ZaloPay</option>--%>
-<%--                        <option>Thẻ tín dụng / Ghi nợ</option>--%>
-<%--                    </select>--%>
-<%--                </div>--%>
-
-<%--                <button class="btn-checkout">Thanh toán ngay</button>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<div class="modal fade" id="confirmDelete" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 rounded-4">
-            <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title"><i class="bi bi-exclamation-triangle me-2"></i>Xác nhận xóa</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng không?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Xóa</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="toast-container">
-    <div id="toastMsg" class="toast text-bg-success border-0">
-        <div class="d-flex">
-            <div class="toast-body">Đã xóa sản phẩm!</div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-        </div>
-    </div>
-</div>
-
 <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
     <div class="container">
         <div class="row gy-4">
