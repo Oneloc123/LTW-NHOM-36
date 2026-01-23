@@ -33,7 +33,6 @@ public class UserDao extends BaseDao {
         );
     }
 
-
     //OK
     public void insert(List<User> users) {
         get().useHandle(h -> {
@@ -66,7 +65,6 @@ public class UserDao extends BaseDao {
                         .execute()
         );
     }
-
 
     // OK
     public void updatePassword(int id, String password) {
@@ -140,6 +138,112 @@ public class UserDao extends BaseDao {
                         .orElse(null)
         );
     }
+
+    // 🔹 Tìm kiếm theo username
+    public List<User> getUserByKeyword(String keyword) {
+        return get().withHandle(h ->
+                h.createQuery(
+                                "SELECT id, username, password, email, fullName, address, phoneNumber, role, isActive, createAt, imgURL " +
+                                        "FROM users WHERE username LIKE :keyword"
+                        )
+                        .bind("keyword", "%" + keyword + "%")
+                        .mapToBean(User.class)
+                        .list()
+        );
+    }
+
+    public List<User> filterUsers(String keyword, String role, String status) {
+
+        return get().withHandle(h -> {
+
+            String sql =
+                    "SELECT id, username, password, email, fullName, address, phoneNumber, role, isActive, createAt, imgURL " +
+                            "FROM users WHERE 1=1 ";
+
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                sql += "AND (username LIKE :keyword " +
+                        "OR fullName LIKE :keyword " +
+                        "OR email LIKE :keyword) ";
+            }
+
+            if (role != null && !role.isEmpty()) {
+                sql += "AND role = :role ";
+            }
+
+            if (status != null && !status.isEmpty()) {
+                sql += "AND isActive = :status ";
+            }
+
+            var query = h.createQuery(sql);
+
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                query.bind("keyword", "%" + keyword.trim() + "%");
+            }
+
+            if (role != null && !role.isEmpty()) {
+                query.bind("role", role);
+            }
+
+            if (status != null && !status.isEmpty()) {
+                query.bind("status", Integer.parseInt(status));
+            }
+
+            return query.mapToBean(User.class).list();
+        });
+    }
+
+
+    public void deleteUserById(int id) {
+        get().useHandle(h ->
+                h.createUpdate("DELETE FROM users WHERE id = :id")
+                        .bind("id", id)
+                        .execute()
+        );
+    }
+
+    public List<User> filterUsers(String keyword, String role) {
+        return get().withHandle(h ->
+                h.createQuery(
+                                "SELECT id, username, password, email, fullName, address, phoneNumber, role, isActive, createAt, imgURL " +
+                                        "FROM users " +
+                                        "WHERE (:keyword IS NULL OR username LIKE :keyword) " +
+                                        "AND (:role IS NULL OR role = :role) "
+                        )
+                        .bind("keyword",
+                                (keyword == null || keyword.trim().isEmpty())
+                                        ? null
+                                        : "%" + keyword + "%")
+                        .bind("role",
+                                (role == null || role.trim().isEmpty())
+                                        ? null
+                                        : role)
+                        .mapToBean(User.class)
+                        .list()
+        );
+    }
+
+    public List<User> filterUsers(String keyword) {
+
+        return get().withHandle(h -> {
+
+            String sql =
+                    "SELECT id, username, password, email, fullName, address, phoneNumber, role, isActive, createAt, imgURL " +
+                            "FROM users ";
+
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                sql += "WHERE fullName LIKE :keyword";
+            }
+
+            var query = h.createQuery(sql);
+
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                query.bind("keyword", "%" + keyword + "%");
+            }
+
+            return query.mapToBean(User.class).list();
+        });
+    }
+
 
 
 }

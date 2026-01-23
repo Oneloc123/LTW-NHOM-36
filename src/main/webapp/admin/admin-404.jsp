@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -19,7 +21,7 @@
         </p>
 
         <div class="d-flex justify-content-center gap-3 mt-3">
-            <a href="admin-dashboard.html" class="btn btn-primary px-4">
+            <a href="admin-dashboard.jsp" class="btn btn-primary px-4">
                 <i class="bi bi-speedometer2 me-1"></i> Về Dashboard
             </a>
             <a href="login.html" class="btn btn-outline-secondary px-4">

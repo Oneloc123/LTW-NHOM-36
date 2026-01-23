@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -22,15 +24,15 @@
             <h2 class="logo"><i class="bi bi-cpu me-2"></i>TechX Admin</h2>
             <nav>
                 <ul>
-                    <li><a href="admin-dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-                    <li><a href="admin-products.html"><i class="bi bi-box"></i> Sản phẩm</a></li>
-                    <li><a href="admin-categories.html"><i class="bi bi-tags"></i> Danh mục</a></li>
-                    <li><a href="admin-orders.html"><i class="bi bi-cart"></i> Đơn hàng</a></li>
+                    <li><a href="admin-dashboard.jsp"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+                    <li><a href="admin-products.jsp"><i class="bi bi-box"></i> Sản phẩm</a></li>
+                    <li><a href="admin-categories.jsp"><i class="bi bi-tags"></i> Danh mục</a></li>
+                    <li><a href="admin-orders.jsp"><i class="bi bi-cart"></i> Đơn hàng</a></li>
                     <li><a href="admin-payment.html" class="active"><i class="bi bi-credit-card"></i> Thanh toán</a></li>
-                    <li><a href="admin-users.html"><i class="bi bi-people"></i> Người dùng</a></li>
-                    <li><a href="admin-blog.html"><i class="bi bi-journal-text"></i> Blog</a></li>
-                    <li><a href="admin-banners.html"><i class="bi bi-image"></i> Banner</a></li>
-                    <li><a href="admin-login.html"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a></li>
+                    <li><a href="admin-users.jsp"><i class="bi bi-people"></i> Người dùng</a></li>
+                    <li><a href="admin-blog.jsp"><i class="bi bi-journal-text"></i> Blog</a></li>
+                    <li><a href="admin-banners.jsp"><i class="bi bi-image"></i> Banner</a></li>
+                    <li><a href="admin-login.jsp"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a></li>
                 </ul>
             </nav>
         </aside>
