@@ -24,6 +24,14 @@ public class Blog {
     public Blog() {
     }
 
+    public Blog(String title, String thumbnail, String summary,
+                String content, String author) {
+        this.title = title;
+        this.thumbnail = thumbnail;
+        this.summary = summary;
+        this.content = content;
+        this.author = author;
+    }
     public int getId() {
         return id;
     }

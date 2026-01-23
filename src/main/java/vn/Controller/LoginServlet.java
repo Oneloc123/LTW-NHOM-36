@@ -36,8 +36,12 @@ public class LoginServlet extends HttpServlet {
             User user = userService.getUserByUserName(username);
             HttpSession session = request.getSession();
             session.setAttribute("id", user.getId());
-
-            response.sendRedirect(request.getContextPath() + "/home");
+            if(user.getRole().equalsIgnoreCase("admin")){
+                session.setAttribute("role", "admin");
+                response.sendRedirect("/admin/dashBoard");
+            }else{
+                response.sendRedirect(request.getContextPath() + "/home");
+            }
 
         }else{
             String message = "Tên đăng nhập hoặc mật khẩu không đúng";
