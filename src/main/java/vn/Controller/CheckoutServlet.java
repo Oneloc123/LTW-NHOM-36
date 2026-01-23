@@ -1,45 +1,49 @@
 package vn.Controller;
 
-
-import vn.model.CartItem;
-import vn.model.Order;
-import vn.model.OrderItem;
-import vn.services.OrderService;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import vn.dao.CartDao;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import java.util.List;
 
 @WebServlet("/checkout")
 public class CheckoutServlet extends HttpServlet {
 
+    private final CartDao cartDao = new CartDao();
 
-    private final OrderService orderService = new OrderService();
+    // ✅ FIX LỖI GET NOT SUPPORTED
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
+        // Hiển thị trang checkout
+        request.getRequestDispatcher("/WEB-INF/pages/checkout.jsp")
+                .forward(request, response);
+    }
+
+    // Xử lý khi nhấn nút "Thanh toán"
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("userId");
 
-        if (session == null || session.getAttribute("id") == null) {
-            response.sendRedirect("login");
+        if (userId == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
-        int userId = (int) session.getAttribute("id");
+        // Clear cart sau khi thanh toán
+        cartDao.clearCart(userId);
 
-        // CHUẨN: KHÔNG XOÁ – CHỈ ĐỔI STATUS
-        cartDao.checkout(userId);
+        request.setAttribute("message", "Thanh toán thành công!");
 
-        // Redirect thành công
-        response.sendRedirect("order-success.jsp?orderId=" + orderId);
-
+        request.getRequestDispatcher("/WEB-INF/pages/checkout-success.jsp")
+                .forward(request, response);
     }
 }

@@ -1,50 +1,51 @@
 package vn.dao;
 
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
-public class DBProperties
-{
-    private static Properties prop = new Properties();
+public class DBProperties {
 
-    static
-    {
-        try {
-            prop.load(DBProperties.class.getClassLoader().getResourceAsStream("db.properties"));
-        } catch (IOException e){
-            e.printStackTrace();
+    private static final Properties prop = new Properties();
+
+    static {
+        try (InputStream is =
+                     DBProperties.class.getClassLoader().getResourceAsStream("db.properties")) {
+
+            if (is == null) {
+                throw new RuntimeException("❌ Không tìm thấy file db.properties");
+            }
+            prop.load(is);
+
+        } catch (Exception e) {
+            throw new RuntimeException("❌ Lỗi load db.properties", e);
         }
     }
 
-    public static String host(){
-        return prop.get("db.host").toString();
+    public static String host() {
+        return prop.getProperty("db.host", "localhost");
     }
-    public static int port(){
+
+    public static int port() {
         try {
-            return Integer.parseInt(prop.get("db.port").toString());
-        }catch (NumberFormatException e){
+            return Integer.parseInt(prop.getProperty("db.port", "3306"));
+        } catch (NumberFormatException e) {
             return 3306;
         }
     }
 
-    public static String username(){
-        return prop.get("db.username").toString();
+    public static String username() {
+        return prop.getProperty("db.username", "root");
     }
 
-    public static String password(){
-        return prop.get("db.password").toString();
+    public static String password() {
+        return prop.getProperty("db.password", "");
     }
 
-    public static String dbname(){
-        return prop.get("db.name").toString();
+    public static String dbname() {
+        return prop.getProperty("db.name");
     }
 
-    public static String option(){
-        return prop.get("db.option").toString();
-    }
-
-    static void main(String[] args) {
-        System.out.println(host());
-        System.out.println(port());
+    public static String option() {
+        return prop.getProperty("db.option", "");
     }
 }

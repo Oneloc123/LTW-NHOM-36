@@ -1,37 +1,57 @@
 package vn.services;
 
+import vn.dao.CartDao;
 import vn.model.CartItem;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class CartService {
 
-    public List<CartItem> getDemoCart() {
-        List<CartItem> cart = new ArrayList<>();
+    private CartDao cartDao = new CartDao();
 
-        cart.add(new CartItem(
-                1,
-                "4URPC sạc không dây",
-                "../assets/img/Cart/4urpc.png",
-                999000,
-                1
-        ));
-
-        cart.add(new CartItem(
-                2,
-                "ChargeStick",
-                "../assets/img/Cart/ChargeStick.png",
-                1290000,
-                1
-        ));
-
-        return cart;
+    // ================== LẤY GIỎ HÀNG ==================
+    public List<CartItem> getCartByUserId(int userId) {
+        return cartDao.getCartByUserId(userId);
     }
 
-    public int getTotalPrice(List<CartItem> cart) {
+    // ================== THÊM VÀO GIỎ ==================
+    public void addToCart(int userId, int productId, int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            cartDao.addToCart(userId, productId);
+        }
+    }
+
+    // ================== CẬP NHẬT SỐ LƯỢNG ==================
+    public void updateQuantity(int userId, int productId, int quantity) {
+        cartDao.updateQuantity(userId, productId, quantity);
+    }
+
+    // ================== XOÁ 1 SẢN PHẨM ==================
+    public void removeItem(int userId, int productId) {
+        cartDao.removeItem(userId, productId);
+    }
+
+    // ================== XOÁ TOÀN BỘ GIỎ ==================
+    public void clearCart(int userId) {
+        cartDao.clearCart(userId);
+    }
+
+    // ================== TÍNH TỔNG TIỀN ==================
+    public double getTotalPrice(int userId) {
+        List<CartItem> items = cartDao.getCartByUserId(userId);
+        double total = 0;
+        for (CartItem item : items) {
+            total += item.getTotal();
+        }
+        return total;
+    }
+
+    // ================== TÍNH TỔNG SỐ LƯỢNG ==================
+    public int getTotalQuantity(int userId) {
+        List<CartItem> items = cartDao.getCartByUserId(userId);
         int total = 0;
-        for (CartItem c : cart) {
-            total += c.getTotal();
+        for (CartItem item : items) {
+            total += item.getQuantity();
         }
         return total;
     }

@@ -87,18 +87,14 @@
 
             <div class="card-footer">
 
-                <!-- Nút mua (xem chi tiết) -->
-                <button
-                        onclick="window.location.href='product?id=${p.getId()}'"
-                        class="buy-btn">
-                    Chi tiết
-                </button>
+                          <!-- Nút thêm vào giỏ hàng -->
 
-                <!-- Nút thêm vào giỏ hàng -->
-                <button
-                        class="add-cart-btn"
-                >
-                    <i class="fa fa-shopping-cart"></i>
+                          <a href="/add-to-cart?productId=${p.id}" class="btn btn-primary">
+                              Thêm vào giỏ
+                          <a/>
+
+
+
 
                 </button>
 

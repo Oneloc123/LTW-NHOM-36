@@ -8,9 +8,11 @@ import java.util.List;
 
 public class CartDao {
 
+    // ================== CONNECTION ==================
     private Connection getConnection() throws SQLException {
         String url = "jdbc:mysql://" + DBProperties.host() + ":" + DBProperties.port()
                 + "/" + DBProperties.dbname() + "?" + DBProperties.option();
+
         return DriverManager.getConnection(
                 url,
                 DBProperties.username(),
@@ -46,7 +48,7 @@ public class CartDao {
                 item.setProductId(rs.getInt("product_id"));
                 item.setName(rs.getString("name"));
                 item.setImage(rs.getString("image"));
-                item.setPrice(rs.getInt("price"));
+                item.setPrice(rs.getDouble("price")); // ✅ FIX
                 item.setQuantity(rs.getInt("quantity"));
                 list.add(item);
             }
@@ -98,15 +100,14 @@ public class CartDao {
         }
     }
 
-
-
     // ================== UPDATE QUANTITY ==================
     public void updateQuantity(int userId, int productId, int quantity) {
+
         String sql = """
-                    UPDATE cart
-                    SET quantity = ?
-                    WHERE user_id = ? AND product_id = ? AND status = 'ACTIVE'
-                """;
+            UPDATE cart
+            SET quantity = ?
+            WHERE user_id = ? AND product_id = ?
+        """;
 
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -123,10 +124,8 @@ public class CartDao {
 
     // ================== REMOVE ITEM ==================
     public void removeItem(int userId, int productId) {
-        String sql = """
-                    DELETE FROM cart
-                    WHERE user_id = ? AND product_id = ? AND status = 'ACTIVE'
-                """;
+
+        String sql = "DELETE FROM cart WHERE user_id=? AND product_id=?";
 
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -140,13 +139,10 @@ public class CartDao {
         }
     }
 
-    // ================== CHECKOUT ==================
-    public void checkout(int userId) {
-        String sql = """
-                    UPDATE cart
-                    SET status = 'CHECKED_OUT'
-                    WHERE user_id = ? AND status = 'ACTIVE'
-                """;
+    // ================== CLEAR CART ==================
+    public void clearCart(int userId) {
+
+        String sql = "DELETE FROM cart WHERE user_id=?";
 
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
