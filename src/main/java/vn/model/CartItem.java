@@ -7,7 +7,7 @@ public class CartItem implements Serializable {
     private int productId;
     private String name;
     private String image;
-    private double price;   // ✅ int → double
+    private double price;
     private int quantity;
 
     public CartItem() {
@@ -21,6 +21,7 @@ public class CartItem implements Serializable {
         this.quantity = quantity;
     }
 
+    // ===== GET / SET =====
     public int getProductId() {
         return productId;
     }
@@ -45,16 +46,14 @@ public class CartItem implements Serializable {
         this.image = image;
     }
 
-    // ===== PRICE =====
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {   // ✅ int → double
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    // ===== QUANTITY =====
     public int getQuantity() {
         return quantity;
     }
@@ -64,7 +63,7 @@ public class CartItem implements Serializable {
     }
 
     // ===== TOTAL =====
-    public double getTotal() {              // ✅ int → double
+    public double getTotal() {
         return price * quantity;
     }
 }

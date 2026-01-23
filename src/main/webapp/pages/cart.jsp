@@ -73,44 +73,37 @@
 </header>
 
 <!-- ===== CONTENT ===== -->
-<div class="container mt-4">
-
-    <div class="cart-header mb-4">
-        <h2><i class="bi bi-cart4 me-2"></i>Giỏ hàng của bạn</h2>
-        <p class="text-muted">Kiểm tra sản phẩm trước khi thanh toán</p>
+<!-- EMPTY CART -->
+<c:if test="${empty cartItems}">
+    <div class="alert alert-info">
+        Giỏ hàng của bạn đang trống.
     </div>
+</c:if>
 
-    <div class="row g-4">
+<div class="row g-4">
+    <!-- CART LIST -->
+    <div class="col-lg-8">
 
-        <!-- LEFT -->
-        <div class="col-lg-8">
+        <c:set var="subtotal" value="0"/>
 
-            <c:if test="${empty cartItems}">
-                <div class="alert alert-info">
-                    Giỏ hàng của bạn đang trống.
-                </div>
-            </c:if>
-
-            <c:set var="subtotal" value="0"/>
-
-            <c:forEach var="item" items="${cartItems}">
-                <div class="cart-item d-flex justify-content-between align-items-center mb-3">
+        <c:forEach var="item" items="${cartItems}">
+            <div class="card mb-3">
+                <div class="card-body d-flex justify-content-between align-items-center">
 
                     <div class="d-flex align-items-center">
-                        <img src="${item.image}" class="product-img me-3">
-
+                        <img src="${item.image}" width="80" class="me-3">
                         <div>
                             <h6 class="mb-1">${item.name}</h6>
-                            <p class="text-muted small mb-1">
-                                Giá: ${item.price}₫
-                            </p>
+                            <small class="text-muted">
+                                Giá: ${item.price} ₫
+                            </small>
                         </div>
                     </div>
 
                     <div class="d-flex align-items-center">
-
-                        <!-- update quantity -->
-                        <form action="cart-update" method="post">
+                        <!-- UPDATE -->
+                        <form action="${pageContext.request.contextPath}/cart-update"
+                              method="post" class="me-2">
                             <input type="hidden" name="productId" value="${item.productId}">
                             <input type="number"
                                    name="quantity"
@@ -121,48 +114,56 @@
                                    onchange="this.form.submit()">
                         </form>
 
-                        <!-- remove -->
-                        <a href="cart-remove?productId=${item.productId}"
-                           class="btn btn-outline-danger ms-2">
+                        <!-- REMOVE -->
+                        <a href="${pageContext.request.contextPath}/cart-remove?productId=${item.productId}"
+                           class="btn btn-outline-danger">
                             <i class="bi bi-trash"></i>
                         </a>
                     </div>
                 </div>
+            </div>
 
-                <c:set var="subtotal" value="${subtotal + item.total}"/>
-            </c:forEach>
-        </div>
+            <c:set var="subtotal" value="${subtotal + item.total}"/>
+        </c:forEach>
 
-        <!-- RIGHT -->
-        <div class="col-lg-4">
-            <div class="summary-box p-3 border rounded">
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
                 <h5>Tổng kết đơn hàng</h5>
 
                 <div class="d-flex justify-content-between mb-2">
                     <span>Tạm tính:</span>
-                    <strong>${subtotal}₫</strong>
+                    <strong>${subtotal} ₫</strong>
                 </div>
 
                 <div class="d-flex justify-content-between mb-2">
-                    <span>Phí vận chuyển:</span>
+                    <span>Vận chuyển:</span>
                     <span>Miễn phí</span>
                 </div>
 
-                <div class="d-flex justify-content-between border-top pt-2 mb-3">
+                <hr>
+
+                <div class="d-flex justify-content-between mb-3">
                     <strong>Tổng cộng:</strong>
-                    <strong class="text-danger">${subtotal}₫</strong>
+                    <strong class="text-danger">${subtotal} ₫</strong>
                 </div>
 
                 <c:if test="${not empty cartItems}">
-                    <a href="checkout.jsp" class="btn btn-primary w-100">
-                        Thanh toán ngay
-                    </a>
+                    <form action="${pageContext.request.contextPath}/checkout" method="post">
+                        <button type="submit" class="btn btn-primary w-100">
+                            Thanh toán
+                        </button>
+                    </form>
                 </c:if>
             </div>
         </div>
-
     </div>
 </div>
+</div>
+
 <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
     <div class="container">
         <div class="row gy-4">

@@ -9,12 +9,17 @@ import vn.dao.CartDao;
 import java.io.IOException;
 @WebServlet("/cart-remove")
 public class CartRemoveServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        int userId = (int) req.getSession().getAttribute("userId");
-        int productId = Integer.parseInt(req.getParameter("productId"));
-
-        new CartDao().removeItem(userId, productId);
-        resp.sendRedirect("cart");
-    }
+//
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+//            throws IOException {
+//
+//        int userId = (int) req.getSession().getAttribute("id");
+//        int productId = Integer.parseInt(req.getParameter("productId"));
+//
+//        new CartDao().removeItem(userId, productId);
+//
+//        resp.sendRedirect(req.getContextPath() + "/cart");
+//    }
 }
 

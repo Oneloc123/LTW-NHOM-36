@@ -9,12 +9,21 @@ import java.io.IOException;
 
 @WebServlet("/cart-update")
 public class CartUpdateServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        int userId = (int) req.getSession().getAttribute("userId");
-        int productId = Integer.parseInt(req.getParameter("productId"));
-        int quantity = Integer.parseInt(req.getParameter("quantity"));
-
-        new CartDao().updateQuantity(userId, productId, quantity);
-        resp.sendRedirect("cart");
-    }
+//    @Override
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//
+//        int productId = Integer.parseInt(request.getParameter("productId"));
+//        int quantity = Integer.parseInt(request.getParameter("quantity"));
+//
+//        HttpSession session = request.getSession();
+//        Map<Integer, CartItem> cart =
+//                CartService.getCart(session.getAttribute("cart"));
+//
+//        CartService.updateItem(cart, productId, quantity);
+//        session.setAttribute("cart", cart);
+//
+//        response.sendRedirect(request.getContextPath() + "/cart");
+//    }
 }
+
