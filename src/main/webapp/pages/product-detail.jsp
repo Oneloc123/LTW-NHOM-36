@@ -27,6 +27,7 @@
 <body>
 
   <!-- Header (kept minimal, you can reuse your site header) -->
+
   <!-- ================= Header ================= -->
 
   <main class="container product-detail-page" style="padding-top:18px">
@@ -41,43 +42,31 @@
 
         <div class="gallery">
           <!-- MAIN IMAGE -->
-          <figure class="main-image" id="mainImageWrap" aria-label="Ảnh sản phẩm chính">
-            <img id="mainImage" src="${p.img}"
-              alt="Tai nghe TechX AirBeat - màu đen">
-            <div class="zoom-hint"><i class="bi bi-arrows-fullscreen"></i> Phóng to</div>
-          </figure>
+            <figure class="main-image" id="mainImageWrap" aria-label="Ảnh sản phẩm chính">
+                <img id="mainImage" src="${p.imagesTop}" alt="${p.name}">
+                <div class="zoom-hint"><i class="bi bi-arrows-fullscreen"></i> Phóng to</div>
+            </figure>
 
-          <!-- THUMBNAILS -->
-          <div class="thumbs" id="thumbsList" role="list">
-            <button class="thumb active" data-src="https://www.gundam.my/images/sell_products/big/image_8273.jpg"
-              aria-label="Ảnh 1" role="listitem">
-              <img src="https://www.gundam.my/images/sell_products/big/image_8273.jpg" alt="thumbnail 1" />
-            </button>
-            <button class="thumb"
-              data-src="https://i.redd.it/fm-aerial-kosmos-led-succumbed-and-broke-my-no-1-100-non-mg-v0-6one2blg5bqc1.jpg?width=2877&format=pjpg&auto=webp&s=d76ff82cd5c2f76b84bb3143cdce4b727d093bfb"
-              aria-label="Ảnh 2" role="listitem">
-              <img
-                src="https://i.redd.it/fm-aerial-kosmos-led-succumbed-and-broke-my-no-1-100-non-mg-v0-6one2blg5bqc1.jpg?width=2877&format=pjpg&auto=webp&s=d76ff82cd5c2f76b84bb3143cdce4b727d093bfb"
-                alt="thumbnail 2" />
-            </button>
-            <button class="thumb" data-src="https://i.ytimg.com/vi/MFa9yULoWRc/maxresdefault.jpg" aria-label="Ảnh 3"
-              role="listitem">
-              <img src="https://i.ytimg.com/vi/MFa9yULoWRc/maxresdefault.jpg" alt="thumbnail 3" />
-            </button>
-            <button class="thumb"
-              data-src="https://cooldragonhobby.ca/cdn/shop/files/O1CN01Ekq03t1yf8smTjssJ__741596605_jpg_468x468Q75_jpg.jpg?v=1738941898&width=1445"
-              aria-label="Ảnh 4" role="listitem">
-              <img
-                src="https://cooldragonhobby.ca/cdn/shop/files/O1CN01Ekq03t1yf8smTjssJ__741596605_jpg_468x468Q75_jpg.jpg?v=1738941898&width=1445"
-                alt="thumbnail 4" />
-            </button>
-          </div>
+
+            <!-- THUMBNAILS -->
+            <div class="thumbs" id="thumbsList" role="list">
+                <c:forEach var="img" items="${p.images}" varStatus="st">
+
+                    <button class="thumb ${st.index == 0 ? 'active' : ''}"
+                            data-src="${img}"
+                            aria-label="Ảnh ${st.index + 1}">
+                        <img src="${img}" alt="thumbnail ${st.index + 1}" />
+                    </button>
+
+                </c:forEach>
+            </div>
+
         </div>
 
         <!-- META -->
         <div class="meta" style="margin-top:16px">
           <h1 id="productTitle" class="product-title">${p.name}</h1>
-          <span class="sku">Mã: <strong>TX-AB001</strong></span>
+
 
           <div class="rating-row">
             <div class="stars" aria-hidden="true">★★★★☆</div>
@@ -90,33 +79,9 @@
             <div class="badge-sale">-18%</div>
           </div>
 
-          <p class="product-desc">Tai nghe không dây TechX AirBeat: pin 30 giờ, Bluetooth 5.3, ANC chống ồn chủ động,
-            sạc nhanh Type-C. Thiết kế tối giản phù hợp người dùng năng động.</p>
+          <p class="product-desc">${p.fullDescription}</p>
 
-          <!-- Options: color & capacity -->
-          <div style="margin-top:8px">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <strong>Chọn màu</strong>
-              <span class="kv">Sản phẩm còn <span class="in-stock">còn hàng</span></span>
-            </div>
-            <div class="options" style="margin-top:8px">
-              <button class="color-swatch active" data-color="black" style="background:#0f1724"
-                aria-label="Màu Đen"></button>
-              <button class="color-swatch" data-color="white" style="background:#f5f6fa"
-                aria-label="Màu Trắng"></button>
-              <button class="color-swatch" data-color="rose" style="background:#ffb4c1" aria-label="Màu Hồng"></button>
-            </div>
 
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px">
-              <strong>Chọn bản</strong>
-              <span class="kv">Bảo hành 12 tháng</span>
-            </div>
-
-            <div class="options" style="margin-top:8px">
-              <button class="capacity-btn active" data-cap="standard">Tiêu chuẩn</button>
-              <button class="capacity-btn" data-cap="pro">Pro (Bluetooth LDAC)</button>
-            </div>
-          </div>
 
         </div> <!-- /.meta -->
 
@@ -131,14 +96,8 @@
 
             <div class="tab-content" id="tabContent">
               <div id="details" class="tab-panel" data-panel>
-                <p>AirBeat có driver 10mm, âm trường rộng, bass sâu nhưng không lấn, mid rõ giọng nói, phù hợp nghe
-                  nhạc, họp trực tuyến, chơi game nhẹ. Vật liệu chống mồ hôi, dùng được khi tập luyện.</p>
-                <ul>
-                  <li>Thời lượng pin: 30 giờ (kể cả hộp sạc)</li>
-                  <li>ANC: Có</li>
-                  <li>Kết nối: Bluetooth 5.3 (LDAC ở phiên bản Pro)</li>
-                  <li>Sạc nhanh: 10 phút -> 3 giờ</li>
-                </ul>
+
+
               </div>
 
               <div id="specs" class="tab-panel" data-panel style="display:none">

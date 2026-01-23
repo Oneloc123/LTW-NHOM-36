@@ -5,6 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import vn.dao.ProductDao;
+
 import vn.model.Product;
 import vn.services.ProductService;
 
@@ -17,11 +20,14 @@ public class ShopServlet extends HttpServlet {
 
         ProductService ps = new ProductService();
         List<Product> list = ps.getListProduct();
+        List<Product> newArrivalsList = ps.getNewArrivalsList();
         request.setAttribute("list", list);
+        request.setAttribute("newArrivalsList", newArrivalsList);
         request.setAttribute("currentPage", "shop");
         request.getRequestDispatcher("/pages/shop.jsp").forward(request,response);
-
-
     }
+
+
+
 
 }

@@ -1,16 +1,26 @@
 package vn.Controller;
 
+
+import vn.model.CartItem;
+import vn.model.Order;
+import vn.model.OrderItem;
+import vn.services.OrderService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import vn.dao.CartDao;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import java.util.List;
 
 @WebServlet("/checkout")
 public class CheckoutServlet extends HttpServlet {
 
-    private final CartDao cartDao = new CartDao();
+
+    private final OrderService orderService = new OrderService();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -28,6 +38,8 @@ public class CheckoutServlet extends HttpServlet {
         // CHUẨN: KHÔNG XOÁ – CHỈ ĐỔI STATUS
         cartDao.checkout(userId);
 
-        response.sendRedirect("order-history");
+        // Redirect thành công
+        response.sendRedirect("order-success.jsp?orderId=" + orderId);
+
     }
 }
