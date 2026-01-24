@@ -3,7 +3,6 @@ package vn.Controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.model.Product;
 import vn.services.ProductService;
 
 import java.io.IOException;

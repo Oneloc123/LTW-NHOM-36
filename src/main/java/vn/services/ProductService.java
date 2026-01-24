@@ -3,7 +3,6 @@ package vn.services;
 import vn.dao.ImageDao;
 import vn.dao.ProductDao;
 import vn.model.Image;
-import vn.model.Product;
 
 import java.util.List;
 

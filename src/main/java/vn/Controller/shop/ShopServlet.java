@@ -6,9 +6,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import vn.dao.ProductDao;
-
-import vn.model.Product;
 import vn.services.ProductService;
 
 import java.io.IOException;

@@ -6,7 +6,6 @@ import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.model.Product;
 import vn.services.ProductService;
 
 @WebServlet("/products")

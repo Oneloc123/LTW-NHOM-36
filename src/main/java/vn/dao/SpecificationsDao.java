@@ -1,6 +1,5 @@
 package vn.dao;
 
-import vn.model.Product;
 import vn.model.ProductAttribute;
 
 import java.util.List;

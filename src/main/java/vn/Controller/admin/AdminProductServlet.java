@@ -1,6 +1,5 @@
 package vn.Controller.admin;
 
-import vn.model.Product;
 import vn.model.Image;
 import vn.services.ProductService;
 import vn.services.ImageService;

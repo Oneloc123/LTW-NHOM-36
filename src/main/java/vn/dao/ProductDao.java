@@ -1,8 +1,5 @@
 package vn.dao;
 
-import vn.model.Product;
-import vn.model.User;
-
 import java.util.*;
 
 public class ProductDao extends BaseDao{
