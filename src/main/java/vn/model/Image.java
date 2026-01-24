@@ -14,6 +14,11 @@ public class Image implements Serializable {
         this.productId = productId;
     }
 
+    public Image(String url, int productId) {
+        this.url = url;
+        this.productId = productId;
+    }
+
     public Image() {}
 
     public int getId() {

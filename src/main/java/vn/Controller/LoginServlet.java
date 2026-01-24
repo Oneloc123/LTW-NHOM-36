@@ -45,12 +45,17 @@ public class LoginServlet extends HttpServlet {
             User user = userService.getUserByUserName(username);
             HttpSession session = request.getSession(true);
             session.setAttribute("id", user.getId());
+            if(user.getRole().equalsIgnoreCase("admin")){
+                session.setAttribute("role", "admin");
+                response.sendRedirect("/admin/dashBoard");
+            }else{
+                response.sendRedirect(request.getContextPath() + "/home");
+            }
 
-            response.sendRedirect(request.getContextPath() + "/home");
-        } else {
-            request.setAttribute("message", "Tên đăng nhập hoặc mật khẩu không đúng");
-            request.getRequestDispatcher("/pages/login.jsp")
-                    .forward(request, response);
+        }else{
+            String message = "Tên đăng nhập hoặc mật khẩu không đúng";
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
         }
     }
 }
