@@ -16,13 +16,12 @@ public class Product implements Serializable {
     private String createAt;
     private String updateAt;
     private List<String> images = new ArrayList<>();
-<<<<<<< HEAD
     private int stock; // THÊM DÒNG NÀY
 
-    // Constructor có stock
-    public Product(int id, String name, int categoryID, String shortDescription, String fullDescription, int price, boolean isFeatured, String createAt, String updateAt, List<String> images, int stock) {
-=======
-    // Thêm vào class Product
+    // Constructor không tham số
+    public Product() {}
+
+    // Constructor từ remote (không có stock và images)
     public Product(int id, String name, int categoryID, String shortDescription,
                    String fullDescription, int price, boolean isFeatured,
                    String createAt, String updateAt) {
@@ -37,6 +36,7 @@ public class Product implements Serializable {
         this.updateAt = updateAt;
     }
 
+    // Constructor từ remote (không có id, dates, images, stock)
     public Product(String name, int categoryID, String shortDescription,
                    String fullDescription, int price, boolean isFeatured) {
         this.name = name;
@@ -47,8 +47,10 @@ public class Product implements Serializable {
         this.isFeatured = isFeatured;
     }
 
-    public Product(int id, String name, int categoryID, String shortDescription, String fullDescription, int price, boolean isFeatured, String createAt, String updateAt, List<String> images) {
->>>>>>> 9c86a1b2e1830bfb08a8a9af20706afc94015c1c
+    // Constructor đầy đủ có stock (của bạn)
+    public Product(int id, String name, int categoryID, String shortDescription,
+                   String fullDescription, int price, boolean isFeatured,
+                   String createAt, String updateAt, List<String> images, int stock) {
         this.id = id;
         this.name = name;
         this.categoryID = categoryID;
@@ -59,11 +61,25 @@ public class Product implements Serializable {
         this.createAt = createAt;
         this.updateAt = updateAt;
         this.images = images;
-        this.stock = stock; // THÊM DÒNG NÀY
+        this.stock = stock;
     }
 
-    // Constructor không tham số
-    public Product() {}
+    // Constructor có images nhưng không có stock (nếu cần)
+    public Product(int id, String name, int categoryID, String shortDescription,
+                   String fullDescription, int price, boolean isFeatured,
+                   String createAt, String updateAt, List<String> images) {
+        this.id = id;
+        this.name = name;
+        this.categoryID = categoryID;
+        this.shortDescription = shortDescription;
+        this.fullDescription = fullDescription;
+        this.price = price;
+        this.isFeatured = isFeatured;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+        this.images = images;
+        this.stock = 0; // Mặc định stock = 0
+    }
 
     // Getter và Setter cho stock
     public int getStock() {
