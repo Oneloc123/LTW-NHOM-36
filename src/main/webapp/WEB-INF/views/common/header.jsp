@@ -57,7 +57,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link ${currentPage == 'orders' ? 'active' : ''}"
-                           href="${pageContext.request.contextPath}/orders">Đơn hàng</a>
+                           href="${pageContext.request.contextPath}/user/orders">Đơn hàng</a>
                     </li>
 
                     <!-- Dropdown -->

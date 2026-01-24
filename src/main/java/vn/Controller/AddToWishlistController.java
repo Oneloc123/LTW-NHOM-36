@@ -25,6 +25,7 @@ public class AddToWishlistController extends HttpServlet {
 
         // Kiểm tra đăng nhập
         if (userId == null) {
+            session.setAttribute("redirectAfterLogin", request.getHeader("Referer"));
             session.setAttribute("message", "Vui lòng đăng nhập để thêm vào wishlist!");
             response.sendRedirect(request.getContextPath() + "/login");
             return;
