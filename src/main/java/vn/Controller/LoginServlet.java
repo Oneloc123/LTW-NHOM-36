@@ -44,7 +44,9 @@ public class LoginServlet extends HttpServlet {
         if (check) {
             User user = userService.getUserByUserName(username);
             HttpSession session = request.getSession(true);
+            session.setAttribute("user", user);
             session.setAttribute("id", user.getId());
+
 
             response.sendRedirect(request.getContextPath() + "/home");
         } else {
