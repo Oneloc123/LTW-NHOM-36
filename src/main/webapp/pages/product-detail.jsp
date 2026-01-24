@@ -27,6 +27,7 @@
 <body>
 
 <!-- Header (kept minimal, you can reuse your site header) -->
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <!-- ================= Header ================= -->
 
@@ -47,9 +48,6 @@
                     <div class="zoom-hint"><i class="bi bi-arrows-fullscreen"></i> Phóng to</div>
                 </figure>
 
-<body>
-<!-- Header -->
-<%@ include file="../WEB-INF/views/common/header.jsp" %>
 
                 <!-- THUMBNAILS -->
                 <div class="thumbs" id="thumbsList" role="list">
@@ -73,7 +71,7 @@
 
                 <div class="rating-row">
                     <div class="stars" aria-hidden="true">★★★★☆</div>
-                    <div class="review-count">(125 đánh giá)</div>
+                    <div class="review-count">${p.ratingCount}</div>
                 </div>
 
                 <div class="price-row">
@@ -202,33 +200,28 @@
                 <%--                    có--%>
                 <%--                    sẵn--%>
                 <%--                </div>--%>
+
             </div>
-
-
-            <div >
-
-
+            <div>
                 <button id="buyNow" class="btn-buy" aria-label="Mua ngay">
                     <i class="bi bi-bag-check me-1"></i> Mua ngay
                 </button>
 
                 <!-- FORM ADD TO CART (CHỈ THÊM, KHÔNG ẢNH HƯỞNG GIAO DIỆN) -->
 
+
                 <form id="addCartForm"
-                      action="${pageContext.request.contextPath}/add-to-cart"
-                      method="post"
-                      style="margin-top:8px"
-                      class="btn-cart">
+                      action="${pageContext.request.contextPath}/add-cart"
+                      method="get"
+                      style="margin-top: 10px">
 
-
-                    <input type="hidden" name="productId" value="${p.id}">
-                    <input type="hidden" name="quantity" id="cartQty">
+                    <input type="hidden" name="id" value="${p.id}">
+                    <input type="hidden" name="q" id="qtyHidden" value="1">
 
                     <button type="submit" class="btn-cart">
                         <i class="bi bi-cart-plus me-1"></i> Thêm vào giỏ
                     </button>
                 </form>
-
             </div>
 
 
@@ -237,18 +230,13 @@
             </div>
         </aside>
 
-            <div style="margin-top:12px; font-size:13px; color:var(--muted)">
-                <i class="bi bi-shield-check me-1"></i> 12 tháng bảo hành • Hỗ trợ 24/7
-            </div>
-        </aside>
     </section>
 
-    <!-- Toast Notification -->
+    <!-- Toast for feedback -->
     <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">
         <i class="bi bi-check-circle-fill" style="font-size:20px"></i>
         <div id="toastText" style="font-weight:700">Đã thêm vào giỏ hàng</div>
     </div>
-</main>
 
 </main>
 
@@ -259,235 +247,134 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    AOS.init({once: true, duration: 700});
+    document.addEventListener("DOMContentLoaded", function () {
 
-    // ---------- Gallery logic ----------
-    (function () {
-        const main = document.getElementById('mainImage');
-        const thumbs = Array.from(document.querySelectorAll('.thumb'));
-        thumbs.forEach(t => {
-            t.addEventListener('click', () => {
-                thumbs.forEach(x => x.classList.remove('active'));
-                t.classList.add('active');
-                const src = t.dataset.src;
-                // fade out-in
-                main.style.filter = 'brightness(.85) blur(0.5px)';
-                setTimeout(() => {
-                    main.src = src;
-                    main.alt = 'Ảnh sản phẩm';
-                    main.style.filter = 'none';
-                }, 160);
+        /* ================= AOS ================= */
+        if (window.AOS) {
+            AOS.init({once: true, duration: 700});
+        }
+
+        /* ================= GALLERY ================= */
+        const mainImage = document.getElementById("mainImage");
+        const thumbs = document.querySelectorAll(".thumb");
+
+        if (mainImage && thumbs.length) {
+            let currentIndex = 0;
+
+            thumbs.forEach((thumb, index) => {
+                thumb.addEventListener("click", () => {
+                    thumbs.forEach(t => t.classList.remove("active"));
+                    thumb.classList.add("active");
+
+                    const src = thumb.dataset.src;
+                    if (src) {
+                        mainImage.style.filter = "brightness(.85)";
+                        setTimeout(() => {
+                            mainImage.src = src;
+                            mainImage.style.filter = "none";
+                        }, 150);
+                    }
+                    currentIndex = index;
+                });
             });
-        });
 
-        // simple keyboard left/right for thumbs
-        let current = 0;
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-                if (e.key === 'ArrowRight') current = Math.min(current + 1, thumbs.length - 1);
-                else current = Math.max(current - 1, 0);
-                thumbs[current].click();
-            }
-        });
-    })();
-
-    // ---------- Color & capacity UI ----------
-    (function () {
-        document.querySelectorAll('.color-swatch').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.color-swatch').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                // small visual: change main image to correspond color if available
-                const color = btn.dataset.color;
-                const main = document.getElementById('mainImage');
-                if (color === 'white') main.src = '/assets/img/product-sample-2.jpg';
-                else if (color === 'rose') main.src = '/assets/img/product-sample-3.jpg';
-                else main.src = '/assets/img/product-sample.jpg';
-            });
-        });
-
-        document.querySelectorAll('.capacity-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.capacity-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                // change price for 'pro' variant
-                const sidePrice = document.getElementById('sidePrice');
-                const price = document.getElementById('price');
-                if (btn.dataset.cap === 'pro') {
-                    sidePrice.textContent = '1.199.000₫';
-                    price.textContent = '1.199.000₫';
-                    document.querySelector('.badge-sale').textContent = '-8%';
-                } else {
-                    sidePrice.textContent = '899.000₫';
-                    price.textContent = '899.000₫';
-                    document.querySelector('.badge-sale').textContent = '-18%';
+            document.addEventListener("keydown", e => {
+                if (e.key === "ArrowRight") {
+                    currentIndex = Math.min(currentIndex + 1, thumbs.length - 1);
+                    thumbs[currentIndex].click();
+                }
+                if (e.key === "ArrowLeft") {
+                    currentIndex = Math.max(currentIndex - 1, 0);
+                    thumbs[currentIndex].click();
                 }
             });
-        });
-    })();
-
-    // ---------- Quantity control & stock ----------
-    (function () {
-        const decr = document.getElementById('decr');
-        const incr = document.getElementById('incr');
-        const input = document.getElementById('qtyInput');
-        const stockCount = document.getElementById('stockCount');
-        let stock = parseInt(stockCount.textContent) || 50;
-
-        function setQty(v) {
-            v = Math.max(1, Math.min(stock, Number(v) || 1));
-            input.value = v;
         }
 
-        decr.addEventListener('click', () => setQty(Number(input.value) - 1));
-        incr.addEventListener('click', () => setQty(Number(input.value) + 1));
-        input.addEventListener('change', () => setQty(input.value));
-    })();
+        /* ================= TABS ================= */
+        const tabButtons = document.querySelectorAll(".tab-controls button");
+        const tabPanels = document.querySelectorAll("[data-panel]");
 
-    // ---------- Add to cart & toast ----------
-    // ---------- Add to cart & toast (REAL BACKEND) ----------
-    (function () {
-        const toast = document.getElementById('toast');
-        const toastText = document.getElementById('toastText');
-        const addCartForm = document.getElementById('addCartForm');
-        const buyNow = document.getElementById('buyNow');
-
-        function showToast(msg) {
-            toastText.textContent = msg;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2200);
-        }
-
-        // ADD TO CART → GỌI SERVLET
-        addCartForm.addEventListener('submit', function (e) {
-            e.preventDefault(); // KHÔNG reload trang
-
-            const qty = document.getElementById('qtyInput').value;
-            document.getElementById('cartQty').value = qty;
-
-            fetch(addCartForm.action, {
-                method: 'POST',
-                body: new FormData(addCartForm)
-            }).then(() => {
-                showToast('🛒 Đã thêm ' + qty + ' sản phẩm vào giỏ');
-            });
-        });
-
-        buyNow.addEventListener('click', () => {
-            const qty = document.getElementById('qtyInput').value;
-            showToast('✅ Mua ngay: ' + qty + ' sản phẩm');
-            setTimeout(() => {
-                window.location.href = '${pageContext.request.contextPath}/cart';
-            }, 900);
-        });
-    })();
-
-
-    // ---------- Tabs logic ----------
-    (function () {
-        const tabButtons = document.querySelectorAll('.tab-controls button');
-        const panels = document.querySelectorAll('[data-panel]');
         tabButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                tabButtons.forEach(b => b.classList.remove('active'));
-                panels.forEach(p => p.style.display = 'none');
-                btn.classList.add('active');
+            btn.addEventListener("click", () => {
+                tabButtons.forEach(b => b.classList.remove("active"));
+                tabPanels.forEach(p => p.style.display = "none");
+
+                btn.classList.add("active");
                 const panel = document.getElementById(btn.dataset.tab);
-                if (panel) panel.style.display = 'block';
-                // scroll into view on small devices
-                if (window.innerWidth < 800) panel.scrollIntoView({behavior: 'smooth', block: 'center'});
+                if (panel) panel.style.display = "block";
             });
         });
-    })();
 
-    // ---------- Write review demo ----------
-    (function () {
-        const writeBtn = document.getElementById('writeReviewBtn');
-        writeBtn.addEventListener('click', () => {
-            const name = prompt('Tên của bạn');
-            const text = prompt('Đánh giá (tối đa 300 ký tự)');
-            if (name && text) {
-                alert('Cảm ơn ' + name + '! (Demo: đánh giá sẽ được ghi lại trên server thực tế)');
-            }
-        });
-    })();
+        /* ================= QUANTITY ================= */
+        const qtyInput = document.getElementById("qtyInput");
+        const qtyHidden = document.getElementById("qtyHidden");
+        const decr = document.getElementById("decr");
+        const incr = document.getElementById("incr");
 
-    // Accessibility: thumbs keyboard focus
-    (function () {
-        const thumbs = document.querySelectorAll('.thumb');
-        thumbs.forEach((t, i) => {
-            t.tabIndex = 0;
-            t.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') t.click();
-                if (e.key === 'ArrowRight') thumbs[Math.min(i + 1, thumbs.length - 1)].focus();
-                if (e.key === 'ArrowLeft') thumbs[Math.max(i - 1, 0)].focus();
+        function syncQty(val) {
+            val = parseInt(val);
+            if (isNaN(val) || val < 1) val = 1;
+            qtyInput.value = val;
+            qtyHidden.value = val;
+        }
+
+        if (qtyInput && qtyHidden && decr && incr) {
+            decr.addEventListener("click", e => {
+                e.preventDefault();
+                syncQty(qtyInput.value - 1);
             });
-        });
-    })();
-        (function () {
 
-        const qtyInput = document.getElementById('qtyInput');
-        const decr = document.getElementById('decr');
-        const incr = document.getElementById('incr');
+            incr.addEventListener("click", e => {
+                e.preventDefault();
+                syncQty(+qtyInput.value + 1);
+            });
 
-        const addCartForm = document.getElementById('addCartForm');
-        const cartQty = document.getElementById('cartQty');
-        const buyNow = document.getElementById('buyNow');
+            qtyInput.addEventListener("input", () => {
+                syncQty(qtyInput.value);
+            });
+        }
 
-        const toast = document.getElementById('toast');
-        const toastText = document.getElementById('toastText');
 
-        function showToast(msg) {
-        toastText.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2000);
-    }
+        /* ================= TOAST ================= */
+        const toast = document.getElementById("toast");
+        const toastText = document.getElementById("toastText");
 
-        /* ====== QUANTITY +/- ====== */
-        function setQty(val) {
-        val = Math.max(1, parseInt(val) || 1);
-        qtyInput.value = val;
-    }
+        function showToast(message) {
+            if (!toast || !toastText) return;
+            toastText.textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 2200);
+        }
 
-        decr.addEventListener('click', () => setQty(qtyInput.value - 1));
-        incr.addEventListener('click', () => setQty(+qtyInput.value + 1));
-        qtyInput.addEventListener('change', () => setQty(qtyInput.value));
+        /* ================= ADD TO CART ================= */
+        const addCartForm = document.getElementById("addCartForm");
+        const cartQty = document.getElementById("cartQty");
 
-        /* ====== ADD TO CART (AJAX) ====== */
-        addCartForm.addEventListener('submit', function (e) {
-        e.preventDefault();
+        if (addCartForm) {
+            addCartForm.addEventListener("submit", function () {
+                showToast(`🛒 Đã thêm ${qtyHidden.value} sản phẩm vào giỏ`);
+            });
+        }
 
-        cartQty.value = qtyInput.value;
 
-        fetch(addCartForm.action, {
-        method: 'POST',
-        body: new FormData(addCartForm)
-    })
-        .then(res => {
-        if (!res.ok) throw new Error();
-        showToast(`🛒 Đã thêm ${cartQty.value} sản phẩm vào giỏ`);
-    })
-        .catch(() => {
-        showToast('❌ Thêm giỏ hàng thất bại');
+        /* ================= BUY NOW ================= */
+        const buyNow = document.getElementById("buyNow");
+
+        if (buyNow && addCartForm) {
+            buyNow.addEventListener("click", () => {
+                qtyHidden.value = qtyInput.value;
+                addCartForm.submit();
+
+                setTimeout(() => {
+                    window.location.href = "${pageContext.request.contextPath}/cart";
+                }, 200);
+            });
+        }
+
+
     });
-    });
-
-        /* ====== BUY NOW ====== */
-        buyNow.addEventListener('click', () => {
-        cartQty.value = qtyInput.value;
-
-        fetch(addCartForm.action, {
-        method: 'POST',
-        body: new FormData(addCartForm)
-    }).then(() => {
-        window.location.href = '${pageContext.request.contextPath}/cart';
-    });
-    });
-
-    })();
-
-
 </script>
 
 </body>
+
 </html>

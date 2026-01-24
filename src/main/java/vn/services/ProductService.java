@@ -22,7 +22,7 @@ public class ProductService {
         return productDao.getAllProducts();
     }
     public Product getProductById(int id) {
-        return productDao.getProductById(id);
+        return productDao.findById(id);
     }
     public boolean addProduct(Product product) {
         boolean success = productDao.addProduct(product);

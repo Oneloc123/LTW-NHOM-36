@@ -34,8 +34,9 @@ public class ProductController extends HttpServlet {
             response.sendRedirect("products");
             return;
         }
-        request.setAttribute("p", p);
+        request.setAttribute("p", p );
         request.setAttribute("reviews", reviews);
+        request.setAttribute("currentPage", "products");
 
         request.getRequestDispatcher("/pages/product-detail.jsp").forward(request,response);
     }
