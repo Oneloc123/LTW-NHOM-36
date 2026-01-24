@@ -12,6 +12,8 @@ src/main/resources/config.properties
 *.iws
 *.iml
 *.ipr
+/out/
+**/*.class
 
 ### Eclipse ###
 .apt_generated
