@@ -9,8 +9,16 @@ public class Review {
     private int rating;
     private String comment;
     private LocalDateTime createdAt;
+    private String userName;
 
-    // getter & setter
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+// getter & setter
 
     public LocalDateTime getCreatedAt() {
         return createdAt;

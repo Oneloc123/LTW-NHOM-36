@@ -74,7 +74,9 @@
                 </div>
 
                 <div class="price-row">
-                    <div class="current-price" id="price">${p.price}</div>
+                    <div class="current-price">
+                        ${String.format("%,d", p.price)} đ
+                    </div>
                 </div>
 
                 <p class="product-desc">${p.fullDescription}</p>
@@ -100,19 +102,20 @@
 
                         <div id="reviews" class="tab-panel" data-panel style="display:none">
                             <div class="reviews">
-<%--                                <div class="review">--%>
-<%--                                    <div class="meta">--%>
-<%--                                        <div class="name">Hùng</div>--%>
-<%--                                        <div class="date">2 tuần trước</div>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="text">Âm bass ấm, đeo êm, ANC tạm ổn với tầm giá. Giao hàng nhanh.</div>--%>
-<%--                                </div>--%>
+                                <%--                                <div class="review">--%>
+                                <%--                                    <div class="meta">--%>
+                                <%--                                        <div class="name">Hùng</div>--%>
+                                <%--                                        <div class="date">2 tuần trước</div>--%>
+                                <%--                                    </div>--%>
+                                <%--                                    <div class="text">Âm bass ấm, đeo êm, ANC tạm ổn với tầm giá. Giao hàng nhanh.</div>--%>
+                                <%--                                </div>--%>
                                 <c:if test="${empty reviews}">
                                     <p>Chưa có đánh giá nào</p>
                                 </c:if>
                                 <c:forEach var="r" items="${reviews}">
                                     <div class="review">
-                                        <strong>${r.rating}★</strong>
+                                        <strong>${r.userName}</strong>
+                                        <span> – ${r.rating}★</span>
                                         <p>${r.comment}</p>
                                         <small>${r.createdAt}</small>
                                     </div>
@@ -150,7 +153,7 @@
                         <div style="font-size:36px; font-weight:800; color:#07122a">${p.avgRating}</div>
                         <div>
                             <div class="stars">★★★★☆</div>
-                            <div class="kv">${p.ratingCount} đánh giá </div>
+                            <div class="kv">${p.ratingCount} đánh giá</div>
                         </div>
                     </div>
 
@@ -179,8 +182,9 @@
             <div>
                 <div class="kv">Giá</div>
                 <div style="display:flex; align-items:center; justify-content:space-between; margin-top:6px">
-                    <div class="current-price" id="sidePrice">899.000₫</div>
-                    <div class="old-price">1.099.000₫</div>
+                    <div class="current-price" id="sidePrice">
+                        ${String.format("%,d", p.price)} đ
+                    </div>
                 </div>
             </div>
 
@@ -191,34 +195,28 @@
                     <input id="qtyInput" type="number" min="1" value="1" aria-label="Số lượng sản phẩm"/>
                     <button id="incr" class="qty-btn" aria-label="Tăng">+</button>
                 </div>
-                <div style="margin-top:8px; font-size:13px; color:var(--muted)"><span id="stockCount">50</span> sản phẩm
-                    có
-                    sẵn
-                </div>
+                <%--                <div style="margin-top:8px; font-size:13px; color:var(--muted)"><span id="stockCount">50</span> sản phẩm--%>
+                <%--                    có--%>
+                <%--                    sẵn--%>
+                <%--                </div>--%>
             </div>
-            <div>
+
+
+            <div >
+
+
                 <button id="buyNow" class="btn-buy" aria-label="Mua ngay">
                     <i class="bi bi-bag-check me-1"></i> Mua ngay
                 </button>
 
                 <!-- FORM ADD TO CART (CHỈ THÊM, KHÔNG ẢNH HƯỞNG GIAO DIỆN) -->
-                <form id="addCartForm"
-                      action="${pageContext.request.contextPath}/cart"
-                      method="post"
-                      style="margin-top:8px">
 
-                    <input type="hidden" name="action" value="add">
-                    <input type="hidden" name="productId" value="${p.id}">
-                    <input type="hidden" name="quantity" id="cartQty">
-
-                    <button type="submit" id="addCart" class="btn-cart">
-                        <i class="bi bi-cart-plus me-1"></i> Thêm vào giỏ
-                    </button>
-                </form>
                 <form id="addCartForm"
                       action="${pageContext.request.contextPath}/add-to-cart"
                       method="post"
-                      style="margin-top:8px">
+                      style="margin-top:8px"
+                      class="btn-cart">
+
 
                     <input type="hidden" name="productId" value="${p.id}">
                     <input type="hidden" name="quantity" id="cartQty">
@@ -418,6 +416,68 @@
             });
         });
     })();
+        (function () {
+
+        const qtyInput = document.getElementById('qtyInput');
+        const decr = document.getElementById('decr');
+        const incr = document.getElementById('incr');
+
+        const addCartForm = document.getElementById('addCartForm');
+        const cartQty = document.getElementById('cartQty');
+        const buyNow = document.getElementById('buyNow');
+
+        const toast = document.getElementById('toast');
+        const toastText = document.getElementById('toastText');
+
+        function showToast(msg) {
+        toastText.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+        /* ====== QUANTITY +/- ====== */
+        function setQty(val) {
+        val = Math.max(1, parseInt(val) || 1);
+        qtyInput.value = val;
+    }
+
+        decr.addEventListener('click', () => setQty(qtyInput.value - 1));
+        incr.addEventListener('click', () => setQty(+qtyInput.value + 1));
+        qtyInput.addEventListener('change', () => setQty(qtyInput.value));
+
+        /* ====== ADD TO CART (AJAX) ====== */
+        addCartForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        cartQty.value = qtyInput.value;
+
+        fetch(addCartForm.action, {
+        method: 'POST',
+        body: new FormData(addCartForm)
+    })
+        .then(res => {
+        if (!res.ok) throw new Error();
+        showToast(`🛒 Đã thêm ${cartQty.value} sản phẩm vào giỏ`);
+    })
+        .catch(() => {
+        showToast('❌ Thêm giỏ hàng thất bại');
+    });
+    });
+
+        /* ====== BUY NOW ====== */
+        buyNow.addEventListener('click', () => {
+        cartQty.value = qtyInput.value;
+
+        fetch(addCartForm.action, {
+        method: 'POST',
+        body: new FormData(addCartForm)
+    }).then(() => {
+        window.location.href = '${pageContext.request.contextPath}/cart';
+    });
+    });
+
+    })();
+
 
 </script>
 

@@ -41,14 +41,24 @@ public class ReviewDao extends BaseDao {
     // Lấy danh sách review theo product
     public List<Review> findByProductId(int productId) {
         return get().withHandle(h ->
-                h.createQuery(
-                                "SELECT id, user_id AS userId, product_id AS productId, rating, comment, created_at AS createdAt " +
-                                        "FROM reviews WHERE product_id = :productId ORDER BY created_at DESC"
-                        )
+                h.createQuery("""
+            SELECT r.id,
+                   r.user_id        AS userId,
+                   r.product_id     AS productId,
+                   r.rating,
+                   r.comment,
+                   r.created_at     AS createdAt,
+                   u.fullName       AS userName
+            FROM reviews r
+            JOIN users u ON r.user_id = u.id
+            WHERE r.product_id = :productId
+            ORDER BY r.created_at DESC
+        """)
                         .bind("productId", productId)
                         .mapToBean(Review.class)
                         .list()
         );
     }
+
 
 }
