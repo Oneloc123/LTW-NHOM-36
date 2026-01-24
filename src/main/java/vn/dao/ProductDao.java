@@ -12,21 +12,28 @@ public class ProductDao extends BaseDao {
         return get().withHandle(h -> {
 
             String sql = """
-                        SELECT p.id, p.name, p.category_id, p.short_description, p.full_description,
-                               p.price, p.is_featured, p.created_at, p.updated_at,
+                        SELECT p.id,
+                               p.name,
+                               p.category_id,
+                               p.short_description,
+                               p.full_description,
+                               p.price,
+                               p.is_featured,
+                               p.created_at,
+                               p.updated_at,
+                               p.avg_rating,
+                               p.rating_count,
                                pi.url AS image_url
                         FROM products p
                         LEFT JOIN product_images pi ON p.id = pi.product_id
                         ORDER BY p.id
                     """;
 
-            // Map để gom sản phẩm theo id
             Map<Integer, Product> map = new LinkedHashMap<>();
 
             h.createQuery(sql).map((rs, ctx) -> {
                 int productId = rs.getInt("id");
 
-                // nếu chưa có product thì tạo mới
                 Product p = map.get(productId);
                 if (p == null) {
                     p = new Product();
@@ -40,22 +47,26 @@ public class ProductDao extends BaseDao {
                     p.setCreateAt(rs.getTimestamp("created_at").toString());
                     p.setUpdateAt(rs.getTimestamp("updated_at").toString());
 
-                    p.setImages(new ArrayList<>()); // list ảnh rỗng
+                    // ⭐ THÊM RATE
+                    p.setAvgRating(rs.getFloat("avg_rating"));
+                    p.setRatingCount(rs.getInt("rating_count"));
+
+                    p.setImages(new ArrayList<>());
                     map.put(productId, p);
                 }
 
-                // add ảnh nếu có
                 String imageUrl = rs.getString("image_url");
                 if (imageUrl != null) {
                     p.getImages().add(imageUrl);
                 }
 
-                return null; // vì mình chỉ dùng để fill map
+                return null;
             }).list();
 
             return new ArrayList<>(map.values());
         });
     }
+
 
     public List<Product> getAllProducts() {
         return get().withHandle(h ->
@@ -339,6 +350,7 @@ public class ProductDao extends BaseDao {
                         .list()
         );
     }
+
     public void updateRating(int productId, int rating) {
         get().useHandle(h ->
                 h.createUpdate(
@@ -352,6 +364,118 @@ public class ProductDao extends BaseDao {
                         .execute()
         );
     }
+
+    public List<Product> filterAjax(
+            String keyword,
+            Integer categoryId,
+            Integer minPrice,
+            Integer maxPrice,
+            String sort
+    ) {
+        return get().withHandle(h -> {
+
+            StringBuilder sql = new StringBuilder("""
+                        SELECT DISTINCT
+                               p.id,
+                               p.name,
+                               p.category_id AS categoryID,
+                               p.short_description AS shortDescription,
+                               p.full_description AS fullDescription,
+                               p.price,
+                               p.is_featured AS featured,
+                               p.created_at AS createAt,
+                               p.updated_at AS updateAt,
+                               p.avg_rating AS avgRating,
+                               p.rating_count AS ratingCount,
+                               pi.url AS image_url
+                        FROM products p
+                        LEFT JOIN product_images pi ON p.id = pi.product_id
+                        WHERE 1=1
+                    """);
+
+
+            if (keyword != null && !keyword.isBlank()) {
+                sql.append("""
+                            AND (p.name LIKE :kw
+                                 OR p.short_description LIKE :kw
+                                 OR p.full_description LIKE :kw)
+                        """);
+            }
+
+            if (categoryId != null) {
+                sql.append(" AND p.category_id = :categoryId ");
+            }
+
+            if (minPrice != null) {
+                sql.append(" AND p.price >= :minPrice ");
+            }
+
+            if (maxPrice != null) {
+                sql.append(" AND p.price <= :maxPrice ");
+            }
+
+            sql.append(" GROUP BY p.id ");
+
+            if ("asc".equals(sort)) {
+                sql.append(" ORDER BY p.price ASC ");
+            } else if ("desc".equals(sort)) {
+                sql.append(" ORDER BY p.price DESC ");
+            } else if ("new".equals(sort)) {
+                sql.append(" ORDER BY p.created_at DESC ");
+            } else {
+                sql.append(" ORDER BY p.id DESC ");
+            }
+
+
+            var query = h.createQuery(sql.toString());
+
+            if (keyword != null && !keyword.isBlank()) {
+                query.bind("kw", "%" + keyword.trim() + "%");
+            }
+            if (categoryId != null) {
+                query.bind("categoryId", categoryId);
+            }
+            if (minPrice != null) {
+                query.bind("minPrice", minPrice);
+            }
+            if (maxPrice != null) {
+                query.bind("maxPrice", maxPrice);
+            }
+
+            Map<Integer, Product> map = new LinkedHashMap<>();
+
+            query.map((rs, ctx) -> {
+                int id = rs.getInt("id");
+                Product p = map.get(id);
+
+                if (p == null) {
+                    p = new Product();
+                    p.setId(id);
+                    p.setName(rs.getString("name"));
+                    p.setCategoryID(rs.getInt("categoryID"));
+                    p.setShortDescription(rs.getString("shortDescription"));
+                    p.setFullDescription(rs.getString("fullDescription"));
+                    p.setPrice(rs.getInt("price"));
+                    p.setFeatured(rs.getBoolean("featured"));
+                    p.setAvgRating(rs.getDouble("avgRating"));
+                    p.setRatingCount(rs.getInt("ratingCount"));
+                    p.setCreateAt(rs.getTimestamp("createAt").toString());
+                    p.setUpdateAt(rs.getTimestamp("updateAt").toString());
+                    p.setImages(new ArrayList<>());
+                    map.put(id, p);
+                }
+
+                String img = rs.getString("image_url");
+                if (img != null) p.getImages().add(img);
+
+                return null;
+            }).list();
+
+            return new ArrayList<>(map.values());
+        });
+    }
+
+
 }
 
 
