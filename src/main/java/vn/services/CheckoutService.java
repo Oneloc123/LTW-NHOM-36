@@ -1,7 +1,6 @@
 package vn.services;
 
 import jakarta.servlet.http.HttpSession;
-import vn.model.CartItem;
 
 import java.util.List;
 
