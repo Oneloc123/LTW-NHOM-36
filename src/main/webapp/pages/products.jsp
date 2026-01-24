@@ -65,47 +65,52 @@
     <!-- PRODUCT GRID -->
     <section class="product-grid" id="productGrid">
         <c:forEach var="p" items="${list}">
-        <div class="product-card">
-            <img src="${p.imagesTop}" alt="${p.name}">
+            <div class="product-card">
+                <img src="${p.imagesTop}" alt="${p.name}">
 
-            <h3>${p.name}</h3>
+                <h3>${p.name}</h3>
 
-            <div class="product-rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <span>4.5 (12)</span>
-            </div>
+                <div class="product-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <span>4.5 (12)</span>
+                </div>
 
-            <div class="product-price">${p.getPrice()}</div>
+                <div class="product-price">${p.getPrice()}</div>
 
-            <p class="product-discount">
-                Giá gốc <span class="product-old-price">7.139.000 VND</span>
-            </p>
+                <p class="product-discount">
+                    Giá gốc <span class="product-old-price">7.139.000 VND</span>
+                </p>
 
-            <div class="card-footer">
+                <div class="card-footer">
+                    <!-- Nút mua (xem chi tiết) -->
+                    <button
+                            onclick="window.location.href='product?id=${p.getId()}'"
+                            class="buy-btn">
+                        Chi tiết
+                    </button>
 
-                          <!-- Nút thêm vào giỏ hàng -->
+                    <!-- Nút thêm vào giỏ hàng -->
+                    <button
+                            class="add-cart-btn"
+                            onclick="window.location.href='add-to-cart?productId=${p.id}'"
+                    >
+                        <i class="fa fa-shopping-cart"></i>
 
-                          <a href="/add-to-cart?productId=${p.id}" class="btn btn-primary">
-                              Thêm vào giỏ
-                          <a/>
+                    </button>
+
+                    <!-- Nút yêu thích -->
+                    <button
+                            class="wishlist-btn"
+                    >
+                        <i class="fa fa-heart-o"></i>
+                    </button>
 
 
-
-
-                </button>
-
-                <!-- Nút yêu thích -->
-                <button
-                        class="wishlist-btn"
-                >
-                    <i class="fa fa-heart-o"></i>
-                </button>
-
-            </div>
+                </div>
 
             </div>
         </c:forEach>
