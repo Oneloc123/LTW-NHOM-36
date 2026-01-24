@@ -96,9 +96,13 @@
 
                     <div class="tab-content" id="tabContent">
                         <div id="details" class="tab-panel" data-panel>
+                            <p>${p.fullDescription}</p>
                         </div>
 
                         <div id="specs" class="tab-panel" data-panel style="display:none">
+
+                            <%--                            Chỗ này thêm Thông Số--%>
+                            <%--                            <p>${p.}</p>--%>
                         </div>
 
                         <div id="reviews" class="tab-panel" data-panel style="display:none">
@@ -203,25 +207,32 @@
 
             </div>
             <div>
-                <button id="buyNow" class="btn-buy" aria-label="Mua ngay">
+
+                <button id="buyNow" type="button" class="btn-buy">
                     <i class="bi bi-bag-check me-1"></i> Mua ngay
                 </button>
+
+
 
                 <!-- FORM ADD TO CART (CHỈ THÊM, KHÔNG ẢNH HƯỞNG GIAO DIỆN) -->
 
 
                 <form id="addCartForm"
                       action="${pageContext.request.contextPath}/add-cart"
-                      method="get"
+                      method="post"
                       style="margin-top: 10px">
 
                     <input type="hidden" name="id" value="${p.id}">
                     <input type="hidden" name="q" id="qtyHidden" value="1">
 
+                    <!-- 🔥 PHẢI NẰM TRONG FORM -->
+                    <input type="hidden" name="buyNow" id="buyNowFlag" value="false">
+
                     <button type="submit" class="btn-cart">
                         <i class="bi bi-cart-plus me-1"></i> Thêm vào giỏ
                     </button>
                 </form>
+
                 <c:if test="${not empty sessionScope.id}">
                     <form action="${pageContext.request.contextPath}/wishlist" method="post" class="d-inline">
                         <input type="hidden" name="action" value="add">
@@ -239,13 +250,13 @@
                         <i class="bi bi-heart"></i> Yêu thích
                     </a>
                 </c:if>
-<%--                <!-- Test Link -->--%>
-<%--                <div class="mt-3 text-center">--%>
-<%--                    <a href="${pageContext.request.contextPath}/add-cart?id=${p.id}&q=1"--%>
-<%--                       class="btn btn-sm btn-outline-primary">--%>
-<%--                        <i class="bi bi-cart-check me-1"></i>Test Add 1 Item--%>
-<%--                    </a>--%>
-<%--                </div>--%>
+                <%--                <!-- Test Link -->--%>
+                <%--                <div class="mt-3 text-center">--%>
+                <%--                    <a href="${pageContext.request.contextPath}/add-cart?id=${p.id}&q=1"--%>
+                <%--                       class="btn btn-sm btn-outline-primary">--%>
+                <%--                        <i class="bi bi-cart-check me-1"></i>Test Add 1 Item--%>
+                <%--                    </a>--%>
+                <%--                </div>--%>
             </div>
 
 
@@ -376,24 +387,24 @@
 
         if (addCartForm) {
             addCartForm.addEventListener("submit", function () {
+                document.getElementById("buyNowFlag").value = "false";
                 showToast(`🛒 Đã thêm ${qtyHidden.value} sản phẩm vào giỏ`);
             });
         }
 
 
+
+
         /* ================= BUY NOW ================= */
         const buyNow = document.getElementById("buyNow");
 
-        if (buyNow && addCartForm) {
-            buyNow.addEventListener("click", () => {
-                qtyHidden.value = qtyInput.value;
-                addCartForm.submit();
+        buyNow.addEventListener("click", () => {
+            qtyHidden.value = qtyInput.value;
+            document.getElementById("buyNowFlag").value = "true";
+            addCartForm.submit();
+        });
 
-                setTimeout(() => {
-                    window.location.href = "${pageContext.request.contextPath}/cart";
-                }, 200);
-            });
-        }
+
 
 
     });

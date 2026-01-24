@@ -71,19 +71,10 @@
                 <h3>${p.name}</h3>
 
                 <div class="product-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                    <span>4.5 (12)</span>
+                    <span>${p.avgRating} </span> <i class="fa fa-star"></i> <span>(${p.ratingCount})</span>
                 </div>
 
-                <div class="product-price">${p.getPrice()}</div>
-
-                <p class="product-discount">
-                    Giá gốc <span class="product-old-price">7.139.000 VND</span>
-                </p>
+                <div class="product-price">  ${String.format("%,d", p.price)} đ</div>
 
                 <div class="card-footer">
                     <!-- Nút mua (xem chi tiết) -->
@@ -94,7 +85,7 @@
                     </button>
 
                     <!-- Nút thêm vào giỏ hàng -->
-                    <form action="${pageContext.request.contextPath}/add-cart" method="get" >
+                    <form action="${pageContext.request.contextPath}/add-cart" method="get">
                         <input type="hidden" name="id" value="${p.id}">
                         <input type="hidden" name="q" value="1">
                         <button type="submit" class="add-cart-btn">
@@ -104,41 +95,25 @@
 
 
                     <!-- Nút yêu thích -->
-                    <c:set var="isInWishlist" value="false" />
+
+
                     <c:if test="${not empty sessionScope.id}">
-                        <c:if test="${wishlistService.isInWishlist(sessionScope.id, p.id)}">
-                            <c:set var="isInWishlist" value="true" />
-                        </c:if>
-                    </c:if>
-                    <c:choose>
-                        <c:when test="${empty sessionScope.id}">
-                            <a href="${pageContext.request.contextPath}/login"
-                               class="btn btn-outline-danger wishlist-btn"
-                               title="Thêm vào wishlist">
+                        <form action="${pageContext.request.contextPath}/wishlist" method="post" class="d-inline">
+                            <input type="hidden" name="action" value="add">
+                            <input type="hidden" name="productId" value="${p.id}">
+                            <button type="submit" class="btn btn-outline-danger btn-sm wishlist-btn"
+                                    title="Thêm vào danh sách yêu thích">
                                 <i class="bi bi-heart"></i>
-                            </a>
-                        </c:when>
-                        <c:when test="${isInWishlist}">
-                            <button class="btn btn-danger wishlist-btn" disabled>
-                                <i class="bi bi-heart-fill"></i>
                             </button>
-                        </c:when>
-                        <c:otherwise>
-                            <form action="${pageContext.request.contextPath}/add-to-wishlist" method="post" class="d-inline">
-                                <input type="hidden" name="id" value="${product.id}">
-<%--                                <button type="submit" class="btn btn-outline-danger wishlist-btn"--%>
-<%--                                        title="Thêm vào wishlist">--%>
-<%--                                    <i class="bi bi-heart"></i>--%>
-<%--                                </button>--%>
-                                <button type="submit"
-                                        class="wishlist-btn"
-                                        title="Thêm vào wishlist"
-                                >
-                                    <i class="fa fa-heart-o"></i>
-                                </button>
-                            </form>
-                        </c:otherwise>
-                    </c:choose>
+                        </form>
+                    </c:if>
+                    <c:if test="${empty sessionScope.id}">
+                        <a href="${pageContext.request.contextPath}/login"
+                           class="btn btn-outline-danger btn-sm wishlist-btn"
+                           title="Đăng nhập để thêm vào wishlist">
+                            <i class="bi bi-heart"></i>
+                        </a>
+                    </c:if>
 
                 </div>
 
@@ -255,9 +230,110 @@
         </div>
     </div>
 </footer>
+<div id="app" data-context-path="<%= request.getContextPath() %>"></div>
 
 <!-- JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+    const mapCategory = {
+        "mini-tech": 1,
+        "ai-device": 2,
+        "fun-tech": 3,
+        "creative": 4
+    };
+
+    const contextPath = document.getElementById("app").dataset.contextPath;
+    let currentCategory = "";
+
+    function loadProducts() {
+        const params = new URLSearchParams();
+        const kw = document.getElementById("searchInput").value.trim();
+        const sort = document.getElementById("sortSelect").value;
+        const minP = document.getElementById("minPrice").value;
+        const maxP = document.getElementById("maxPrice").value;
+
+        if (kw) params.append("keyword", kw);
+        if (sort) params.append("sort", sort);
+        if (minP) params.append("minPrice", minP);
+        if (maxP) params.append("maxPrice", maxP);
+        if (currentCategory) params.append("category", currentCategory);
+
+        fetch(contextPath + "/api/products/filter?" + params.toString())
+            .then(r => r.json())
+            .then(renderProducts)
+            .catch(err => console.error("FILTER ERROR", err));
+    }
+
+    function renderProducts(list) {
+        const grid = document.getElementById("productGrid");
+        grid.innerHTML = "";
+
+        if (!list || list.length === 0) {
+            grid.innerHTML = "<p>Không có sản phẩm phù hợp</p>";
+            return;
+        }
+
+        list.forEach(p => {
+            const img = (p.images && p.images.length > 0)
+                ? p.images[0]
+                : "https://via.placeholder.com/300x300?text=No+Image";
+
+            grid.innerHTML +=
+                '<div class="product-card">' +
+
+                '<img src="' + img + '" alt="' + p.name + '">' +
+
+                '<h3>' + p.name + '</h3>' +
+
+                '<div class="product-rating">' +
+                '<span>' +
+                (p.avgRating ? p.avgRating.toFixed(1) : '0.0') +
+                ' <i class="fa fa-star"></i> (' +
+                (p.ratingCount || 0) +
+                ')' +
+                '</span>' +
+                '</div>'
+                +
+
+                '<div class="product-price">' +
+                Number(p.price).toLocaleString() + ' đ' +
+                '</div>' +
+
+                '<div class="card-footer">' +
+                '<button class="buy-btn">Chi tiết</button>' +
+                '<button class="add-cart-btn"><i class="bi bi-cart-plus"></i></button>' +
+                '<button class="wishlist-btn"><i class="bi bi-heart"></i></button>' +
+                '</div>' +
+
+                '</div>';
+        });
+    }
+
+</script>
+<script>
+    // Nút Lọc
+    document.getElementById("filterBtn").addEventListener("click", loadProducts);
+
+    // Tab category
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.addEventListener("click", function () {
+            document.querySelector(".tab-btn.active")?.classList.remove("active");
+            this.classList.add("active");
+
+            const slug = this.dataset.category;
+            currentCategory = (slug === "all") ? "" : mapCategory[slug];
+            loadProducts();
+        });
+    });
+
+    // (Tuỳ chọn) Enter để tìm
+    document.getElementById("searchInput").addEventListener("keydown", e => {
+        if (e.key === "Enter") loadProducts();
+    });
+</script>
+
 
 </body>
 

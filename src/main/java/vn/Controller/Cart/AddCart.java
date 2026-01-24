@@ -59,13 +59,20 @@ public class AddCart extends HttpServlet {
             // LƯU CART VÀO SESSION
             session.setAttribute("cart", cart);
 
-            // KIỂM TRA KẾT QUẢ
-            System.out.println("Items in cart after add: " + cart.getItems().size());
-            System.out.println("Total quantity in cart: " + cart.getTotalQuantity());
+            boolean buyNow = "true".equals(request.getParameter("buyNow"));
 
-            System.out.println("=== ADD CART END ===");
+            System.out.println("buyNow = " + buyNow);
 
-            response.sendRedirect(referer);
+            if (buyNow) {
+                response.sendRedirect(request.getContextPath() + "/cart");
+            } else {
+                response.sendRedirect(referer);
+            }
+
+            return; // kết thúc servlet
+
+
+
         } catch (NumberFormatException e) {
             System.out.println("ERROR: Invalid number format");
             e.printStackTrace();
@@ -80,5 +87,6 @@ public class AddCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
+
     }
 }
