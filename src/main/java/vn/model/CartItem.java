@@ -7,12 +7,13 @@ public class CartItem implements Serializable {
     private int productId;
     private String name;
     private String image;
-    private int price;
+    private double price;
     private int quantity;
 
-    public CartItem() {}
+    public CartItem() {
+    }
 
-    public CartItem(int productId, String name, String image, int price, int quantity) {
+    public CartItem(int productId, String name, String image, double price, int quantity) {
         this.productId = productId;
         this.name = name;
         this.image = image;
@@ -20,22 +21,49 @@ public class CartItem implements Serializable {
         this.quantity = quantity;
     }
 
-    public int getProductId() { return productId; }
-    public void setProductId(int productId) { this.productId = productId; }
+    // ===== GET / SET =====
+    public int getProductId() {
+        return productId;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
 
-    public String getImage() { return image; }
-    public void setImage(String image) { this.image = image; }
+    public String getName() {
+        return name;
+    }
 
-    public int getPrice() { return price; }
-    public void setPrice(int price) { this.price = price; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public String getImage() {
+        return image;
+    }
 
-    public int getTotal() {
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    // ===== TOTAL =====
+    public double getTotal() {
         return price * quantity;
     }
 }

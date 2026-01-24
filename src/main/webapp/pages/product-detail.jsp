@@ -1,7 +1,5 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -76,9 +74,9 @@
           </div>
 
           <div class="price-row">
-              <div class="current-price" id="price">
-                  <fmt:formatNumber value="${p.price}" type="number" groupingUsed="true"/> đ
-              </div>
+            <div class="current-price" id="price">${p.price}</div>
+            <div class="old-price">1.099.000₫</div>
+            <div class="badge-sale">-18%</div>
           </div>
 
           <p class="product-desc">${p.fullDescription}</p>
@@ -103,7 +101,24 @@
               </div>
 
               <div id="specs" class="tab-panel" data-panel style="display:none">
-                ${p.fullDescription}
+                <table style="width:100%; border-collapse:collapse; font-size:14px">
+                  <tr>
+                    <td style="padding:8px; color:var(--muted)">Driver</td>
+                    <td style="padding:8px">10 mm dynamic</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:8px; color:var(--muted)">Bluetooth</td>
+                    <td style="padding:8px">5.3</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:8px; color:var(--muted)">Trọng lượng</td>
+                    <td style="padding:8px">45g</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:8px; color:var(--muted)">Chuẩn chống nước</td>
+                    <td style="padding:8px">IPX4</td>
+                  </tr>
+                </table>
               </div>
 
               <div id="reviews" class="tab-panel" data-panel style="display:none">
@@ -142,7 +157,24 @@
 
             <hr style="margin:12px 0">
             <h5 style="margin-bottom:10px">Sản phẩm tương tự</h5>
-
+            <div class="related-grid" id="relatedGrid">
+              <!-- static related cards -->
+              <div class="related-card">
+                <img src="/assets/img/rel-1.jpg" alt="related 1">
+                <h4>Humane AI Pin</h4>
+                <div class="price">6.490.000₫</div>
+              </div>
+              <div class="related-card">
+                <img src="/assets/img/rel-2.jpg" alt="related 2">
+                <h4>AI Smart Glasses</h4>
+                <div class="price">3.290.000₫</div>
+              </div>
+              <div class="related-card">
+                <img src="/assets/img/rel-3.jpg" alt="related 3">
+                <h4>Mini Projector</h4>
+                <div class="price">4.990.000₫</div>
+              </div>
+            </div>
           </aside>
         </div> <!-- /.product-detail-section -->
 
@@ -166,10 +198,8 @@
         <div>
           <div class="kv">Giá</div>
           <div style="display:flex; align-items:center; justify-content:space-between; margin-top:6px">
-              <div class="current-price" id="sidePrice">
-                  <fmt:formatNumber value="${p.price}" type="number" groupingUsed="true"/> đ
-              </div>
-
+            <div class="current-price" id="sidePrice">899.000₫</div>
+            <div class="old-price">1.099.000₫</div>
           </div>
         </div>
 
@@ -183,13 +213,39 @@
           <div style="margin-top:8px; font-size:13px; color:var(--muted)"><span id="stockCount">50</span> sản phẩm có
             sẵn</div>
         </div>
-
         <div>
-          <button id="buyNow" class="btn-buy" aria-label="Mua ngay"><i class="bi bi-bag-check me-1"></i> Mua
-            ngay</button>
-          <button id="addCart" class="btn-cart" style="margin-top:8px"><i class="bi bi-cart-plus me-1"></i> Thêm vào
-            giỏ</button>
+          <button id="buyNow" class="btn-buy" aria-label="Mua ngay">
+            <i class="bi bi-bag-check me-1"></i> Mua ngay
+          </button>
+
+          <!-- FORM ADD TO CART (CHỈ THÊM, KHÔNG ẢNH HƯỞNG GIAO DIỆN) -->
+          <form id="addCartForm"
+                action="${pageContext.request.contextPath}/cart"
+                method="post"
+                style="margin-top:8px">
+
+            <input type="hidden" name="action" value="add">
+            <input type="hidden" name="productId" value="${p.id}">
+            <input type="hidden" name="quantity" id="cartQty">
+
+            <button type="submit" id="addCart" class="btn-cart">
+              <i class="bi bi-cart-plus me-1"></i> Thêm vào giỏ
+            </button>
+          </form><form id="addCartForm"
+                       action="${pageContext.request.contextPath}/add-to-cart"
+                       method="post"
+                       style="margin-top:8px">
+
+          <input type="hidden" name="productId" value="${p.id}">
+          <input type="hidden" name="quantity" id="cartQty">
+
+          <button type="submit" class="btn-cart">
+            <i class="bi bi-cart-plus me-1"></i> Thêm vào giỏ
+          </button>
+        </form>
+
         </div>
+
 
         <div style="margin-top:6px; font-size:13px; color:var(--muted)">
           <i class="bi bi-shield-check me-1"></i> 12 tháng bảo hành • Hỗ trợ 24/7
@@ -356,10 +412,11 @@
     })();
 
     // ---------- Add to cart & toast ----------
+    // ---------- Add to cart & toast (REAL BACKEND) ----------
     (function () {
       const toast = document.getElementById('toast');
       const toastText = document.getElementById('toastText');
-      const addCart = document.getElementById('addCart');
+      const addCartForm = document.getElementById('addCartForm');
       const buyNow = document.getElementById('buyNow');
 
       function showToast(msg) {
@@ -368,19 +425,30 @@
         setTimeout(() => toast.classList.remove('show'), 2200);
       }
 
-      addCart.addEventListener('click', () => {
+      // ADD TO CART → GỌI SERVLET
+      addCartForm.addEventListener('submit', function (e) {
+        e.preventDefault(); // KHÔNG reload trang
+
         const qty = document.getElementById('qtyInput').value;
-        // simulate add: in real app you'd call API or update localStorage
-        showToast('🛒 Đã thêm ' + qty + ' sản phẩm vào giỏ');
+        document.getElementById('cartQty').value = qty;
+
+        fetch(addCartForm.action, {
+          method: 'POST',
+          body: new FormData(addCartForm)
+        }).then(() => {
+          showToast('🛒 Đã thêm ' + qty + ' sản phẩm vào giỏ');
+        });
       });
 
       buyNow.addEventListener('click', () => {
         const qty = document.getElementById('qtyInput').value;
-        showToast('✅ Mua ngay: ' + qty + ' sản phẩm — chuyển tới thanh toán (demo)');
-        // demo: redirect to cart / checkout page (static)
-        setTimeout(() => { window.location.href = 'cart.jsp'; }, 900);
+        showToast('✅ Mua ngay: ' + qty + ' sản phẩm');
+        setTimeout(() => {
+          window.location.href = '${pageContext.request.contextPath}/cart';
+        }, 900);
       });
     })();
+
 
     // ---------- Tabs logic ----------
     (function () {
