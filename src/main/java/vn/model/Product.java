@@ -16,30 +16,7 @@ public class Product implements Serializable {
     private String createAt;
     private String updateAt;
     private List<String> images = new ArrayList<>();
-    // Thêm vào class Product
-    public Product(int id, String name, int categoryID, String shortDescription,
-                   String fullDescription, int price, boolean isFeatured,
-                   String createAt, String updateAt) {
-        this.id = id;
-        this.name = name;
-        this.categoryID = categoryID;
-        this.shortDescription = shortDescription;
-        this.fullDescription = fullDescription;
-        this.price = price;
-        this.isFeatured = isFeatured;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
-    }
 
-    public Product(String name, int categoryID, String shortDescription,
-                   String fullDescription, int price, boolean isFeatured) {
-        this.name = name;
-        this.categoryID = categoryID;
-        this.shortDescription = shortDescription;
-        this.fullDescription = fullDescription;
-        this.price = price;
-        this.isFeatured = isFeatured;
-    }
 
     public Product(int id, String name, int categoryID, String shortDescription, String fullDescription, int price, boolean isFeatured, String createAt, String updateAt, List<String> images) {
         this.id = id;

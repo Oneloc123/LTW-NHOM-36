@@ -1,29 +1,22 @@
 package vn.model;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Banner {
-    private int id;
-    private String title;
-    private String imageURL;
-    private String linkURL;
-    private String altText;
-    private LocalDate startDate;      // Thay Date bằng LocalDate
-    private LocalDate endDate;        // Thay Date bằng LocalDate
-    private int sortOrder;
-    private int status;
-    private LocalDateTime createAt;   // Thay Date bằng LocalDateTime
-    private LocalDateTime updateAt;   // Thay Date bằng LocalDateTime
+    public int id;
+    public String title;
+    public String imageURL;
+    public String linkURL;
+    public String altText;
+    public Date startDate;
+    public Date endDate;
+    public int sortOrder;
+    public int status;
+    public Date createAt;
+    public Date updateAt;
 
-    // Constructors
-    public Banner() {
-    }
 
-    public Banner(int id, String title, String imageURL, String linkURL,
-                  String altText, LocalDate startDate, LocalDate endDate,
-                  int sortOrder, int status, LocalDateTime createAt,
-                  LocalDateTime updateAt) {
+    public Banner(int id, String title, String imageURL, String linkURL, String altText, Date startDate, Date endDate, int sortOrder, int status, Date createAt, Date updateAt) {
         this.id = id;
         this.title = title;
         this.imageURL = imageURL;
@@ -36,8 +29,9 @@ public class Banner {
         this.createAt = createAt;
         this.updateAt = updateAt;
     }
+    public  Banner() {
+    }
 
-    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -78,19 +72,19 @@ public class Banner {
         this.altText = altText;
     }
 
-    public LocalDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -110,40 +104,19 @@ public class Banner {
         this.status = status;
     }
 
-    public LocalDateTime getCreateAt() {
+    public Date getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(LocalDateTime createAt) {
+    public void setCreateAt(Date createAt) {
         this.createAt = createAt;
     }
 
-    public LocalDateTime getUpdateAt() {
+    public Date getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(LocalDateTime updateAt) {
+    public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
-    }
-
-    // Helper methods để tương thích với JSP
-    public java.util.Date getStartDateAsUtilDate() {
-        return startDate != null ?
-                java.sql.Date.valueOf(startDate) : null;
-    }
-
-    public java.util.Date getEndDateAsUtilDate() {
-        return endDate != null ?
-                java.sql.Date.valueOf(endDate) : null;
-    }
-
-    public java.util.Date getCreateAtAsUtilDate() {
-        return createAt != null ?
-                java.sql.Timestamp.valueOf(createAt) : null;
-    }
-
-    public java.util.Date getUpdateAtAsUtilDate() {
-        return updateAt != null ?
-                java.sql.Timestamp.valueOf(updateAt) : null;
     }
 }

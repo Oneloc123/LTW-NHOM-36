@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.model.Banner;
-import vn.services.BannerService;
+import vn.services.BannerSevice;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +17,7 @@ public class HomeController extends HttpServlet
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        BannerService bs = new BannerService();
+        BannerSevice  bs = new BannerSevice();
         List<Banner> list = bs.getBanner();
         request.setAttribute("list", list);
         request.setAttribute("currentPage", "home");
