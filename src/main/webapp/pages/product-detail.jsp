@@ -199,7 +199,23 @@
                         <i class="bi bi-cart-plus me-2"></i>Thêm vào giỏ hàng
                     </button>
                 </form>
-
+                <c:if test="${not empty sessionScope.id}">
+                    <form action="${pageContext.request.contextPath}/wishlist" method="post" class="d-inline">
+                        <input type="hidden" name="action" value="add">
+                        <input type="hidden" name="productId" value="${p.id}">
+                        <button type="submit" class="btn btn-outline-danger btn-sm"
+                                title="Thêm vào danh sách yêu thích">
+                            <i class="bi bi-heart"></i> Yêu thích
+                        </button>
+                    </form>
+                </c:if>
+                <c:if test="${empty sessionScope.id}">
+                    <a href="${pageContext.request.contextPath}/login"
+                       class="btn btn-outline-danger btn-sm"
+                       title="Đăng nhập để thêm vào wishlist">
+                        <i class="bi bi-heart"></i> Yêu thích
+                    </a>
+                </c:if>
 <%--                <!-- Test Link -->--%>
 <%--                <div class="mt-3 text-center">--%>
 <%--                    <a href="${pageContext.request.contextPath}/add-cart?id=${p.id}&q=1"--%>

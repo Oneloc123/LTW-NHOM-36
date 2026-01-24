@@ -505,7 +505,7 @@
             <ul class="sidebar-menu">
                 <li><a href="#" class="active"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
                 <li><a href="../Order-History"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
-                <li><a href="../favorites"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
+                <li><a href="../wishlist"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
                 <li><a href="../changePassword"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
                 <li><a href="../loggout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
             </ul>

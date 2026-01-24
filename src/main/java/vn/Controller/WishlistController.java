@@ -24,10 +24,7 @@ public class WishlistController extends HttpServlet {
 
         // Kiểm tra đăng nhập
         if (userId == null) {
-            // Lưu URL hiện tại để redirect sau khi đăng nhập
-            String redirectUrl = request.getRequestURI();
-            session.setAttribute("redirectAfterLogin", redirectUrl);
-
+            session.setAttribute("redirectAfterLogin", "/wishlist");
             session.setAttribute("message", "Vui lòng đăng nhập để xem wishlist!");
             response.sendRedirect(request.getContextPath() + "/login");
             return;
@@ -54,40 +51,54 @@ public class WishlistController extends HttpServlet {
 
         // Kiểm tra đăng nhập
         if (userId == null) {
-            response.getWriter().write("{\"status\":\"error\",\"message\":\"Vui lòng đăng nhập!\"}");
+            session.setAttribute("error", "Vui lòng đăng nhập để thực hiện thao tác này!");
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
         try {
-            int productId = Integer.parseInt(request.getParameter("productId"));
-
-            if ("add".equals(action)) {
-                boolean success = wishlistService.addToWishlist(userId, productId);
-                if (success) {
-                    response.getWriter().write("{\"status\":\"success\",\"message\":\"Đã thêm vào wishlist!\"}");
-                } else {
-                    response.getWriter().write("{\"status\":\"error\",\"message\":\"Sản phẩm đã có trong wishlist!\"}");
-                }
-            }
-            else if ("remove".equals(action)) {
+            if ("remove".equals(action)) {
+                int productId = Integer.parseInt(request.getParameter("productId"));
                 boolean success = wishlistService.removeFromWishlist(userId, productId);
+
                 if (success) {
-                    response.getWriter().write("{\"status\":\"success\",\"message\":\"Đã xóa khỏi wishlist!\"}");
+                    session.setAttribute("message", "Đã xóa sản phẩm khỏi wishlist!");
                 } else {
-                    response.getWriter().write("{\"status\":\"error\",\"message\":\"Xóa thất bại!\"}");
+                    session.setAttribute("error", "Xóa sản phẩm thất bại!");
                 }
             }
             else if ("clear".equals(action)) {
                 boolean success = wishlistService.clearWishlist(userId);
+
                 if (success) {
-                    response.getWriter().write("{\"status\":\"success\",\"message\":\"Đã xóa tất cả khỏi wishlist!\"}");
+                    session.setAttribute("message", "Đã xóa tất cả sản phẩm khỏi wishlist!");
                 } else {
-                    response.getWriter().write("{\"status\":\"error\",\"message\":\"Xóa thất bại!\"}");
+                    session.setAttribute("error", "Xóa wishlist thất bại!");
                 }
+            }
+            else if ("add".equals(action)) {
+                int productId = Integer.parseInt(request.getParameter("productId"));
+                boolean success = wishlistService.addToWishlist(userId, productId);
+
+                if (success) {
+                    session.setAttribute("message", "Đã thêm vào wishlist!");
+                } else {
+                    session.setAttribute("error", "Sản phẩm đã có trong wishlist!");
+                }
+
+                // Quay lại trang trước
+                String referer = request.getHeader("Referer");
+                response.sendRedirect(referer != null ? referer : request.getContextPath() + "/products");
+                return;
             }
 
         } catch (NumberFormatException e) {
-            response.getWriter().write("{\"status\":\"error\",\"message\":\"ID sản phẩm không hợp lệ!\"}");
+            session.setAttribute("error", "ID sản phẩm không hợp lệ!");
+        } catch (Exception e) {
+            session.setAttribute("error", "Đã xảy ra lỗi: " + e.getMessage());
         }
+
+        // Sau khi xử lý POST, redirect về trang wishlist
+        response.sendRedirect(request.getContextPath() + "/wishlist");
     }
 }
