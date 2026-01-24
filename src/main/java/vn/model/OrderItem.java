@@ -3,72 +3,47 @@ package vn.model;
 import java.io.Serializable;
 
 public class OrderItem implements Serializable {
-
     private int id;
     private int orderId;
     private int productId;
-    private String productName;
-    private long price;
     private int quantity;
+    private double unitPrice;
+    private double subtotal;
 
-    public OrderItem() {
-    }
+    // Thông tin sản phẩm
+    private Product product;
 
-    public OrderItem(int id, int orderId, int productId,
-                     String productName, long price, int quantity) {
+    public OrderItem() {}
+
+    public OrderItem(int id, int orderId, int productId, int quantity,
+                     double unitPrice, double subtotal) {
         this.id = id;
         this.orderId = orderId;
         this.productId = productId;
-        this.productName = productName;
-        this.price = price;
         this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.subtotal = subtotal;
     }
 
-    public int getId() {
-        return id;
-    }
+    // Getters và Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getOrderId() { return orderId; }
+    public void setOrderId(int orderId) { this.orderId = orderId; }
 
-    public int getOrderId() {
-        return orderId;
-    }
+    public int getProductId() { return productId; }
+    public void setProductId(int productId) { this.productId = productId; }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 
-    public int getProductId() {
-        return productId;
-    }
+    public double getUnitPrice() { return unitPrice; }
+    public void setUnitPrice(double unitPrice) { this.unitPrice = unitPrice; }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
+    public double getSubtotal() { return subtotal; }
+    public void setSubtotal(double subtotal) { this.subtotal = subtotal; }
 
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public long getPrice() {
-        return price;
-    }
-
-    public void setPrice(long price) {
-        this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+    public Product getProduct() { return product; }
+    public void setProduct(Product product) { this.product = product; }
 }
