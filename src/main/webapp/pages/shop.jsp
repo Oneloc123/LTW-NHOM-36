@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -8,372 +9,533 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Công nghệ độc lạ - TechX</title>
-    <link rel="stylesheet" href="/assets/css/shop.css"/>
+
+    <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/header.css">
-    <link rel="stylesheet" href="../assets/css/footer.css">
 
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/shop.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css">
+
+    <style>
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #eaeaea;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-price {
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .product-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+            height: 3rem;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .product-category {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .add-to-cart-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4757;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .section-title {
+            color: #333;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .shop-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+            url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .shop-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .shop-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .filter-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .pagination {
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .page-link {
+            color: #667eea;
+            border: 1px solid #dee2e6;
+        }
+
+        .page-link:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .page-item.active .page-link {
+            background: #667eea;
+            border-color: #667eea;
+        }
+    </style>
 </head>
 
 <body>
-
 <!-- ================= Header ================= -->
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-<!-- Main -->
-<main class="shop-page">
-    <!-- HERO SECTION -->
-    <section class="hero" aria-label="Hero carousel">
-        <!-- Radio inputs để điều khiển slider -->
-        <input type="radio" name="hero" id="slide-1" checked hidden>
-        <input type="radio" name="hero" id="slide-2" hidden>
-        <input type="radio" name="hero" id="slide-3" hidden>
+<!-- Shop Header -->
+<div class="shop-header">
+    <div class="container">
+        <h1>Cửa hàng TechX</h1>
+        <p>Khám phá những thiết bị công nghệ độc đáo, hiện đại và sáng tạo</p>
 
-        <div class="hero-slides">
-            <div class="slide s1" aria-hidden="false">
-                <div class="slide-inner">
-                    <div class="slide-media">
-                        <picture>
-                            <source
-                                    srcset="https://down-vn.img.susercontent.com/file/vn-11134208-7qukw-lik7dccpew9e9b"
-                                    type="image/webp">
-                            <img src="https://down-vn.img.susercontent.com/file/vn-11134208-7qukw-lik7dccpew9e9b"
-                                 alt="Hero 1 - Khuyến mãi lớn" loading="lazy">
-                        </picture>
-                    </div>
-                    <div class="slide-content">
-                        <span class="eyebrow">Khuyến mãi đặc biệt</span>
-                        <h1>Khám phá Thiết bị Mini & AI</h1>
-                        <p>Thiết kế tối giản, hiệu năng tối đa. Ưu đãi độc quyền, trả góp 0%.</p>
-                        <div class="cta-group">
-                            <a class="btn btn-primary" href="/pages/shop.html">Xem sản phẩm</a>
-                            <a class="btn btn-ghost" href="/pages/shop.html">Tìm hiểu thêm</a>
-                        </div>
-                    </div>
+        <!-- Search Form -->
+        <form action="${pageContext.request.contextPath}/shop" method="get" class="row g-3 justify-content-center">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-lg"
+                           name="keyword" placeholder="Tìm kiếm sản phẩm..."
+                           value="${param.keyword}">
+                    <button class="btn btn-primary btn-lg" type="submit">
+                        <i class="bi bi-search"></i> Tìm kiếm
+                    </button>
                 </div>
             </div>
+        </form>
+    </div>
+</div>
 
-            <div class="slide s2" aria-hidden="true">
-                <div class="slide-inner">
-                    <div class="slide-media">
-                        <picture>
-                            <source srcset="https://i.ytimg.com/vi/FkmLhstVKnk/maxresdefault.jpg" type="image/webp">
-                            <img src="https://i.ytimg.com/vi/FkmLhstVKnk/maxresdefault.jpg"
-                                 alt="Hero 2 - Sản phẩm mới" loading="lazy">
-                        </picture>
+<!-- Main Content -->
+<main class="container py-4">
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h4 class="mb-3">
+                    <i class="bi bi-funnel me-2"></i>Lọc sản phẩm
+                </h4>
+                <form action="${pageContext.request.contextPath}/shop" method="get" class="row g-2">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="keyword"
+                               placeholder="Từ khóa" value="${param.keyword}">
                     </div>
-                    <div class="slide-content">
-                        <span class="eyebrow">Sản phẩm mới</span>
-                        <h1>Đèn ngủ Decor - sản phẩm mới</h1>
-                        <p>Thiết kế siêu đẹp, Ánh sáng tốt, Giá rẻ tuyệt vời.</p>
-                        <div class="cta-group">
-                            <a class="btn btn-primary" href="/pages/shop.html">Xem sản phẩm</a>
-                            <a class="btn btn-ghost" href="/pages/shop.html">Tìm hiểu thêm</a>
-                        </div>
+                    <div class="col-md-4">
+                        <select class="form-select" name="category">
+                            <option value="">Tất cả danh mục</option>
+                            <option value="1" ${param.category == '1' ? 'selected' : ''}>Công nghệ mini</option>
+                            <option value="2" ${param.category == '2' ? 'selected' : ''}>Thiết bị AI</option>
+                            <option value="3" ${param.category == '3' ? 'selected' : ''}>Phụ kiện sáng tạo</option>
+                            <option value="4" ${param.category == '4' ? 'selected' : ''}>Đồ chơi công nghệ</option>
+                        </select>
                     </div>
-                </div>
-            </div>
-
-            <div class="slide s3" aria-hidden="true">
-                <div class="slide-inner">
-                    <div class="slide-media">
-                        <picture>
-                            <source srcset="https://cdn.tgdd.vn/News/1561504/11(10)-1280x720.jpg" type="image/webp">
-                            <img src="https://cdn.tgdd.vn/News/1561504/11(10)-1280x720.jpg" alt="Hero 3 - Dịch vụ"
-                                 loading="lazy">
-                        </picture>
+                    <div class="col-md-4">
+                        <select class="form-select" name="featured">
+                            <option value="">Tất cả</option>
+                            <option value="true" ${param.featured == 'true' ? 'selected' : ''}>Sản phẩm nổi bật</option>
+                        </select>
                     </div>
-                    <div class="slide-content">
-                        <span class="eyebrow">Sản phẩm</span>
-                        <h1>TechX Ring - An tâm sử dụng</h1>
-                        <p>Kiểm tra sức khỏe liên tục, kết nối nhanh chóng.</p>
-                        <div class="cta-group">
-                            <a class="btn btn-primary" href="/pages/shop.html">Xem sản phẩm</a>
-                            <a class="btn btn-ghost" href="/pages/shop.html">Tìm hiểu thêm</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Controls: sử dụng labels liên kết radio -->
-        <div class="hero-controls" aria-hidden="false">
-            <label for="slide-1" class="hero-dot" aria-label="Slide 1"></label>
-            <label for="slide-2" class="hero-dot" aria-label="Slide 2"></label>
-            <label for="slide-3" class="hero-dot" aria-label="Slide 3"></label>
-        </div>
-    </section>
-    <!-- PROMOTION BANNERS: grid 3 -->
-    <section class="promos" aria-label="Các khuyến mãi nổi bật">
-        <article class="promo-card">
-            <div class="promo-icon">🎁</div>
-            <h3>Ưu đãi trả góp 0%</h3>
-            <p>Chọn trả góp 0% cho nhiều sản phẩm, thủ tục nhanh gọn.</p>
-            <a class="link-more" href="/pages/shop.html">Xem chi tiết</a>
-        </article>
-
-        <article class="promo-card">
-            <div class="promo-icon">⚡</div>
-            <h3>Flash Sale</h3>
-            <p>Giảm giá lên đến 50% chỉ trong hôm nay. Số lượng có hạn.</p>
-            <a class="link-more" href="/pages/shop.html">Mua ngay</a>
-        </article>
-
-        <article class="promo-card">
-            <div class="promo-icon">📦</div>
-            <h3>Giao hàng nhanh</h3>
-            <p>Giao trong ngày cho khu vực nội thành, kiểm tra thời gian giao hàng.</p>
-            <a class="link-more" href="/pages/shop.html">Xem tuyến</a>
-        </article>
-    </section>
-
-    <!-- ================= BEST SELLERS ================= -->
-    <section class="arrivals section-padding">
-        <h2 class="section-title">Bán chạy nhất tuần</h2>
-
-        <div class="na-grid">
-
-            <a class="na-card card-soft soft-hover" href="/pages/product-detail.html">
-                <img src="data:image/jpeg;base64,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"
-                     class="bs-img" alt="Nebula Mini Projector">
-                <h4 class="bs-name">Máy chiếu bỏ túi Nebula</h4>
-                <p class="bs-price">6.490.000 VND</p>
-
-            </a>
-
-            <a class="na-card card-soft soft-hover" href="/pages/product-detail.html">
-                <img src="https://www.maychieuminhtan.com/uploaded/qu%E1%BA%A1t%203D1.png" class="bs-img"
-                     alt="Hologram Fan">
-                <h4 class="bs-name">Quạt trình chiếu Hologram 3D</h4>
-                <p class="bs-price">3.990.000 VND</p>
-            </a>
-
-            <a class="na-card card-soft soft-hover" href="/pages/product-detail.html">
-
-                <img src="https://i0.wp.com/www.seriousinsights.net/wp-content/uploads/3_1.png.webp?resize=750%2C420&ssl=1"
-                     class="bs-img" alt="Gravastar Speaker">
-                <h4 class="bs-name">Loa robot Gravastar</h4>
-                <p class="bs-price">4.890.000 VND</p>
-            </a>
-
-            <div class="na-card card-soft soft-hover">
-
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6Ich99_2XVAcW8s8vo6ZsXKy7E3own3Wiw&s"
-                     class="bs-img" alt="Mini AI Speaker">
-                <h4 class="bs-name">Loa mini AI</h4>
-                <p class="bs-price">790.000 VND</p>
-            </div>
-
-        </div>
-    </section>
-    <!-- ================= NEW ARRIVALS ================= -->
-    <section class="arrivals section-padding">
-        <h2 class="section-title">Hàng mới ra lò</h2>
-        <div class="na-grid">
-
-            <c:forEach var="newArrivalsList" items="${newArrivalsList}">
-                <a class="na-card card-soft soft-hover" href="/product?id=${newArrivalsList.getId()}">
-                    <img src="${newArrivalsList.imagesTop}" alt="">
-                    <span class="na-tag">NEW</span>
-                    <h4>${newArrivalsList.name}</h4>
-                    <p>${newArrivalsList.price} VND</p>
-                </a>
-            </c:forEach>
-
-
-        </div>
-    </section>
-    <!-- ================= OFFER GRID ================= -->
-    <section class="offers">
-
-        <div class="offer left">
-            <img id="offer-galaxy"/>
-            <div class="offer-text">
-                <h2>Công nghệ mini – Sức mạnh tối đa</h2>
-                <p>Những thiết bị độc lạ giúp mỗi ngày của bạn trở nên thú vị hơn.</p>
-                <button class="btn-ghost">Khám phá ngay</button>
-            </div>
-        </div>
-
-        <div class="offer right">
-            <div class="offer-text">
-                <h2>Màn hình tương lai</h2>
-                <p>Không chỉ hiển thị. Chúng phản hồi, hòa vào không gian và sáng tạo cùng bạn.</p>
-                <button class="btn-ghost">Xem sản phẩm</button>
-            </div>
-            <img id="offer-tv"/>
-        </div>
-
-        <div class="offer left">
-            <img id="offer-home"/>
-            <div class="offer-text">
-                <h2>Nhà nhỏ – Ý tưởng lớn</h2>
-                <p>Các thiết bị mini độc đáo biến căn phòng của bạn thành phòng lab cá nhân.</p>
-                <button class="btn-ghost">Tìm hiểu thêm</button>
-            </div>
-        </div>
-
-    </section>
-    <!-- ================= COLLECTIONS ================= -->
-    <section class="collections section-padding">
-        <div class="container">
-            <h2 class="section-title">Thể loại dành cho bạn</h2>
-
-            <div class="collection-grid">
-
-                <div class="collection-item">
-                    <img src="https://i.pinimg.com/736x/d9/77/02/d9770279f62fb561139572f81d9bfd80.jpg" alt="">
-                    <div class="collection-text">
-                        <h3>Setup góc làm việc tương lai</h3>
-                    </div>
-                </div>
-
-                <div class="collection-item">
-                    <img src="https://nld.mediacdn.vn/zoom/700_438/291774122806476800/2024/7/10/samsung-galaxy-ring-04-17206256917602074229663-26-0-651-1000-crop-17206256941412137169810.jpeg"
-                         alt="">
-                    <div class="collection-text">
-                        <h3>Công nghệ bỏ túi</h3>
-                    </div>
-                </div>
-
-                <div class="collection-item">
-                    <img src="https://file.hstatic.net/200000264521/article/nha_thong_minh_la_gi_91f0aa8716fc4d36b584689abfd451be_1024x1024.jpg"
-                         alt="">
-                    <div class="collection-text">
-                        <h3>Không gian số – Không giới hạn</h3>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= BLOG PREVIEW ================= -->
-    <section class="blog-preview section-padding">
-        <div class="container">
-            <h2 class="section-title">Tin & mẹo công nghệ</h2>
-
-            <div class="blog-grid">
-
-                <a href="blog/blog.html" class="blog-card card-soft soft-hover">
-                    <img src="https://img.lazcdn.com/g/ff/kf/Sd1c572e62be345eebd35d21b216b6cb3r.jpg_960x960q80.jpg_.webp"
-                         alt="">
-                    <h4>Top 7 thiết bị độc lạ bạn chưa từng thấy</h4>
-                    <p>Danh sách các sản phẩm nhỏ mà ai cũng muốn thử ít nhất 1 lần.</p>
-                </a>
-
-                <a href="blog/blog.html" class="blog-card card-soft soft-hover">
-                    <img src="https://dienmaykaw.com/images/products/2025/08/21/large/trang-xanh-don-gian-hien-dai-hinh-anh-khung-sale-san-pham-instagram-post_1755768621.png"
-                         alt="">
-                    <h4>Biến phòng trọ thành phòng chiếu</h4>
-                    <p>Chỉ cần một chiếc máy chiếu mini – mọi thứ thay đổi.</p>
-                </a>
-
-                <a href="blog/blog.html" class="blog-card card-soft soft-hover">
-                    <img src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/11/kinh-thong-minh.jpg"
-                         alt="">
-                    <h4>Kính AI có gì đặc biệt?</h4>
-                    <p>Từ dịch thuật, nhận diện đến thực tế tăng cường.</p>
-                </a>
-
-            </div>
-        </div>
-    </section>
-    <!-- ================= FAQ ================= -->
-    <section class="faq section-padding">
-        <div class="container">
-            <h2 class="section-title">Câu hỏi thường gặp</h2>
-
-            <div class="accordion mt-4" id="faqBox">
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" data-bs-target="#f1" data-bs-toggle="collapse">
-                            Sản phẩm có bảo hành không?
+                    <div class="col-12 mt-2">
+                        <button type="submit" class="btn btn-primary me-2">
+                            <i class="bi bi-filter me-1"></i>Lọc
                         </button>
-                    </h2>
-                    <div id="f1" class="accordion-collapse collapse show">
-                        <div class="accordion-body">
-                            Tất cả sản phẩm đều được bảo hành từ 6–12 tháng tùy loại.
-                        </div>
+                        <a href="${pageContext.request.contextPath}/shop" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-circle me-1"></i>Xóa bộ lọc
+                        </a>
                     </div>
+                </form>
+            </div>
+            <div class="col-md-6 text-end">
+                <div class="d-flex align-items-center justify-content-end">
+                    <span class="me-2">Sắp xếp:</span>
+                    <select class="form-select w-auto" id="sortSelect">
+                        <option value="newest">Mới nhất</option>
+                        <option value="price_asc">Giá: Thấp đến cao</option>
+                        <option value="price_desc">Giá: Cao đến thấp</option>
+                        <option value="name">Tên A-Z</option>
+                    </select>
                 </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" data-bs-target="#f2" data-bs-toggle="collapse">
-                            Có hỗ trợ đổi trả không?
-                        </button>
-                    </h2>
-                    <div id="f2" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                            Bạn được đổi trả trong vòng 7 ngày nếu lỗi từ nhà sản xuất.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" data-bs-target="#f3" data-bs-toggle="collapse">
-                            Có ship nhanh không?
-                        </button>
-                    </h2>
-                    <div id="f3" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                            TechX hỗ trợ giao nhanh 2–4 giờ trong nội thành HCM.
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
-    </section>
-    <!-- CART DRAWER SIMULATION (checkbox hack) -->
-    <div class="site-cart">
-        <input type="checkbox" id="cart-toggle" hidden>
-        <label for="cart-toggle" class="cart-overlay"></label>
+    </div>
 
-        <label for="cart-toggle" class="cart-floating" aria-hidden="false" title="Mở giỏ hàng">
-            <span class="cart-count">0</span>
-            🛒
-        </label>
-        <aside class="cart-drawer" aria-label="Giỏ hàng">
-            <div class="cart-header">
-                <h3>Giỏ hàng của bạn</h3>
-                <label for="cart-toggle" class="cart-close" aria-label="Đóng giỏ">✕</label>
-            </div>
-            <div class="cart-body">
-                <p class="muted">Giỏ hàng demo (tĩnh). Links "Thêm vào giỏ" trong trang sẽ dẫn tới đây nhưng không
-                    update số lượng do không dùng JS.</p>
-                <ul class="cart-items">
-                    <li class="cart-item">
-                        <img src="https://via.placeholder.com/80x80.png?text=Item" alt="">
-                        <div class="cart-info">
-                            <strong>Galaxy Mini 1</strong>
-                            <span class="muted">1 x 6.490.000₫</span>
+    <!-- Products Grid -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="section-title">Tất cả sản phẩm</h3>
+
+            <c:choose>
+                <c:when test="${not empty list}">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                        <c:forEach var="product" items="${list}">
+                            <div class="col">
+                                <div class="product-card">
+                                    <!-- Featured Badge -->
+                                    <c:if test="${product.featured}">
+                                        <span class="featured-badge">
+                                            <i class="bi bi-star-fill me-1"></i>Nổi bật
+                                        </span>
+                                    </c:if>
+
+                                    <!-- Product Image -->
+                                    <a href="${pageContext.request.contextPath}/product?id=${product.id}">
+                                        <c:choose>
+                                            <c:when test="${not empty product.imagesTop}">
+                                                <img src="${product.imagesTop}"
+                                                     alt="${product.name}"
+                                                     class="product-img">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="${pageContext.request.contextPath}/assets/img/default-product.jpg"
+                                                     alt="${product.name}"
+                                                     class="product-img">
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </a>
+
+                                    <!-- Product Info -->
+                                    <div class="p-3">
+                                        <div class="product-category">
+                                            <c:choose>
+                                                <c:when test="${product.categoryID == 1}">Công nghệ mini</c:when>
+                                                <c:when test="${product.categoryID == 2}">Thiết bị AI</c:when>
+                                                <c:when test="${product.categoryID == 3}">Phụ kiện sáng tạo</c:when>
+                                                <c:when test="${product.categoryID == 4}">Đồ chơi công nghệ</c:when>
+                                                <c:otherwise>Danh mục khác</c:otherwise>
+                                            </c:choose>
+                                        </div>
+
+                                        <h5 class="product-name">
+                                            <a href="${pageContext.request.contextPath}/product?id=${product.id}"
+                                               class="text-decoration-none text-dark">
+                                                    ${product.name}
+                                            </a>
+                                        </h5>
+
+                                        <p class="product-price">
+                                            <fmt:formatNumber value="${product.price}"
+                                                              type="currency"
+                                                              currencySymbol="₫"
+                                                              maxFractionDigits="0"/>
+                                        </p>
+
+                                        <p class="small text-muted mb-3">
+                                                ${product.shortDescription}
+                                        </p>
+
+                                        <!-- Add to Cart Form -->
+                                        <form action="${pageContext.request.contextPath}/add-cart" method="get">
+                                            <input type="hidden" name="id" value="${product.id}">
+                                            <input type="hidden" name="q" value="1">
+                                            <button type="submit" class="add-to-cart-btn">
+                                                <i class="bi bi-cart-plus me-1"></i>Thêm vào giỏ
+                                            </button>
+                                        </form>
+                                        <!-- Wishlist Button -->
+                                        <c:set var="isInWishlist" value="false" />
+                                        <c:if test="${not empty sessionScope.id}">
+                                            <c:if test="${wishlistService.isInWishlist(sessionScope.id, product.id)}">
+                                                <c:set var="isInWishlist" value="true" />
+                                            </c:if>
+                                        </c:if>
+
+                                        <c:choose>
+                                            <c:when test="${empty sessionScope.id}">
+                                                <a href="${pageContext.request.contextPath}/login"
+                                                   class="btn btn-outline-danger wishlist-btn"
+                                                   title="Thêm vào wishlist">
+                                                    <i class="bi bi-heart"></i>
+                                                </a>
+                                            </c:when>
+                                            <c:when test="${isInWishlist}">
+                                                <button class="btn btn-danger wishlist-btn" disabled>
+                                                    <i class="bi bi-heart-fill"></i>
+                                                </button>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <form action="${pageContext.request.contextPath}/add-to-wishlist" method="post" class="d-inline">
+                                                    <input type="hidden" name="id" value="${product.id}">
+                                                    <button type="submit" class="btn btn-outline-danger wishlist-btn"
+                                                            title="Thêm vào wishlist">
+                                                        <i class="bi bi-heart"></i>
+                                                    </button>
+                                                </form>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </c:when>
+
+                <c:otherwise>
+                    <!-- No Products Found -->
+                    <div class="text-center py-5">
+                        <i class="bi bi-search display-1 text-muted mb-3"></i>
+                        <h4 class="text-muted mb-3">Không tìm thấy sản phẩm nào</h4>
+                        <p class="text-muted mb-4">Hãy thử tìm kiếm với từ khóa khác hoặc xóa bộ lọc</p>
+                        <a href="${pageContext.request.contextPath}/shop" class="btn btn-primary">
+                            <i class="bi bi-arrow-left me-2"></i>Quay lại cửa hàng
+                        </a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </div>
+
+    <!-- New Arrivals Section -->
+    <c:if test="${not empty newArrivalsList}">
+        <div class="row mb-5">
+            <div class="col-12">
+                <h3 class="section-title">Hàng mới về</h3>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                    <c:forEach var="newProduct" items="${newArrivalsList}">
+                        <div class="col">
+                            <div class="product-card">
+                                <!-- New Badge -->
+                                <span class="featured-badge" style="background: #00b894;">
+                                    <i class="bi bi-newspaper me-1"></i>Mới
+                                </span>
+
+                                <!-- Product Image -->
+                                <a href="${pageContext.request.contextPath}/product?id=${newProduct.id}">
+                                    <c:choose>
+                                        <c:when test="${not empty newProduct.imagesTop}">
+                                            <img src="${newProduct.imagesTop}"
+                                                 alt="${newProduct.name}"
+                                                 class="product-img">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="${pageContext.request.contextPath}/assets/img/default-product.jpg"
+                                                 alt="${newProduct.name}"
+                                                 class="product-img">
+                                        </c:otherwise>
+                                    </c:choose>
+                                </a>
+
+                                <!-- Product Info -->
+                                <div class="p-3">
+                                    <h5 class="product-name">
+                                        <a href="${pageContext.request.contextPath}/product?id=${newProduct.id}"
+                                           class="text-decoration-none text-dark">
+                                                ${newProduct.name}
+                                        </a>
+                                    </h5>
+
+                                    <p class="product-price">
+                                        <fmt:formatNumber value="${newProduct.price}"
+                                                          type="currency"
+                                                          currencySymbol="₫"
+                                                          maxFractionDigits="0"/>
+                                    </p>
+
+                                    <!-- Add to Cart Form -->
+                                    <form action="${pageContext.request.contextPath}/add-cart" method="get">
+                                        <input type="hidden" name="id" value="${newProduct.id}">
+                                        <input type="hidden" name="q" value="1">
+                                        <button type="submit" class="add-to-cart-btn">
+                                            <i class="bi bi-cart-plus me-1"></i>Thêm vào giỏ
+                                        </button>
+                                    </form>
+                                    <!-- Wishlist Button -->
+                                    <c:set var="isInWishlist" value="false" />
+                                    <c:if test="${not empty sessionScope.userId}">
+                                        <c:if test="${wishlistService.isInWishlist(sessionScope.id, product.id)}">
+                                            <c:set var="isInWishlist" value="true" />
+                                        </c:if>
+                                    </c:if>
+
+                                    <c:choose>
+                                        <c:when test="${empty sessionScope.id}">
+                                            <a href="${pageContext.request.contextPath}/login"
+                                               class="btn btn-outline-danger wishlist-btn"
+                                               title="Thêm vào wishlist">
+                                                <i class="bi bi-heart"></i>
+                                            </a>
+                                        </c:when>
+                                        <c:when test="${isInWishlist}">
+                                            <button class="btn btn-danger wishlist-btn" disabled>
+                                                <i class="bi bi-heart-fill"></i>
+                                            </button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <form action="${pageContext.request.contextPath}/add-to-wishlist" method="post" class="d-inline">
+                                                <input type="hidden" name="id" value="${product.id}">
+                                                <button type="submit" class="btn btn-outline-danger wishlist-btn"
+                                                        title="Thêm vào wishlist">
+                                                    <i class="bi bi-heart"></i>
+                                                </button>
+                                            </form>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </div>
                         </div>
-                        <div class="cart-actions"><a href="#" class="link-more">Xóa</a></div>
-                    </li>
-                </ul>
-            </div>
-            <div class="cart-footer">
-                <div class="cart-total"><span>Tổng</span><strong>6.490.000₫</strong></div>
-                <div class="cart-cta">
-                    <a class="btn btn-ghost" href="#">Tiếp tục mua</a>
-                    <a class="btn btn-primary" href="#">Thanh toán</a>
+                    </c:forEach>
                 </div>
             </div>
-        </aside>
+        </div>
+    </c:if>
+
+    <!-- Categories Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="section-title">Danh mục sản phẩm</h3>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <a href="${pageContext.request.contextPath}/shop?category=1"
+                       class="text-decoration-none">
+                        <div class="card text-center border-0 shadow-sm h-100">
+                            <div class="card-body p-4">
+                                <div class="mb-3">
+                                    <i class="bi bi-phone display-4 text-primary"></i>
+                                </div>
+                                <h5 class="card-title">Công nghệ mini</h5>
+                                <p class="text-muted small">Thiết bị nhỏ gọn, tiện lợi</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="${pageContext.request.contextPath}/shop?category=2"
+                       class="text-decoration-none">
+                        <div class="card text-center border-0 shadow-sm h-100">
+                            <div class="card-body p-4">
+                                <div class="mb-3">
+                                    <i class="bi bi-cpu display-4 text-success"></i>
+                                </div>
+                                <h5 class="card-title">Thiết bị AI</h5>
+                                <p class="text-muted small">Thông minh, tự động hóa</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="${pageContext.request.contextPath}/shop?category=3"
+                       class="text-decoration-none">
+                        <div class="card text-center border-0 shadow-sm h-100">
+                            <div class="card-body p-4">
+                                <div class="mb-3">
+                                    <i class="bi bi-tools display-4 text-warning"></i>
+                                </div>
+                                <h5 class="card-title">Phụ kiện sáng tạo</h5>
+                                <p class="text-muted small">Độc đáo, sáng tạo</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="${pageContext.request.contextPath}/shop?category=4"
+                       class="text-decoration-none">
+                        <div class="card text-center border-0 shadow-sm h-100">
+                            <div class="card-body p-4">
+                                <div class="mb-3">
+                                    <i class="bi bi-controller display-4 text-danger"></i>
+                                </div>
+                                <h5 class="card-title">Đồ chơi công nghệ</h5>
+                                <p class="text-muted small">Giải trí thông minh</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
+
 <!-- ================= Footer ================= -->
 <footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
     <div class="container">
         <div class="row gy-4">
             <!-- Logo + Giới thiệu -->
             <div class="col-md-4">
-                <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
+                <a href="${pageContext.request.contextPath}/" class="d-flex align-items-center mb-3 text-decoration-none">
                     <i class="bi bi-camera fs-3 text-primary me-2"></i>
                     <span class="fw-bold fs-5 text-primary">TechX</span>
                 </a>
@@ -387,10 +549,10 @@
             <div class="col-md-2">
                 <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
                 <ul class="list-unstyled">
-                    <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
-                    <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
-                    <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
-                    <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shop?category=1" class="footer-link">Công nghệ mini</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shop?category=2" class="footer-link">Thiết bị AI</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shop?category=3" class="footer-link">Phụ kiện sáng tạo</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shop?category=4" class="footer-link">Đồ chơi công nghệ</a></li>
                 </ul>
             </div>
 
@@ -398,21 +560,19 @@
             <div class="col-md-2">
                 <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
                 <ul class="list-unstyled">
-                    <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-                    <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
-                    <li><a href="/pages/order-history.jsp" class="footer-link">Theo dõi đơn hàng</a></li>
-                    <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
+                    <li><a href="${pageContext.request.contextPath}/contact" class="footer-link">Liên hệ</a></li>
+                    <li><a href="${pageContext.request.contextPath}/faq" class="footer-link">Câu hỏi thường gặp</a></li>
+                    <li><a href="${pageContext.request.contextPath}/cart" class="footer-link">Giỏ hàng</a></li>
+                    <li><a href="${pageContext.request.contextPath}/checkout" class="footer-link">Thanh toán</a></li>
                 </ul>
             </div>
 
             <!-- Liên hệ -->
             <div class="col-md-4">
                 <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
-                <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí
-                    Minh
-                </p>
+                <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh</p>
                 <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
-                <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
+                <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@techx.vn</p>
                 <div class="mt-3">
                     <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
                     <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
@@ -429,226 +589,160 @@
     </div>
 </footer>
 
-<!-- ✅ Bootstrap Bundle -->
+<!-- Bootstrap Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-    // ==============================
-    // offer.js
-    // Kích hoạt hiệu ứng cuộn (fade-in) cho từng section
-    // ==============================
+    // Sort functionality
+    document.getElementById('sortSelect').addEventListener('change', function() {
+        const sortValue = this.value;
+        const url = new URL(window.location.href);
+        url.searchParams.set('sort', sortValue);
+        window.location.href = url.toString();
+    });
 
-    const categories = document.querySelectorAll('.category-item');
-    const productLists = document.querySelectorAll('.product-list');
+    // Set current sort value
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentSort = urlParams.get('sort') || 'newest';
+    document.getElementById('sortSelect').value = currentSort;
 
-    categories.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // remove old active
-            categories.forEach(b => b.classList.remove('active'));
-            productLists.forEach(p => p.classList.remove('active'));
+    // Add to cart with AJAX
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const form = this.closest('form');
+            const formData = new FormData(form);
 
-            // add new active
-            btn.classList.add('active');
-            document.getElementById(btn.dataset.category).classList.add('active');
+            // Get product ID and quantity
+            const productId = formData.get('id');
+            const quantity = formData.get('q');
+
+            // Disable button during request
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="bi bi-hourglass-split me-1"></i>Đang thêm...';
+            this.disabled = true;
+
+            // Send AJAX request
+            fetch(`${pageContext.request.contextPath}/add-cart?id=${productId}&q=${quantity}`, {
+                method: 'GET'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        showToast('Đã thêm sản phẩm vào giỏ hàng!');
+                        updateCartCount(parseInt(quantity));
+
+                        // Redirect to cart page after 2 seconds if needed
+                        setTimeout(() => {
+                            if (confirm('Bạn có muốn xem giỏ hàng?')) {
+                                window.location.href = `${pageContext.request.contextPath}/cart`;
+                            }
+                        }, 1500);
+                    } else {
+                        showToast('Có lỗi xảy ra. Vui lòng thử lại!', false);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showToast('Lỗi kết nối. Vui lòng thử lại!', false);
+                })
+                .finally(() => {
+                    // Restore button state
+                    this.innerHTML = originalText;
+                    this.disabled = false;
+                });
         });
     });
 
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                }
-            });
-        }, {threshold: 0.2});
-
-        const sections = document.querySelectorAll('.offer, .hero-content, .categories');
-        sections.forEach((el) => observer.observe(el));
-
-        // Xử lý nút category chọn active
-        const catBtns = document.querySelectorAll('.cat-btn');
-        catBtns.forEach((btn) => {
-            btn.addEventListener('click', () => {
-                catBtns.forEach((b) => b.classList.remove('active'));
-                btn.classList.add('active');
-            });
-        });
-
-        // Hiệu ứng nút CTA trong hero (scroll xuống offers)
-        const exploreBtn = document.querySelector('.btn-main');
-        exploreBtn.addEventListener('click', () => {
-            document.querySelector('.offers').scrollIntoView({behavior: 'smooth'});
-        });
-    });
-    // ================= Carousel Logic =================
-    const track = document.querySelector(".carousel-track");
-    const prevBtn = document.querySelector(".carousel-btn.prev");
-    const nextBtn = document.querySelector(".carousel-btn.next");
-
-    let currentSlide = 0;
-    const items = document.querySelectorAll(".product-card");
-    const totalItems = items.length;
-    const visibleCount = 4;
-    const totalSlides = Math.ceil(totalItems / visibleCount);
-
-    function updateCarousel() {
-        const width = items[0].offsetWidth + 20; // khoảng cách gap
-        const offset = currentSlide * width * visibleCount;
-        track.style.transform = `translateX(-${offset}px)`;
-    }
-
-    nextBtn.addEventListener("click", () => {
-        if (currentSlide < totalSlides - 1) currentSlide++;
-        else currentSlide = 0;
-        updateCarousel();
-    });
-
-    prevBtn.addEventListener("click", () => {
-        if (currentSlide > 0) currentSlide--;
-        else currentSlide = totalSlides - 1;
-        updateCarousel();
-    });
-
-</script>
-<script>
-    /* ================================
-       GÁN ẢNH SẢN PHẨM TỰ ĐỘNG (JS)
-    ================================ */
-    const IMG = {
-        // OFFER
-        OFFER_GALAXY: "https://cdn-media.sforum.vn/storage/app/media/ctvseo_phung/chip-dien-thoai-manh-nhat/chip-dien-thoai-manh-nhat-3.jpg",
-        OFFER_TV: "https://cdn.tgdd.vn//News/1174380//Thuong-hieu-tivi-cao-cap-nhat-hien-nay-9-730x404.jpg",
-        OFFER_HOME: "https://s3-api.fpt.vn/fptvn-storage/2025-04-15/1744684695_xu-huong-nha-thong-minh-smart-home-trong-tuong-lai.png",
-
-        // FEATURED PRODUCTS
-        MINI_PROJECTOR: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS21nn7-0LPqF3sLCzLJvMPcIapG8Udr1f6lA&s",
-        HOLOGRAM_FAN: "https://sgp1.digitaloceanspaces.com/adtechasia.sg/wp-content/uploads/2024/11/11203510/65cm-hologram-fan-with-high-resolutionc1f738f3-fb00-4746-a621-21f39a90c432-3.jpg",
-        MINI_PRINTER: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLZWS2LeMYpX5MULT8FmdiHStXC2Rgm59NKQ&s",
-        GRAVASTAR: "https://azaudio.vn/wp-content/uploads/2024/09/gravastar-mars-pro-black-6.jpg",
-        INSTA_PAL: "https://instax.com/pal/assets/images/pic_pal_green_01.png",
-        MINI_DRONE: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTK1uXvEH5JzgR53H8biyV2MBWkiHtC7mG_w&s",
-        FREESTYLE: "data:image/jpeg;base64,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",
-        AIR_PURIFIER: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq3uojjbnD60bDRY8X6Iw-rU-fPCuHekA2eQ&s",
-        PIXEL_CLOCK: "https://cdn.shopify.com/s/files/1/0136/3119/3188/files/7_5346e792-b108-422d-b173-219ec426ee2e.jpg?v=1698399241",
-
-        // MOBILE
-        JELLY_STAR: "https://www.unihertz.com/cdn/shop/files/JellyStar_Blue_01_1800x1800.jpg",
-        NOTHING_MINI: "https://cdn.tgdd.vn/Files/2023/08/01/1538790/nothing-phone-2-transparent.jpg",
-
-        // TV
-        ROKID_MAX: "https://cdn.shopify.com/s/files/1/0709/4422/0017/files/Rokid_Max_3_600x600.jpg",
-        TRANSPARENT_TV: "https://images.samsung.com/is/image/samsung/assets/global/about-us/brand/logo/transparent-oled-tv.jpg",
-
-        // HOME
-        ROBOT_WINDOW: "https://cdn.tgdd.vn/Files/2023/07/10/1536318/robot-lau-kinh.jpg",
-        FOLDIMATE: "https://cdn.tgdd.vn/Files/2023/08/09/1539702/foldimate.jpg",
-
-        // IT
-        TRANSPARENT_KEYBOARD: "https://m.media-amazon.com/images/I/71rLvsNnBiL._AC_SL1500_.jpg",
-        RGB_PAD: "https://cdn.tgdd.vn/Files/2023/08/01/1538754/mousepad-rgb-02.jpg",
-
-        // WEARABLE
-        OURA: "https://m.media-amazon.com/images/I/61chvE3hIfL._AC_SL1500_.jpg",
-        AI_GLASSES: "https://cdn.tgdd.vn/Files/2023/08/15/1541101/kinh-ai-translation.jpg",
-
-        // ACCESSORY
-        SOLAR_CHARGER: "https://cdn.tgdd.vn/Files/2022/11/18/1488550/solar-charger.jpg",
-        FLYING_CHARGER: "https://cdn.tgdd.vn/Files/2023/06/01/1531802/floating-charger.jpg",
-
-        // RECOMMENDED
-        POCKET_PROJECTOR: "https://cdn.tgdd.vn/Files/2023/06/10/1532709/pocket-projector.jpg",
-        MINI_HANDHELD: "https://cdn.tgdd.vn/Files/2023/08/01/1538802/mini-console.jpg",
-        MINI_SPEAKER: "https://cdn.tgdd.vn/Files/2023/08/02/1538933/mini-ai-speaker.jpg",
-        AI_LAMP: "https://cdn.tgdd.vn/Files/2023/07/30/1538665/ai-smart-lamp.jpg",
-        AIR_GESTURE: "https://cdn.tgdd.vn/Files/2023/08/03/1539041/ai-gesture-controller.jpg"
-    };
-
-    // Map class → ảnh tương ứng
-    const mapping = {
-        ".img-mini-projector": IMG.MINI_PROJECTOR,
-        ".img-hologram-fan": IMG.HOLOGRAM_FAN,
-        ".img-mini-printer": IMG.MINI_PRINTER,
-        ".img-gravastar": IMG.GRAVASTAR,
-        ".img-instax-pal": IMG.INSTA_PAL,
-        ".img-mini-drone": IMG.MINI_DRONE,
-        ".img-freestyle": IMG.FREESTYLE,
-        ".img-airmini": IMG.AIR_PURIFIER,
-        ".img-pixelclock": IMG.PIXEL_CLOCK,
-        ".img-jellystar": IMG.JELLY_STAR,
-        ".img-nothingmini": IMG.NOTHING_MINI,
-        ".img-rokid": IMG.ROKID_MAX,
-        ".img-transparenttv": IMG.TRANSPARENT_TV,
-        ".img-robotwindow": IMG.ROBOT_WINDOW,
-        ".img-foldimate": IMG.FOLDIMATE,
-        ".img-transkb": IMG.TRANSPARENT_KEYBOARD,
-        ".img-rgbpad": IMG.RGB_PAD,
-        ".img-oura": IMG.OURA,
-        ".img-aiglass": IMG.AI_GLASSES,
-        ".img-solarcharger": IMG.SOLAR_CHARGER,
-        ".img-flyingcharger": IMG.FLYING_CHARGER,
-        "#offer-galaxy": IMG.OFFER_GALAXY,
-        "#offer-tv": IMG.OFFER_TV,
-        "#offer-home": IMG.OFFER_HOME,
-        "#img-pocket-projector": IMG.POCKET_PROJECTOR,
-        "#img-mini-handheld": IMG.MINI_HANDHELD,
-        "#img-mini-speaker": IMG.MINI_SPEAKER,
-        "#img-ai-lamp": IMG.AI_LAMP,
-        "#img-air-gesture": IMG.AIR_GESTURE
-    };
-
-    // Gán src cho từng phần tử tồn tại
-    for (const [selector, src] of Object.entries(mapping)) {
-        const el = document.querySelector(selector);
-        if (el) el.src = src;
-    }
-</script>
-<script>
-    document.querySelectorAll('.product-scroll').forEach(scrollArea => {
-        const list = scrollArea.querySelector('.product-list');
-        const thumb = scrollArea.querySelector('.scroll-thumb');
-        const track = scrollArea.querySelector('.scroll-track');
-
-        function updateThumb() {
-            const visible = list.clientWidth;
-            const total = list.scrollWidth;
-            const scrollLeft = list.scrollLeft;
-
-            // Chiều rộng thanh thumb tỉ lệ với phần hiển thị
-            const thumbWidth = (visible / total) * track.clientWidth;
-            thumb.style.width = `${thumbWidth}px`;
-
-            // Vị trí thumb theo phần đã cuộn
-            const maxScroll = total - visible;
-            const maxMove = track.clientWidth - thumbWidth;
-            const move = (scrollLeft / maxScroll) * maxMove;
-
-            thumb.style.transform = `translateX(${move}px)`;
+    // Toast notification
+    function showToast(message, isSuccess = true) {
+        // Create toast element if it doesn't exist
+        let toastContainer = document.getElementById('toast-container');
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.id = 'toast-container';
+            toastContainer.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1050;
+            `;
+            document.body.appendChild(toastContainer);
         }
 
-        // Cập nhật khi load & khi cuộn
-        updateThumb();
-        list.addEventListener('scroll', updateThumb);
-        window.addEventListener('resize', updateThumb);
-    });
+        const toastId = 'toast-' + Date.now();
+        const toast = document.createElement('div');
+        toast.id = toastId;
+        toast.className = 'toast show';
+        toast.style.cssText = `
+            background: ${isSuccess ? '#28a745' : '#dc3545'};
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: slideIn 0.3s ease;
+        `;
+
+        toast.innerHTML = `
+            <i class="bi ${isSuccess ? 'bi-check-circle-fill' : 'bi-x-circle-fill'} me-2"></i>
+            <span>${message}</span>
+        `;
+
+        toastContainer.appendChild(toast);
+
+        // Remove toast after 3 seconds
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
+        }, 3000);
+    }
+
+    // Update cart count in header
+    function updateCartCount(addedQty) {
+        const cartCountElements = document.querySelectorAll('.cart-count, .cart-badge');
+        cartCountElements.forEach(element => {
+            let currentCount = parseInt(element.textContent) || 0;
+            element.textContent = currentCount + addedQty;
+            element.style.display = 'inline-block';
+
+            // Add animation
+            element.classList.add('cart-updated');
+            setTimeout(() => {
+                element.classList.remove('cart-updated');
+            }, 1000);
+        });
+    }
+
+    // Add CSS animations
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        .cart-updated {
+            animation: cartPulse 0.5s ease-in-out;
+        }
+
+        @keyframes cartPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+    `;
+    document.head.appendChild(style);
 </script>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const radios = [
-            document.getElementById("slide-1"),
-            document.getElementById("slide-2"),
-            document.getElementById("slide-3")
-        ];
-
-        let index = 0;
-        const total = radios.length;
-
-        setInterval(() => {
-            index = (index + 1) % total;   // chuyển vòng lặp 1 → 2 → 3 → 1
-            radios[index].checked = true;  // kích hoạt slide tương ứng
-        }, 3000);  // 5 giây đổi slide
-    });
-</script>
-
 </body>
-
 </html>
