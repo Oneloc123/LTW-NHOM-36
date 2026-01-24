@@ -16,6 +16,8 @@ public class Product implements Serializable {
     private String createAt;
     private String updateAt;
     private List<String> images = new ArrayList<>();
+    private double avgRating;
+    private int ratingCount;
 
 
     public Product(int id, String name, int categoryID, String shortDescription, String fullDescription, int price, boolean isFeatured, String createAt, String updateAt, List<String> images) {
@@ -40,6 +42,21 @@ public class Product implements Serializable {
         return images.get(0);
     }
 
+    public double getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(double avgRating) {
+        this.avgRating = avgRating;
+    }
+
+    public int getRatingCount() {
+        return ratingCount;
+    }
+
+    public void setRatingCount(int ratingCount) {
+        this.ratingCount = ratingCount;
+    }
 
     public void setImages(List<String> images) {
         this.images = images;

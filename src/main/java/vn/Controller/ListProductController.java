@@ -39,7 +39,7 @@ public class ListProductController extends HttpServlet {
 
         } else {
             // Get all products
-            list = ps.getAllProducts();
+            list = ps.getListProduct();
         }
 
         // Apply sorting if specified
