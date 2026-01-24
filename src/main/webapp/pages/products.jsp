@@ -322,36 +322,23 @@
                                             </button>
                                         </form>
                                         <!-- Wishlist Button -->
-                                        <c:set var="isInWishlist" value="false" />
                                         <c:if test="${not empty sessionScope.id}">
-                                            <c:if test="${wishlistService.isInWishlist(sessionScope.id, product.id)}">
-                                                <c:set var="isInWishlist" value="true" />
-                                            </c:if>
-                                        </c:if>
-
-                                        <c:choose>
-                                            <c:when test="${empty sessionScope.id}">
-                                                <a href="${pageContext.request.contextPath}/login"
-                                                   class="btn btn-outline-danger wishlist-btn"
-                                                   title="Thêm vào wishlist">
-                                                    <i class="bi bi-heart"></i>
-                                                </a>
-                                            </c:when>
-                                            <c:when test="${isInWishlist}">
-                                                <button class="btn btn-danger wishlist-btn" disabled>
-                                                    <i class="bi bi-heart-fill"></i>
+                                            <form action="${pageContext.request.contextPath}/wishlist" method="post" class="d-inline">
+                                                <input type="hidden" name="action" value="add">
+                                                <input type="hidden" name="productId" value="${product.id}">
+                                                <button type="submit" class="btn btn-outline-danger btn-sm"
+                                                        title="Thêm vào danh sách yêu thích">
+                                                    <i class="bi bi-heart"></i> Yêu thích
                                                 </button>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <form action="${pageContext.request.contextPath}/add-to-wishlist" method="post" class="d-inline">
-                                                    <input type="hidden" name="id" value="${product.id}">
-                                                    <button type="submit" class="btn btn-outline-danger wishlist-btn"
-                                                            title="Thêm vào wishlist">
-                                                        <i class="bi bi-heart"></i>
-                                                    </button>
-                                                </form>
-                                            </c:otherwise>
-                                        </c:choose>
+                                            </form>
+                                        </c:if>
+                                        <c:if test="${empty sessionScope.id}">
+                                            <a href="${pageContext.request.contextPath}/login"
+                                               class="btn btn-outline-danger btn-sm"
+                                               title="Đăng nhập để thêm vào wishlist">
+                                                <i class="bi bi-heart"></i> Yêu thích
+                                            </a>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
