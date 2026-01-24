@@ -414,12 +414,13 @@
 
                                     <!-- Add to Cart Form -->
                                     <form action="${pageContext.request.contextPath}/add-cart" method="get">
-                                        <input type="hidden" name="id" value="${newProduct.id}">
+                                        <input type="hidden" name="id" value="${product.id}">
                                         <input type="hidden" name="q" value="1">
                                         <button type="submit" class="add-to-cart-btn">
                                             <i class="bi bi-cart-plus me-1"></i>Thêm vào giỏ
                                         </button>
                                     </form>
+
                                     <!-- Wishlist Button -->
                                     <c:set var="isInWishlist" value="false" />
                                     <c:if test="${not empty sessionScope.userId}">
@@ -592,157 +593,5 @@
 <!-- Bootstrap Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-    // Sort functionality
-    document.getElementById('sortSelect').addEventListener('change', function() {
-        const sortValue = this.value;
-        const url = new URL(window.location.href);
-        url.searchParams.set('sort', sortValue);
-        window.location.href = url.toString();
-    });
-
-    // Set current sort value
-    const urlParams = new URLSearchParams(window.location.search);
-    const currentSort = urlParams.get('sort') || 'newest';
-    document.getElementById('sortSelect').value = currentSort;
-
-    // Add to cart with AJAX
-    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const form = this.closest('form');
-            const formData = new FormData(form);
-
-            // Get product ID and quantity
-            const productId = formData.get('id');
-            const quantity = formData.get('q');
-
-            // Disable button during request
-            const originalText = this.innerHTML;
-            this.innerHTML = '<i class="bi bi-hourglass-split me-1"></i>Đang thêm...';
-            this.disabled = true;
-
-            // Send AJAX request
-            fetch(`${pageContext.request.contextPath}/add-cart?id=${productId}&q=${quantity}`, {
-                method: 'GET'
-            })
-                .then(response => {
-                    if (response.ok) {
-                        showToast('Đã thêm sản phẩm vào giỏ hàng!');
-                        updateCartCount(parseInt(quantity));
-
-                        // Redirect to cart page after 2 seconds if needed
-                        setTimeout(() => {
-                            if (confirm('Bạn có muốn xem giỏ hàng?')) {
-                                window.location.href = `${pageContext.request.contextPath}/cart`;
-                            }
-                        }, 1500);
-                    } else {
-                        showToast('Có lỗi xảy ra. Vui lòng thử lại!', false);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    showToast('Lỗi kết nối. Vui lòng thử lại!', false);
-                })
-                .finally(() => {
-                    // Restore button state
-                    this.innerHTML = originalText;
-                    this.disabled = false;
-                });
-        });
-    });
-
-    // Toast notification
-    function showToast(message, isSuccess = true) {
-        // Create toast element if it doesn't exist
-        let toastContainer = document.getElementById('toast-container');
-        if (!toastContainer) {
-            toastContainer = document.createElement('div');
-            toastContainer.id = 'toast-container';
-            toastContainer.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                z-index: 1050;
-            `;
-            document.body.appendChild(toastContainer);
-        }
-
-        const toastId = 'toast-' + Date.now();
-        const toast = document.createElement('div');
-        toast.id = toastId;
-        toast.className = 'toast show';
-        toast.style.cssText = `
-            background: ${isSuccess ? '#28a745' : '#dc3545'};
-            color: white;
-            padding: 12px 20px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            animation: slideIn 0.3s ease;
-        `;
-
-        toast.innerHTML = `
-            <i class="bi ${isSuccess ? 'bi-check-circle-fill' : 'bi-x-circle-fill'} me-2"></i>
-            <span>${message}</span>
-        `;
-
-        toastContainer.appendChild(toast);
-
-        // Remove toast after 3 seconds
-        setTimeout(() => {
-            toast.style.animation = 'slideOut 0.3s ease';
-            setTimeout(() => {
-                if (toast.parentNode) {
-                    toast.parentNode.removeChild(toast);
-                }
-            }, 300);
-        }, 3000);
-    }
-
-    // Update cart count in header
-    function updateCartCount(addedQty) {
-        const cartCountElements = document.querySelectorAll('.cart-count, .cart-badge');
-        cartCountElements.forEach(element => {
-            let currentCount = parseInt(element.textContent) || 0;
-            element.textContent = currentCount + addedQty;
-            element.style.display = 'inline-block';
-
-            // Add animation
-            element.classList.add('cart-updated');
-            setTimeout(() => {
-                element.classList.remove('cart-updated');
-            }, 1000);
-        });
-    }
-
-    // Add CSS animations
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-
-        .cart-updated {
-            animation: cartPulse 0.5s ease-in-out;
-        }
-
-        @keyframes cartPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
-        }
-    `;
-    document.head.appendChild(style);
-</script>
 </body>
 </html>
