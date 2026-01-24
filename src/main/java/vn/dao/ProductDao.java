@@ -8,8 +8,8 @@ import java.util.*;
 public class ProductDao extends BaseDao{
     static Map<Integer,Product> data=new HashMap<Integer,Product>();
     /* getListProduct
-    *   - Lấy dữ liệu từ DataBase ra sử dụng
-    * */
+     *   - Lấy dữ liệu từ DataBase ra sử dụng
+     * */
 //    public List<Product> getListProduct() {
 //    return new ArrayList<>(data.values());
 //    }
@@ -333,9 +333,9 @@ public class ProductDao extends BaseDao{
     public List<Product> findBykeyWord(String keyword) {
         return get().withHandle(h ->
                 h.createQuery(
-                        "SELECT id, name, category_id, short_description, full_description, price, is_featured, created_at, updated_at " +
-                                "FROM products " +
-                                "WHERE name LIKE :keyword"
+                                "SELECT id, name, category_id, short_description, full_description, price, is_featured, created_at, updated_at " +
+                                        "FROM products " +
+                                        "WHERE name LIKE :keyword"
                         )
                         .bind("keyword", "%" + keyword + "%")
                         .mapToBean(Product.class)

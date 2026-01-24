@@ -11,7 +11,7 @@ public class ProductService {
     ProductDao productDao = new ProductDao();
     private ImageDao imageDao = new ImageDao();
     public List<Product> getListProduct() {
-    return productDao.getListProduct();
+        return productDao.getListProduct();
     }
     public List<Product> getNewArrivalsList() {return productDao.getLatestProducts(4);}
     public List<Product> filterProduct(String keyword) {

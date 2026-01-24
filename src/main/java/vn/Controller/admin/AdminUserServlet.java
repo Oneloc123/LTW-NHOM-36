@@ -24,12 +24,6 @@ public class AdminUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("id") == null || session.getAttribute("role") == null) {
-            req.getRequestDispatcher("/pages/login.jsp").forward(req, resp);
-            return;
-        }
-
         String action = req.getParameter("action");
 
         if (action == null) {

@@ -167,107 +167,69 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
-<!-- Main Content -->
-<main class="container py-4">
-    <!-- Filter Section -->
-    <div class="filter-section">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <h4 class="mb-3">
-                    <i class="bi bi-funnel me-2"></i>Lọc sản phẩm
-                </h4>
-                <form action="${pageContext.request.contextPath}/shop" method="get" class="row g-2">
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="keyword"
-                               placeholder="Từ khóa" value="${param.keyword}">
-                    </div>
-                    <div class="col-md-4">
-                        <select class="form-select" name="category">
-                            <option value="">Tất cả danh mục</option>
-                            <option value="1" ${param.category == '1' ? 'selected' : ''}>Công nghệ mini</option>
-                            <option value="2" ${param.category == '2' ? 'selected' : ''}>Thiết bị AI</option>
-                            <option value="3" ${param.category == '3' ? 'selected' : ''}>Phụ kiện sáng tạo</option>
-                            <option value="4" ${param.category == '4' ? 'selected' : ''}>Đồ chơi công nghệ</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <select class="form-select" name="featured">
-                            <option value="">Tất cả</option>
-                            <option value="true" ${param.featured == 'true' ? 'selected' : ''}>Sản phẩm nổi bật</option>
-                        </select>
-                    </div>
-                    <div class="col-12 mt-2">
-                        <button type="submit" class="btn btn-primary me-2">
-                            <i class="bi bi-filter me-1"></i>Lọc
-                        </button>
-                        <a href="${pageContext.request.contextPath}/shop" class="btn btn-outline-secondary">
-                            <i class="bi bi-x-circle me-1"></i>Xóa bộ lọc
-                        </a>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-6 text-end">
-                <div class="d-flex align-items-center justify-content-end">
-                    <span class="me-2">Sắp xếp:</span>
-                    <select class="form-select w-auto" id="sortSelect">
-                        <option value="newest">Mới nhất</option>
-                        <option value="price_asc">Giá: Thấp đến cao</option>
-                        <option value="price_desc">Giá: Cao đến thấp</option>
-                        <option value="name">Tên A-Z</option>
-                    </select>
-                </div>
-            </div>
+            <button id="filterBtn" class="filter-btn">Lọc</button>
         </div>
-    </div>
+    </section>
 
-    <!-- Categories Section -->
-    <div class="row mb-5">
-        <div class="col-12">
-            <h3 class="section-title">Danh mục sản phẩm</h3>
-            <div class="row g-4">
-                <div class="col-md-3">
-                    <a href="${pageContext.request.contextPath}/shop?category=1"
-                       class="text-decoration-none">
-                        <div class="card text-center border-0 shadow-sm h-100">
-                            <div class="card-body p-4">
-                                <div class="mb-3">
-                                    <i class="bi bi-phone display-4 text-primary"></i>
-                                </div>
-                                <h5 class="card-title">Công nghệ mini</h5>
-                                <p class="text-muted small">Thiết bị nhỏ gọn, tiện lợi</p>
-                            </div>
-                        </div>
-                    </a>
+    <!-- CATEGORY TABS -->
+    <section class="category-tabs">
+        <div class="tabs-container">
+            <button class="tab-btn active" data-category="all">Tất cả</button>
+            <button class="tab-btn" data-category="mini-tech">Công nghệ mini</button>
+            <button class="tab-btn" data-category="ai-device">Thiết bị AI</button>
+            <button class="tab-btn" data-category="fun-tech">Đồ chơi công nghệ</button>
+            <button class="tab-btn" data-category="creative">Phụ kiện sáng tạo</button>
+        </div>
+    </section>
+
+    <!-- PRODUCT GRID -->
+    <section class="product-grid" id="productGrid">
+        <c:forEach var="p" items="${list}">
+            <div class="product-card">
+                <img src="${p.imagesTop}" alt="${p.name}">
+
+                <h3>${p.name}</h3>
+
+                <div class="product-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <span>4.5 (12)</span>
                 </div>
 
-                <div class="col-md-3">
-                    <a href="${pageContext.request.contextPath}/shop?category=2"
-                       class="text-decoration-none">
-                        <div class="card text-center border-0 shadow-sm h-100">
-                            <div class="card-body p-4">
-                                <div class="mb-3">
-                                    <i class="bi bi-cpu display-4 text-success"></i>
-                                </div>
-                                <h5 class="card-title">Thiết bị AI</h5>
-                                <p class="text-muted small">Thông minh, tự động hóa</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                <div class="product-price">${p.getPrice()}</div>
 
-                <div class="col-md-3">
-                    <a href="${pageContext.request.contextPath}/shop?category=3"
-                       class="text-decoration-none">
-                        <div class="card text-center border-0 shadow-sm h-100">
-                            <div class="card-body p-4">
-                                <div class="mb-3">
-                                    <i class="bi bi-tools display-4 text-warning"></i>
-                                </div>
-                                <h5 class="card-title">Phụ kiện sáng tạo</h5>
-                                <p class="text-muted small">Độc đáo, sáng tạo</p>
-                            </div>
-                        </div>
-                    </a>
+                <p class="product-discount">
+                    Giá gốc <span class="product-old-price">7.139.000 VND</span>
+                </p>
+
+                <div class="card-footer">
+                    <!-- Nút mua (xem chi tiết) -->
+                    <button
+                            onclick="window.location.href='product?id=${p.getId()}'"
+                            class="buy-btn">
+                        Chi tiết
+                    </button>
+
+                    <!-- Nút thêm vào giỏ hàng -->
+                    <button
+                            class="add-cart-btn"
+                            onclick="window.location.href='add-to-cart?productId=${p.id}'"
+                    >
+                        <i class="fa fa-shopping-cart"></i>
+
+                    </button>
+
+                    <!-- Nút yêu thích -->
+                    <button
+                            class="wishlist-btn"
+                    >
+                        <i class="fa fa-heart-o"></i>
+                    </button>
+
+
                 </div>
 
                 <div class="col-md-3">
