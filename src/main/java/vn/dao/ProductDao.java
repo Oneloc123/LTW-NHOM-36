@@ -8,23 +8,6 @@ import java.util.*;
 public class ProductDao extends BaseDao {
     static Map<Integer, Product> data = new HashMap<Integer, Product>();
 
-    /* getListProduct
-     *   - Lấy dữ liệu từ DataBase ra sử dụng
-     * */
-//    public List<Product> getListProduct() {
-//    return new ArrayList<>(data.values());
-//    }
-//    public List<Product> getListProduct() {
-//        return get().withHandle(h ->
-//                h.createQuery(
-//                                "SELECT id, name, category_id, short_description, full_description, " +
-//                                        "price, is_featured, created_at, updated_at " +
-//                                        "FROM products"
-//                        )
-//                        .mapToBean(Product.class)
-//                        .list()
-//        );
-//    }
     public List<Product> getListProduct() {
         return get().withHandle(h -> {
 
@@ -143,6 +126,7 @@ public class ProductDao extends BaseDao {
             return map.values().stream().findFirst().orElse(null);
         });
     }
+
     public boolean addProduct(Product product) {
         try {
             get().useHandle(h ->
@@ -166,6 +150,7 @@ public class ProductDao extends BaseDao {
             return false;
         }
     }
+
     public void updateProduct(Product product) {
         get().useHandle(h ->
                 h.createUpdate(
@@ -188,6 +173,7 @@ public class ProductDao extends BaseDao {
                         .execute()
         );
     }
+
     public void deleteProductById(int id) {
         get().useHandle(h ->
                 h.createUpdate("DELETE FROM products WHERE id = :id")
@@ -195,6 +181,7 @@ public class ProductDao extends BaseDao {
                         .execute()
         );
     }
+
     public List<Product> filterProducts(String keyword, String category, String featured) {
         return get().withHandle(h -> {
 
@@ -238,6 +225,7 @@ public class ProductDao extends BaseDao {
             return query.mapToBean(Product.class).list();
         });
     }
+
     public List<Product> searchByName(String keyword) {
         return get().withHandle(h ->
                 h.createQuery(
@@ -338,6 +326,7 @@ public class ProductDao extends BaseDao {
                         .one()
         );
     }
+
     public List<Product> findBykeyWord(String keyword) {
         return get().withHandle(h ->
                 h.createQuery(
@@ -350,7 +339,6 @@ public class ProductDao extends BaseDao {
                         .list()
         );
     }
-}
     public void updateRating(int productId, int rating) {
         get().useHandle(h ->
                 h.createUpdate(
@@ -364,6 +352,9 @@ public class ProductDao extends BaseDao {
                         .execute()
         );
     }
-
-
 }
+
+
+
+
+
