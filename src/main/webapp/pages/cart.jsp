@@ -9,6 +9,9 @@
     <title>Giỏ Hàng</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/footer.css">
+    <link rel="stylesheet" href="/assets/css/home.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
     <style>
         .empty-cart {
             text-align: center;
@@ -37,6 +40,7 @@
     </style>
 </head>
 <body>
+
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <div class="container mt-4 mb-5">
