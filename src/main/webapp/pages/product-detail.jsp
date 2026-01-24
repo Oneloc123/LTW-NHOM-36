@@ -1,7 +1,5 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -76,9 +74,9 @@
           </div>
 
           <div class="price-row">
-              <div class="current-price" id="price">
-                  <fmt:formatNumber value="${p.price}" type="number" groupingUsed="true"/> đ
-              </div>
+            <div class="current-price" id="price">${p.price}</div>
+            <div class="old-price">1.099.000₫</div>
+            <div class="badge-sale">-18%</div>
           </div>
 
           <p class="product-desc">${p.fullDescription}</p>
@@ -103,7 +101,24 @@
               </div>
 
               <div id="specs" class="tab-panel" data-panel style="display:none">
-                ${p.fullDescription}
+                <table style="width:100%; border-collapse:collapse; font-size:14px">
+                  <tr>
+                    <td style="padding:8px; color:var(--muted)">Driver</td>
+                    <td style="padding:8px">10 mm dynamic</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:8px; color:var(--muted)">Bluetooth</td>
+                    <td style="padding:8px">5.3</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:8px; color:var(--muted)">Trọng lượng</td>
+                    <td style="padding:8px">45g</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:8px; color:var(--muted)">Chuẩn chống nước</td>
+                    <td style="padding:8px">IPX4</td>
+                  </tr>
+                </table>
               </div>
 
               <div id="reviews" class="tab-panel" data-panel style="display:none">
@@ -142,7 +157,24 @@
 
             <hr style="margin:12px 0">
             <h5 style="margin-bottom:10px">Sản phẩm tương tự</h5>
-
+            <div class="related-grid" id="relatedGrid">
+              <!-- static related cards -->
+              <div class="related-card">
+                <img src="/assets/img/rel-1.jpg" alt="related 1">
+                <h4>Humane AI Pin</h4>
+                <div class="price">6.490.000₫</div>
+              </div>
+              <div class="related-card">
+                <img src="/assets/img/rel-2.jpg" alt="related 2">
+                <h4>AI Smart Glasses</h4>
+                <div class="price">3.290.000₫</div>
+              </div>
+              <div class="related-card">
+                <img src="/assets/img/rel-3.jpg" alt="related 3">
+                <h4>Mini Projector</h4>
+                <div class="price">4.990.000₫</div>
+              </div>
+            </div>
           </aside>
         </div> <!-- /.product-detail-section -->
 
@@ -166,10 +198,8 @@
         <div>
           <div class="kv">Giá</div>
           <div style="display:flex; align-items:center; justify-content:space-between; margin-top:6px">
-              <div class="current-price" id="sidePrice">
-                  <fmt:formatNumber value="${p.price}" type="number" groupingUsed="true"/> đ
-              </div>
-
+            <div class="current-price" id="sidePrice">899.000₫</div>
+            <div class="old-price">1.099.000₫</div>
           </div>
         </div>
 
