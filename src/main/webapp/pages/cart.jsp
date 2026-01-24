@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="vi">
@@ -8,227 +9,230 @@
     <title>Giỏ Hàng</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/footer.css">
-    <link rel="stylesheet" href="../assets/css/header.css">
-    <link rel="stylesheet" href="../assets/css/cart.css">
-
+    <link rel="stylesheet" href="/assets/css/footer.css">
+    <link rel="stylesheet" href="/assets/css/home.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
+    <style>
+        .empty-cart {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .empty-cart i {
+            font-size: 5rem;
+            color: #dee2e6;
+            margin-bottom: 20px;
+        }
+        .card img {
+            object-fit: cover;
+            height: 80px;
+            width: 80px;
+        }
+        .cart-summary {
+            position: sticky;
+            top: 20px;
+        }
+        .cart-item {
+            transition: all 0.3s;
+        }
+        .cart-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
-<header class="header-scope navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
-    <div class="container">
-        <!-- Logo -->
-        <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="/index.jsp">
-            <i class="bi bi-camera fs-4 me-2"></i>
-            <span>TechX</span>
-        </a>
 
-        <!-- Toggle (mobile) -->
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="bi bi-list fs-2 text-primary"></i>
-        </button>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-        <!-- Nav links -->
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav align-items-lg-center gap-lg-3">
-                <li class="nav-item"><a class="nav-link " href="/home">Trang chủ</a></li>
-                <li class="nav-item"><a class="nav-link" href="../pages/shop.html">Cửa hàng</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/pages/products.html">Sản phẩm</a></li>
+<div class="container mt-4 mb-5">
+    <h2 class="mb-4">
+        <i class="bi bi-cart3 me-2"></i>Giỏ Hàng
+        <c:if test="${not empty cartItems}">
+            <span class="badge bg-primary ms-2">${totalQuantity} sản phẩm</span>
+        </c:if>
+    </h2>
 
-
-                <li class="nav-item"><a class="nav-link" href="../pages/blog.html">Blog</a></li>
-                <li class="nav-item"><a class="nav-link" href="../pages/contact.html">Liên hệ</a></li>
-                <li class="nav-item"><a class="nav-link" href="order-history.jsp">Đơn hàng</a></li>
-                 <!-- Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Tài khoản
-                        </a>
-                        <ul class="dropdown-menu border-0 shadow rounded-3" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/pages/profile.jsp">Thông tin tài khoản</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="../pages/wishList.html">Danh sách sản phẩm yêu thích</a></li>
-                            <li><a class="dropdown-item" href="../pages/notification.html">Xem thông báo</a></li>
-                            <li><a class="dropdown-item" href="../pages/viewed-product.html">Sản phẩm đã xem</a>
-                            </li>
-
-                        </ul>
-                    </li>
-            </ul>
-
-            <!-- Login & Cart -->
-            <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
-                <a href="/pages/login.jsp" class="btn btn-outline-primary btn-sm d-flex align-items-center">
-                    <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
-                </a>
-                <a href="/pages/cart.html" class="btn btn-primary btn-sm d-flex align-items-center">
-                    <i class="bi bi-cart3 me-1"></i> Giỏ hàng
+    <c:choose>
+        <c:when test="${empty cartItems}">
+            <!-- EMPTY CART -->
+            <div class="empty-cart">
+                <i class="bi bi-cart-x"></i>
+                <h3 class="text-muted mb-3">Giỏ hàng của bạn đang trống</h3>
+                <p class="text-muted mb-4">Hãy thêm sản phẩm để bắt đầu mua sắm</p>
+                <a href="${pageContext.request.contextPath}/" class="btn btn-primary btn-lg">
+                    <i class="bi bi-arrow-left me-2"></i>Tiếp tục mua sắm
                 </a>
             </div>
-        </div>
-    </div>
-</header>
+        </c:when>
 
-<!-- ===== CONTENT ===== -->
-<!-- EMPTY CART -->
-<c:if test="${empty cartItems}">
-    <div class="alert alert-info">
-        Giỏ hàng của bạn đang trống.
-    </div>
-</c:if>
+        <c:otherwise>
+            <div class="row g-4">
+                <!-- CART LIST -->
+                <div class="col-lg-8">
+                    <c:set var="subtotal" value="0"/>
 
-<div class="row g-4">
-    <!-- CART LIST -->
-    <div class="col-lg-8">
+                    <c:forEach var="item" items="${cartItems}">
+                        <c:set var="itemTotal" value="${item.price * item.quantity}"/>
+                        <c:set var="subtotal" value="${subtotal + itemTotal}"/>
+                        <c:set var="imageUrl" value="${requestScope['image_' += item.product.id]}"/>
 
-        <c:set var="subtotal" value="0"/>
+                        <div class="card mb-3 cart-item">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-md-2">
+                                        <img src="${not empty imageUrl ? imageUrl : 'https://via.placeholder.com/80x80?text=No+Image'}"
+                                             class="img-fluid rounded" alt="${item.product.name}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5 class="card-title mb-1">${item.product.name}</h5>
+                                        <p class="text-muted small mb-2">${item.product.shortDescription}</p>
+                                        <div class="d-flex align-items-center">
+                                            <span class="text-primary fw-bold">
+                                                <fmt:formatNumber value="${item.price}" type="currency" currencySymbol="₫" maxFractionDigits="0"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="d-flex align-items-center justify-content-end">
+                                            <!-- UPDATE FORM -->
+                                            <form action="${pageContext.request.contextPath}/cart-update" method="post" class="me-3">
+                                                <input type="hidden" name="productId" value="${item.product.id}">
+                                                <div class="input-group" style="width: 120px;">
+                                                    <button class="btn btn-outline-secondary" type="button" onclick="changeQuantity(this, -1)">-</button>
+                                                    <input type="number" name="quantity" value="${item.quantity}" min="1" max="99"
+                                                           class="form-control text-center" readonly>
+                                                    <button class="btn btn-outline-secondary" type="button" onclick="changeQuantity(this, 1)">+</button>
+                                                </div>
+                                            </form>
 
-        <c:forEach var="item" items="${cartItems}">
-            <div class="card mb-3">
-                <div class="card-body d-flex justify-content-between align-items-center">
+                                            <!-- REMOVE BUTTON -->
+                                            <a href="${pageContext.request.contextPath}/cart-remove?productId=${item.product.id}"
+                                               class="btn btn-outline-danger"
+                                               onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?')">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </div>
+                                        <div class="text-end mt-2">
+                                            <small class="text-muted">Tổng:</small>
+                                            <span class="fw-bold text-danger ms-2">
+                                                <fmt:formatNumber value="${itemTotal}" type="currency" currencySymbol="₫" maxFractionDigits="0"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
 
-                    <div class="d-flex align-items-center">
-                        <img src="${item.image}" width="80" class="me-3">
-                        <div>
-                            <h6 class="mb-1">${item.name}</h6>
-                            <small class="text-muted">
-                                Giá: ${item.price} ₫
-                            </small>
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="${pageContext.request.contextPath}/" class="btn btn-outline-primary">
+                            <i class="bi bi-arrow-left me-2"></i>Tiếp tục mua sắm
+                        </a>
+                        <a href="${pageContext.request.contextPath}/cart-remove-all" class="btn btn-outline-danger"
+                           onclick="return confirm('Bạn có chắc muốn xóa tất cả sản phẩm khỏi giỏ hàng?')">
+                            <i class="bi bi-trash me-2"></i>Xóa tất cả
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SUMMARY -->
+                <div class="col-lg-4">
+                    <div class="card cart-summary">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">
+                                <i class="bi bi-receipt me-2"></i>Tổng kết đơn hàng
+                            </h5>
+
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="text-muted">Tạm tính:</span>
+                                    <strong><fmt:formatNumber value="${subtotal}" type="currency" currencySymbol="₫" maxFractionDigits="0"/></strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="text-muted">Vận chuyển:</span>
+                                    <span class="text-success">Miễn phí</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="text-muted">Giảm giá:</span>
+                                    <span class="text-success">0₫</span>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="mb-0">Tổng cộng:</h5>
+                                <h4 class="text-danger mb-0">
+                                    <fmt:formatNumber value="${subtotal}" type="currency" currencySymbol="₫" maxFractionDigits="0"/>
+                                </h4>
+                            </div>
+
+                            <!-- THANH TOÁN BUTTON -->
+                            <button type="button" class="btn btn-primary w-100 btn-lg mb-3" onclick="checkout()">
+                                <i class="bi bi-credit-card me-2"></i>Thanh toán
+                            </button>
+
+                            <div class="text-center small text-muted">
+                                <i class="bi bi-shield-check text-success me-1"></i>
+                                Thanh toán an toàn • Đảm bảo hoàn tiền
+                            </div>
                         </div>
                     </div>
 
-                    <div class="d-flex align-items-center">
-                        <!-- UPDATE -->
-                        <form action="${pageContext.request.contextPath}/cart-update"
-                              method="post" class="me-2">
-                            <input type="hidden" name="productId" value="${item.productId}">
-                            <input type="number"
-                                   name="quantity"
-                                   value="${item.quantity}"
-                                   min="1"
-                                   class="form-control text-center"
-                                   style="width:70px"
-                                   onchange="this.form.submit()">
-                        </form>
-
-                        <!-- REMOVE -->
-                        <a href="${pageContext.request.contextPath}/cart-remove?productId=${item.productId}"
-                           class="btn btn-outline-danger">
-                            <i class="bi bi-trash"></i>
-                        </a>
+                    <!-- PROMO CODE -->
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h6 class="card-title mb-3">
+                                <i class="bi bi-tag me-2"></i>Mã giảm giá
+                            </h6>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Nhập mã giảm giá">
+                                <button class="btn btn-outline-secondary" type="button">Áp dụng</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <c:set var="subtotal" value="${subtotal + item.total}"/>
-        </c:forEach>
-
-    </div>
-
-    <!-- SUMMARY -->
-    <div class="col-lg-4">
-        <div class="card">
-            <div class="card-body">
-                <h5>Tổng kết đơn hàng</h5>
-
-                <div class="d-flex justify-content-between mb-2">
-                    <span>Tạm tính:</span>
-                    <strong>${subtotal} ₫</strong>
-                </div>
-
-                <div class="d-flex justify-content-between mb-2">
-                    <span>Vận chuyển:</span>
-                    <span>Miễn phí</span>
-                </div>
-
-                <hr>
-
-                <div class="d-flex justify-content-between mb-3">
-                    <strong>Tổng cộng:</strong>
-                    <strong class="text-danger">${subtotal} ₫</strong>
-                </div>
-
-                <c:if test="${not empty cartItems}">
-                    <form action="${pageContext.request.contextPath}/checkout" method="post">
-                        <button type="submit" class="btn btn-primary w-100">
-                            Thanh toán
-                        </button>
-                    </form>
-                </c:if>
-            </div>
-        </div>
-    </div>
-</div>
+        </c:otherwise>
+    </c:choose>
 </div>
 
-<footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
-    <div class="container">
-        <div class="row gy-4">
-            <!-- Logo + Giới thiệu -->
-            <div class="col-md-4">
-                <a href="/index.jsp" class="d-flex align-items-center mb-3 text-decoration-none">
-                    <i class="bi bi-camera fs-3 text-primary me-2"></i>
-                    <span class="fw-bold fs-5 text-primary">TechX</span>
-                </a>
-                <p class="text-muted">
-                    Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
-                    Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
-                </p>
-            </div>
+<!-- Thêm phần footer nếu cần -->
 
-            <!-- Danh mục -->
-            <div class="col-md-2">
-                <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
-                <ul class="list-unstyled">
-                    <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
-                    <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
-                    <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
-                    <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
-                </ul>
-            </div>
-
-            <!-- Hỗ trợ -->
-            <div class="col-md-2">
-                <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
-                <ul class="list-unstyled">
-                    <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-                    <li><a href="/pages/forgot-password.jsp" class="footer-link">Quên mật khẩu</a></li>
-                    <li><a href="/pages/order-history.jsp" class="footer-link">Theo dõi đơn hàng</a></li>
-                    <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
-                </ul>
-            </div>
-
-            <!-- Liên hệ -->
-            <div class="col-md-4">
-                <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
-                <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh</p>
-                <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
-                <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
-                <div class="mt-3">
-                    <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
-                    <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
-                </div>
-            </div>
-        </div>
-
-        <hr class="mt-4 mb-3">
-        <div class="text-center small text-muted">
-            © 2025 <strong>TechX</strong>. All rights reserved.
-        </div>
-    </div>
-</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-document.querySelector(".btn-checkout").addEventListener("click", function () {
-    window.location.href = "checkout.jsp"; // trang bạn muốn chuyển tới
-});
+    // Hàm thay đổi số lượng
+    function changeQuantity(button, change) {
+        const input = button.parentElement.querySelector('input[name="quantity"]');
+        let currentValue = parseInt(input.value);
+        let newValue = currentValue + change;
+
+        if (newValue < 1) newValue = 1;
+        if (newValue > 99) newValue = 99;
+
+        if (newValue !== currentValue) {
+            input.value = newValue;
+            // Tự động submit form
+            button.closest('form').submit();
+        }
+    }
+
+    // Hàm xử lý thanh toán
+    function checkout() {
+        alert('Chức năng thanh toán đang được phát triển. Cảm ơn bạn đã quan tâm!');
+        // window.location.href = "${pageContext.request.contextPath}/checkout";
+    }
+
+    // Tự động submit khi thay đổi số lượng từ input
+    document.querySelectorAll('input[name="quantity"]').forEach(input => {
+        input.addEventListener('change', function() {
+            if (this.value < 1) this.value = 1;
+            if (this.value > 99) this.value = 99;
+            this.closest('form').submit();
+        });
+    });
+
+    // Kiểm tra console để debug
+    console.log('Cart items count:', ${not empty cartItems ? cartItems.size() : 0});
 </script>
-
-
 </body>
 </html>

@@ -47,6 +47,9 @@
                     <div class="zoom-hint"><i class="bi bi-arrows-fullscreen"></i> Phóng to</div>
                 </figure>
 
+<body>
+<!-- Header -->
+<%@ include file="../WEB-INF/views/common/header.jsp" %>
 
                 <!-- THUMBNAILS -->
                 <div class="thumbs" id="thumbsList" role="list">
@@ -234,13 +237,18 @@
             </div>
         </aside>
 
+            <div style="margin-top:12px; font-size:13px; color:var(--muted)">
+                <i class="bi bi-shield-check me-1"></i> 12 tháng bảo hành • Hỗ trợ 24/7
+            </div>
+        </aside>
     </section>
 
-    <!-- Toast for feedback -->
+    <!-- Toast Notification -->
     <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">
         <i class="bi bi-check-circle-fill" style="font-size:20px"></i>
         <div id="toastText" style="font-weight:700">Đã thêm vào giỏ hàng</div>
     </div>
+</main>
 
 </main>
 
@@ -482,5 +490,4 @@
 </script>
 
 </body>
-
 </html>

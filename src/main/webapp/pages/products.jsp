@@ -1,51 +1,171 @@
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
 
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thiết bị AI Mini | TechX</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Công nghệ độc lạ - TechX</title>
+
+    <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/footer.css">
-    <link rel="stylesheet" href="../assets/css/header.css">
-    <link rel="stylesheet" href="../assets/css/products.css">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/shop.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css">
+
+    <style>
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #eaeaea;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-price {
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .product-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+            height: 3rem;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .product-category {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .add-to-cart-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4757;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .section-title {
+            color: #333;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .shop-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+            url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .shop-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .shop-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .filter-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .pagination {
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .page-link {
+            color: #667eea;
+            border: 1px solid #dee2e6;
+        }
+
+        .page-link:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .page-item.active .page-link {
+            background: #667eea;
+            border-color: #667eea;
+        }
+    </style>
 </head>
 
 <body>
 <!-- ================= Header ================= -->
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-<main class="products-page">
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-box">
-            <h1 class="hero-title">Thiết bị AI Mini</h1>
-            <p class="hero-subtitle">Công nghệ tương lai gói gọn trong lòng bàn tay – Nhỏ nhưng đầy sức mạnh.</p>
-        </div>
-    </section>
-
-    <!-- FILTER BAR -->
-    <section class="filter-bar">
-        <div class="filter-container">
-            <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm sản phẩm, thương hiệu...">
-            <select id="sortSelect">
-                <option value="">Sắp xếp</option>
-                <option value="asc">Giá tăng dần</option>
-                <option value="desc">Giá giảm dần</option>
-                <option value="new">Mới nhất</option>
-            </select>
-
-            <div class="price-filter">
-                <input type="number" id="minPrice" placeholder="Giá từ">
-                <span>-</span>
-                <input type="number" id="maxPrice" placeholder="đến">
-            </div>
 
             <button id="filterBtn" class="filter-btn">Lọc</button>
         </div>
@@ -112,58 +232,243 @@
 
                 </div>
 
-            </div>
-        </c:forEach>
-    </section>
-
-
-    <!-- Pagination -->
-    <div class="pagination-container">
-        <nav aria-label="Page navigation">
-            <ul class="pagination" id="pagination">
-                <!-- Pagination sẽ được tạo bằng JavaScript -->
-            </ul>
-        </nav>
-    </div>
-
-
-    <!-- CART DRAWER SIMULATION (checkbox hack) -->
-    <div class="site-cart">
-        <input type="checkbox" id="cart-toggle" hidden>
-        <label for="cart-toggle" class="cart-overlay"></label>
-
-        <label for="cart-toggle" class="cart-floating" aria-hidden="false" title="Mở giỏ hàng">
-            <span class="cart-count">0</span>
-            🛒
-        </label>
-        <aside class="cart-drawer" aria-label="Giỏ hàng">
-            <div class="cart-header">
-                <h3>Giỏ hàng của bạn</h3>
-                <label for="cart-toggle" class="cart-close" aria-label="Đóng giỏ">✕</label>
-            </div>
-            <div class="cart-body">
-                <p class="muted">Giỏ hàng demo (tĩnh). Links "Thêm vào giỏ" trong trang sẽ dẫn tới đây nhưng không
-                    update số lượng do không dùng JS.</p>
-                <ul class="cart-items">
-                    <li class="cart-item">
-                        <img src="https://via.placeholder.com/80x80.png?text=Item" alt="">
-                        <div class="cart-info">
-                            <strong>Galaxy Mini 1</strong>
-                            <span class="muted">1 x 6.490.000₫</span>
+                <div class="col-md-3">
+                    <a href="${pageContext.request.contextPath}/shop?category=4"
+                       class="text-decoration-none">
+                        <div class="card text-center border-0 shadow-sm h-100">
+                            <div class="card-body p-4">
+                                <div class="mb-3">
+                                    <i class="bi bi-controller display-4 text-danger"></i>
+                                </div>
+                                <h5 class="card-title">Đồ chơi công nghệ</h5>
+                                <p class="text-muted small">Giải trí thông minh</p>
+                            </div>
                         </div>
-                        <div class="cart-actions"><a href="#" class="link-more">Xóa</a></div>
-                    </li>
-                </ul>
-            </div>
-            <div class="cart-footer">
-                <div class="cart-total"><span>Tổng</span><strong>6.490.000₫</strong></div>
-                <div class="cart-cta">
-                    <a class="btn btn-ghost" href="#">Tiếp tục mua</a>
-                    <a class="btn btn-primary" href="#">Thanh toán</a>
+                    </a>
                 </div>
             </div>
-        </aside>
+        </div>
     </div>
+    <!-- Products Grid -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="section-title">Tất cả sản phẩm</h3>
+
+            <c:choose>
+                <c:when test="${not empty list}">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                        <c:forEach var="product" items="${list}">
+                            <div class="col">
+                                <div class="product-card">
+                                    <!-- Featured Badge -->
+                                    <c:if test="${product.featured}">
+                                        <span class="featured-badge">
+                                            <i class="bi bi-star-fill me-1"></i>Nổi bật
+                                        </span>
+                                    </c:if>
+
+                                    <!-- Product Image -->
+                                    <a href="${pageContext.request.contextPath}/product?id=${product.id}">
+                                        <c:choose>
+                                            <c:when test="${not empty product.imagesTop}">
+                                                <img src="${product.imagesTop}"
+                                                     alt="${product.name}"
+                                                     class="product-img">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="${pageContext.request.contextPath}/assets/img/default-product.jpg"
+                                                     alt="${product.name}"
+                                                     class="product-img">
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </a>
+
+                                    <!-- Product Info -->
+                                    <div class="p-3">
+                                        <div class="product-category">
+                                            <c:choose>
+                                                <c:when test="${product.categoryID == 1}">Công nghệ mini</c:when>
+                                                <c:when test="${product.categoryID == 2}">Thiết bị AI</c:when>
+                                                <c:when test="${product.categoryID == 3}">Phụ kiện sáng tạo</c:when>
+                                                <c:when test="${product.categoryID == 4}">Đồ chơi công nghệ</c:when>
+                                                <c:otherwise>Danh mục khác</c:otherwise>
+                                            </c:choose>
+                                        </div>
+
+                                        <h5 class="product-name">
+                                            <a href="${pageContext.request.contextPath}/product?id=${product.id}"
+                                               class="text-decoration-none text-dark">
+                                                    ${product.name}
+                                            </a>
+                                        </h5>
+
+                                        <p class="product-price">
+                                            <fmt:formatNumber value="${product.price}"
+                                                              type="currency"
+                                                              currencySymbol="₫"
+                                                              maxFractionDigits="0"/>
+                                        </p>
+
+                                        <p class="small text-muted mb-3">
+                                                ${product.shortDescription}
+                                        </p>
+
+                                        <!-- Add to Cart Form -->
+                                        <form action="${pageContext.request.contextPath}/add-cart" method="get">
+                                            <input type="hidden" name="id" value="${product.id}">
+                                            <input type="hidden" name="q" value="1">
+                                            <button type="submit" class="add-to-cart-btn">
+                                                <i class="bi bi-cart-plus me-1"></i>Thêm vào giỏ
+                                            </button>
+                                        </form>
+                                        <!-- Wishlist Button -->
+                                        <c:set var="isInWishlist" value="false" />
+                                        <c:if test="${not empty sessionScope.id}">
+                                            <c:if test="${wishlistService.isInWishlist(sessionScope.id, product.id)}">
+                                                <c:set var="isInWishlist" value="true" />
+                                            </c:if>
+                                        </c:if>
+
+                                        <c:choose>
+                                            <c:when test="${empty sessionScope.id}">
+                                                <a href="${pageContext.request.contextPath}/login"
+                                                   class="btn btn-outline-danger wishlist-btn"
+                                                   title="Thêm vào wishlist">
+                                                    <i class="bi bi-heart"></i>
+                                                </a>
+                                            </c:when>
+                                            <c:when test="${isInWishlist}">
+                                                <button class="btn btn-danger wishlist-btn" disabled>
+                                                    <i class="bi bi-heart-fill"></i>
+                                                </button>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <form action="${pageContext.request.contextPath}/add-to-wishlist" method="post" class="d-inline">
+                                                    <input type="hidden" name="id" value="${product.id}">
+                                                    <button type="submit" class="btn btn-outline-danger wishlist-btn"
+                                                            title="Thêm vào wishlist">
+                                                        <i class="bi bi-heart"></i>
+                                                    </button>
+                                                </form>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </c:when>
+
+                <c:otherwise>
+                    <!-- No Products Found -->
+                    <div class="text-center py-5">
+                        <i class="bi bi-search display-1 text-muted mb-3"></i>
+                        <h4 class="text-muted mb-3">Không tìm thấy sản phẩm nào</h4>
+                        <p class="text-muted mb-4">Hãy thử tìm kiếm với từ khóa khác hoặc xóa bộ lọc</p>
+                        <a href="${pageContext.request.contextPath}/shop" class="btn btn-primary">
+                            <i class="bi bi-arrow-left me-2"></i>Quay lại cửa hàng
+                        </a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </div>
+
+    <!-- New Arrivals Section -->
+    <c:if test="${not empty newArrivalsList}">
+        <div class="row mb-5">
+            <div class="col-12">
+                <h3 class="section-title">Hàng mới về</h3>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                    <c:forEach var="newProduct" items="${newArrivalsList}">
+                        <div class="col">
+                            <div class="product-card">
+                                <!-- New Badge -->
+                                <span class="featured-badge" style="background: #00b894;">
+                                    <i class="bi bi-newspaper me-1"></i>Mới
+                                </span>
+
+                                <!-- Product Image -->
+                                <a href="${pageContext.request.contextPath}/product?id=${newProduct.id}">
+                                    <c:choose>
+                                        <c:when test="${not empty newProduct.imagesTop}">
+                                            <img src="${newProduct.imagesTop}"
+                                                 alt="${newProduct.name}"
+                                                 class="product-img">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="${pageContext.request.contextPath}/assets/img/default-product.jpg"
+                                                 alt="${newProduct.name}"
+                                                 class="product-img">
+                                        </c:otherwise>
+                                    </c:choose>
+                                </a>
+
+                                <!-- Product Info -->
+                                <div class="p-3">
+                                    <h5 class="product-name">
+                                        <a href="${pageContext.request.contextPath}/product?id=${newProduct.id}"
+                                           class="text-decoration-none text-dark">
+                                                ${newProduct.name}
+                                        </a>
+                                    </h5>
+
+                                    <p class="product-price">
+                                        <fmt:formatNumber value="${newProduct.price}"
+                                                          type="currency"
+                                                          currencySymbol="₫"
+                                                          maxFractionDigits="0"/>
+                                    </p>
+
+                                    <!-- Add to Cart Form -->
+                                    <form action="${pageContext.request.contextPath}/add-cart" method="get">
+                                        <input type="hidden" name="id" value="${newProduct.id}">
+                                        <input type="hidden" name="q" value="1">
+                                        <button type="submit" class="add-to-cart-btn">
+                                            <i class="bi bi-cart-plus me-1"></i>Thêm vào giỏ
+                                        </button>
+                                    </form>
+                                    <!-- Wishlist Button -->
+                                    <c:set var="isInWishlist" value="false" />
+                                    <c:if test="${not empty sessionScope.id}">
+                                        <c:if test="${wishlistService.isInWishlist(sessionScope.id, product.id)}">
+                                            <c:set var="isInWishlist" value="true" />
+                                        </c:if>
+                                    </c:if>
+
+                                    <c:choose>
+                                        <c:when test="${empty sessionScope.id}">
+                                            <a href="${pageContext.request.contextPath}/login"
+                                               class="btn btn-outline-danger wishlist-btn"
+                                               title="Thêm vào wishlist">
+                                                <i class="bi bi-heart"></i>
+                                            </a>
+                                        </c:when>
+                                        <c:when test="${isInWishlist}">
+                                            <button class="btn btn-danger wishlist-btn" disabled>
+                                                <i class="bi bi-heart-fill"></i>
+                                            </button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <form action="${pageContext.request.contextPath}/add-to-wishlist" method="post" class="d-inline">
+                                                <input type="hidden" name="id" value="${product.id}">
+                                                <button type="submit" class="btn btn-outline-danger wishlist-btn"
+                                                        title="Thêm vào wishlist">
+                                                    <i class="bi bi-heart"></i>
+                                                </button>
+                                            </form>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+    </c:if>
+
+
 </main>
 
 <!-- ================= Footer ================= -->
@@ -172,7 +477,7 @@
         <div class="row gy-4">
             <!-- Logo + Giới thiệu -->
             <div class="col-md-4">
-                <a href="/index.html" class="d-flex align-items-center mb-3 text-decoration-none">
+                <a href="${pageContext.request.contextPath}/" class="d-flex align-items-center mb-3 text-decoration-none">
                     <i class="bi bi-camera fs-3 text-primary me-2"></i>
                     <span class="fw-bold fs-5 text-primary">TechX</span>
                 </a>
@@ -186,10 +491,10 @@
             <div class="col-md-2">
                 <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
                 <ul class="list-unstyled">
-                    <li><a href="/pages/products.html#mini-tech" class="footer-link">Công nghệ mini</a></li>
-                    <li><a href="/pages/products.html#ai-device" class="footer-link">Thiết bị AI</a></li>
-                    <li><a href="/pages/products.html#creative" class="footer-link">Phụ kiện sáng tạo</a></li>
-                    <li><a href="/pages/products.html#fun-tech" class="footer-link">Đồ chơi công nghệ</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shop?category=1" class="footer-link">Công nghệ mini</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shop?category=2" class="footer-link">Thiết bị AI</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shop?category=3" class="footer-link">Phụ kiện sáng tạo</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shop?category=4" class="footer-link">Đồ chơi công nghệ</a></li>
                 </ul>
             </div>
 
@@ -197,10 +502,10 @@
             <div class="col-md-2">
                 <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
                 <ul class="list-unstyled">
-                    <li><a href="/pages/contact.html" class="footer-link">Liên hệ</a></li>
-                    <li><a href="/pages/forgot-password.html" class="footer-link">Quên mật khẩu</a></li>
-                    <li><a href="/pages/order-history.jsp" class="footer-link">Theo dõi đơn hàng</a></li>
-                    <li><a href="/pages/404.html" class="footer-link">Trung tâm trợ giúp</a></li>
+                    <li><a href="${pageContext.request.contextPath}/contact" class="footer-link">Liên hệ</a></li>
+                    <li><a href="${pageContext.request.contextPath}/faq" class="footer-link">Câu hỏi thường gặp</a></li>
+                    <li><a href="${pageContext.request.contextPath}/cart" class="footer-link">Giỏ hàng</a></li>
+                    <li><a href="${pageContext.request.contextPath}/checkout" class="footer-link">Thanh toán</a></li>
                 </ul>
             </div>
 
@@ -209,7 +514,7 @@
                 <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
                 <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh</p>
                 <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
-                <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@htcamera.vn</p>
+                <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@techx.vn</p>
                 <div class="mt-3">
                     <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
                     <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
@@ -226,9 +531,160 @@
     </div>
 </footer>
 
-<!-- JavaScript -->
+<!-- Bootstrap Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-</body>
+<script>
+    // Sort functionality
+    document.getElementById('sortSelect').addEventListener('change', function() {
+        const sortValue = this.value;
+        const url = new URL(window.location.href);
+        url.searchParams.set('sort', sortValue);
+        window.location.href = url.toString();
+    });
 
+    // Set current sort value
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentSort = urlParams.get('sort') || 'newest';
+    document.getElementById('sortSelect').value = currentSort;
+
+    // Add to cart with AJAX
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const form = this.closest('form');
+            const formData = new FormData(form);
+
+            // Get product ID and quantity
+            const productId = formData.get('id');
+            const quantity = formData.get('q');
+
+            // Disable button during request
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="bi bi-hourglass-split me-1"></i>Đang thêm...';
+            this.disabled = true;
+
+            // Send AJAX request
+            fetch(`${pageContext.request.contextPath}/add-cart?id=${productId}&q=${quantity}`, {
+                method: 'GET'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        showToast('Đã thêm sản phẩm vào giỏ hàng!');
+                        updateCartCount(parseInt(quantity));
+
+                        // Redirect to cart page after 2 seconds if needed
+                        setTimeout(() => {
+                            if (confirm('Bạn có muốn xem giỏ hàng?')) {
+                                window.location.href = `${pageContext.request.contextPath}/cart`;
+                            }
+                        }, 1500);
+                    } else {
+                        showToast('Có lỗi xảy ra. Vui lòng thử lại!', false);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showToast('Lỗi kết nối. Vui lòng thử lại!', false);
+                })
+                .finally(() => {
+                    // Restore button state
+                    this.innerHTML = originalText;
+                    this.disabled = false;
+                });
+        });
+    });
+
+    // Toast notification
+    function showToast(message, isSuccess = true) {
+        // Create toast element if it doesn't exist
+        let toastContainer = document.getElementById('toast-container');
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.id = 'toast-container';
+            toastContainer.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1050;
+            `;
+            document.body.appendChild(toastContainer);
+        }
+
+        const toastId = 'toast-' + Date.now();
+        const toast = document.createElement('div');
+        toast.id = toastId;
+        toast.className = 'toast show';
+        toast.style.cssText = `
+            background: ${isSuccess ? '#28a745' : '#dc3545'};
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: slideIn 0.3s ease;
+        `;
+
+        toast.innerHTML = `
+            <i class="bi ${isSuccess ? 'bi-check-circle-fill' : 'bi-x-circle-fill'} me-2"></i>
+            <span>${message}</span>
+        `;
+
+        toastContainer.appendChild(toast);
+
+        // Remove toast after 3 seconds
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
+        }, 3000);
+    }
+
+    // Update cart count in header
+    function updateCartCount(addedQty) {
+        const cartCountElements = document.querySelectorAll('.cart-count, .cart-badge');
+        cartCountElements.forEach(element => {
+            let currentCount = parseInt(element.textContent) || 0;
+            element.textContent = currentCount + addedQty;
+            element.style.display = 'inline-block';
+
+            // Add animation
+            element.classList.add('cart-updated');
+            setTimeout(() => {
+                element.classList.remove('cart-updated');
+            }, 1000);
+        });
+    }
+
+    // Add CSS animations
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        .cart-updated {
+            animation: cartPulse 0.5s ease-in-out;
+        }
+
+        @keyframes cartPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+    `;
+    document.head.appendChild(style);
+</script>
+</body>
 </html>
