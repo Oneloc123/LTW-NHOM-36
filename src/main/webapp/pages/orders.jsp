@@ -3,7 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đơn hàng của tôi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/footer.css">
+    <link rel="stylesheet" href="/assets/css/home.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
+
     <style>
         * {
             margin: 0;
@@ -24,29 +32,6 @@
             padding: 20px;
         }
 
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
-        }
 
         .user-nav {
             display: flex;
@@ -315,17 +300,157 @@
     </style>
 </head>
 <body>
-<header>
-    <div class="header-content">
-        <a href="${pageContext.request.contextPath}/" class="logo">Shop Online</a>
-        <div class="user-nav">
-            <span class="welcome">Xin chào, ${user.fullName}</span>
-            <a href="${pageContext.request.contextPath}/" class="nav-link">Trang chủ</a>
-            <a href="${pageContext.request.contextPath}/user/orders" class="nav-link">Đơn hàng</a>
-            <a href="${pageContext.request.contextPath}/logout" class="nav-link">Đăng xuất</a>
+<header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top header-main py-2">
+    <div class="container">
+
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center fw-bold text-primary"
+           href="${pageContext.request.contextPath}/home">
+            <i class="bi bi-camera fs-4 me-2"></i>
+            <span>TechX</span>
+        </a>
+
+        <!-- Toggle (mobile) -->
+        <button class="navbar-toggler border-0" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <i class="bi bi-list fs-2 text-primary"></i>
+        </button>
+
+        <!-- Nav links -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-lg-center gap-lg-3">
+                <li class="nav-item">
+                    <a class="nav-link ${currentPage == 'home' ? 'active' : ''}"
+                       href="${pageContext.request.contextPath}/home">Trang chủ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link ${currentPage == 'shop' ? 'active' : ''}"
+                       href="${pageContext.request.contextPath}/shop">Cửa hàng</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link ${currentPage == 'products' ? 'active' : ''}"
+                       href="${pageContext.request.contextPath}/products">Sản phẩm</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link ${currentPage == 'blog' ? 'active' : ''}"
+                       href="${pageContext.request.contextPath}/blog">Blog</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link ${currentPage == 'contact' ? 'active' : ''}"
+                       href="${pageContext.request.contextPath}/contact">Liên hệ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link ${currentPage == 'orders' ? 'active' : ''}"
+                       href="${pageContext.request.contextPath}/user/orders">Đơn hàng</a>
+                </li>
+
+                <!-- Dropdown -->
+                <%
+                    if (session.getAttribute("id") != null) {
+                %>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle ${currentPage == 'profile' ? 'active' : ''}"
+                       href="#"
+                       id="navbarDropdown"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Tài khoản
+                    </a>
+
+                    <ul class="dropdown-menu border-0 shadow rounded-3"
+                        aria-labelledby="navbarDropdown">
+
+                        <li>
+                            <a class="dropdown-item"
+                               href="${pageContext.request.contextPath}/profile">
+                                Thông tin tài khoản
+                            </a>
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <a class="dropdown-item"
+                               href="${pageContext.request.contextPath}/wishlist">
+                                Danh sách yêu thích
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                               href="${pageContext.request.contextPath}/notifications">
+                                Xem thông báo
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                               href="${pageContext.request.contextPath}/viewed-products">
+                                Sản phẩm đã xem
+                            </a>
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <a class="dropdown-item"
+                               href="${pageContext.request.contextPath}/loggout">
+                                đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <%
+                    }
+                %>
+
+
+            </ul>
+
+            <!-- Login & Cart -->
+            <div class="ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center gap-2">
+
+                <%
+                    if (session.getAttribute("id") == null) {
+                %>
+                <a href="${pageContext.request.contextPath}/login"
+                   class="btn btn-outline-primary btn-sm d-flex align-items-center">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
+                </a>
+                <%
+                    }
+                %>
+
+                <a href="${pageContext.request.contextPath}/cart"
+                   class="btn btn-primary btn-sm d-flex align-items-center">
+                    <i class="bi bi-cart3 me-1"></i> Giỏ hàng
+                </a>
+            </div>
         </div>
     </div>
 </header>
+
+<%--<header>--%>
+<%--    <div class="header-content">--%>
+<%--        <a href="${pageContext.request.contextPath}/" class="logo">Shop Online</a>--%>
+<%--        <div class="user-nav">--%>
+<%--            <span class="welcome">Xin chào, ${user.fullName}</span>--%>
+<%--            <a href="${pageContext.request.contextPath}/" class="nav-link">Trang chủ</a>--%>
+<%--            <a href="${pageContext.request.contextPath}/user/orders" class="nav-link">Đơn hàng</a>--%>
+<%--            <a href="${pageContext.request.contextPath}/logout" class="nav-link">Đăng xuất</a>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</header>--%>
 
 <div class="container">
     <h1 class="page-title">Đơn hàng của tôi</h1>
