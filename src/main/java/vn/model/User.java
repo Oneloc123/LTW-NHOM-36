@@ -14,6 +14,7 @@ public class User implements Serializable {
     private boolean isActive;
     private String createAt;
     private String imgURL;
+
     public User(int id, String username, String password, String email, String fullName,String address,
      String phoneNumber, String role, boolean isActive, String createAt, String imgURL ) {
         this.id = id;

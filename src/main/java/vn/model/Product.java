@@ -18,6 +18,8 @@ public class Product implements Serializable {
     private List<String> images = new ArrayList<>();
     private double avgRating;
     private int ratingCount;
+    private List<String> specs = new ArrayList<>();
+
 
     public Product(int id, String name, int categoryID, String shortDescription, String fullDescription, int price, boolean isFeatured, String createAt, String updateAt, List<String> images, double avgRating, int ratingCount) {
         this.id = id;
@@ -34,6 +36,29 @@ public class Product implements Serializable {
         this.ratingCount = ratingCount;
     }
 
+    public Product(int id, String name, int categoryID, String shortDescription, String fullDescription, int price, boolean isFeatured, String createAt, String updateAt, List<String> images, double avgRating, int ratingCount, List<String> specs) {
+        this.id = id;
+        this.name = name;
+        this.categoryID = categoryID;
+        this.shortDescription = shortDescription;
+        this.fullDescription = fullDescription;
+        this.price = price;
+        this.isFeatured = isFeatured;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+        this.images = images;
+        this.avgRating = avgRating;
+        this.ratingCount = ratingCount;
+        this.specs = specs;
+    }
+
+    public List<String> getSpecs() {
+        return specs;
+    }
+
+    public void setSpecs(List<String> specs) {
+        this.specs = specs;
+    }
 
     public List<String> getImages() {
         return images;
