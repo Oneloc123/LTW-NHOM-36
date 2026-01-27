@@ -1,335 +1,512 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Đơn hàng của tôi</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết đơn hàng #${order.id}</title>
+
+    <!-- Bootstrap & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css">
     <style>
+        /* ===== Reset & Base ===== */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            font-family: "Segoe UI", Arial;
+            background: #f4f6f9;
             color: #333;
-            background-color: #f5f5f5;
         }
 
+        /* ===== Container ===== */
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
-        }
-
-        .user-nav {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-
-        .nav-link:hover {
-            background-color: rgba(255,255,255,0.1);
-        }
-
-        .welcome {
-            font-size: 1.1rem;
-            font-weight: 500;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 16px;
         }
 
         .page-title {
-            color: #333;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #667eea;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #222;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .stats-card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            text-align: center;
-        }
-
-        .stats-number {
-            font-size: 2.5rem;
-            font-weight: bold;
+        .page-title i {
             color: #667eea;
-            margin-bottom: 10px;
         }
 
-        .stats-label {
-            font-size: 1.1rem;
-            color: #666;
-        }
-
-        .order-card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
             margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background-color: white;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: #f8f9fa;
+            border-color: #667eea;
+            transform: translateX(-3px);
+        }
+
+        /* ===== Message ===== */
+        .message {
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .message.success {
+            background: #e6f4ea;
+            color: #1e7e34;
+            border-left: 4px solid #28a745;
+        }
+
+        .message.error {
+            background: #fdecea;
+            color: #c82333;
+            border-left: 4px solid #dc3545;
+        }
+
+        /* ===== Order Header Card ===== */
+        .order-header-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 22px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
             border-left: 4px solid #667eea;
         }
 
-        .order-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .order-header {
+        .order-header-content {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .order-id {
-            font-size: 1.2rem;
+        .order-basic-info h3 {
+            font-size: 20px;
             font-weight: 600;
-            color: #333;
+            margin-bottom: 8px;
+            color: #222;
         }
 
         .order-date {
+            font-size: 14px;
             color: #666;
-            font-size: 0.9rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .order-status {
+        .order-status-badge {
             display: inline-block;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 14px;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            white-space: nowrap;
         }
 
-        .status-pending { background-color: #fff3cd; color: #856404; }
-        .status-processing { background-color: #cce5ff; color: #004085; }
-        .status-shipped { background-color: #d1ecf1; color: #0c5460; }
-        .status-delivered { background-color: #d4edda; color: #155724; }
-        .status-cancelled { background-color: #f8d7da; color: #721c24; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-processing { background: #cce5ff; color: #004085; }
+        .status-shipped { background: #d1ecf1; color: #0c5460; }
+        .status-delivered { background: #d4edda; color: #155724; }
+        .status-cancelled { background: #f8d7da; color: #721c24; }
 
-        .order-info {
+        .order-payment-status {
+            text-align: right;
+        }
+
+        .payment-status {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .payment-method {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* ===== Order Details Card ===== */
+        .order-details-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 0;
+            margin-bottom: 22px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .order-details-header {
+            background: #f8f9fb;
+            padding: 18px 24px;
+            border-bottom: 1px solid #eee;
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .order-items {
+            padding: 0;
+        }
+
+        .order-item {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: 60px 2fr 1fr 1fr 1fr;
             gap: 20px;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+        }
+
+        .order-item:hover {
+            background-color: #fafafa;
+        }
+
+        .item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        .item-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .item-price, .item-quantity, .item-subtotal {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .item-subtotal {
+            font-weight: 600;
+            color: #222;
+        }
+
+        .order-summary {
+            background: #f8f9fb;
+            padding: 24px;
+            border-top: 1px solid #eee;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .summary-row.total {
+            font-size: 18px;
+            font-weight: 700;
+            color: #dc2626;
+            border-top: 2px solid #eee;
+            margin-top: 8px;
+            padding-top: 16px;
+        }
+
+        /* ===== Customer Info Card ===== */
+        .customer-info-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 22px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .info-card-title {
+            font-size: 18px;
+            font-weight: 600;
             margin-bottom: 20px;
+            color: #222;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
         .info-item {
-            padding: 10px 0;
+            padding: 16px;
+            background: #f8f9fb;
+            border-radius: 12px;
+            border-left: 3px solid #667eea;
         }
 
         .info-label {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 5px;
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .info-value {
-            font-size: 1rem;
+            font-size: 15px;
             font-weight: 500;
             color: #333;
         }
 
-        .order-total {
-            text-align: right;
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #667eea;
-            margin-top: 15px;
+        /* ===== Order Actions ===== */
+        .order-actions-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
         }
 
-        .order-actions {
+        .action-buttons {
             display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
             text-decoration: none;
-            font-weight: 500;
-            text-align: center;
-            cursor: pointer;
             border: none;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
-        .btn-view {
-            background-color: #667eea;
-            color: white;
+        .btn-primary {
+            background: #2563eb;
+            color: #fff;
         }
 
-        .btn-view:hover {
-            background-color: #5a6fd8;
-            transform: translateY(-2px);
+        .btn-primary:hover {
+            background: #1d4ed8;
         }
 
-        .btn-cancel {
-            background-color: #f8f9fa;
-            color: #dc3545;
-            border: 1px solid #dc3545;
+        .btn-danger {
+            background: #fee2e2;
+            color: #b91c1c;
         }
 
-        .btn-cancel:hover {
-            background-color: #dc3545;
-            color: white;
+        .btn-danger:hover {
+            background: #fecaca;
         }
 
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .btn-success {
+            background: #16a34a;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background: #15803d;
+        }
+
+        /* ===== Notes Section ===== */
+        .notes-section {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 18px;
+            border-radius: 0 12px 12px 0;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .notes-label {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .notes-content {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* ===== Empty State ===== */
         .empty-state {
             text-align: center;
+            background: #fff;
             padding: 60px 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-radius: 18px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
         }
 
         .empty-icon {
-            font-size: 4rem;
-            color: #ddd;
-            margin-bottom: 20px;
+            font-size: 56px;
+            margin-bottom: 16px;
+            color: #ccc;
         }
 
         .empty-title {
-            font-size: 1.5rem;
+            font-size: 22px;
+            margin-bottom: 8px;
             color: #666;
-            margin-bottom: 10px;
         }
 
         .empty-text {
+            font-size: 14px;
             color: #888;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
-        .btn-shopping {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px 30px;
-            font-size: 1.1rem;
+        /* ===== Timeline ===== */
+        .order-timeline {
+            margin-top: 20px;
         }
 
-        .btn-shopping:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            position: relative;
         }
 
-        .message {
-            padding: 15px;
-            margin-bottom: 25px;
-            border-radius: 8px;
-            font-weight: 500;
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 24px;
+            bottom: -24px;
+            width: 2px;
+            background: #e5e7eb;
+            z-index: 1;
         }
 
-        .message.success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+        .timeline-item:last-child:before {
+            display: none;
         }
 
-        .message.error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+        .timeline-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            border: 3px solid #fff;
+            position: relative;
+            z-index: 2;
+            flex-shrink: 0;
+            margin-top: 4px;
         }
 
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
-            color: #666;
-            border-top: 1px solid #eee;
+        .timeline-icon.active {
+            background: #10b981;
         }
 
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* ===== Responsive ===== */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
+            .order-item {
+                grid-template-columns: 1fr;
+                gap: 12px;
                 text-align: center;
             }
 
-            .order-header {
+            .order-header-content {
                 flex-direction: column;
-                gap: 10px;
+                text-align: center;
             }
 
-            .order-info {
-                grid-template-columns: 1fr;
+            .order-payment-status {
+                text-align: center;
             }
 
-            .order-actions {
+            .action-buttons {
                 flex-direction: column;
             }
 
             .btn {
                 width: 100%;
+                justify-content: center;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-<header>
-    <div class="header-content">
-        <a href="${pageContext.request.contextPath}/" class="logo">Shop Online</a>
-        <div class="user-nav">
-            <span class="welcome">Xin chào, ${user.fullName}</span>
-            <a href="${pageContext.request.contextPath}/" class="nav-link">Trang chủ</a>
-            <a href="${pageContext.request.contextPath}/user/orders" class="nav-link">Đơn hàng</a>
-            <a href="${pageContext.request.contextPath}/logout" class="nav-link">Đăng xuất</a>
-        </div>
-    </div>
-</header>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <div class="container">
-    <h1 class="page-title">Đơn hàng của tôi</h1>
+    <!-- Breadcrumb và Back link -->
+    <a href="${pageContext.request.contextPath}/user/orders" class="back-link">
+        <i class="bi bi-arrow-left"></i> Quay lại danh sách đơn hàng
+    </a>
 
+    <h1 class="page-title">
+        <i class="bi bi-receipt"></i> Chi tiết đơn hàng #${order.id}
+    </h1>
+
+    <!-- Thông báo -->
     <c:if test="${not empty message}">
         <div class="message success">${message}</div>
     </c:if>
@@ -338,82 +515,337 @@
         <div class="message error">${error}</div>
     </c:if>
 
-    <!-- Thống kê -->
-    <div class="stats-card">
-        <div class="stats-number">${totalOrders}</div>
-        <div class="stats-label">Tổng số đơn hàng</div>
-    </div>
-
-    <!-- Danh sách đơn hàng -->
     <c:choose>
-        <c:when test="${not empty orders}">
-            <c:forEach var="order" items="${orders}">
-                <div class="order-card">
-                    <div class="order-header">
-                        <div>
-                            <div class="order-id">Đơn hàng #${order.id}</div>
-                            <div class="order-date">${order.orderDate}</div>
+        <c:when test="${order != null}">
+            <!-- Order Header -->
+            <div class="order-header-card">
+                <div class="order-header-content">
+                    <div class="order-basic-info">
+                        <h3>Đơn hàng #${order.id}</h3>
+                        <div class="order-date">
+                            <i class="bi bi-calendar"></i>
+                            Đặt ngày: <fmt:formatDate value="${order.orderDate}" pattern="HH:mm dd/MM/yyyy" />
                         </div>
-                        <span class="order-status status-${order.status}">
+                        <span class="order-status-badge status-${order.status}">
                                 ${order.statusDisplay}
                         </span>
                     </div>
-
-                    <div class="order-info">
-                        <div class="info-item">
-                            <div class="info-label">Phương thức thanh toán</div>
-                            <div class="info-value">${order.paymentMethodDisplay}</div>
+                    <div class="order-payment-status">
+                        <div class="payment-status">
+                            Thanh toán: ${order.paymentStatusDisplay}
                         </div>
-                        <div class="info-item">
-                            <div class="info-label">Trạng thái thanh toán</div>
-                            <div class="info-value">${order.paymentStatusDisplay}</div>
+                        <div class="payment-method">
+                            Phương thức: ${order.paymentMethodDisplay}
                         </div>
-                        <div class="info-item">
-                            <div class="info-label">Địa chỉ giao hàng</div>
-                            <div class="info-value">${order.shippingAddress}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Số điện thoại</div>
-                            <div class="info-value">${order.phoneNumber}</div>
-                        </div>
-                    </div>
-
-                    <div class="order-total">
-                        Tổng tiền: ${String.format("%,.0f", order.totalAmount)} VNĐ
-                    </div>
-
-                    <div class="order-actions">
-                        <a href="${pageContext.request.contextPath}/user/order-detail?id=${order.id}"
-                           class="btn btn-view">Xem chi tiết</a>
-
-                        <c:if test="${order.status == 'pending'}">
-                            <form method="post" action="${pageContext.request.contextPath}/user/cancel-order"
-                                  style="display: inline;">
-                                <input type="hidden" name="id" value="${order.id}">
-                                <button type="submit" class="btn btn-cancel"
-                                        onclick="return confirm('Bạn có chắc muốn hủy đơn hàng này?')">
-                                    Hủy đơn hàng
-                                </button>
-                            </form>
-                        </c:if>
                     </div>
                 </div>
-            </c:forEach>
+
+                <!-- Order Timeline -->
+                <div class="order-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon ${order.status != 'cancelled' ? 'active' : ''}"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Đơn hàng đã được tạo</div>
+                            <div class="timeline-date">
+                                <fmt:formatDate value="${order.orderDate}" pattern="HH:mm dd/MM/yyyy" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <c:if test="${order.status == 'processing' || order.status == 'shipped' || order.status == 'delivered'}">
+                        <div class="timeline-item">
+                            <div class="timeline-icon ${order.status != 'pending' ? 'active' : ''}"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Đang xử lý</div>
+                                <div class="timeline-date">Đơn hàng đang được chuẩn bị</div>
+                            </div>
+                        </div>
+                    </c:if>
+
+                    <c:if test="${order.status == 'shipped' || order.status == 'delivered'}">
+                        <div class="timeline-item">
+                            <div class="timeline-icon ${order.status == 'shipped' || order.status == 'delivered' ? 'active' : ''}"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Đang giao hàng</div>
+                                <div class="timeline-date">Đơn hàng đang được vận chuyển</div>
+                            </div>
+                        </div>
+                    </c:if>
+
+                    <c:if test="${order.status == 'delivered'}">
+                        <div class="timeline-item">
+                            <div class="timeline-icon active"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Đã giao hàng</div>
+                                <div class="timeline-date">Đơn hàng đã được giao thành công</div>
+                            </div>
+                        </div>
+                    </c:if>
+
+                    <c:if test="${order.status == 'cancelled'}">
+                        <div class="timeline-item">
+                            <div class="timeline-icon active"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Đã hủy</div>
+                                <div class="timeline-date">Đơn hàng đã bị hủy</div>
+                            </div>
+                        </div>
+                    </c:if>
+                </div>
+            </div>
+
+            <!-- Order Items -->
+            <div class="order-details-card">
+                <div class="order-details-header">
+                    Sản phẩm đã đặt (${order.items.size()} sản phẩm)
+                </div>
+                <div class="order-items">
+                    <c:forEach var="item" items="${order.items}">
+                        <div class="order-item">
+                            <div class="item-image">
+                                <c:choose>
+                                    <c:when test="${not empty item.product.imageUrl}">
+                                        <img src="${item.product.imageUrl}" alt="${item.product.name}"
+                                             style="width: 100%; height: 100%; border-radius: 8px;">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <i class="bi bi-box"></i>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                            <div class="item-name">
+                                    ${item.product.name}
+                                <c:if test="${not empty item.product.sku}">
+                                    <div class="text-muted small mt-1">SKU: ${item.product.sku}</div>
+                                </c:if>
+                            </div>
+                            <div class="item-price">
+                                <fmt:formatNumber value="${item.unitPrice}" type="currency"
+                                                  currencyCode="VND" maxFractionDigits="0" />
+                            </div>
+                            <div class="item-quantity">
+                                Số lượng: ${item.quantity}
+                            </div>
+                            <div class="item-subtotal">
+                                <fmt:formatNumber value="${item.subtotal}" type="currency"
+                                                  currencyCode="VND" maxFractionDigits="0" />
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <div class="summary-row">
+                        <span>Tạm tính:</span>
+                        <span>
+                            <fmt:formatNumber value="${order.totalAmount}" type="currency"
+                                              currencyCode="VND" maxFractionDigits="0" />
+                        </span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Phí vận chuyển:</span>
+                        <span>Miễn phí</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Giảm giá:</span>
+                        <span>₫0</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Tổng cộng:</span>
+                        <span>
+                            <fmt:formatNumber value="${order.totalAmount}" type="currency"
+                                              currencyCode="VND" maxFractionDigits="0" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Information -->
+            <div class="customer-info-card">
+                <div class="info-card-title">
+                    <i class="bi bi-person-circle"></i> Thông tin khách hàng
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Họ tên</div>
+                        <div class="info-value">${sessionScope.fullName}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">${order.email}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Số điện thoại</div>
+                        <div class="info-value">${order.phoneNumber}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Địa chỉ giao hàng</div>
+                        <div class="info-value">${order.shippingAddress}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Notes -->
+            <c:if test="${not empty order.notes}">
+                <div class="notes-section">
+                    <div class="notes-label">
+                        <i class="bi bi-sticky"></i> Ghi chú đơn hàng
+                    </div>
+                    <div class="notes-content">
+                            ${order.notes}
+                    </div>
+                </div>
+            </c:if>
+
+            <!-- Order Actions -->
+            <div class="order-actions-card">
+                <div class="info-card-title">
+                    <i class="bi bi-gear"></i> Thao tác
+                </div>
+                <div class="action-buttons">
+                    <c:if test="${order.status == 'pending'}">
+                        <form method="post" action="${pageContext.request.contextPath}/user/cancel-order"
+                              style="display: inline;">
+                            <input type="hidden" name="id" value="${order.id}">
+                            <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">
+                                <i class="bi bi-x-circle"></i> Hủy đơn hàng
+                            </button>
+                        </form>
+                        <a href="#" class="btn btn-secondary">
+                            <i class="bi bi-pencil"></i> Chỉnh sửa đơn hàng
+                        </a>
+                    </c:if>
+
+                    <c:if test="${order.status == 'delivered'}">
+                        <button class="btn btn-success" disabled>
+                            <i class="bi bi-check-circle"></i> Đã nhận được hàng
+                        </button>
+                        <a href="#" class="btn btn-secondary">
+                            <i class="bi bi-arrow-repeat"></i> Yêu cầu đổi trả
+                        </a>
+                    </c:if>
+
+                    <c:if test="${order.status == 'shipped'}">
+                        <a href="#" class="btn btn-primary">
+                            <i class="bi bi-truck"></i> Theo dõi vận chuyển
+                        </a>
+                    </c:if>
+
+                    <a href="${pageContext.request.contextPath}/" class="btn btn-primary">
+                        <i class="bi bi-cart-plus"></i> Tiếp tục mua sắm
+                    </a>
+
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="bi bi-printer"></i> In đơn hàng
+                    </button>
+                </div>
+
+                <!-- Support Info -->
+                <div class="mt-4 pt-3 border-top">
+                    <p class="small text-muted mb-2">
+                        <i class="bi bi-info-circle"></i>
+                        Nếu bạn có bất kỳ câu hỏi nào về đơn hàng, vui lòng liên hệ hỗ trợ.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="tel:19001234" class="btn btn-secondary btn-sm">
+                            <i class="bi bi-telephone"></i> 1900 1234
+                        </a>
+                        <a href="mailto:support@store.com" class="btn btn-secondary btn-sm">
+                            <i class="bi bi-envelope"></i> support@store.com
+                        </a>
+                    </div>
+                </div>
+            </div>
         </c:when>
 
         <c:otherwise>
+            <!-- Empty State if Order Not Found -->
             <div class="empty-state">
-                <div class="empty-icon">📦</div>
-                <h2 class="empty-title">Chưa có đơn hàng nào</h2>
-                <p class="empty-text">Hãy mua sắm và quay lại xem đơn hàng của bạn tại đây!</p>
-                <a href="${pageContext.request.contextPath}/" class="btn btn-shopping">Mua sắm ngay</a>
+                <div class="empty-icon">❌</div>
+                <h2 class="empty-title">Không tìm thấy đơn hàng</h2>
+                <p class="empty-text">Đơn hàng bạn tìm kiếm không tồn tại hoặc bạn không có quyền xem.</p>
+                <a href="${pageContext.request.contextPath}/user/orders" class="btn btn-primary">
+                    Quay lại danh sách đơn hàng
+                </a>
             </div>
         </c:otherwise>
     </c:choose>
 </div>
 
-<footer>
-    <p>© 2024 Shop Online. Tất cả các quyền được bảo lưu.</p>
+<!-- Footer -->
+<footer class="footer bg-light text-dark pt-5 pb-4 mt-5 border-top">
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Logo + Giới thiệu -->
+            <div class="col-md-4">
+                <a href="${pageContext.request.contextPath}/"
+                   class="d-flex align-items-center mb-3 text-decoration-none">
+                    <i class="bi bi-camera fs-3 text-primary me-2"></i>
+                    <span class="fw-bold fs-5 text-primary">TechX</span>
+                </a>
+                <p class="text-muted">
+                    Nơi bạn tìm thấy những thiết bị công nghệ độc đáo, hiện đại và sáng tạo.
+                    Chúng tôi mang đến trải nghiệm mua sắm tiện lợi và đáng tin cậy.
+                </p>
+            </div>
+
+            <!-- Danh mục -->
+            <div class="col-md-2">
+                <h6 class="fw-bold mb-3 text-uppercase">Danh mục</h6>
+                <ul class="list-unstyled">
+                    <li><a href="${pageContext.request.contextPath}/shop?category=1" class="footer-link">Công nghệ mini</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shop?category=2" class="footer-link">Thiết bị AI</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shop?category=3" class="footer-link">Phụ kiện sáng tạo</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shop?category=4" class="footer-link">Đồ chơi công nghệ</a></li>
+                </ul>
+            </div>
+
+            <!-- Hỗ trợ -->
+            <div class="col-md-2">
+                <h6 class="fw-bold mb-3 text-uppercase">Hỗ trợ</h6>
+                <ul class="list-unstyled">
+                    <li><a href="${pageContext.request.contextPath}/contact" class="footer-link">Liên hệ</a></li>
+                    <li><a href="${pageContext.request.contextPath}/faq" class="footer-link">Câu hỏi thường gặp</a></li>
+                    <li><a href="${pageContext.request.contextPath}/cart" class="footer-link">Giỏ hàng</a></li>
+                    <li><a href="${pageContext.request.contextPath}/checkout" class="footer-link">Thanh toán</a></li>
+                </ul>
+            </div>
+
+            <!-- Liên hệ -->
+            <div class="col-md-4">
+                <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
+                <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>123 Nguyễn Huệ, TP. Hồ Chí Minh</p>
+                <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i>+84 987 654 321</p>
+                <p><i class="bi bi-envelope-fill text-primary me-2"></i>support@techx.vn</p>
+                <div class="mt-3">
+                    <a href="#" class="social-link me-2"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-link me-2"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="social-link me-2"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="mt-4 mb-3">
+        <div class="text-center small text-muted">
+            © 2025 <strong>TechX</strong>. All rights reserved.
+        </div>
+    </div>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Print order functionality
+    function printOrder() {
+        window.print();
+    }
+
+    // Confirm order cancellation
+    function confirmCancel() {
+        return confirm('Bạn có chắc chắn muốn hủy đơn hàng này? Hành động này không thể hoàn tác.');
+    }
+</script>
 </body>
 </html>
