@@ -35,10 +35,6 @@
                            href="${pageContext.request.contextPath}/home">Trang chủ</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link ${currentPage == 'shop' ? 'active' : ''}"
-                           href="${pageContext.request.contextPath}/shop">Cửa hàng</a>
-                    </li>
 
                     <li class="nav-item">
                         <a class="nav-link ${currentPage == 'products' ? 'active' : ''}"

@@ -361,3 +361,6 @@
 
 /* small utilities */
 .product-detail-page .text-muted { color: var(--muted); font-size: 14px; }
+.btn-outline-danger{
+    margin-top: 10px;
+}
