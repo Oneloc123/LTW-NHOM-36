@@ -62,4 +62,29 @@ public class OrderService {
     public String[] getPaymentMethods() {
         return new String[]{"cod", "bank_transfer", "credit_card", "paypal"};
     }
+
+    // Lấy tất cả đơn hàng (admin)
+    public List<Order> getAllOrders() {
+        return orderDao.getAllOrders();
+    }
+    // Tìm kiếm đơn hàng
+    public List<Order> searchOrders(String keyword, String status, String paymentStatus, String userId) {
+        return orderDao.searchOrders(keyword, status, paymentStatus, userId);
+    }
+
+    // Cập nhật đơn hàng
+    public boolean updateOrder(Order order) {
+        // Cần implement trong OrderDao
+        return false;
+    }
+
+    // Cập nhật trạng thái đơn hàng
+    public boolean updateOrderStatus(int orderId, String status) {
+        return orderDao.updateOrderStatus(orderId, status);
+    }
+
+    // Xóa đơn hàng
+    public boolean deleteOrder(int orderId) {
+        return orderDao.deleteOrder(orderId);
+    }
 }

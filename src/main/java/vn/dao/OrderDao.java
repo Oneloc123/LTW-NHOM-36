@@ -5,7 +5,9 @@ import vn.model.Order;
 import vn.model.OrderItem;
 import org.jdbi.v3.core.Jdbi;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderDao extends BaseDao {
 
@@ -285,5 +287,195 @@ public class OrderDao extends BaseDao {
 
             return query.mapToBean(Order.class).list();
         });
+    }
+    // 1. Lấy tất cả đơn hàng (dành cho admin)
+
+
+    // 2. Tìm kiếm đơn hàng với nhiều tiêu chí
+    public List<Order> searchOrders(String keyword, String status, String paymentStatus, String userId) {
+        return get().withHandle(h -> {
+            StringBuilder sql = new StringBuilder(
+                    "SELECT id, user_id as userId, order_date as orderDate, total_amount as totalAmount, " +
+                            "shipping_address as shippingAddress, phone_number as phoneNumber, email, status, " +
+                            "payment_method as paymentMethod, payment_status as paymentStatus, notes " +
+                            "FROM orders WHERE 1=1"
+            );
+
+            // Thêm điều kiện tìm kiếm
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                sql.append(" AND (email LIKE ? OR phone_number LIKE ? OR shipping_address LIKE ? OR notes LIKE ?)");
+            }
+            if (status != null && !status.trim().isEmpty()) {
+                sql.append(" AND status = ?");
+            }
+            if (paymentStatus != null && !paymentStatus.trim().isEmpty()) {
+                sql.append(" AND payment_status = ?");
+            }
+            if (userId != null && !userId.trim().isEmpty()) {
+                try {
+                    int userIdInt = Integer.parseInt(userId);
+                    sql.append(" AND user_id = ?");
+                } catch (NumberFormatException e) {
+                    // Nếu không phải số, không thêm điều kiện
+                }
+            }
+
+            sql.append(" ORDER BY order_date DESC");
+
+            var query = h.createQuery(sql.toString());
+
+            int paramIndex = 0;
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                String likeKeyword = "%" + keyword.trim() + "%";
+                query.bind(paramIndex++, likeKeyword)
+                        .bind(paramIndex++, likeKeyword)
+                        .bind(paramIndex++, likeKeyword)
+                        .bind(paramIndex++, likeKeyword);
+            }
+            if (status != null && !status.trim().isEmpty()) {
+                query.bind(paramIndex++, status.trim());
+            }
+            if (paymentStatus != null && !paymentStatus.trim().isEmpty()) {
+                query.bind(paramIndex++, paymentStatus.trim());
+            }
+            if (userId != null && !userId.trim().isEmpty()) {
+                try {
+                    int userIdInt = Integer.parseInt(userId);
+                    query.bind(paramIndex++, userIdInt);
+                } catch (NumberFormatException e) {
+                    // Bỏ qua nếu không phải số
+                }
+            }
+
+            return query.mapToBean(Order.class).list();
+        });
+    }
+
+    // 3. Cập nhật thông tin đơn hàng
+    public boolean updateOrder(Order order) {
+        int rows = get().withHandle(h ->
+                h.createUpdate(
+                                "UPDATE orders SET " +
+                                        "shipping_address = ?, " +
+                                        "phone_number = ?, " +
+                                        "email = ?, " +
+                                        "total_amount = ?, " +
+                                        "status = ?, " +
+                                        "payment_method = ?, " +
+                                        "payment_status = ?, " +
+                                        "notes = ?, " +
+                                        "updated_at = CURRENT_TIMESTAMP " +
+                                        "WHERE id = ?"
+                        )
+                        .bind(0, order.getShippingAddress())
+                        .bind(1, order.getPhoneNumber())
+                        .bind(2, order.getEmail())
+                        .bind(3, order.getTotalAmount())
+                        .bind(4, order.getStatus())
+                        .bind(5, order.getPaymentMethod())
+                        .bind(6, order.getPaymentStatus())
+                        .bind(7, order.getNotes())
+                        .bind(8, order.getId())
+                        .execute()
+        );
+        return rows > 0;
+    }
+
+
+    // 5. Lấy đơn hàng theo khoảng thời gian
+    public List<Order> getOrdersByDateRange(Timestamp startDate, Timestamp endDate) {
+        return get().withHandle(h ->
+                h.createQuery(
+                                "SELECT id, user_id as userId, order_date as orderDate, total_amount as totalAmount, " +
+                                        "shipping_address as shippingAddress, phone_number as phoneNumber, email, status, " +
+                                        "payment_method as paymentMethod, payment_status as paymentStatus, notes " +
+                                        "FROM orders WHERE order_date BETWEEN ? AND ? " +
+                                        "ORDER BY order_date DESC"
+                        )
+                        .bind(0, startDate)
+                        .bind(1, endDate)
+                        .mapToBean(Order.class)
+                        .list()
+        );
+    }
+
+    // 6. Thống kê đơn hàng theo trạng thái
+    public Map<String, Integer> getOrderStatistics() {
+        return get().withHandle(h -> {
+            Map<String, Integer> stats = new HashMap<>();
+
+            // Tổng số đơn hàng
+            int total = h.createQuery("SELECT COUNT(*) FROM orders")
+                    .mapTo(Integer.class)
+                    .one();
+            stats.put("total", total);
+
+            // Đếm theo trạng thái
+            List<Map<String, Object>> statusCounts = h.createQuery(
+                    "SELECT status, COUNT(*) as count FROM orders GROUP BY status"
+            ).mapToMap().list();
+
+            for (Map<String, Object> row : statusCounts) {
+                String status = (String) row.get("status");
+                Long count = (Long) row.get("count");
+                stats.put(status, count.intValue());
+            }
+
+            // Doanh thu
+            Double revenue = h.createQuery(
+                    "SELECT COALESCE(SUM(total_amount), 0) FROM orders " +
+                            "WHERE status = 'delivered' AND payment_status = 'paid'"
+            ).mapTo(Double.class).one();
+            stats.put("revenue", revenue.intValue());
+
+            return stats;
+        });
+    }
+
+    // 7. Lấy đơn hàng với phân trang
+    public List<Order> getOrdersWithPagination(int offset, int limit) {
+        return get().withHandle(h ->
+                h.createQuery(
+                                "SELECT id, user_id as userId, order_date as orderDate, total_amount as totalAmount, " +
+                                        "shipping_address as shippingAddress, phone_number as phoneNumber, email, status, " +
+                                        "payment_method as paymentMethod, payment_status as paymentStatus, notes " +
+                                        "FROM orders ORDER BY order_date DESC LIMIT ? OFFSET ?"
+                        )
+                        .bind(0, limit)
+                        .bind(1, offset)
+                        .mapToBean(Order.class)
+                        .list()
+        );
+    }
+
+    // 8. Đếm tổng số đơn hàng (cho phân trang)
+    public int countAllOrders() {
+        return get().withHandle(h ->
+                h.createQuery("SELECT COUNT(*) FROM orders")
+                        .mapTo(Integer.class)
+                        .one()
+        );
+    }
+
+    // 9. Cập nhật chỉ trạng thái
+    public boolean updateOrderStatusOnly(int orderId, String status) {
+        int rows = get().withHandle(h ->
+                h.createUpdate("UPDATE orders SET status = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?")
+                        .bind(0, status)
+                        .bind(1, orderId)
+                        .execute()
+        );
+        return rows > 0;
+    }
+
+    // 10. Cập nhật chỉ trạng thái thanh toán
+    public boolean updatePaymentStatusOnly(int orderId, String paymentStatus) {
+        int rows = get().withHandle(h ->
+                h.createUpdate("UPDATE orders SET payment_status = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?")
+                        .bind(0, paymentStatus)
+                        .bind(1, orderId)
+                        .execute()
+        );
+        return rows > 0;
     }
 }
