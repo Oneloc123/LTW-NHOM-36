@@ -1,10 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi tiết đơn hàng #${order.id}</title>
 
@@ -23,8 +30,11 @@
 
         body {
             font-family: "Segoe UI", Arial;
-            background: #f4f6f9;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
             color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* ===== Container ===== */
@@ -32,6 +42,7 @@
             max-width: 1100px;
             margin: 40px auto;
             padding: 0 16px;
+            flex: 1;
         }
 
         .page-title {
@@ -89,14 +100,13 @@
             border-left: 4px solid #dc3545;
         }
 
-        /* ===== Order Header Card ===== */
+        /*===== Order Header Card ===== */
         .order-header-card {
             background: #fff;
             border-radius: 16px;
             padding: 24px;
             margin-bottom: 22px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-            border-left: 4px solid #667eea;
         }
 
         .order-header-content {
@@ -271,6 +281,12 @@
             background: #f8f9fb;
             border-radius: 12px;
             border-left: 3px solid #667eea;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .info-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .info-label {
@@ -285,6 +301,9 @@
             font-size: 15px;
             font-weight: 500;
             color: #333;
+            line-height: 1.5;
+            font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, "Noto Sans",
+            "Noto Sans Vietnamese", sans-serif;
         }
 
         /* ===== Order Actions ===== */
@@ -322,24 +341,31 @@
 
         .btn-primary:hover {
             background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
 
         .btn-danger {
             background: #fee2e2;
             color: #b91c1c;
+            border: 1px solid #fecaca;
         }
 
         .btn-danger:hover {
             background: #fecaca;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(185, 28, 28, 0.1);
         }
 
         .btn-secondary {
             background: #f3f4f6;
             color: #374151;
+            border: 1px solid #e5e7eb;
         }
 
         .btn-secondary:hover {
             background: #e5e7eb;
+            transform: translateY(-2px);
         }
 
         .btn-success {
@@ -349,6 +375,12 @@
 
         .btn-success:hover {
             background: #15803d;
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 13px;
         }
 
         /* ===== Notes Section ===== */
@@ -357,8 +389,13 @@
             border-left: 4px solid #ffc107;
             padding: 18px;
             border-radius: 0 12px 12px 0;
-            margin-top: 20px;
+            margin: 20px 0;
             font-size: 14px;
+            transition: transform 0.2s ease;
+        }
+
+        .notes-section:hover {
+            transform: translateX(2px);
         }
 
         .notes-label {
@@ -382,52 +419,55 @@
             padding: 60px 20px;
             border-radius: 18px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            margin-top: 40px;
         }
 
         .empty-icon {
             font-size: 56px;
             margin-bottom: 16px;
-            color: #ccc;
+            color: #6366f1;
         }
 
         .empty-title {
             font-size: 22px;
             margin-bottom: 8px;
-            color: #666;
+            color: #333;
         }
 
         .empty-text {
             font-size: 14px;
-            color: #888;
+            color: #666;
             margin-bottom: 20px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
 
         /* ===== Timeline ===== */
         .order-timeline {
             margin-top: 20px;
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .order-timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 24px;
+            bottom: 0;
+            width: 2px;
+            background: #e5e7eb;
+            z-index: 1;
         }
 
         .timeline-item {
             display: flex;
             align-items: flex-start;
             gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             position: relative;
-        }
-
-        .timeline-item:before {
-            content: '';
-            position: absolute;
-            left: 7px;
-            top: 24px;
-            bottom: -24px;
-            width: 2px;
-            background: #e5e7eb;
-            z-index: 1;
-        }
-
-        .timeline-item:last-child:before {
-            display: none;
         }
 
         .timeline-icon {
@@ -444,10 +484,12 @@
 
         .timeline-icon.active {
             background: #10b981;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
         }
 
         .timeline-content {
             flex: 1;
+            padding-bottom: 4px;
         }
 
         .timeline-title {
@@ -461,12 +503,84 @@
             color: #888;
         }
 
+        /* ===== Print Styles ===== */
+        @media print {
+            .back-link,
+            .order-actions-card,
+            .btn,
+            footer,
+            header {
+                display: none !important;
+            }
+
+            body {
+                background: white !important;
+                font-size: 12px;
+            }
+
+            .container {
+                margin: 10px !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+
+            .order-header-card,
+            .order-details-card,
+            .customer-info-card {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+                margin-bottom: 10px !important;
+            }
+
+            .page-title {
+                font-size: 20px !important;
+                margin-bottom: 15px !important;
+            }
+        }
+
+        /* ===== Footer (điều chỉnh từ Bootstrap) ===== */
+        .footer {
+            margin-top: 60px;
+        }
+
+        .footer-link {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: #4f46e5;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            color: #666;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: #4f46e5;
+            color: white;
+            transform: translateY(-2px);
+        }
+
         /* ===== Responsive ===== */
         @media (max-width: 768px) {
-            .order-item {
-                grid-template-columns: 1fr;
-                gap: 12px;
-                text-align: center;
+            .container {
+                margin: 20px auto;
+                padding: 0 12px;
+            }
+
+            .page-title {
+                font-size: 24px;
             }
 
             .order-header-content {
@@ -476,6 +590,13 @@
 
             .order-payment-status {
                 text-align: center;
+            }
+
+            .order-item {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                text-align: center;
+                padding: 16px;
             }
 
             .action-buttons {
@@ -489,6 +610,35 @@
 
             .info-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .order-timeline {
+                padding-left: 20px;
+            }
+
+            .timeline-item {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .order-header-card,
+            .order-details-card,
+            .customer-info-card,
+            .order-actions-card {
+                padding: 16px;
+            }
+
+            .empty-state {
+                padding: 40px 16px;
+            }
+
+            .empty-icon {
+                font-size: 48px;
+            }
+
+            .empty-title {
+                font-size: 20px;
             }
         }
     </style>
@@ -604,9 +754,9 @@
                         <div class="order-item">
                             <div class="item-image">
                                 <c:choose>
-                                    <c:when test="${not empty item.product.imageUrl}">
-                                        <img src="${item.product.imageUrl}" alt="${item.product.name}"
-                                             style="width: 100%; height: 100%; border-radius: 8px;">
+                                    <c:when test="${not empty item.product.imagesTop}">
+                                        <img src="${item.product.imagesTop}" alt="${item.product.name}"
+                                             style="width: 100%; height: 100%; border-radius: 8px; object-fit: cover;">
                                     </c:when>
                                     <c:otherwise>
                                         <i class="bi bi-box"></i>
@@ -615,20 +765,15 @@
                             </div>
                             <div class="item-name">
                                     ${item.product.name}
-                                <c:if test="${not empty item.product.sku}">
-                                    <div class="text-muted small mt-1">SKU: ${item.product.sku}</div>
-                                </c:if>
                             </div>
                             <div class="item-price">
-                                <fmt:formatNumber value="${item.unitPrice}" type="currency"
-                                                  currencyCode="VND" maxFractionDigits="0" />
+                                <fmt:formatNumber value="${item.unitPrice}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
                             </div>
                             <div class="item-quantity">
                                 Số lượng: ${item.quantity}
                             </div>
                             <div class="item-subtotal">
-                                <fmt:formatNumber value="${item.subtotal}" type="currency"
-                                                  currencyCode="VND" maxFractionDigits="0" />
+                                <fmt:formatNumber value="${item.subtotal}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
                             </div>
                         </div>
                     </c:forEach>
@@ -639,8 +784,7 @@
                     <div class="summary-row">
                         <span>Tạm tính:</span>
                         <span>
-                            <fmt:formatNumber value="${order.totalAmount}" type="currency"
-                                              currencyCode="VND" maxFractionDigits="0" />
+                            <fmt:formatNumber value="${order.totalAmount}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
                         </span>
                     </div>
                     <div class="summary-row">
@@ -654,8 +798,7 @@
                     <div class="summary-row total">
                         <span>Tổng cộng:</span>
                         <span>
-                            <fmt:formatNumber value="${order.totalAmount}" type="currency"
-                                              currencyCode="VND" maxFractionDigits="0" />
+                            <fmt:formatNumber value="${order.totalAmount}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
                         </span>
                     </div>
                 </div>
@@ -669,7 +812,7 @@
                 <div class="info-grid">
                     <div class="info-item">
                         <div class="info-label">Họ tên</div>
-                        <div class="info-value">${sessionScope.fullName}</div>
+                        <div class="info-value">${user.fullName}</div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Email</div>
@@ -713,18 +856,12 @@
                                 <i class="bi bi-x-circle"></i> Hủy đơn hàng
                             </button>
                         </form>
-                        <a href="#" class="btn btn-secondary">
-                            <i class="bi bi-pencil"></i> Chỉnh sửa đơn hàng
-                        </a>
                     </c:if>
 
                     <c:if test="${order.status == 'delivered'}">
                         <button class="btn btn-success" disabled>
                             <i class="bi bi-check-circle"></i> Đã nhận được hàng
                         </button>
-                        <a href="#" class="btn btn-secondary">
-                            <i class="bi bi-arrow-repeat"></i> Yêu cầu đổi trả
-                        </a>
                     </c:if>
 
                     <c:if test="${order.status == 'shipped'}">
@@ -748,7 +885,7 @@
                         <i class="bi bi-info-circle"></i>
                         Nếu bạn có bất kỳ câu hỏi nào về đơn hàng, vui lòng liên hệ hỗ trợ.
                     </p>
-                    <div class="d-flex gap-3">
+                    <div class="d-flex gap-3 flex-wrap">
                         <a href="tel:19001234" class="btn btn-secondary btn-sm">
                             <i class="bi bi-telephone"></i> 1900 1234
                         </a>
@@ -843,9 +980,13 @@
     }
 
     // Confirm order cancellation
-    function confirmCancel() {
-        return confirm('Bạn có chắc chắn muốn hủy đơn hàng này? Hành động này không thể hoàn tác.');
-    }
+    document.querySelectorAll('form[action*="cancel-order"]').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            if (!confirm('Bạn có chắc chắn muốn hủy đơn hàng này? Hành động này không thể hoàn tác.')) {
+                e.preventDefault();
+            }
+        });
+    });
 </script>
 </body>
 </html>
