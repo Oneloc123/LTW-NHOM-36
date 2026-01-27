@@ -55,10 +55,9 @@
     <section class="category-tabs">
         <div class="tabs-container">
             <button class="tab-btn active" data-category="all">Tất cả</button>
-            <button class="tab-btn" data-category="mini-tech">Công nghệ mini</button>
+            <button class="tab-btn" data-category="mini-tech">Thiết bị máy tính</button>
             <button class="tab-btn" data-category="ai-device">Thiết bị AI</button>
-            <button class="tab-btn" data-category="fun-tech">Đồ chơi công nghệ</button>
-            <button class="tab-btn" data-category="creative">Phụ kiện sáng tạo</button>
+            <button class="tab-btn" data-category="fun-tech">Decor công nghệ</button>
         </div>
     </section>
 
@@ -132,43 +131,6 @@
     </div>
 
 
-    <!-- CART DRAWER SIMULATION (checkbox hack) -->
-    <div class="site-cart">
-        <input type="checkbox" id="cart-toggle" hidden>
-        <label for="cart-toggle" class="cart-overlay"></label>
-
-        <label for="cart-toggle" class="cart-floating" aria-hidden="false" title="Mở giỏ hàng">
-            <span class="cart-count">0</span>
-            🛒
-        </label>
-        <aside class="cart-drawer" aria-label="Giỏ hàng">
-            <div class="cart-header">
-                <h3>Giỏ hàng của bạn</h3>
-                <label for="cart-toggle" class="cart-close" aria-label="Đóng giỏ">✕</label>
-            </div>
-            <div class="cart-body">
-                <p class="muted">Giỏ hàng demo (tĩnh). Links "Thêm vào giỏ" trong trang sẽ dẫn tới đây nhưng không
-                    update số lượng do không dùng JS.</p>
-                <ul class="cart-items">
-                    <li class="cart-item">
-                        <img src="https://via.placeholder.com/80x80.png?text=Item" alt="">
-                        <div class="cart-info">
-                            <strong>Galaxy Mini 1</strong>
-                            <span class="muted">1 x 6.490.000₫</span>
-                        </div>
-                        <div class="cart-actions"><a href="#" class="link-more">Xóa</a></div>
-                    </li>
-                </ul>
-            </div>
-            <div class="cart-footer">
-                <div class="cart-total"><span>Tổng</span><strong>6.490.000₫</strong></div>
-                <div class="cart-cta">
-                    <a class="btn btn-ghost" href="#">Tiếp tục mua</a>
-                    <a class="btn btn-primary" href="#">Thanh toán</a>
-                </div>
-            </div>
-        </aside>
-    </div>
 </main>
 
 <!-- ================= Footer ================= -->
@@ -235,8 +197,8 @@
 <!-- JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-
 <script>
+    /* ================== GLOBAL CONFIG ================== */
     const mapCategory = {
         "mini-tech": 1,
         "ai-device": 2,
@@ -244,10 +206,46 @@
         "creative": 4
     };
 
-    const contextPath = document.getElementById("app").dataset.contextPath;
+    let currentPage = 1;
     let currentCategory = "";
+    const pageSize = 20;
+    const contextPath = document.getElementById("app").dataset.contextPath;
 
-    function loadProducts() {
+    /* ================== INIT ================== */
+    document.addEventListener("DOMContentLoaded", function () {
+        bindEvents();
+        loadProducts(1); // load lần đầu
+    });
+
+    /* ================== EVENTS ================== */
+    function bindEvents() {
+        // Nút lọc
+        document.getElementById("filterBtn")
+            .addEventListener("click", () => loadProducts(1));
+
+        // Enter để search
+        document.getElementById("searchInput")
+            .addEventListener("keydown", e => {
+                if (e.key === "Enter") loadProducts(1);
+            });
+
+        // Tab category
+        document.querySelectorAll(".tab-btn").forEach(btn => {
+            btn.addEventListener("click", function () {
+                document.querySelector(".tab-btn.active")?.classList.remove("active");
+                this.classList.add("active");
+
+                const slug = this.dataset.category;
+                currentCategory = (slug === "all") ? "" : mapCategory[slug];
+                loadProducts(1);
+            });
+        });
+    }
+
+    /* ================== API LOAD ================== */
+    function loadProducts(page = 1) {
+        currentPage = page;
+
         const params = new URLSearchParams();
         const kw = document.getElementById("searchInput").value.trim();
         const sort = document.getElementById("sortSelect").value;
@@ -260,12 +258,21 @@
         if (maxP) params.append("maxPrice", maxP);
         if (currentCategory) params.append("category", currentCategory);
 
+        params.append("page", currentPage);
+        params.append("size", pageSize);
+
         fetch(contextPath + "/api/products/filter?" + params.toString())
-            .then(r => r.json())
-            .then(renderProducts)
-            .catch(err => console.error("FILTER ERROR", err));
+            .then(res => res.json())
+            .then(data => {
+                console.log("API DATA =", data);
+                renderProducts(data.items);
+                renderPagination(data.totalPages);
+
+            })
+            .catch(err => console.error("LOAD PRODUCT ERROR:", err));
     }
 
+    /* ================== RENDER PRODUCTS ================== */
     function renderProducts(list) {
         const grid = document.getElementById("productGrid");
         grid.innerHTML = "";
@@ -282,9 +289,7 @@
 
             grid.innerHTML +=
                 '<div class="product-card">' +
-
                 '<img src="' + img + '" alt="' + p.name + '">' +
-
                 '<h3>' + p.name + '</h3>' +
 
                 '<div class="product-rating">' +
@@ -292,48 +297,66 @@
                 (p.avgRating ? p.avgRating.toFixed(1) : '0.0') +
                 ' <i class="fa fa-star"></i> (' +
                 (p.ratingCount || 0) +
-                ')' +
-                '</span>' +
-                '</div>'
-                +
+                ')</span>' +
+                '</div>' +
 
                 '<div class="product-price">' +
                 Number(p.price).toLocaleString() + ' đ' +
                 '</div>' +
 
                 '<div class="card-footer">' +
-                '<button class="buy-btn">Chi tiết</button>' +
-                '<button class="add-cart-btn"><i class="bi bi-cart-plus"></i></button>' +
-                '<button class="wishlist-btn"><i class="bi bi-heart"></i></button>' +
+                '<button class="buy-btn" onclick="window.location.href=\'' +
+                contextPath + '/product?id=' + p.id +
+                '\'">Chi tiết</button>'
+                +
+                '<button class="add-cart-btn" onclick="window.location.href=\'' +
+                contextPath + '/add-cart?id=' + p.id + '&q=1' +
+                '\'">' +
+                '<i class="bi bi-cart-plus"></i>' +
+                '</button>'
+                +
+                '<form action="' + contextPath + '/wishlist" method="post" style="display:inline">' +
+                '<input type="hidden" name="action" value="add">' +
+                '<input type="hidden" name="productId" value="' + p.id + '">' +
+                '<button type="submit" class="wishlist-btn">' +
+                '<i class="bi bi-heart"></i>' +
+                '</button>' +
+                '</form>'
+                +
                 '</div>' +
-
                 '</div>';
         });
     }
 
+    /* ================== PAGINATION ================== */
+    function renderPagination(totalPages) {
+        const ul = document.getElementById("pagination");
+        ul.innerHTML = "";
+        totalPages = 5; // ÉP CỨNG TEST
+
+        if (!totalPages || totalPages <= 1) return;
+
+        // Prev
+        ul.innerHTML +=
+            '<li class="page-item ' + (currentPage == 1 ? 'disabled' : '') + '">' +
+            '<a class="page-link" href="#" onclick="loadProducts(' + (currentPage - 1) + ')">Prev</a>' +
+            '</li>';
+
+        // Pages
+        for (let i = 1; i <= totalPages; i++) {
+            ul.innerHTML +=
+                '<li class="page-item ' + (i == currentPage ? 'active' : '') + '">' +
+                '<a class="page-link" href="#" onclick="loadProducts(' + i + ')">' + i + '</a>' +
+                '</li>';
+        }
+
+        // Next
+        ul.innerHTML +=
+            '<li class="page-item ' + (currentPage == totalPages ? 'disabled' : '') + '">' +
+            '<a class="page-link" href="#" onclick="loadProducts(' + (currentPage + 1) + ')">Next</a>' +
+            '</li>';
+    }
 </script>
-<script>
-    // Nút Lọc
-    document.getElementById("filterBtn").addEventListener("click", loadProducts);
-
-    // Tab category
-    document.querySelectorAll(".tab-btn").forEach(btn => {
-        btn.addEventListener("click", function () {
-            document.querySelector(".tab-btn.active")?.classList.remove("active");
-            this.classList.add("active");
-
-            const slug = this.dataset.category;
-            currentCategory = (slug === "all") ? "" : mapCategory[slug];
-            loadProducts();
-        });
-    });
-
-    // (Tuỳ chọn) Enter để tìm
-    document.getElementById("searchInput").addEventListener("keydown", e => {
-        if (e.key === "Enter") loadProducts();
-    });
-</script>
-
 
 </body>
 

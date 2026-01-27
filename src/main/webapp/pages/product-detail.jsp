@@ -80,7 +80,7 @@
                     </div>
                 </div>
 
-                <p class="product-desc">${p.fullDescription}</p>
+                <p class="product-desc">${p.shortDescription}</p>
 
 
             </div> <!-- /.meta -->
@@ -101,8 +101,8 @@
 
                         <div id="specs" class="tab-panel" data-panel style="display:none">
 
-                            <%--                            Chỗ này thêm Thông Số--%>
-                            <%--                            <p>${p.}</p>--%>
+                            <pre>${p.spec}</pre>
+
                         </div>
 
                         <div id="reviews" class="tab-panel" data-panel style="display:none">
@@ -237,7 +237,7 @@
                     <form action="${pageContext.request.contextPath}/wishlist" method="post" class="d-inline">
                         <input type="hidden" name="action" value="add">
                         <input type="hidden" name="productId" value="${p.id}">
-                        <button type="submit" class="btn btn-outline-danger btn-sm"
+                        <button type="submit" class="btn btn-cart btn-outline-danger btn-sm"
                                 title="Thêm vào danh sách yêu thích">
                             <i class="bi bi-heart"></i> Yêu thích
                         </button>
@@ -245,8 +245,9 @@
                 </c:if>
                 <c:if test="${empty sessionScope.id}">
                     <a href="${pageContext.request.contextPath}/login"
-                       class="btn btn-outline-danger btn-sm"
-                       title="Đăng nhập để thêm vào wishlist">
+                       class="btn btn-outline-danger  "
+                       title="Đăng nhập để thêm vào wishlist"
+                        type = "margin-top:10px;">
                         <i class="bi bi-heart"></i> Yêu thích
                     </a>
                 </c:if>

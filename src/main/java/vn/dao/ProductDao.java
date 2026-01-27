@@ -87,11 +87,12 @@ public class ProductDao extends BaseDao {
         return get().withHandle(h -> {
 
             String sql = """
-                        SELECT p.id, p.name, p.category_id, p.short_description, p.full_description,
-                               p.price, p.is_featured, p.created_at, p.updated_at,
-                               p.avg_rating AS avgRating,
-                               p.rating_count AS ratingCount,
-                               pi.url AS image_url
+                      SELECT p.id, p.name, p.category_id, p.short_description, p.full_description,
+                                                         p.spec,
+                                                         p.price, p.is_featured, p.created_at, p.updated_at,
+                                                         p.avg_rating AS avgRating,
+                                                         p.rating_count AS ratingCount,
+                                                         pi.url AS image_url                                                
                         FROM products p
                         LEFT JOIN product_images pi ON p.id = pi.product_id
                         WHERE p.id = :id
@@ -120,6 +121,8 @@ public class ProductDao extends BaseDao {
 
                             p.setAvgRating(rs.getDouble("avgRating"));
                             p.setRatingCount(rs.getInt("ratingCount"));
+                            p.setSpec(rs.getString("spec"));
+
 
                             p.setImages(new ArrayList<>());
                             map.put(productId, p);
@@ -253,22 +256,6 @@ public class ProductDao extends BaseDao {
         );
     }
 
-    public Product getProductById(int id) {
-        return get().withHandle(h ->
-                h.createQuery(
-                                "SELECT id, name, category_id as categoryID, " +
-                                        "short_description as shortDescription, " +
-                                        "full_description as fullDescription, " +
-                                        "price, is_featured as featured, " +
-                                        "created_at as createAt, updated_at as updateAt " +
-                                        "FROM products WHERE id = :id"
-                        )
-                        .bind("id", id)
-                        .mapToBean(Product.class)
-                        .findOne()
-                        .orElse(null)
-        );
-    }
 
     public List<Product> getLatestProducts(int limit) {
         return get().withHandle(h -> {
@@ -370,36 +357,39 @@ public class ProductDao extends BaseDao {
             Integer categoryId,
             Integer minPrice,
             Integer maxPrice,
-            String sort
+            String sort,
+            int page,
+            int size
     ) {
+        int offset = (page - 1) * size;
+
         return get().withHandle(h -> {
 
             StringBuilder sql = new StringBuilder("""
-                        SELECT DISTINCT
-                               p.id,
-                               p.name,
-                               p.category_id AS categoryID,
-                               p.short_description AS shortDescription,
-                               p.full_description AS fullDescription,
-                               p.price,
-                               p.is_featured AS featured,
-                               p.created_at AS createAt,
-                               p.updated_at AS updateAt,
-                               p.avg_rating AS avgRating,
-                               p.rating_count AS ratingCount,
-                               pi.url AS image_url
-                        FROM products p
-                        LEFT JOIN product_images pi ON p.id = pi.product_id
-                        WHERE 1=1
-                    """);
-
+            SELECT
+                p.id,
+                p.name,
+                p.category_id AS categoryID,
+                p.short_description AS shortDescription,
+                p.full_description AS fullDescription,
+                p.price,
+                p.is_featured AS featured,
+                p.created_at AS createAt,
+                p.updated_at AS updateAt,
+                p.avg_rating AS avgRating,
+                p.rating_count AS ratingCount,
+                pi.url AS image_url
+            FROM products p
+            LEFT JOIN product_images pi ON p.id = pi.product_id
+            WHERE 1=1
+        """);
 
             if (keyword != null && !keyword.isBlank()) {
                 sql.append("""
-                            AND (p.name LIKE :kw
-                                 OR p.short_description LIKE :kw
-                                 OR p.full_description LIKE :kw)
-                        """);
+                AND (p.name LIKE :kw
+                     OR p.short_description LIKE :kw
+                     OR p.full_description LIKE :kw)
+            """);
             }
 
             if (categoryId != null) {
@@ -426,21 +416,22 @@ public class ProductDao extends BaseDao {
                 sql.append(" ORDER BY p.id DESC ");
             }
 
+            // ✅ LIMIT PHẢI Ở CUỐI
+            sql.append(" LIMIT :size OFFSET :offset ");
 
             var query = h.createQuery(sql.toString());
 
-            if (keyword != null && !keyword.isBlank()) {
+            if (keyword != null && !keyword.isBlank())
                 query.bind("kw", "%" + keyword.trim() + "%");
-            }
-            if (categoryId != null) {
+            if (categoryId != null)
                 query.bind("categoryId", categoryId);
-            }
-            if (minPrice != null) {
+            if (minPrice != null)
                 query.bind("minPrice", minPrice);
-            }
-            if (maxPrice != null) {
+            if (maxPrice != null)
                 query.bind("maxPrice", maxPrice);
-            }
+
+            query.bind("size", size);
+            query.bind("offset", offset);
 
             Map<Integer, Product> map = new LinkedHashMap<>();
 
@@ -474,6 +465,48 @@ public class ProductDao extends BaseDao {
             return new ArrayList<>(map.values());
         });
     }
+
+    public int countFilterAjax(
+            String keyword,
+            Integer categoryId,
+            Integer minPrice,
+            Integer maxPrice
+    ) {
+        return get().withHandle(h -> {
+
+            StringBuilder sql = new StringBuilder("""
+            SELECT COUNT(DISTINCT p.id)
+            FROM products p
+            WHERE 1=1
+        """);
+
+            if (keyword != null && !keyword.isBlank()) {
+                sql.append("""
+                AND (p.name LIKE :kw
+                     OR p.short_description LIKE :kw
+                     OR p.full_description LIKE :kw)
+            """);
+            }
+
+            if (categoryId != null) sql.append(" AND p.category_id = :categoryId ");
+            if (minPrice != null) sql.append(" AND p.price >= :minPrice ");
+            if (maxPrice != null) sql.append(" AND p.price <= :maxPrice ");
+
+            var q = h.createQuery(sql.toString());
+
+            if (keyword != null && !keyword.isBlank())
+                q.bind("kw", "%" + keyword.trim() + "%");
+            if (categoryId != null)
+                q.bind("categoryId", categoryId);
+            if (minPrice != null)
+                q.bind("minPrice", minPrice);
+            if (maxPrice != null)
+                q.bind("maxPrice", maxPrice);
+
+            return q.mapTo(Integer.class).one();
+        });
+    }
+
 
 
 }

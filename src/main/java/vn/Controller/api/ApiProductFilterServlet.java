@@ -1,10 +1,11 @@
 package vn.Controller.api;
 
+import com.google.gson.Gson;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
-import java.util.List;
-import com.google.gson.Gson;
+
+import vn.model.PageResult;
 import vn.model.Product;
 import vn.services.ProductService;
 
@@ -12,6 +13,7 @@ import vn.services.ProductService;
 public class ApiProductFilterServlet extends HttpServlet {
 
     private final ProductService ps = new ProductService();
+    private final Gson gson = new Gson();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -20,19 +22,47 @@ public class ApiProductFilterServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json;charset=UTF-8");
 
+        // ===== 1. PARAMS =====
         String keyword = req.getParameter("keyword");
         String sort = req.getParameter("sort");
+
+        Integer categoryId = parseInt(req.getParameter("category"));
         Integer minPrice = parseInt(req.getParameter("minPrice"));
         Integer maxPrice = parseInt(req.getParameter("maxPrice"));
-        Integer categoryId = parseInt(req.getParameter("category"));
 
-        List<Product> list = ps.filterAjax(keyword, categoryId, minPrice, maxPrice, sort);
+        // 👉 phân trang
+        int page = parseInt(req.getParameter("page"), 1);
+        int size = parseInt(req.getParameter("size"), 20);
 
-        resp.getWriter().write(new Gson().toJson(list));
+        // ===== 2. SERVICE =====
+        PageResult<Product> result = ps.filterAjaxPaging(
+                keyword,
+                categoryId,
+                minPrice,
+                maxPrice,
+                sort,
+                page,
+                size
+        );
+
+        // ===== 3. JSON =====
+        resp.getWriter().write(gson.toJson(result));
     }
 
+    // ===== UTILS =====
     private Integer parseInt(String v) {
-        try { return (v == null || v.isBlank()) ? null : Integer.parseInt(v); }
-        catch (Exception e) { return null; }
+        try {
+            return (v == null || v.isBlank()) ? null : Integer.parseInt(v);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private int parseInt(String v, int defaultValue) {
+        try {
+            return (v == null || v.isBlank()) ? defaultValue : Integer.parseInt(v);
+        } catch (Exception e) {
+            return defaultValue;
+        }
     }
 }

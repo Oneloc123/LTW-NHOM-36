@@ -3,6 +3,7 @@ package vn.services;
 import vn.dao.ImageDao;
 import vn.dao.ProductDao;
 import vn.model.Image;
+import vn.model.PageResult;
 import vn.model.Product;
 
 import java.util.List;
@@ -59,14 +60,6 @@ public class ProductService {
         return productAdded;
     }
 
-    public List<Product> filterAjax(
-            String keyword,
-            Integer categoryId,
-            Integer minPrice,
-            Integer maxPrice,
-            String sort
-    ){        return productDao.filterAjax(keyword, categoryId, minPrice, maxPrice, sort);
-    }
 
     public void updateProduct(Product product) {
         productDao.updateProduct(product);
@@ -90,4 +83,26 @@ public class ProductService {
     public String getFirstImageUrl(int productId) {
         return imageDao.getFirstImageUrl(productId);
     }
+    public PageResult<Product> filterAjaxPaging(
+            String keyword,
+            Integer categoryId,
+            Integer minPrice,
+            Integer maxPrice,
+            String sort,
+            int page,
+            int size
+    ) {
+        int totalItems = productDao.countFilterAjax(
+                keyword, categoryId, minPrice, maxPrice
+        );
+
+        int totalPages = (int) Math.ceil((double) totalItems / size);
+
+        List<Product> items = productDao.filterAjax(
+                keyword, categoryId, minPrice, maxPrice, sort, page, size
+        );
+
+        return new PageResult<>(items, page, totalPages, totalItems);
+    }
+
 }

@@ -30,7 +30,7 @@
                 <div class="banner-img"></div>
                 <div class="banner-text">
                     <h2>${banner.title}</h2>
-                    <a href="../pages/shop.html" class="btn_unline">Mua ngay</a>
+                    <a href="/products" class="btn_unline">Mua ngay</a>
                 </div>
             </div>
 
@@ -56,8 +56,8 @@
             <p>Thỏa mãn khao khát bất tận</p>
 
             <div class="premium-buttons">
-                <a href="../pages/shop.html" class="btn-ghost-dark btn_unline">Tìm hiểu thêm</a>
-                <a href="../pages/shop.html" class="btn-outline-dark">Xem tất cả</a>
+                <a href="/product" class="btn-ghost-dark btn_unline">Tìm hiểu thêm</a>
+                <a href="/product" class="btn-outline-dark">Xem tất cả</a>
             </div>
         </div>
 
@@ -73,8 +73,8 @@
             <p>Nhỏ gọn – Tiện lợi – Mạnh mẽ vượt trội</p>
 
             <div class="premium-buttons">
-                <a href="../pages/shop.html" class="btn-ghost-dark btn_unline">Khám phá ngay</a>
-                <a href="../pages/shop.html" class="btn-outline-dark">Xem tất cả</a>
+                <a href="/product" class="btn-ghost-dark btn_unline">Khám phá ngay</a>
+                <a href="/product" class="btn-outline-dark">Xem tất cả</a>
             </div>
         </div>
         <img class="premium-media banner-media-2"
@@ -89,8 +89,8 @@
             <p>Đưa trải nghiệm công nghệ lên một tầm cao mới</p>
 
             <div class="premium-buttons">
-                <a href="../pages/shop.html" class="btn-ghost-dark btn_unline">Xem chi tiết</a>
-                <a href="../pages/shop.html" class="btn-outline-dark">Mua ngay</a>
+                <a href="/product" class="btn-ghost-dark btn_unline">Xem chi tiết</a>
+                <a href="/product" class="btn-outline-dark">Mua ngay</a>
             </div>
         </div>
 
@@ -103,25 +103,25 @@
     <section class="category">
 
         <div class="category-list">
-            <a href="../pages/shop.html" class="category-card">
+            <a href="/product" class="category-card">
                 <img class="cat-img"
                      src="https://owlgaming.vn/wp-content/uploads/2024/10/loa-bluetooth-gravastar-mars-pro-black.jpg"
                      alt="">
                 <p>Phụ Kiện Công Nghệ Sáng Tạo</p>
             </a>
 
-            <a href="../pages/shop.html" class="category-card">
+            <a href="/product" class="category-card">
                 <img class="cat-img" src="https://m.media-amazon.com/images/I/61Wjxlf61pL._AC_SL1200_.jpg">
                 <p>Decor Công Nghệ</p>
             </a>
 
-            <a href="../pages/shop.html" class="category-card">
+            <a href="/product" class="category-card">
                 <img class="cat-img"
                      src="https://m.media-amazon.com/images/I/51DBd7O6GEL.jpg_BO30,255,255,255_UF900,850_SR1910,1000,0,C_QL100_.jpg">
                 <p>Thiết Bị Thông Minh</p>
             </a>
 
-            <a href="../pages/shop.html" class="category-card">
+            <a href="/product" class="category-card">
                 <img class="cat-img"
                      src="https://product.hstatic.net/200000547251/product/b9-d_9979d37925a34bdba91802da528f995a_master.jpg">
                 <p>Công nghệ Lifestyle</p>
@@ -130,37 +130,6 @@
     </section>
 
 
-    <!-- ================= DEALS ================= -->
-    <section class="deals section-padding">
-        <div class="container">
-            <h2 class="section-title">Ưu đãi độc quyền</h2>
-
-                <div class="deal-grid">
-
-                <a class="deal-card" href="../pages/shop.html">
-                    <img src="https://img.topbank.vn/crop/620x324/2017/10/12/BAVjA8Ix/0-8f1f.jpg" alt="">
-                    <div class="deal-info">
-                        <h3>Ưu đãi trả góp 0%</h3>
-                    </div>
-                </a>
-
-                <a href="../pages/shop.html" class="deal-card">
-                    <img src="https://bizweb.dktcdn.net/100/517/390/collections/sale-2.png?v=1751516458907" alt="">
-                    <div class="deal-info">
-                        <h3>Flash sales lên đến 50%</h3>
-                    </div>
-                </a>
-
-                <a href="../pages/shop.html" class="deal-card">
-                    <img src="https://blog.abit.vn/wp-content/uploads/2020/11/free-shippig-la-gi-1-e1606374150159.jpg"
-                         alt="">
-                    <div class="deal-info">
-                        <h3>Freeship mọi đơn hàng</h3>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
 
 </main>
 

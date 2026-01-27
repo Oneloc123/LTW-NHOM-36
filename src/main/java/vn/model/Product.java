@@ -18,8 +18,9 @@ public class Product implements Serializable {
     private List<String> images = new ArrayList<>();
     private double avgRating;
     private int ratingCount;
+    private String spec;
 
-    public Product(int id, String name, int categoryID, String shortDescription, String fullDescription, int price, boolean isFeatured, String createAt, String updateAt, List<String> images, double avgRating, int ratingCount) {
+    public Product(int id, String name, int categoryID, String shortDescription, String fullDescription, int price, boolean isFeatured, String createAt, String updateAt, List<String> images, double avgRating, int ratingCount, String spec) {
         this.id = id;
         this.name = name;
         this.categoryID = categoryID;
@@ -32,6 +33,15 @@ public class Product implements Serializable {
         this.images = images;
         this.avgRating = avgRating;
         this.ratingCount = ratingCount;
+        this.spec = spec;
+    }
+
+    public String getSpec() {
+        return spec;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
     }
 
     public List<String> getImages() {
