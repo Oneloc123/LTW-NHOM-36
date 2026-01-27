@@ -245,5 +245,20 @@ public class UserDao extends BaseDao {
     }
 
 
+    public boolean updateAvatar(int userId, String imgURL) {
+
+        return get().withHandle(h -> {
+
+            String sql =
+                    "UPDATE users " +
+                            "SET imgURL = :imgURL " +
+                            "WHERE id = :userId";
+
+            return h.createUpdate(sql)
+                    .bind("imgURL", imgURL)
+                    .bind("userId", userId)
+                    .execute() > 0;
+        });
+    }
 
 }
