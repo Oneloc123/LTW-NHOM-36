@@ -1,5 +1,6 @@
 package vn.services;
 
+import vn.cart.CartItem;
 import vn.dao.OrderDao;
 import vn.model.Order;
 import vn.model.OrderItem;
@@ -19,9 +20,9 @@ public class OrderService {
         return orderDao.getOrderById(orderId, userId);
     }
 
-    // Tạo đơn hàng mới
-    public int createOrder(Order order) {
-        return orderDao.createOrder(order);
+    // Tạo đơn hàng mới từ giỏ hàng
+    public int createOrder(Order order, List<CartItem> cartItems) {
+        return orderDao.createOrder(order, cartItems);
     }
 
     // Hủy đơn hàng
@@ -42,6 +43,15 @@ public class OrderService {
         }
         return total;
     }
+    // Tính tổng tiền từ cart items
+    public double calculateTotalFromCart(List<CartItem> cartItems) {
+        double total = 0;
+        for (CartItem item : cartItems) {
+            total += item.getPrice() * item.getQuantity();
+        }
+        return total;
+    }
+
 
     // Lấy các trạng thái đơn hàng
     public String[] getOrderStatuses() {
@@ -51,5 +61,30 @@ public class OrderService {
     // Lấy các phương thức thanh toán
     public String[] getPaymentMethods() {
         return new String[]{"cod", "bank_transfer", "credit_card", "paypal"};
+    }
+
+    // Lấy tất cả đơn hàng (admin)
+    public List<Order> getAllOrders() {
+        return orderDao.getAllOrders();
+    }
+    // Tìm kiếm đơn hàng
+    public List<Order> searchOrders(String keyword, String status, String paymentStatus, String userId) {
+        return orderDao.searchOrders(keyword, status, paymentStatus, userId);
+    }
+
+    // Cập nhật đơn hàng
+    public boolean updateOrder(Order order) {
+        // Cần implement trong OrderDao
+        return false;
+    }
+
+    // Cập nhật trạng thái đơn hàng
+    public boolean updateOrderStatus(int orderId, String status) {
+        return orderDao.updateOrderStatus(orderId, status);
+    }
+
+    // Xóa đơn hàng
+    public boolean deleteOrder(int orderId) {
+        return orderDao.deleteOrder(orderId);
     }
 }
