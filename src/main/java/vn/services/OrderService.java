@@ -1,5 +1,6 @@
 package vn.services;
 
+import vn.cart.CartItem;
 import vn.dao.OrderDao;
 import vn.model.Order;
 import vn.model.OrderItem;
@@ -19,9 +20,9 @@ public class OrderService {
         return orderDao.getOrderById(orderId, userId);
     }
 
-    // Tạo đơn hàng mới
-    public int createOrder(Order order) {
-        return orderDao.createOrder(order);
+    // Tạo đơn hàng mới từ giỏ hàng
+    public int createOrder(Order order, List<CartItem> cartItems) {
+        return orderDao.createOrder(order, cartItems);
     }
 
     // Hủy đơn hàng
@@ -42,6 +43,15 @@ public class OrderService {
         }
         return total;
     }
+    // Tính tổng tiền từ cart items
+    public double calculateTotalFromCart(List<CartItem> cartItems) {
+        double total = 0;
+        for (CartItem item : cartItems) {
+            total += item.getPrice() * item.getQuantity();
+        }
+        return total;
+    }
+
 
     // Lấy các trạng thái đơn hàng
     public String[] getOrderStatuses() {
