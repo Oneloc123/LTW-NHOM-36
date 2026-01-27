@@ -1,58 +1,52 @@
 package vn.Controller;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.*;
 import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
 import vn.model.User;
 import vn.services.UserService;
 
 import java.io.IOException;
 
-@WebServlet("/login")
+@WebServlet(name = "login", value = "/login")
 public class LoginServlet extends HttpServlet {
-
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-
+        if(request.getAttribute("message") != null){
+            request.removeAttribute("message");
+        }
         if (session == null || session.getAttribute("id") == null) {
-            request.getRequestDispatcher("/pages/login.jsp")
-                    .forward(request, response);
-        } else {
-            response.sendRedirect(request.getContextPath() + "/home");
+            request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
+        }else{
+            request.getRequestDispatcher("/home").forward(request, response);
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
-        if (username == null || password == null) {
-            request.getRequestDispatcher("/pages/login.jsp")
-                    .forward(request, response);
-            return;
+        if(username == null || password == null){
+            request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
         }
-
         UserService userService = new UserService();
         boolean check = userService.checkUserNameAndPassword(username, password);
-
-        if (check) {
+        if(check){
             User user = userService.getUserByUserName(username);
-            HttpSession session = request.getSession(true);
-            session.setAttribute("user", user);
+            HttpSession session = request.getSession();
             session.setAttribute("id", user.getId());
+            if(user.getRole().equalsIgnoreCase("admin")){
+                session.setAttribute("role", "admin");
+                response.sendRedirect("/admin/dashBoard");
+            }else{
+                response.sendRedirect(request.getContextPath() + "/home");
+            }
 
-
-            response.sendRedirect(request.getContextPath() + "/home");
-        } else {
-            request.setAttribute("message", "Tên đăng nhập hoặc mật khẩu không đúng");
-            request.getRequestDispatcher("/pages/login.jsp")
-                    .forward(request, response);
+        }else{
+            String message = "Tên đăng nhập hoặc mật khẩu không đúng";
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
         }
     }
 }
