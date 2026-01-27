@@ -86,29 +86,65 @@ public class AdminProductServlet extends HttpServlet {
         String category = req.getParameter("category");
         String featured = req.getParameter("featured");
 
-        List<Product> products;
+        // Lấy tham số phân trang
+        int page = 1;
+        int pageSize = 10; // Số sản phẩm mỗi trang
 
-        boolean hasKeyword = keyword != null && !keyword.trim().isEmpty();
-        boolean hasCategory = category != null && !category.isEmpty();
-        boolean hasFeatured = featured != null && !featured.isEmpty();
-
-        if (hasKeyword || hasCategory || hasFeatured) {
-            products = productService.filterProducts(keyword, category, featured);
-        } else {
-            products = productService.getAllProducts();
+        try {
+            page = Integer.parseInt(req.getParameter("page"));
+            if (page < 1) page = 1;
+        } catch (NumberFormatException e) {
+            page = 1;
         }
 
-        // Lấy ảnh đầu tiên cho mỗi sản phẩm
-        for (Product product : products) {
-            String firstImage = imageService.getFirstImageUrl(product.getId());
-            if (firstImage != null) {
-                List<String> images = new ArrayList<>();
-                images.add(firstImage);
-                product.setImages(images);
+        List<Product> products;
+        int totalProducts;
+
+        if ((keyword != null && !keyword.trim().isEmpty()) ||
+                (category != null && !category.isEmpty()) ||
+                (featured != null && !featured.isEmpty())) {
+            // Tìm kiếm + lọc
+            products = productService.filterProducts(keyword, category, featured);
+            totalProducts = products.size();
+
+            // Phân trang cho kết quả tìm kiếm
+            int startIndex = (page - 1) * pageSize;
+            int endIndex = Math.min(startIndex + pageSize, totalProducts);
+
+            if (startIndex < totalProducts) {
+                products = products.subList(startIndex, endIndex);
+            } else {
+                products = new ArrayList<>();
+            }
+        } else {
+            // Lấy tất cả với phân trang
+            // Bạn cần implement phương thức getProductsWithPagination trong ProductService
+            // products = productService.getProductsWithPagination(page, pageSize);
+            // totalProducts = productService.countAllProducts();
+
+            // Tạm thời lấy tất cả rồi phân trang
+            products = productService.getAllProducts();
+            totalProducts = products.size();
+
+            int startIndex = (page - 1) * pageSize;
+            int endIndex = Math.min(startIndex + pageSize, totalProducts);
+
+            if (startIndex < totalProducts) {
+                products = products.subList(startIndex, endIndex);
+            } else {
+                products = new ArrayList<>();
             }
         }
 
+        // Tính tổng số trang
+        int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
+
         req.setAttribute("products", products);
+        req.setAttribute("currentPage", page);
+        req.setAttribute("pageSize", pageSize);
+        req.setAttribute("totalProducts", totalProducts);
+        req.setAttribute("totalPages", totalPages);
+
         req.getRequestDispatcher("/admin/admin-products.jsp").forward(req, resp);
     }
 

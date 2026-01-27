@@ -23,6 +23,25 @@
             color: #dc3545;
             font-weight: bold;
         }
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination .page-link {
+            color: #0d6efd;
+            border: 1px solid #dee2e6;
+        }
+        .pagination .page-item.active .page-link {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            color: white;
+        }
+        .page-info {
+            text-align: center;
+            color: #6c757d;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -62,6 +81,7 @@
 
         <!-- 🔎 SEARCH -->
         <form class="input-group mb-4" action="products" method="get">
+            <input type="hidden" name="page" value="1">
             <input type="text" class="form-control" name="keyword"
                    placeholder="Tìm kiếm sản phẩm theo tên..."
                    value="${param.keyword}">
@@ -70,6 +90,7 @@
 
         <section class="filters mt-4">
             <form action="products" method="get">
+                <input type="hidden" name="page" value="1">
                 <div class="row g-3">
                     <div class="col-md-4">
                         <select class="form-select" name="category">
@@ -94,13 +115,26 @@
                         <button class="btn btn-primary">
                             <i class="bi bi-funnel"></i> Lọc
                         </button>
+                        <a href="products" class="btn btn-outline-secondary ms-2">
+                            <i class="bi bi-arrow-clockwise"></i> Xóa lọc
+                        </a>
                     </div>
                 </div>
             </form>
         </section>
 
+        <!-- Thông tin phân trang -->
+        <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+            <div class="text-muted">
+                Hiển thị <strong>${products.size()}</strong> sản phẩm trên tổng số <strong>${totalProducts}</strong>
+            </div>
+            <div class="text-muted">
+                Trang <strong>${currentPage}</strong>/<strong>${totalPages}</strong>
+            </div>
+        </div>
+
         <!-- Bảng sản phẩm -->
-        <section class="product-table mt-4">
+        <section class="product-table mt-2">
             <div class="card shadow-sm">
                 <div class="card-body">
                     <table class="table table-hover align-middle">
@@ -118,61 +152,175 @@
                         </thead>
 
                         <tbody>
-                        <c:forEach items="${products}" var="p" varStatus="i">
-                            <tr>
-                                <td>${i.index + 1}</td>
-                                <td>
-                                    <c:if test="${not empty p.images}">
-                                        <img src="${p.images[0]}" alt="${p.name}"
-                                             class="product-img" onerror="this.src='../assets/images/no-image.png'">
-                                    </c:if>
-                                    <c:if test="${empty p.images}">
-                                        <img src="../assets/images/no-image.png" alt="No image" class="product-img">
-                                    </c:if>
-                                </td>
-                                <td>${p.name}</td>
-                                <td>
-                                    <c:choose>
-                                        <c:when test="${p.categoryID == 1}">Laptop</c:when>
-                                        <c:when test="${p.categoryID == 2}">Điện thoại</c:when>
-                                        <c:when test="${p.categoryID == 3}">Phụ kiện</c:when>
-                                        <c:otherwise>Khác</c:otherwise>
-                                    </c:choose>
-                                </td>
-                                <td class="price">
-                                    <fmt:formatNumber value="${p.price}" type="number"/> đ
-                                </td>
-                                <td>
-                                    <c:choose>
-                                        <c:when test="${p.featured}">
-                                            <span class="badge bg-warning">Nổi bật</span>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <span class="badge bg-secondary">Bình thường</span>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </td>
-                                <td>${p.createAt}</td>
-                                <td>
-                                    <a href="products?action=view&id=${p.id}" class="action-btn action-view">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <a href="products?action=edit&id=${p.id}" class="action-btn action-edit">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                    <a href="products?action=delete&id=${p.id}"
-                                       onclick="return confirm('Xóa sản phẩm này?')"
-                                       class="action-btn action-delete">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                        <c:choose>
+                            <c:when test="${not empty products && products.size() > 0}">
+                                <c:forEach items="${products}" var="p" varStatus="i">
+                                    <tr>
+                                        <td>${(currentPage - 1) * pageSize + i.index + 1}</td>
+                                        <td>
+                                            <c:if test="${not empty p.images}">
+                                                <img src="${p.images[0]}" alt="${p.name}"
+                                                     class="product-img" onerror="this.src='../assets/images/no-image.png'">
+                                            </c:if>
+                                            <c:if test="${empty p.images}">
+                                                <img src="../assets/images/no-image.png" alt="No image" class="product-img">
+                                            </c:if>
+                                        </td>
+                                        <td>${p.name}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${p.categoryID == 1}">Laptop</c:when>
+                                                <c:when test="${p.categoryID == 2}">Điện thoại</c:when>
+                                                <c:when test="${p.categoryID == 3}">Phụ kiện</c:when>
+                                                <c:otherwise>Khác</c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td class="price">
+                                            <fmt:formatNumber value="${p.price}" type="number"/> đ
+                                        </td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${p.featured}">
+                                                    <span class="badge bg-warning">Nổi bật</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span class="badge bg-secondary">Bình thường</span>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td>${p.createAt}</td>
+                                        <td>
+                                            <a href="products?action=view&id=${p.id}" class="action-btn action-view">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            <a href="products?action=edit&id=${p.id}" class="action-btn action-edit">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            <a href="products?action=delete&id=${p.id}"
+                                               onclick="return confirm('Xóa sản phẩm này?')"
+                                               class="action-btn action-delete">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <tr>
+                                    <td colspan="8" class="text-center py-4">
+                                        <i class="bi bi-box-seam text-muted" style="font-size: 3rem;"></i>
+                                        <p class="mt-2 text-muted">Không có sản phẩm nào</p>
+                                    </td>
+                                </tr>
+                            </c:otherwise>
+                        </c:choose>
                         </tbody>
                     </table>
                 </div>
             </div>
         </section>
+
+        <!-- Phân trang -->
+        <c:if test="${totalPages > 1}">
+            <nav aria-label="Page navigation" class="pagination-container">
+                <ul class="pagination">
+                    <!-- Nút Trang trước -->
+                    <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                        <a class="page-link"
+                           href="products?page=${currentPage - 1}&keyword=${param.keyword}&category=${param.category}&featured=${param.featured}"
+                           aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <!-- Các nút trang -->
+                    <c:choose>
+                        <c:when test="${totalPages <= 10}">
+                            <!-- Hiển thị tất cả các trang nếu tổng số trang <= 10 -->
+                            <c:forEach begin="1" end="${totalPages}" var="pageNum">
+                                <li class="page-item ${pageNum == currentPage ? 'active' : ''}">
+                                    <a class="page-link"
+                                       href="products?page=${pageNum}&keyword=${param.keyword}&category=${param.category}&featured=${param.featured}">
+                                            ${pageNum}
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <!-- Hiển thị phân trang với ellipsis -->
+                            <c:set var="startPage" value="${currentPage - 2}"/>
+                            <c:set var="endPage" value="${currentPage + 2}"/>
+
+                            <c:if test="${startPage < 1}">
+                                <c:set var="startPage" value="1"/>
+                                <c:set var="endPage" value="5"/>
+                            </c:if>
+
+                            <c:if test="${endPage > totalPages}">
+                                <c:set var="endPage" value="${totalPages}"/>
+                                <c:set var="startPage" value="${totalPages - 4}"/>
+                            </c:if>
+
+                            <!-- Trang đầu -->
+                            <c:if test="${startPage > 1}">
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       href="products?page=1&keyword=${param.keyword}&category=${param.category}&featured=${param.featured}">
+                                        1
+                                    </a>
+                                </li>
+                                <c:if test="${startPage > 2}">
+                                    <li class="page-item disabled">
+                                        <span class="page-link">...</span>
+                                    </li>
+                                </c:if>
+                            </c:if>
+
+                            <!-- Các trang giữa -->
+                            <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
+                                <li class="page-item ${pageNum == currentPage ? 'active' : ''}">
+                                    <a class="page-link"
+                                       href="products?page=${pageNum}&keyword=${param.keyword}&category=${param.category}&featured=${param.featured}">
+                                            ${pageNum}
+                                    </a>
+                                </li>
+                            </c:forEach>
+
+                            <!-- Trang cuối -->
+                            <c:if test="${endPage < totalPages}">
+                                <c:if test="${endPage < totalPages - 1}">
+                                    <li class="page-item disabled">
+                                        <span class="page-link">...</span>
+                                    </li>
+                                </c:if>
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       href="products?page=${totalPages}&keyword=${param.keyword}&category=${param.category}&featured=${param.featured}">
+                                            ${totalPages}
+                                    </a>
+                                </li>
+                            </c:if>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <!-- Nút Trang tiếp theo -->
+                    <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                        <a class="page-link"
+                           href="products?page=${currentPage + 1}&keyword=${param.keyword}&category=${param.category}&featured=${param.featured}"
+                           aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Thông tin hiển thị -->
+            <div class="page-info">
+                Hiển thị sản phẩm ${(currentPage - 1) * pageSize + 1}
+                đến ${(currentPage * pageSize) > totalProducts ? totalProducts : (currentPage * pageSize)}
+                trên tổng số ${totalProducts} sản phẩm
+            </div>
+        </c:if>
 
     </main>
 </div>
@@ -337,6 +485,33 @@
 
     <div class="modal-backdrop fade show"></div>
 </c:if>
+
+<script>
+    // Lưu các tham số tìm kiếm khi click vào nút phân trang
+    document.addEventListener('DOMContentLoaded', function() {
+        // Cập nhật URL trong form tìm kiếm khi thay đổi trang
+        const searchForm = document.querySelector('.filters form');
+        const pageLinks = document.querySelectorAll('.page-link');
+
+        pageLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (!this.classList.contains('disabled')) {
+                    // Nếu là liên kết phân trang, không cần thêm gì cả
+                    // URL đã được tạo sẵn trong href
+                }
+            });
+        });
+
+        // Reset về trang 1 khi tìm kiếm
+        document.querySelector('form.input-group').addEventListener('submit', function() {
+            this.querySelector('input[name="page"]').value = 1;
+        });
+
+        document.querySelector('.filters form').addEventListener('submit', function() {
+            this.querySelector('input[name="page"]').value = 1;
+        });
+    });
+</script>
 
 </body>
 </html>
