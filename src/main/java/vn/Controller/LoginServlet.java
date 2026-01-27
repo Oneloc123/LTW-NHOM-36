@@ -33,8 +33,14 @@ public class LoginServlet extends HttpServlet {
         UserService userService = new UserService();
         boolean check = userService.checkUserNameAndPassword(username, password);
         if(check){
-            User user = userService.getUserByUserName(username);
+//            HttpSession session = request.getSession();
+//            session.setAttribute("loginState", "checkOTP");
+//            session.setAttribute("username", username);
+//            response.sendRedirect("/send-otp-forLogin");
+
             HttpSession session = request.getSession();
+            UserService us = new UserService();
+            User user = us.getUserByUserName(username);
             session.setAttribute("id", user.getId());
             if(user.getRole().equalsIgnoreCase("admin")){
                 session.setAttribute("role", "admin");
@@ -42,7 +48,6 @@ public class LoginServlet extends HttpServlet {
             }else{
                 response.sendRedirect(request.getContextPath() + "/home");
             }
-
         }else{
             String message = "Tên đăng nhập hoặc mật khẩu không đúng";
             request.setAttribute("message", message);
