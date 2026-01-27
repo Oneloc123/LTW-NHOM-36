@@ -87,14 +87,17 @@ public class ProductDao extends BaseDao {
         return get().withHandle(h -> {
 
             String sql = """
-                      SELECT p.id, p.name, p.category_id, p.short_description, p.full_description,
-                                                         p.price, p.is_featured, p.created_at, p.updated_at,
-                                                         p.avg_rating AS avgRating,
-                                                         p.rating_count AS ratingCount,
-                                                         pi.url AS image_url                                                
-                        FROM products p
-                        LEFT JOIN product_images pi ON p.id = pi.product_id
-                        WHERE p.id = :id
+                    SELECT p.id, p.name, p.category_id, p.short_description, p.full_description,
+                           p.price, p.is_featured, p.created_at, p.updated_at,
+                           p.avg_rating AS avgRating,
+                           p.rating_count AS ratingCount,
+                           ps.spec_value,
+                           pi.url AS image_url
+                    FROM products p
+                    LEFT JOIN product_images pi ON p.id = pi.product_id
+                    LEFT JOIN product_specs ps ON p.id = ps.product_id
+                    WHERE p.id = :id
+                    
                     """;
 
 
@@ -120,7 +123,6 @@ public class ProductDao extends BaseDao {
 
                             p.setAvgRating(rs.getDouble("avgRating"));
                             p.setRatingCount(rs.getInt("ratingCount"));
-//                            p.setSpec(rs.getString("spec"));
 
 
                             p.setImages(new ArrayList<>());
@@ -132,6 +134,11 @@ public class ProductDao extends BaseDao {
                         if (imageUrl != null) {
                             p.getImages().add(imageUrl);
                         }
+                        String specValue = rs.getString("spec_value");
+                        if (specValue != null) {
+                            p.getSpecs().add(specValue);
+                        }
+
 
                         return null;
                     }).list();

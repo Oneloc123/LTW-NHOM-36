@@ -100,10 +100,11 @@
                         </div>
 
                         <div id="specs" class="tab-panel" data-panel style="display:none">
-
-<%--                            <pre>${p.spec}</pre>--%>
-
+                            <div class="product-spec">
+                                ${p.specs[0].toString()}
+                            </div>
                         </div>
+
 
                         <div id="reviews" class="tab-panel" data-panel style="display:none">
                             <div class="reviews">
