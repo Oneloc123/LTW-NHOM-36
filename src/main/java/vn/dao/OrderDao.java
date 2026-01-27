@@ -10,79 +10,83 @@ public class OrderDao extends BaseDao {
 
     // Lấy tất cả đơn hàng của user
     public List<Order> getOrdersByUserId(int userId) {
-        return get().withHandle(h -> {
-            String sql = """
-                SELECT o.* 
-                FROM orders o
-                WHERE o.user_id = :userId
-                ORDER BY o.order_date DESC
-            """;
+        try {
+            return get().withHandle(h -> {
+                String sql = """
+                    SELECT o.* 
+                    FROM orders o
+                    WHERE o.user_id = :userId
+                    ORDER BY o.order_date DESC
+                """;
 
-            return h.createQuery(sql)
-                    .bind("userId", userId)
-                    .map((rs, ctx) -> {
-                        Order order = new Order();
-                        order.setId(rs.getInt("id"));
-                        order.setUserId(rs.getInt("user_id"));
-                        order.setOrderDate(rs.getTimestamp("order_date"));
-                        order.setTotalAmount(rs.getDouble("total_amount"));
-                        order.setShippingAddress(rs.getString("shipping_address"));
-                        order.setPhoneNumber(rs.getString("phone_number"));
-                        order.setEmail(rs.getString("email"));
-                        order.setStatus(rs.getString("status"));
-                        order.setPaymentMethod(rs.getString("payment_method"));
-                        order.setPaymentStatus(rs.getString("payment_status"));
-                        order.setNotes(rs.getString("notes"));
+                return h.createQuery(sql)
+                        .bind("userId", userId)
+                        .map((rs, ctx) -> {
+                            Order order = new Order();
+                            order.setId(rs.getInt("id"));
+                            order.setUserId(rs.getInt("user_id"));
+                            order.setOrderDate(rs.getTimestamp("order_date"));
+                            order.setTotalAmount(rs.getDouble("total_amount"));
+                            order.setShippingAddress(rs.getString("shipping_address"));
+                            order.setPhoneNumber(rs.getString("phone_number"));
+                            order.setEmail(rs.getString("email"));
+                            order.setStatus(rs.getString("status"));
+                            order.setPaymentMethod(rs.getString("payment_method"));
+                            order.setPaymentStatus(rs.getString("payment_status"));
+                            order.setNotes(rs.getString("notes"));
 
-                        return order;
-                    })
-                    .list();
-        });
+                            return order;
+                        })
+                        .list();
+            });
+        } catch (Exception e) {
+            System.out.println("ERROR in getOrdersByUserId: " + e.getMessage());
+            throw new RuntimeException("Database error", e);
+        }
     }
 
-    // Lấy chi tiết đơn hàng của user
+    // Lấy chi tiết đơn hàng của user - FIXED VERSION
     public Order getOrderById(int orderId, int userId) {
-        return get().withHandle(h -> {
-            // Lấy thông tin đơn hàng
-            String orderSql = """
-                SELECT o.* 
-                FROM orders o
-                WHERE o.id = :orderId AND o.user_id = :userId
-            """;
+        try {
+            return get().withHandle(h -> {
+                // 1. Lấy thông tin đơn hàng
+                String orderSql = "SELECT * FROM orders WHERE id = ? AND user_id = ?";
 
-            Order order = h.createQuery(orderSql)
-                    .bind("orderId", orderId)
-                    .bind("userId", userId)
-                    .map((rs, ctx) -> {
-                        Order o = new Order();
-                        o.setId(rs.getInt("id"));
-                        o.setUserId(rs.getInt("user_id"));
-                        o.setOrderDate(rs.getTimestamp("order_date"));
-                        o.setTotalAmount(rs.getDouble("total_amount"));
-                        o.setShippingAddress(rs.getString("shipping_address"));
-                        o.setPhoneNumber(rs.getString("phone_number"));
-                        o.setEmail(rs.getString("email"));
-                        o.setStatus(rs.getString("status"));
-                        o.setPaymentMethod(rs.getString("payment_method"));
-                        o.setPaymentStatus(rs.getString("payment_status"));
-                        o.setNotes(rs.getString("notes"));
+                Order order = h.createQuery(orderSql)
+                        .bind(0, orderId)
+                        .bind(1, userId)
+                        .map((rs, ctx) -> {
+                            Order o = new Order();
+                            o.setId(rs.getInt("id"));
+                            o.setUserId(rs.getInt("user_id"));
+                            o.setOrderDate(rs.getTimestamp("order_date"));
+                            o.setTotalAmount(rs.getDouble("total_amount"));
+                            o.setShippingAddress(rs.getString("shipping_address"));
+                            o.setPhoneNumber(rs.getString("phone_number"));
+                            o.setEmail(rs.getString("email"));
+                            o.setStatus(rs.getString("status"));
+                            o.setPaymentMethod(rs.getString("payment_method"));
+                            o.setPaymentStatus(rs.getString("payment_status"));
+                            o.setNotes(rs.getString("notes"));
+                            return o;
+                        })
+                        .findOne()
+                        .orElse(null);
 
-                        return o;
-                    })
-                    .findOne()
-                    .orElse(null);
+                if (order == null) {
+                    return null;
+                }
 
-            if (order != null) {
-                // Lấy danh sách sản phẩm trong đơn hàng
+                // 2. Lấy danh sách sản phẩm
                 String itemsSql = """
                     SELECT oi.*, p.name as product_name, p.price
                     FROM order_items oi
                     LEFT JOIN products p ON oi.product_id = p.id
-                    WHERE oi.order_id = :orderId
+                    WHERE oi.order_id = ?
                 """;
 
                 List<OrderItem> items = h.createQuery(itemsSql)
-                        .bind("orderId", orderId)
+                        .bind(0, orderId)
                         .map((rs, ctx) -> {
                             OrderItem item = new OrderItem();
                             item.setId(rs.getInt("id"));
@@ -92,11 +96,19 @@ public class OrderDao extends BaseDao {
                             item.setUnitPrice(rs.getDouble("unit_price"));
                             item.setSubtotal(rs.getDouble("subtotal"));
 
-                            // Thêm thông tin sản phẩm
+                            // FIX: Xử lý price an toàn
                             Product product = new Product();
                             product.setId(rs.getInt("product_id"));
                             product.setName(rs.getString("product_name"));
-                            product.setPrice((int) rs.getDouble("price"));
+
+                            // Cách 1: Dùng getObject và convert
+                            Object priceObj = rs.getObject("price");
+                            if (priceObj != null) {
+                                if (priceObj instanceof Number) {
+                                    // Nếu là số, convert sang int
+                                    product.setPrice(((Number) priceObj).intValue());
+                                }
+                            }
 
                             item.setProduct(product);
                             return item;
@@ -104,13 +116,16 @@ public class OrderDao extends BaseDao {
                         .list();
 
                 order.setItems(items);
-            }
-
-            return order;
-        });
+                return order;
+            });
+        } catch (Exception e) {
+            System.out.println("CRITICAL ERROR in getOrderById: " + e.getMessage());
+            e.printStackTrace();
+            return null; // Trả về null để servlet xử lý
+        }
     }
 
-    // Tạo đơn hàng mới
+    // Các phương thức khác giữ nguyên...
     public int createOrder(Order order) {
         return get().withHandle(h -> {
             // Insert order

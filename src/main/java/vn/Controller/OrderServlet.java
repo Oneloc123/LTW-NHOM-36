@@ -27,6 +27,9 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+
 
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("id") == null) {
@@ -67,6 +70,9 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+
 
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("id") == null) {
@@ -120,10 +126,14 @@ public class OrderServlet extends HttpServlet {
 
         try {
             int orderId = Integer.parseInt(request.getParameter("id"));
+
+            // THÊM DEBUG
+            System.out.println("Getting order detail for orderId: " + orderId + ", userId: " + user.getId());
+
             Order order = orderService.getOrderDetail(orderId, user.getId());
 
             if (order == null) {
-                request.setAttribute("error", "Không tìm thấy đơn hàng");
+                request.setAttribute("error", "Không tìm thấy đơn hàng #" + orderId);
                 listUserOrders(request, response, user);
                 return;
             }
@@ -133,6 +143,14 @@ public class OrderServlet extends HttpServlet {
 
         } catch (NumberFormatException e) {
             request.setAttribute("error", "Mã đơn hàng không hợp lệ");
+            listUserOrders(request, response, user);
+        } catch (Exception e) {
+            // IN RA LỖI CHI TIẾT
+            System.out.println("ERROR in viewOrderDetail: " + e.getMessage());
+            e.printStackTrace();
+
+            // HIỂN THỊ LỖI TRÊN TRANG
+            request.setAttribute("error", "Lỗi hệ thống: " + e.getClass().getSimpleName() + " - " + e.getMessage());
             listUserOrders(request, response, user);
         }
     }
