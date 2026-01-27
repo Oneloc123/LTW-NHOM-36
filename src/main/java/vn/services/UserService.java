@@ -18,6 +18,9 @@ public class UserService {
         else
             return null;
     }
+    public boolean updateAvatar(int userId,String imgURL){
+        return userDao.updateAvatar(userId,imgURL);
+    }
     // OK
     public List<User> getAllUsers()
     {

@@ -480,7 +480,13 @@
         <div class="sidebar">
             <div class="user-info">
                 <div class="user-avatar-large" id="avatarTrigger">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="User Avatar" id="currentAvatar">
+                    <c:if test="${empty user.imgURL}">
+                        <img src="/assets/img/default-avatar.png">
+                    </c:if>
+                    <img src="${pageContext.request.contextPath}/${user.imgURL}"
+                         class="profile-img"
+                         alt="Avatar">
+
                     <div class="avatar-overlay">
                         <i class="fas fa-camera text-white"></i>
                     </div>
@@ -684,17 +690,21 @@
                     <!-- Phần ảnh đại diện -->
                     <div class="text-center mb-4">
                         <div class="profile-img-container">
-                            <img src="https://via.placeholder.com/150"
-                                 alt="Ảnh đại diện"
-                                 class="profile-img"
-                                 id="profileImage">
-                            <!-- Nút thay đổi ảnh -->
-                            <button type="button"
-                                    class="btn btn-warning change-img-btn"
-                                    onclick="toggleImageForm()"
-                                    title="Thay đổi ảnh">
-                                <i class="fas fa-camera"></i>
-                            </button>
+                            <form action="${pageContext.request.contextPath}/upload-avatar"
+                                  method="post"
+                                  enctype="multipart/form-data">
+
+                                <input type="file"
+                                       name="avatar"
+                                       class="form-control"
+                                       accept="image/*"
+                                       required>
+
+                                <button type="submit" class="btn btn-success mt-2">
+                                    <i class="fas fa-upload me-1"></i>Tải lên
+                                </button>
+                            </form>
+
                         </div>
 
                         <!-- Form upload ảnh (ẩn ban đầu) -->
