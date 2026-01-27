@@ -101,7 +101,7 @@
 
                         <div id="specs" class="tab-panel" data-panel style="display:none">
 
-                            <pre>${p.spec}</pre>
+<%--                            <pre>${p.spec}</pre>--%>
 
                         </div>
 
@@ -213,7 +213,6 @@
                 </button>
 
 
-
                 <!-- FORM ADD TO CART (CHỈ THÊM, KHÔNG ẢNH HƯỞNG GIAO DIỆN) -->
 
 
@@ -247,7 +246,7 @@
                     <a href="${pageContext.request.contextPath}/login"
                        class="btn btn-outline-danger  "
                        title="Đăng nhập để thêm vào wishlist"
-                        type = "margin-top:10px;">
+                       type="margin-top:10px;">
                         <i class="bi bi-heart"></i> Yêu thích
                     </a>
                 </c:if>
@@ -394,8 +393,6 @@
         }
 
 
-
-
         /* ================= BUY NOW ================= */
         const buyNow = document.getElementById("buyNow");
 
@@ -404,8 +401,6 @@
             document.getElementById("buyNowFlag").value = "true";
             addCartForm.submit();
         });
-
-
 
 
     });
