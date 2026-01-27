@@ -78,7 +78,7 @@
         <h2 class="logo"><i class="bi bi-cpu me-2"></i>TechX Admin</h2>
         <nav>
             <ul>
-                <li><a href="dashboard" class="active"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+                <li><a href="dashBoard" class="active"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
                 <li><a href="products"><i class="bi bi-box"></i> Sản phẩm</a></li>
                 <li><a href="categories" ><i class="bi bi-tags"></i> Danh mục</a></li>
                 <li><a href="admin-orders.jsp"><i class="bi bi-cart"></i> Đơn hàng</a></li>

@@ -492,10 +492,9 @@
                     </div>
                 </div>
                 <div class="user-name">${user.getFullName()}</div>
-                <div class="user-role">Thành viên Bạc</div>
                 <div class="user-stats">
                     <div class="stat">
-                        <div class="stat-value">12</div>
+                        <div class="stat-value">2</div>
                         <div class="stat-label">Đơn hàng</div>
                     </div>
                     <div class="stat">
@@ -510,7 +509,7 @@
             </div>
             <ul class="sidebar-menu">
                 <li><a href="#" class="active"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
-                <li><a href="../Order-History"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
+                <li><a href="../user/orders"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
                 <li><a href="../wishlist"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
                 <li><a href="../changePassword"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
                 <li><a href="../loggout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
@@ -555,114 +554,6 @@
                         <input type="text" id="address" class="form-control" value="${user.getAddress()}" readonly>
                     </div>
                 </form>
-            </div>
-
-            <!-- Recent Orders -->
-            <div class="profile-card">
-                <div class="card-header">
-                    <h2 class="card-title">Đơn hàng gần đây</h2>
-                    <a href="/pages/order-history.jsp" class="btn btn-outline">Xem tất cả</a>
-                </div>
-                <div class="table-responsive">
-                    <table class="orders-table">
-                        <thead>
-                        <tr>
-                            <th>Mã đơn hàng</th>
-                            <th>Ngày đặt</th>
-                            <th>Sản phẩm</th>
-                            <th>Tổng tiền</th>
-                            <th>Trạng thái</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>#TS2023001</td>
-                            <td>15/08/2023</td>
-                            <td>iPhone 14 Pro Max</td>
-                            <td>32.990.000₫</td>
-                            <td><span class="status status-delivered">Đã giao</span></td>
-                        </tr>
-                        <tr>
-                            <td>#TS2023002</td>
-                            <td>10/08/2023</td>
-                            <td>MacBook Pro 14"</td>
-                            <td>45.990.000₫</td>
-                            <td><span class="status status-delivered">Đã giao</span></td>
-                        </tr>
-                        <tr>
-                            <td>#TS2023003</td>
-                            <td>05/08/2023</td>
-                            <td>AirPods Pro 2</td>
-                            <td>7.990.000₫</td>
-                            <td><span class="status status-pending">Đang xử lý</span></td>
-                        </tr>
-                        <tr>
-                            <td>#TS2023004</td>
-                            <td>01/08/2023</td>
-                            <td>Apple Watch Series 8</td>
-                            <td>10.990.000₫</td>
-                            <td><span class="status status-cancelled">Đã hủy</span></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Wishlist -->
-            <div class="profile-card">
-                <div class="card-header">
-                    <h2 class="card-title">Sản phẩm yêu thích</h2>
-                    <a href="/pages/wishList.html" class="btn btn-outline">Xem tất cả</a>
-                </div>
-                <div class="wishlist-grid">
-                    <!-- Product 1 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1511385348-a52b4a160dc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Laptop">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Laptop</div>
-                            <div class="product-name">Dell XPS 13</div>
-                            <div class="product-price">25.990.000₫</div>
-                            <div class="product-actions">
-                                <button class="btn btn-sm"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ</button>
-                                <button class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product 2 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Tablet">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Máy tính bảng</div>
-                            <div class="product-name">iPad Pro 12.9"</div>
-                            <div class="product-price">28.990.000₫</div>
-                            <div class="product-actions">
-                                <button class="btn btn-sm"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ</button>
-                                <button class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product 3 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Headphones">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Tai nghe</div>
-                            <div class="product-name">Sony WH-1000XM4</div>
-                            <div class="product-price">7.990.000₫</div>
-                            <div class="product-actions">
-                                <button class="btn btn-sm"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ</button>
-                                <button class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

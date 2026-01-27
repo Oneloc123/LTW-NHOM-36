@@ -89,20 +89,6 @@
                                 </a>
                             </li>
 
-                            <li>
-                                <a class="dropdown-item"
-                                   href="${pageContext.request.contextPath}/notifications">
-                                    Xem thông báo
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item"
-                                   href="${pageContext.request.contextPath}/viewed-products">
-                                    Sản phẩm đã xem
-                                </a>
-                            </li>
-
                             <li><hr class="dropdown-divider"></li>
 
                             <li>
