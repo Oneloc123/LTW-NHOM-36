@@ -683,29 +683,29 @@
                         data-bs-dismiss="modal"
                         aria-label="Đóng"></button>
             </div>
+            <div class="profile-img-container">
+                <form action="${pageContext.request.contextPath}/upload-avatar"
+                      method="post"
+                      enctype="multipart/form-data">
 
+                    <input type="file"
+                           name="avatar"
+                           class="form-control"
+                           accept="image/*"
+                           required>
+
+                    <button type="submit" class="btn btn-success mt-2">
+                        <i class="fas fa-upload me-1"></i>Tải lên
+                    </button>
+                </form>
+
+            </div>
             <!-- Form chính -->
             <form id="profileForm" action="../profile" method="post">
                 <div class="modal-body">
                     <!-- Phần ảnh đại diện -->
                     <div class="text-center mb-4">
-                        <div class="profile-img-container">
-                            <form action="${pageContext.request.contextPath}/upload-avatar"
-                                  method="post"
-                                  enctype="multipart/form-data">
 
-                                <input type="file"
-                                       name="avatar"
-                                       class="form-control"
-                                       accept="image/*"
-                                       required>
-
-                                <button type="submit" class="btn btn-success mt-2">
-                                    <i class="fas fa-upload me-1"></i>Tải lên
-                                </button>
-                            </form>
-
-                        </div>
 
                         <!-- Form upload ảnh (ẩn ban đầu) -->
                         <div id="imageForm" class="mt-3" style="display: none;">

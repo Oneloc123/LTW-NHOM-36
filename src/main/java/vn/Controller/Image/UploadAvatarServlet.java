@@ -55,13 +55,17 @@ public class UploadAvatarServlet extends HttpServlet {
 
         UserService us =new UserService();
         HttpSession session = request.getSession(false);
-        int userId = Integer.parseInt(session.getAttribute("id").toString());
+        User user = us.getUserById(Integer.parseInt(session.getAttribute("id").toString()));
 
 
-        // TODO: update avatarUrl vào bảng USER theo userId
-        userService.updateAvatar(userId, avatarUrl);
 
-        // 7. Redirect
+        boolean success = us.updateAvatar(user.getId(), avatarUrl);
+
+        if (success) {
+            user.setImgURL(avatarUrl);
+            request.getSession().setAttribute("user", user);
+        }
+
         response.sendRedirect("profile");
     }
 }
