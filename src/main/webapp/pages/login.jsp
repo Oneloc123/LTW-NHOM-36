@@ -50,14 +50,6 @@
 
         <button type="submit" class="btn btn-primary">Đăng nhập</button>
 
-        <div class="divider">hoặc</div>
-
-        <button type="button" class="social-btn facebook">
-          <i class="bi bi-facebook"></i> Đăng nhập với Facebook
-        </button>
-        <button type="button" class="social-btn google mt-2">
-          <i class="bi bi-google"></i> Đăng nhập với Google
-        </button>
 
         <div class="footer-links mt-3">
           <a href="/DoCongNghe_Nhom36_war/forgot-password">Quên mật khẩu?</a> |
