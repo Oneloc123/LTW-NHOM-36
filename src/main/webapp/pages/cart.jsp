@@ -179,17 +179,6 @@
                     </div>
 
                     <!-- PROMO CODE -->
-                    <div class="card mt-3">
-                        <div class="card-body">
-                            <h6 class="card-title mb-3">
-                                <i class="bi bi-tag me-2"></i>Mã giảm giá
-                            </h6>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Nhập mã giảm giá">
-                                <button class="btn btn-outline-secondary" type="button">Áp dụng</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </c:otherwise>

@@ -83,7 +83,7 @@ public class OTPForLogin extends HttpServlet {
             session.removeAttribute("loginState");
             if(user.getRole().equalsIgnoreCase("admin")){
                 session.setAttribute("role", "admin");
-                response.sendRedirect("/admin/dashBoard");
+                response.sendRedirect("/admin/dashboard");
             }else{
                 response.sendRedirect(request.getContextPath() + "/home");
             }

@@ -7,8 +7,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class EmailUtil {
-    private static final String EMAIL = "";
-    private static final String APP_PASSWORD = "";
+    private static final String EMAIL = "Oneloc123@gmail.com";
+    private static final String APP_PASSWORD = "otda nuuj nyfd damj";
 
     public static void send(String to, String subject, String content) {
         Properties props = new Properties();

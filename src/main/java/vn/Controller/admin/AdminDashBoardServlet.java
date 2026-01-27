@@ -18,7 +18,7 @@ import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/admin/dashBoard")
+@WebServlet("/admin/dashboard")
 public class AdminDashBoardServlet extends HttpServlet {
 
     private OrderService orderService;

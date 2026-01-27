@@ -21,10 +21,10 @@
         <h2 class="logo"><i class="bi bi-cpu me-2"></i>TechX Admin</h2>
         <nav>
             <ul>
-                <li><a href="admin-dashboard.jsp"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+                <li><a href="dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
                 <li><a href="products"><i class="bi bi-box"></i> Sản phẩm</a></li>
                 <li><a href="categories" ><i class="bi bi-tags"></i> Danh mục</a></li>
-                <li><a href="admin-orders.jsp"><i class="bi bi-cart"></i> Đơn hàng</a></li>
+                <li><a href="orders"><i class="bi bi-cart"></i> Đơn hàng</a></li>
                 <li><a href="admin-payment.jsp"><i class="bi bi-credit-card"></i> Thanh toán</a></li>
                 <li><a href="users" class="active"><i class="bi bi-people"></i> Người dùng</a></li>
                 <li><a href="blogs"><i class="bi bi-journal-text"></i> Blog</a></li>
