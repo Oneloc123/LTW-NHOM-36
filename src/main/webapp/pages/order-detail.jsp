@@ -23,7 +23,7 @@
 
         body {
             font-family: "Segoe UI", Arial;
-            background: #f4f6f9;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
             color: #333;
         }
 
@@ -89,15 +89,7 @@
             border-left: 4px solid #dc3545;
         }
 
-        /* ===== Order Header Card ===== */
-        .order-header-card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 22px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-            border-left: 4px solid #667eea;
-        }
+         /*===== Order Header Card ===== */
 
         .order-header-content {
             display: flex;
