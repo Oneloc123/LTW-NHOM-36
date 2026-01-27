@@ -15,122 +15,122 @@
 
 <body>
 
-    <!-- Sidebar -->
-    <div class="admin-container">
+<!-- Sidebar -->
+<div class="admin-container">
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <h2 class="logo"><i class="bi bi-cpu me-2"></i>TechX Admin</h2>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2 class="logo"><i class="bi bi-cpu me-2"></i>TechX Admin</h2>
+        <nav>
+            <ul>
+                <li><a href="admin-dashboard.jsp"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+                <li><a href="products"><i class="bi bi-box"></i> Sản phẩm</a></li>
+                <li><a href="categories" ><i class="bi bi-tags"></i> Danh mục</a></li>
+                <li><a href="admin-orders.jsp" class="active"><i class="bi bi-cart"></i> Đơn hàng</a></li>
+                <li><a href="admin-payment.jsp"><i class="bi bi-credit-card"></i> Thanh toán</a></li>
+                <li><a href="users"><i class="bi bi-people"></i> Người dùng</a></li>
+                <li><a href="blogs"><i class="bi bi-journal-text"></i> Blog</a></li>
+                <li><a href="banners"><i class="bi bi-image"></i> Banner</a></li>
+                <li><a href="/loggout"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- HEADER -->
+        <div class="header d-flex justify-content-between align-items-center">
+            <h3 class="fw-bold m-0"><i class="bi bi-receipt"></i> Quản lý đơn hàng</h3>
+
+        </div>
+
+        <!-- Search Bar -->
+        <div class="input-group mb-4">
+            <input type="text" class="form-control" id="searchInput" placeholder="Tìm kiếm đơn hàng...">
+            <button class="btn btn-outline-secondary"><i class="bi bi-search"></i></button>
+        </div>
+
+        <!-- Orders Table -->
+        <section class="blog-table mt-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Khách hàng</th>
+                            <th>Ngày đặt</th>
+                            <th>Trạng thái</th>
+                            <th>Tổng tiền</th>
+                            <th>Hành động</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>#1001</td>
+                            <td>Nguyễn Văn A</td>
+                            <td>25/10/2025</td>
+                            <td><span class="badge badge-warning-soft">Chờ xử lý</span></td>
+                            <td>5.200.000₫</td>
+                            <td class="">
+                                <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
+                                <button class="action-btn action-edit"><i
+                                        class="bi bi-pencil-square"></i></button>
+                                <button class="action-btn action-delete"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#1002</td>
+                            <td>Trần Thị B</td>
+                            <td>24/10/2025</td>
+                            <td><span class="badge badge-success-soft">Hoàn thành</span></td>
+                            <td>2.800.000₫</td>
+                            <td class="">
+                                <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
+                                <button class="action-btn action-edit"><i
+                                        class="bi bi-pencil-square"></i></button>
+                                <button class="action-btn action-delete"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#1003</td>
+                            <td>Lê Hữu C</td>
+                            <td>23/10/2025</td>
+                            <td><span class="badge badge-danger-soft">Đã hủy</span></td>
+                            <td>1.500.000₫</td>
+                            <td class="">
+                                <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
+                                <button class="action-btn action-edit"><i
+                                        class="bi bi-pencil-square"></i></button>
+                                <button class="action-btn action-delete"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-end mt-3">
             <nav>
-                <ul>
-                    <li><a href="admin-dashboard.jsp"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-                    <li><a href="admin-products.jsp"><i class="bi bi-box"></i> Sản phẩm</a></li>
-                    <li><a href="admin-categories.jsp"><i class="bi bi-tags"></i> Danh mục</a></li>
-                    <li><a href="admin-orders.html" class="active"><i class="bi bi-cart"></i> Đơn hàng</a></li>
-                    <li><a href="admin-payment.jsp"><i class="bi bi-credit-card"></i> Thanh toán</a></li>
-                    <li><a href="admin-users.jsp"><i class="bi bi-people"></i> Người dùng</a></li>
-                    <li><a href="admin-blog.jsp"><i class="bi bi-journal-text"></i> Blog</a></li>
-                    <li><a href="admin-banners.jsp"><i class="bi bi-image"></i> Banner</a></li>
-                    <li><a href="admin-login.jsp"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a></li>
+                <ul class="pagination custom-pagination">
+                    <li class="page-item disabled"><a class="page-link">Trước</a></li>
+                    <li class="page-item active"><a class="page-link">1</a></li>
+                    <li class="page-item"><a class="page-link">2</a></li>
+                    <li class="page-item"><a class="page-link">3</a></li>
+                    <li class="page-item"><a class="page-link">Sau</a></li>
                 </ul>
             </nav>
-        </aside>
+        </div>
 
+    </main>
+</div>
 
-        <!-- Main Content -->
-        <main class="main-content">
-
-            <!-- HEADER -->
-            <div class="header d-flex justify-content-between align-items-center">
-                <h3 class="fw-bold m-0"><i class="bi bi-receipt"></i> Quản lý đơn hàng</h3>
-
-            </div>
-
-            <!-- Search Bar -->
-            <div class="input-group mb-4">
-                <input type="text" class="form-control" id="searchInput" placeholder="Tìm kiếm đơn hàng...">
-                <button class="btn btn-outline-secondary"><i class="bi bi-search"></i></button>
-            </div>
-
-            <!-- Orders Table -->
-            <section class="blog-table mt-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <table class="table table-hover align-middle">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Khách hàng</th>
-                                    <th>Ngày đặt</th>
-                                    <th>Trạng thái</th>
-                                    <th>Tổng tiền</th>
-                                    <th>Hành động</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#1001</td>
-                                    <td>Nguyễn Văn A</td>
-                                    <td>25/10/2025</td>
-                                    <td><span class="badge badge-warning-soft">Chờ xử lý</span></td>
-                                    <td>5.200.000₫</td>
-                                    <td class="">
-                                        <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
-                                        <button class="action-btn action-edit"><i
-                                                class="bi bi-pencil-square"></i></button>
-                                        <button class="action-btn action-delete"><i class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#1002</td>
-                                    <td>Trần Thị B</td>
-                                    <td>24/10/2025</td>
-                                    <td><span class="badge badge-success-soft">Hoàn thành</span></td>
-                                    <td>2.800.000₫</td>
-                                    <td class="">
-                                        <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
-                                        <button class="action-btn action-edit"><i
-                                                class="bi bi-pencil-square"></i></button>
-                                        <button class="action-btn action-delete"><i class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#1003</td>
-                                    <td>Lê Hữu C</td>
-                                    <td>23/10/2025</td>
-                                    <td><span class="badge badge-danger-soft">Đã hủy</span></td>
-                                    <td>1.500.000₫</td>
-                                    <td class="">
-                                        <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
-                                        <button class="action-btn action-edit"><i
-                                                class="bi bi-pencil-square"></i></button>
-                                        <button class="action-btn action-delete"><i class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Pagination -->
-            <div class="d-flex justify-content-end mt-3">
-                <nav>
-                    <ul class="pagination custom-pagination">
-                        <li class="page-item disabled"><a class="page-link">Trước</a></li>
-                        <li class="page-item active"><a class="page-link">1</a></li>
-                        <li class="page-item"><a class="page-link">2</a></li>
-                        <li class="page-item"><a class="page-link">3</a></li>
-                        <li class="page-item"><a class="page-link">Sau</a></li>
-                    </ul>
-                </nav>
-            </div>
-
-        </main>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

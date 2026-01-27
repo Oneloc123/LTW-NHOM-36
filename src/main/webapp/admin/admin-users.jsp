@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -21,14 +22,14 @@
         <nav>
             <ul>
                 <li><a href="admin-dashboard.jsp"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-                <li><a href="admin-products.jsp"><i class="bi bi-box"></i> Sản phẩm</a></li>
-                <li><a href="admin-categories.jsp"><i class="bi bi-tags"></i> Danh mục</a></li>
+                <li><a href="products"><i class="bi bi-box"></i> Sản phẩm</a></li>
+                <li><a href="categories" ><i class="bi bi-tags"></i> Danh mục</a></li>
                 <li><a href="admin-orders.jsp"><i class="bi bi-cart"></i> Đơn hàng</a></li>
                 <li><a href="admin-payment.jsp"><i class="bi bi-credit-card"></i> Thanh toán</a></li>
                 <li><a href="users" class="active"><i class="bi bi-people"></i> Người dùng</a></li>
-                <li><a href="admin-blog.jsp"><i class="bi bi-journal-text"></i> Blog</a></li>
-                <li><a href="admin-banners.jsp"><i class="bi bi-image"></i> Banner</a></li>
-                <li><a href="admin-login.jsp"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a></li>
+                <li><a href="blogs"><i class="bi bi-journal-text"></i> Blog</a></li>
+                <li><a href="banners"><i class="bi bi-image"></i> Banner</a></li>
+                <li><a href="/loggout"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a></li>
             </ul>
         </nav>
     </aside>
