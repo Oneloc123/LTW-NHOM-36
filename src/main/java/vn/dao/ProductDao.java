@@ -88,7 +88,6 @@ public class ProductDao extends BaseDao {
 
             String sql = """
                       SELECT p.id, p.name, p.category_id, p.short_description, p.full_description,
-                                                         p.spec,
                                                          p.price, p.is_featured, p.created_at, p.updated_at,
                                                          p.avg_rating AS avgRating,
                                                          p.rating_count AS ratingCount,
@@ -121,7 +120,7 @@ public class ProductDao extends BaseDao {
 
                             p.setAvgRating(rs.getDouble("avgRating"));
                             p.setRatingCount(rs.getInt("ratingCount"));
-                            p.setSpec(rs.getString("spec"));
+//                            p.setSpec(rs.getString("spec"));
 
 
                             p.setImages(new ArrayList<>());
